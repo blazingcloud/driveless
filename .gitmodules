@@ -1,0 +1,3 @@
+[submodule "dlc/vendor/plugins/open-id"]
+	path = dlc/vendor/plugins/open-id
+	url = git://github.com/senthilnambi/open-id.git

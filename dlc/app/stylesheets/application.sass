@@ -1,7 +1,38 @@
 @import compass/utilities/general/clearfix.sass
 @import 960/grid.sass
 
+// Colors
+  <!-- Paste this content in the Application.Resources section of App.xaml -->
+  <SolidColorBrush x:Key="Brush1" Color="#FFFFFFFF" />
+  <SolidColorBrush x:Key="Brush2" Color="#FFE6F0FF" />
+  <SolidColorBrush x:Key="Brush3" Color="#FF9DBCEB" />
+  <SolidColorBrush x:Key="Brush4" Color="#FF415C85" />
+  <SolidColorBrush x:Key="Brush5" Color="#FF293240" />
+
+!brush1 = #FFFFFF
+!brush2 = #E6F0FF
+!brush3 = #9DBCEB
+!brush4 = #415C85
+!brush5 = #293240
+
+!site_background = !brush2
+!site_text = #333
+!header_color = #930E23
+
+=carved-text
+  text-shadow = "#{!brush1} 0px 1px 1px"
+
+=bordered
+  border: 1px solid #ccc
+  -webkit-border-radius: 5px
+  -webkit-box-sizing: border-box
+
 body
+  +carved-text
+  background = !site_background
+  color      = !site_text
+  font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif
+  line-height: 40pt
 
 a
   color: #00f
@@ -12,8 +43,19 @@ a
   +grid-container
   +clearfix
 
-h1
+.header, .footer
+  +bordered
   +grid(12,12)
+
+.header
+  color = !header_color
+
+.navigation
+  +bordered
+  +grid(4,12)
+.main
+  +bordered
+  +grid(8,12)
 
 #flash_notice, #flash_error
   +grid(12,12)
@@ -52,3 +94,10 @@ h1
     li
       font-size: 12px
       list-style: disc
+
+input#user_openid_identifier, input#user_session_openid_identifier
+  background: url(http://openid.net/images/login-bg.gif) no-repeat
+  background-color: #fff
+  background-position: 0 50%
+  color: #000
+  padding-left: 18px

@@ -1,15 +1,27 @@
 !!! XHTML 1.1
 %html
   %head
-    %title= h(yield(:title) || "Untitled")
+    %title= "Drive Less Challenge | " + h(yield(:title) || "Untitled")
     = stylesheet_link_tag 'compiled/grid.css',    :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css',    :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/application', :media => 'screen, projection'
     = yield :head
   %body
     #container
-      - flash.each do |name, msg|
-        div{:id => "#flash_#{name}", :class => '.flash'}= msg
-      - if show_title?
+      .header
         %h1= h yield :title
-      = yield
+        .login-system
+        - if current_user
+          = link_to "Edit Profile", edit_account_path(:current)
+          = link_to "Edit Profile", edit_account_path(:current)
+        - else
+          = link_to "Register", new_account_path
+          = link_to "Login", login_path
+      .navigation
+        = "Navigation"
+      .main
+        - flash.each do |name, msg|
+          div{:id => "#flash_#{name}", :class => '.flash'}= msg
+        = yield
+      .footer
+        = "Hi"
