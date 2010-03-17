@@ -1,0 +1,14 @@
+- title "Destinations"
+
+%table
+  %tr
+    %th Name
+  - for destination in @destinations
+    %tr
+      %td= h destination.name
+      %td= link_to 'Show', destination
+      %td= link_to 'Edit', edit_destination_path(destination)
+      %td= link_to 'Destroy', destination, :confirm => 'Are you sure?', :method => :delete
+
+%p= will_paginate(@destinations)
+%p= link_to "New Destination", new_destination_path

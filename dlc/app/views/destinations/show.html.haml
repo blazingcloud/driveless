@@ -1,0 +1,12 @@
+- title "Destination"
+
+%p
+  %strong Name:
+  =h @destination.name
+
+%p
+  = link_to "Edit", edit_destination_path(@destination)
+  |
+  = link_to "Destroy", @destination, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", destinations_path

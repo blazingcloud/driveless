@@ -25,6 +25,10 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "authlogic-oid", :lib => "authlogic_openid"
   config.gem "ruby-openid", :lib => "openid"
+  config.gem "inherited_resources", :lib => "inherited_resources", :version => "1.0.3", :source => "http://gems.github.com"
+  config.gem "will_paginate"
+  config.gem "will_paginate"
+  config.gem 'formtastic'
   # config.gem "compass-960-plugin"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
