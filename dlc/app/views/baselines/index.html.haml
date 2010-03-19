@@ -1,0 +1,16 @@
+- title "Baselines"
+
+%table
+  %tr
+    %th User
+    %th Duration
+  - for baseline in @baselines
+    %tr
+      %td= h baseline.user_id
+      %td= h baseline.duration
+      %td= link_to 'Show', baseline
+      %td= link_to 'Edit', edit_baseline_path(baseline)
+      %td= link_to 'Destroy', baseline, :confirm => 'Are you sure?', :method => :delete
+
+%p= will_paginate(@baselines)
+%p= link_to "New Baseline", new_baseline_path

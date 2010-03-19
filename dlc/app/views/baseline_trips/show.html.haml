@@ -1,0 +1,24 @@
+- title "Baseline Trips"
+
+%p
+  %strong Baseline:
+  =h @baseline_trips.baseline_id
+%p
+  %strong Destination:
+  =h @baseline_trips.destination_id
+%p
+  %strong Unit:
+  =h @baseline_trips.unit_id
+%p
+  %strong Alone:
+  =h @baseline_trips.alone
+%p
+  %strong Green:
+  =h @baseline_trips.green
+
+%p
+  = link_to "Edit", edit_baseline_trips_path(@baseline_trips)
+  |
+  = link_to "Destroy", @baseline_trips, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", baseline_trips_path

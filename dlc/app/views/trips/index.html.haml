@@ -1,0 +1,16 @@
+- title "Trips"
+
+%table
+  %tr
+    %th User
+    %th Destination
+  - for trip in @trips
+    %tr
+      %td= h trip.user_id
+      %td= h trip.destination_id
+      %td= link_to 'Show', trip
+      %td= link_to 'Edit', edit_trip_path(trip)
+      %td= link_to 'Destroy', trip, :confirm => 'Are you sure?', :method => :delete
+
+%p= will_paginate(@trips)
+%p= link_to "New Trip", new_trip_path

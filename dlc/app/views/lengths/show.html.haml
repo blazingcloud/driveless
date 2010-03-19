@@ -1,0 +1,21 @@
+- title "Length"
+
+%p
+  %strong Trip:
+  =h @length.trip_id
+%p
+  %strong Mode:
+  =h @length.mode_id
+%p
+  %strong Distance:
+  =h @length.distance
+%p
+  %strong Unit:
+  =h @length.unit_id
+
+%p
+  = link_to "Edit", edit_length_path(@length)
+  |
+  = link_to "Destroy", @length, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", lengths_path

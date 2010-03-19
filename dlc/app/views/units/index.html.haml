@@ -1,0 +1,16 @@
+- title "Units"
+
+%table
+  %tr
+    %th Name
+    %th In miles
+  - for unit in @units
+    %tr
+      %td= h unit.name
+      %td= h unit.in_miles
+      %td= link_to 'Show', unit
+      %td= link_to 'Edit', edit_unit_path(unit)
+      %td= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete
+
+%p= will_paginate(@units)
+%p= link_to "New Unit", new_unit_path

@@ -1,0 +1,20 @@
+- title "Lengths"
+
+%table
+  %tr
+    %th Trip
+    %th Mode
+    %th Distance
+    %th Unit
+  - for length in @lengths
+    %tr
+      %td= h length.trip_id
+      %td= h length.mode_id
+      %td= h length.distance
+      %td= h length.unit_id
+      %td= link_to 'Show', length
+      %td= link_to 'Edit', edit_length_path(length)
+      %td= link_to 'Destroy', length, :confirm => 'Are you sure?', :method => :delete
+
+%p= will_paginate(@lengths)
+%p= link_to "New Length", new_length_path

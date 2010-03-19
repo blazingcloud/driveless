@@ -1,0 +1,6 @@
+- semantic_form_for @unit do |form|
+  - form.inputs do
+    = form.input :name, :label => 'Name'
+    = form.input :in_miles, :label => 'In miles'
+  - form.buttons do
+    = form.commit_button 'Submit'

@@ -1,0 +1,15 @@
+- title "Baseline"
+
+%p
+  %strong User:
+  =h @baseline.user_id
+%p
+  %strong Duration:
+  =h @baseline.duration
+
+%p
+  = link_to "Edit", edit_baseline_path(@baseline)
+  |
+  = link_to "Destroy", @baseline, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", baselines_path

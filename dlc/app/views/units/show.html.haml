@@ -1,0 +1,15 @@
+- title "Unit"
+
+%p
+  %strong Name:
+  =h @unit.name
+%p
+  %strong In Miles:
+  =h @unit.in_miles
+
+%p
+  = link_to "Edit", edit_unit_path(@unit)
+  |
+  = link_to "Destroy", @unit, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", units_path

@@ -1,4 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :baseline_trips
+
+  map.resources :baselines
+
+  map.resources :lengths
+
+  map.resources :trips
+
+  map.resources :units
+
   map.resources :destinations
 
   map.resources :user_sessions

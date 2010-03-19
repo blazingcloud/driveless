@@ -1,0 +1,8 @@
+- semantic_form_for @length do |form|
+  - form.inputs do
+    = form.input :trip_id, :label => 'Trip'
+    = form.input :mode_id, :label => 'Mode'
+    = form.input :distance, :label => 'Distance'
+    = form.input :unit_id, :label => 'Unit'
+  - form.buttons do
+    = form.commit_button 'Submit'

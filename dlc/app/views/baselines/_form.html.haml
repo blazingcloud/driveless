@@ -1,0 +1,6 @@
+- semantic_form_for @baseline do |form|
+  - form.inputs do
+    = form.input :user_id, :label => 'User'
+    = form.input :duration, :label => 'Duration'
+  - form.buttons do
+    = form.commit_button 'Submit'

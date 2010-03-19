@@ -9,10 +9,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317132511) do
+ActiveRecord::Schema.define(:version => 20100319032925) do
+
+  create_table "baseline_trips", :force => true do |t|
+    t.integer  "baseline_id"
+    t.integer  "destination_id"
+    t.integer  "unit_id"
+    t.integer  "alone",          :limit => 10, :precision => 10, :scale => 0
+    t.integer  "green",          :limit => 10, :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "baselines", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "destinations", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lengths", :force => true do |t|
+    t.integer  "trip_id"
+    t.integer  "mode_id"
+    t.integer  "distance",   :limit => 10, :precision => 10, :scale => 0
+    t.integer  "unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -30,6 +56,20 @@ ActiveRecord::Schema.define(:version => 20100317132511) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "trips", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "destination_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "units", :force => true do |t|
+    t.string   "name"
+    t.integer  "in_miles",   :limit => 10, :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
