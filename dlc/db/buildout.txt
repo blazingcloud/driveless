@@ -1,0 +1,17 @@
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  mode name:string
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  unit name:string in_miles:decimal
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  trip user_id:integer destination_id:integer
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  length trip_id:integer mode_id:integer distance:decimal unit_id:integer
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  baseline user_id:integer duration:integer
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  baseline_trips baseline_id:integer destination_id:integer unit_id:integer alone:decimal green:decimal
