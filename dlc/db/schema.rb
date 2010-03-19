@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100319032925) do
+ActiveRecord::Schema.define(:version => 20100319040335) do
 
   create_table "baseline_trips", :force => true do |t|
     t.integer  "baseline_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20100319032925) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login",                              :null => false
     t.string   "email",                              :null => false
     t.string   "crypted_password",                   :null => false
     t.string   "password_salt",                      :null => false
@@ -90,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20100319032925) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "openid_identifier"
+    t.string   "username"
+    t.string   "pseudonym"
   end
 
 end
