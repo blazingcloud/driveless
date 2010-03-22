@@ -1,4 +1,37 @@
 %h2 How green is your travel now?
 - semantic_form_for @baseline do |form|
-  = form.inputs
+  .baseline-travel.head
+    %ol
+      %li Destination
+      %li Driving alone
+      %li Green Miles (carpool, walk, bike, transit)
+      %li Your Green Travel
+  = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :work,    :title => "Work"}
+  = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :school,  :title => "School"}
+  = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :kids,    :title => "Kids"}
+  = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :errands, :title => "Errands"}
+  = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :faith,   :title => "Faith community"}
+  = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :social,  :title => "Social/Civic/Fun"}
+  .baseline-travel.foot
+    %ol
+      %li Total
+      %li.total-miles
+      %li.total-green
+      %li.total-percent
+        %span.number
+        %span.symbol %
+  %h3 What is your goal for the Drive Less Challenge?
+  .baseline-travel.head
+    %ol
+      %li 
+      %li Total Miles
+      %li Green Miles
+      %li Green Travel Goal
+  - form.inputs :class => 'baseline-travel' do
+    %li
+    = form.input :total_miles, :label => false, :input_html => {:class => 'goal-total'}
+    = form.input :green_miles, :label => false, :input_html => {:class => 'goal-green'}
+    %li.line-percent
+      %span.number
+      %span.symbol %
   = form.buttons

@@ -7,20 +7,18 @@
     = stylesheet_link_tag 'formtastic'
     = stylesheet_link_tag 'formtastic_changes'
     = stylesheet_link_tag 'compiled/application', :media => 'screen, projection'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'underscore-min.js', :defaults
     = yield :head
   %body
     #container
       .header
         %h1= h yield :title
-        .login-system
-        - if current_user
-          = link_to "Edit Profile", edit_account_path()
-          = link_to "Logout", logout_path()
-        - else
-          = link_to "Register", new_account_path
-          = link_to "Login", login_path
       .navigation
-        = "Navigation"
+        - if current_user
+          = render :partial => 'shared/navigation'
+        - else
+          = render :partial => 'shared/public_navigation'
+        = yield :navigation
       .main
         - flash.each do |name, msg|
           %div{:id => "#flash_#{name}", :class => '.flash'}= msg

@@ -15,9 +15,11 @@
 !brush4 = #415C85
 !brush5 = #293240
 
-!site_background = !brush2
+!site_background = !brush1
 !site_text = #333
 !header_color = #930E23
+
+!serif_font = 'Palatino Linotype', 'Book Antiqua', Palatino, serif
 
 =carved-text
   text-shadow = "#{!brush1} 0px 1px 1px"
@@ -29,9 +31,9 @@
 
 body
   +carved-text
-  background = !site_background
-  color      = !site_text
-  font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif
+  background  = !site_background
+  color       = !site_text
+  font-family = !serif_font
 
 a
   color: #00f
@@ -100,3 +102,20 @@ input#user_openid_identifier, input#user_session_openid_identifier
   background-position: 0 50%
   color: #000
   padding-left: 18px
+
+.baseline
+  .foot,.head
+    font-weight: bold
+  .head
+    vertical-align: top
+
+.baseline-travel
+  ol
+    display: block
+    padding: 0
+    margin: 0
+    li
+      display: inline-block
+      width: 24%
+      padding: 0
+      margin: 0

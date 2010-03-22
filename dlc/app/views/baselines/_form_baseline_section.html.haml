@@ -1,0 +1,7 @@
+- form.inputs :class => "baseline-travel #{name}" do
+  %li= title
+  = form.input "#{name}_alone".to_sym, :label => false, :input_html => {:class => 'alone'}
+  = form.input "#{name}_green".to_sym, :label => false, :input_html => {:class => 'green'}
+  %li.line-percent
+    %span.number
+    %span.symbol %
