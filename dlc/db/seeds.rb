@@ -5,3 +5,22 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+Mode.create([
+  {:name => 'Walk'},
+  {:name => 'Bike'},
+  {:name => 'Bus'},
+  {:name => 'Train'},
+  {:name => 'Carpool'},
+  {:name => 'Shuttle'},
+  {:name => 'Drive Alone'},
+])
+
+Destination.create([
+  {:name => 'Work'},
+  {:name => 'School'},
+  {:name => "Kids' Activities"},
+  {:name => 'Errands'},
+  {:name => 'Faith Community'},
+  {:name => 'Social/Civic/Fun'}
+])

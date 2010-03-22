@@ -1,0 +1,12 @@
+- title "Mode"
+
+%p
+  %strong Name:
+  =h @mode.name
+
+%p
+  = link_to "Edit", edit_mode_path(@mode)
+  |
+  = link_to "Destroy", @mode, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", modes_path

@@ -1,0 +1,14 @@
+- title "Modes"
+
+%table
+  %tr
+    %th Name
+  - for mode in @modes
+    %tr
+      %td= h mode.name
+      %td= link_to 'Show', mode
+      %td= link_to 'Edit', edit_mode_path(mode)
+      %td= link_to 'Destroy', mode, :confirm => 'Are you sure?', :method => :delete
+
+%p= will_paginate(@modes)
+%p= link_to "New Mode", new_mode_path

@@ -5,6 +5,9 @@ script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherite
   unit name:string in_miles:decimal
 
 script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  mode name:string
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
   trip user_id:integer destination_id:integer
 
 script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
