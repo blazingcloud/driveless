@@ -1,11 +1,4 @@
+%h2 How green is your travel now?
 - semantic_form_for @baseline do |form|
-  - form.inputs do
-    = form.input :user_id,  :value => current_user.id, :as => :hidden
-    = form.input :duration, :value => 1.week.to_i, :as => :hidden
-    = form.inputs :name => "Trips", :for => :baseline_trips do |baseline_trips_form|
-      = baseline_trips_form.input :unit
-      = baseline_trips_form.input :destination
-      = baseline_trips_form.input :alone
-      = baseline_trips_form.input :green
-  - form.buttons do
-    = form.commit_button 'Submit'
+  = form.inputs
+  = form.buttons

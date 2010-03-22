@@ -16,6 +16,7 @@ class UsersController < ApplicationController
         render :action => 'new'
       end
     end
+    @user.baseline = Baseline.create
   end
   
   def show

@@ -6,6 +6,10 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
+Unit.create([
+  :name => "Mile", :in_miles => 1.0
+])
+
 Mode.create([
   {:name => 'Walk'},
   {:name => 'Bike'},
