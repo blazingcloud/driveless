@@ -4,5 +4,6 @@
   Welcome,
   = h @user.username
   !
-%p
-  = link_to "Fill out your baseline!", edit_baseline_path
+- unless @user.baseline
+  %p
+    = link_to "Fill out your baseline!", edit_baseline_path
