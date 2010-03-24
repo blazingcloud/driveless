@@ -37,12 +37,21 @@ test:
   password:
   socket: /tmp/mysql.sock
 
+staging:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: dlc_staging
+  pool: 5
+  username: dlc
+  password: dr1v3l3ss!
+  socket: /var/run/mysqld/mysqld.sock
 production:
   adapter: mysql
   encoding: utf8
   reconnect: false
   database: dlc_production
   pool: 5
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
+  username: dlc
+  password: dr1v3l3ss!
+  socket: /var/run/mysqld/mysqld.sock
