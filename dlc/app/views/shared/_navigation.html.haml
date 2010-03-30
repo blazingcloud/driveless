@@ -1,9 +1,9 @@
 %ol
   %li
-    = link_to "Log a trip!",  new_trip_path
+    = link_to "Log a trip!",  new_account_trip_path
   %li
-    = link_to "Your Baseline", edit_baseline_path(:id => current_user)
+    = link_to "Your Baseline", edit_baseline_path(current_user.baseline)
   %li
     = link_to "Account Settings", edit_account_path
   %li
-    = link_to "Logout", logout_path
+    = link_to "Logout", account_path

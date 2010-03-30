@@ -1,8 +1,9 @@
-- semantic_form_for @trip do |form|
+- semantic_form_for @trip, :url => account_trips_path do |form|
   - form.inputs :name => "Log a trip!" do
-    = form.input :user_id, :as => :hidden, :value => current_user.id
+    = form.input :user_id,     :as => :hidden, :value => current_user.id
+    = form.input :unit_id,     :as => :hidden, :value => Unit.find(:first).id
     = form.input :destination, :as => :radio
-    = form.input :mode, :as => :select
+    = form.input :mode,        :as => :radio
     = form.input :distance
   - form.buttons do
     = form.commit_button 'Submit'

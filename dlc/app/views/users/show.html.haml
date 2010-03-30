@@ -4,6 +4,8 @@
   Welcome,
   = h @user.username
   !
-- unless @user.baseline
+- unless @user.baseline.green_miles
   %p
-    = link_to "Fill out your baseline!", edit_baseline_path
+= link_to "Fill out your baseline!", edit_baseline_path(@user.baseline)
+
+= render :partial => 'trips/trip', :collection => @user.trips

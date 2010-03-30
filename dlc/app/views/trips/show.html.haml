@@ -1,15 +1,5 @@
 - title "Trip"
 
-%p
-  %strong User:
-  =h @trip.user_id
-%p
-  %strong Destination:
-  =h @trip.destination_id
+= render :partial => 'trip', :locals => {:trip => @trip}
 
-%p
-  = link_to "Edit", edit_trip_path(@trip)
-  |
-  = link_to "Destroy", @trip, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", trips_path
+= link_to "View All", account_path

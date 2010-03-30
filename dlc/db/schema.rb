@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322204548) do
+ActiveRecord::Schema.define(:version => 20100329235521) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20100322204548) do
     t.datetime "updated_at"
     t.integer  "mode_id"
     t.integer  "distance",       :limit => 10, :precision => 10, :scale => 0
+    t.integer  "unit_id"
   end
 
   create_table "units", :force => true do |t|

@@ -1,0 +1,10 @@
+.trip-entry
+  - link_to account_trip_path(trip) do
+    = h pluralize trip.distance, trip.unit.name
+  by
+  = h trip.mode.name
+  to
+  = h trip.destination.name
+  .controls
+    = link_to 'Edit', edit_account_trip_path(trip)
+    = link_to 'Delete', account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete

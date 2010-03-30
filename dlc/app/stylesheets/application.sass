@@ -20,6 +20,7 @@
 !header_color = #930E23
 
 !serif_font = 'Palatino Linotype', 'Book Antiqua', Palatino, serif
+!sans_font  = Helvetica, sans-serif
 
 =carved-text
   text-shadow = "#{!brush1} 0px 1px 1px"
@@ -27,13 +28,19 @@
 =bordered
   border: 1px solid #ccc
   -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  -o-border-radius: 5px
+  border-radius: 5px
   -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -o-box-sizing: border-box
+  box-sizing: border-box
 
 body
   +carved-text
   background  = !site_background
   color       = !site_text
-  font-family = !serif_font
+  font-family = !sans_font
 
 a
   color: #00f
@@ -119,3 +126,7 @@ input#user_openid_identifier, input#user_session_openid_identifier
       width: 24%
       padding: 0
       margin: 0
+
+.trip-entry
+  .controls
+    float: right
