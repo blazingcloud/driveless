@@ -5,9 +5,9 @@
     
     $('.baseline-travel input').change(function(e){
       var $baseline = $(this).parents('.baseline-travel:first');
-      var alone = parseFloat($('input:eq(0)', $baseline).val());
+      var alone = parseFloat($('input:eq(0)', $baseline).val()) || 0;
       var green = parseFloat($('input:eq(1)', $baseline).val()) || 0;
-      if (alone) {
+      if (alone || green) {
         $('.number', $baseline).text(((green/(alone+green))*100+'').substr(0,5));
         $('.line-percent',$baseline).show();
       } else {
