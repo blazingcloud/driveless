@@ -1,9 +1,5 @@
 %ol
-  %li
-    = link_to "Log a trip!",  new_account_trip_path
-  %li
-    = link_to "Your Baseline", edit_baseline_path(current_user.baseline)
-  %li
-    = link_to "Account Settings", edit_account_path
-  %li
-    = link_to "Logout", account_path
+  = link_to_nav "Log a trip!",  new_account_trip_path
+  = link_to_nav "Your Baseline", edit_baseline_path(current_user.baseline)
+  = link_to_nav "Settings", edit_account_path
+  = link_to_nav "Logout", account_path

@@ -9,15 +9,21 @@
   <SolidColorBrush x:Key="Brush4" Color="#FF415C85" />
   <SolidColorBrush x:Key="Brush5" Color="#FF293240" />
 
+  255,255,255
+  230,240,255
+  157,188,235
+  65,92,133
+  41,50,64
+
 !brush1 = #FFFFFF
 !brush2 = #E6F0FF
 !brush3 = #9DBCEB
 !brush4 = #415C85
 !brush5 = #293240
 
-!site_background = !brush1
-!site_text = #333
-!header_color = #930E23
+!site_background = brush1
+!site_text = #000
+!header_color = !brush3 // #930E23
 
 !serif_font = 'Palatino Linotype', 'Book Antiqua', Palatino, serif
 !sans_font  = Helvetica, sans-serif
@@ -25,20 +31,31 @@
 =carved-text
   text-shadow = "#{!brush1} 0px 1px 1px"
 
-=bordered
-  border: 1px solid #ccc
-  -webkit-border-radius: 5px
-  -moz-border-radius: 5px
-  -o-border-radius: 5px
-  border-radius: 5px
+=rounded(!radius, !sides = "all")
+  @if !sides == "all"
+    -webkit-border-radius = !radius
+    -moz-border-radius = !radius
+  @else if !sides == "left"
+    -webkit-border-top-left-radius = !radius
+    -webkit-border-bottom-left-radius = !radius
+    -moz-border-radius-topleft = !radius
+    -moz-border-radius-bottomleft = !radius
+
+=border-box
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
   -o-box-sizing: border-box
   box-sizing: border-box
 
+=box-shadow(!left, !top, !spread, !color)
+  -webkit-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
+  -moz-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
+  -o-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
+  box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
+
 body
   +carved-text
-  background  = !site_background
+  background: #fff
   color       = !site_text
   font-family = !sans_font
 
@@ -52,18 +69,59 @@ a
   +clearfix
 
 .header, .footer
-  +bordered
   +grid(12,12)
 
 .header
   color = !header_color
 
 .navigation
-  +bordered
-  +grid(4,12)
+  // +grid(4,12)
+  // width: 320px
+  +grid(3,12)
+  margin-left: 90px
+  margin-right: 0px
+  padding-top: 10px
+  ol
+    display: block
+    list-style: none
+    padding: 0
+    margin: 0
+    li
+      +rounded(6px, "left")
+      display: block
+      list-style: none
+      padding: 0
+      margin: 0
+      border: 2px solid transparent
+      border-right: none
+      a
+        font-size: 16pt
+        margin: 5px
+        display: block
+        text-decoration: none
+        color = !brush4
+        text-transform: uppercase
+        &:hover
+          color = !brush5
+    .current
+      background: #fff
+      background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(255,255,255)),color-stop(0.49, rgb(224,224,224)),color-stop(0.5, rgb(201,201,201)),color-stop(0.93, rgb(161,161,161)))
+      background: -moz-linear-gradient(center top,rgb(255,255,255) 0%,rgb(224,224,224) 49%,rgb(201,201,201) 50%,rgb(161,161,161) 93%)      
+      border-color = !brush4
+      -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.2)
+      a
+        color = !brush5
 .main
-  +bordered
   +grid(8,12)
+  +rounded(3px)
+  +box-shadow(0px, 2px, 2px, "rgba(0,0,0,0.4)")
+  +border-box
+  border: 1px solid #eee
+  margin-left: 0px
+  background: #fff
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(255,255,255)),color-stop(0.40, rgba(224,224,224,0.3)))
+  background: -moz-linear-gradient(center top,rgb(255,255,255) 0%,rgba(224,224,224,0.3) 40%)      
+  min-height: 500px
 
 #flash_notice, #flash_error
   +grid(12,12)
