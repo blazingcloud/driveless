@@ -21,7 +21,11 @@ class UsersController < ApplicationController
 
   def widget
     @user = current_user
-    render :layout => 'widget'
+    if @user
+      render :layout => 'widget'
+    else
+      render :text => "&nbsp"
+    end
   end
   
   def show
