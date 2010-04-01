@@ -1,0 +1,10 @@
+!!! XHTML 1.1
+%html
+  %head
+    %title= "Drive Less Challenge | " + h(yield(:title) || "Untitled")
+    = stylesheet_link_tag 'compiled/widget.css',    :media => 'screen, projection'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'underscore-min.js', 'widget.js', :defaults
+    = yield :head
+  %body
+    .widget
+      = yield

@@ -23,13 +23,13 @@
 
 !site_background = brush1
 !site_text = #000
-!header_color = !brush3 // #930E23
+!header_color = !brush4
 
 !serif_font = 'Palatino Linotype', 'Book Antiqua', Palatino, serif
 !sans_font  = Helvetica, sans-serif
 
 =carved-text
-  text-shadow = "#{!brush1} 0px 1px 1px"
+  text-shadow = "#{!brush2} 0px 1px 1px"
 
 =rounded(!radius, !sides = "all")
   @if !sides == "all"
@@ -55,7 +55,7 @@
   box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
 
 body
-  background: #fff
+  background  = !brush3
   color       = !site_text
   font-family = !sans_font
 
@@ -80,7 +80,18 @@ a
   +alpha
   +carved-text
   color = !header_color
-
+  h1
+    height: 100px
+    margin: 0
+    div
+      height: 99px
+      display: inline-block
+      width: 8px
+      background: transparent
+    span
+      vertical-align: baseline
+      font-size: 100px
+      line-height: 100px
 .navigation
   +grid(3,12)
   +grid-prefix(1)
@@ -123,11 +134,12 @@ a
   +box-shadow(0px, 2px, 2px, "rgba(0,0,0,0.4)")
   +border-box
   +alpha
+  padding: 20px
   border = "1px solid #{!brush5}"
   color = !brush2
   background: #fff
-  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(41,50,64,0.8)),color-stop(0.40, rgba(41,50,64,1)))
-  background: -moz-linear-gradient(center top,rgba(41,50,64,0.8) 0%,rgba(41,50,64,1) 40%)      
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(41,50,64,0.9)),color-stop(1, rgba(41,50,64,1)))
+  background: -moz-linear-gradient(center top,rgba(41,50,64,0.9) 0%,rgba(41,50,64,1) 100%)      
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FF3A4351, endColorstr=#FF293240)"
   min-height: 500px
   a

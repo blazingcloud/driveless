@@ -4,7 +4,7 @@ class TripsController < InheritedResources::Base
   def create
     create! { account_url }
   end
-
+  
   protected
     def collection
       @trips ||= end_of_association_chain.paginate :page => params[:page], :per_page => (params[:per_page] || 20)

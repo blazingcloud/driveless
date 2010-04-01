@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     end
     @user.baseline = Baseline.create
   end
+
+  def widget
+    @user = current_user
+    render :layout => 'widget'
+  end
   
   def show
     @user = @current_user
