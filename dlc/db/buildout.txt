@@ -18,3 +18,14 @@ script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherite
 
 script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
   baseline_trips baseline_id:integer destination_id:integer unit_id:integer alone:decimal green:decimal
+
+script/generate nifty_scaffold -g --haml --will-paginate --formtastic --inherited-resources \
+  community name:string state:string state_abbreviation:string
+
+
+Challenge
+  start datetime
+  end datetime
+  name string
+  description text
+  

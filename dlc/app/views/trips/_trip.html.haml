@@ -5,6 +5,8 @@
   = h trip.mode.name
   to
   = h trip.destination.name
+  = distance_of_time_in_words(trip.created_at, Time.now)
+  ago
   .controls
     = link_to 'Edit', edit_account_trip_path(trip)
     = link_to 'Delete', account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete
