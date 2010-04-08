@@ -9,27 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100329235521) do
+ActiveRecord::Schema.define(:version => 20100408232334) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "work_green",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "work_alone",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "school_green",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "school_alone",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "kids_green",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "kids_alone",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "errands_green", :limit => 10, :precision => 10, :scale => 0
-    t.integer  "errands_alone", :limit => 10, :precision => 10, :scale => 0
-    t.integer  "faith_green",   :limit => 10, :precision => 10, :scale => 0
-    t.integer  "faith_alone",   :limit => 10, :precision => 10, :scale => 0
-    t.integer  "social_green",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "social_alone",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "total_miles",   :limit => 10, :precision => 10, :scale => 0
-    t.integer  "green_miles",   :limit => 10, :precision => 10, :scale => 0
+    t.integer  "work_green"
+    t.integer  "work_alone"
+    t.integer  "school_green"
+    t.integer  "school_alone"
+    t.integer  "kids_green"
+    t.integer  "kids_alone"
+    t.integer  "errands_green"
+    t.integer  "errands_alone"
+    t.integer  "faith_green"
+    t.integer  "faith_alone"
+    t.integer  "social_green"
+    t.integer  "social_alone"
+    t.integer  "total_miles"
+    t.integer  "green_miles"
   end
 
   create_table "destinations", :force => true do |t|
@@ -74,8 +74,9 @@ ActiveRecord::Schema.define(:version => 20100329235521) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "mode_id"
-    t.integer  "distance",       :limit => 10, :precision => 10, :scale => 0
+    t.integer  "distance"
     t.integer  "unit_id"
+    t.datetime "made_at"
   end
 
   create_table "units", :force => true do |t|

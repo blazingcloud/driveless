@@ -1,7 +1,13 @@
 (function($) {
   $(document).ready(function(){
     
-    $('#com-drivelesschallenge-widget').dlc_widget();
+    //$('#com-drivelesschallenge-widget').dlc_widget();
+    
+    $('.copy-trip-to-form').click(function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      console.log("clicked");
+    });
     
     $('.baseline-travel input').change(function(e){
       var $baseline = $(this).parents('.baseline-travel:first');

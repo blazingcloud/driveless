@@ -1,9 +1,14 @@
 - semantic_form_for @trip, :url => account_trips_path do |form|
+  %h3 Log another trip!
+  .trip-form-headers
+    %span Distance
+    %span Mode
+    %span Destination
   - form.inputs do
     = form.input :user_id,     :as => :hidden, :value => current_user.id
     = form.input :unit_id,     :as => :hidden, :value => Unit.find(:first).id
-    = form.input :destination
-    = form.input :mode
-    = form.input :distance
-  - form.buttons do
-    = form.commit_button 'Submit'
+    = form.input :distance,    :label => false
+    = form.input :mode,        :label => false
+    = form.input :destination, :label => false
+    = form.input :made_at,     :label => "You took this trip on"
+    = form.commit_button 'Log this trip!'
