@@ -1,10 +1,13 @@
-- title "Home (#{@user.username})"
+- title @user.username
 
-%p
-  Welcome,
-  = h @user.username
-  !
-- unless @user.baseline.green_miles
+- if @user.baseline.green_miles
+  %h2
+    You have logged a total of
+    %b>= pluralize @user.sum_of_trips, "green mile"
+    \! You have achieved
+    %b= @user.percent_of_personal_goal_reached
+    of your baseline goal!
+- else
   %p
     = link_to "Fill out your baseline!", edit_baseline_path(@user.baseline)
 

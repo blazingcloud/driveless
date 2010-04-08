@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
     c.openid_required_fields = [:nickname, :email]
   end # block optional
 
+  def sum_of_trips
+    "%.2f" % self.trips.map(&:distance).sum.to_f
+  end
+
+  def percent_of_personal_goal_reached
+    "%.2f%" % (self.sum_of_trips.to_f / self.baseline.green_miles.to_f * 100)
+  end
+
   private
 
   def map_openid_registration(registration)
