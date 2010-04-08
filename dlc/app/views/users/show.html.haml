@@ -6,6 +6,7 @@
   !
 - unless @user.baseline.green_miles
   %p
-= link_to "Fill out your baseline!", edit_baseline_path(@user.baseline)
+    = link_to "Fill out your baseline!", edit_baseline_path(@user.baseline)
 
-= render :partial => 'trips/trip', :collection => @user.trips
+= render :partial => 'trips/form'
+= render :partial => 'trips/trip', :collection => @user.trips.find(:all, :order => 'created_at DESC')
