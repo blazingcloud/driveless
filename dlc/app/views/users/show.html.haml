@@ -6,7 +6,7 @@
     %b>= pluralize @user.sum_of_trips, "green mile"
     \! You have achieved
     %b= @user.percent_of_personal_goal_reached
-    of your baseline goal!
+    of your goal!
 - else
   %p
     = link_to "Fill out your baseline!", edit_baseline_path(@user.baseline)
