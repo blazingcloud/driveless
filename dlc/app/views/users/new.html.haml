@@ -1,24 +1,6 @@
 - title "Welcome!"
 
-%p
-  %a{:href => "#register_form"} Jump to the form!
-
-%p The Drive Less Challenge uses a game-like, web-based tool that that motivates participants to change behavior using personal goal setting and positive peer encouragement within their social networks.
-
-%p Experience with health-related behavior change shows that monitoring daily activity helps people focus attention on opportunities for change.   So the core of the Drive Less Challenge tool is logging one's daily transportation.
-
-%p Social support and social pressure are key to changing social norms.  So the Drive Less Challenge enables people to participate, compete, and view their own progress and that of others in one or more groups: school, workplace, neighborhood, faith community, or other group. 
-
-%p The Challenge is designed to encourage people with a variety of motivations - personal (reach my personal goals), cooperative (help my group succeed), competitive (be the best overall or in a category), social (encourage others and be encouraged by others). Because the goal is behavior change, there are many ways to win - reaching personal goals, helping one's group succeed, using alternatives to solo driving (biking, walking, transit, carpool).
-
-%p The 2009 pilot showed that participants want a responsive experience to maintain motivation.  The Drive Less Challenge tool provides immediate feedback on personal and community results throughout the contest period. 
-
-%p The Drive Less Challenge tool will be displayed as components on the Drive Less Challenge website. It replaces a very simple and much less usable SurveyMonkey logging tool used in 2009, which did not provide any participant response during the Challenge period. 
-
-%p The Drive Less Challenge website includes other information about the challenge. The website content management is provided by WordPress, an open source blogging and content management tool. 
-
-%h1
-  %a{:name => "register_form"} Register
+%h1 Register
 
 - form_for @user, :url => account_path do |f|
   = f.error_messages

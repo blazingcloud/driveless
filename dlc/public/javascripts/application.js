@@ -7,6 +7,7 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       console.log("clicked");
+      alert("This feature isn't finished yet...");
     });
     
     $('.baseline-travel input').change(function(e){

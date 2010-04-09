@@ -1,13 +1,14 @@
 - semantic_form_for @trip, :url => account_trips_path do |form|
-  %h3 Log another trip!
+  %h1 Log a new trip
+  %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
   .trip-form-headers
-    %span Distance
-    %span Mode
-    %span Destination
+    %span How far did you go?
+    %span How did you get there?
+    %span Where did you go?
   - form.inputs do
     = form.input :user_id,     :as => :hidden, :value => current_user.id
     = form.input :unit_id,     :as => :hidden, :value => Unit.find(:first).id
-    = form.input :distance,    :label => false
+    = form.input :distance,    :label => "Miles"
     = form.input :mode,        :label => false
     = form.input :destination, :label => false
     = form.input :made_at,     :label => "You took this trip on"
