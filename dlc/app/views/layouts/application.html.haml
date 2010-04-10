@@ -2,12 +2,13 @@
 %html
   %head
     %title= "Drive Less Challenge | " + h(yield(:title) || "Untitled")
+    = stylesheet_link_tag 'flick/jquery-ui-1.7.2.custom.css',    :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/grid.css',    :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css',    :media => 'screen, projection'
     = stylesheet_link_tag 'formtastic'
     = stylesheet_link_tag 'formtastic_changes'
     = stylesheet_link_tag 'compiled/application', :media => 'screen, projection'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'underscore-min.js', :defaults
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'underscore-min.js', :defaults
     = yield :head
   %body
     #container

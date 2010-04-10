@@ -5,7 +5,7 @@
   = h trip.mode.name
   to
   = h trip.destination.name
-  = distance_of_time_in_words(trip.made_at, Time.new + Time.new.utc_offset)
+  = distance_of_time_in_words(trip.made_at.to_datetime + 1, Time.new + Time.new.utc_offset)
   ago
   .controls
     = link_to 'Edit', edit_account_trip_path(trip)

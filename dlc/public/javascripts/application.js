@@ -10,6 +10,8 @@
       alert("This feature isn't finished yet...");
     });
     
+    $('.datepicker').datepicker()
+    
     $('.baseline-travel input').change(function(e){
       var $baseline = $(this).parents('.baseline-travel:first');
       var alone = parseFloat($('input:eq(0)', $baseline).val()) || 0;

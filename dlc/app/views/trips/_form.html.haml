@@ -11,5 +11,5 @@
     = form.input :distance,    :label => "Miles"
     = form.input :mode,        :label => false
     = form.input :destination, :label => false
-    = form.input :made_at,     :label => "You took this trip on"
+    = form.input :made_at,     :label => "You took this trip on", :as => :string, :input_html => {:value => Time.now.strftime("%m/%d/%Y"), :class => 'datepicker'}
     = form.commit_button 'Log this trip!'

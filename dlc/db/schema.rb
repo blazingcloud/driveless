@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20100408232334) do
     t.integer  "mode_id"
     t.integer  "distance"
     t.integer  "unit_id"
-    t.datetime "made_at"
+    t.date     "made_at"
   end
 
   create_table "units", :force => true do |t|
