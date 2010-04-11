@@ -1,0 +1,260 @@
+/* line 64, ../../../app/stylesheets/application.sass */
+body {
+  background: #9dbceb;
+  color: black;
+  font-family: Helvetica, sans-serif; }
+
+/* line 69, ../../../app/stylesheets/application.sass */
+a {
+  color: #00f; }
+  /* line 71, ../../../app/stylesheets/application.sass */
+  a img {
+    border: none; }
+
+/* line 74, ../../../app/stylesheets/application.sass */
+#container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+  overflow: hidden;
+  display: inline-block; }
+  /* line 5, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
+  #container {
+    display: block; }
+
+/* line 78, ../../../app/stylesheets/application.sass */
+.footer {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 940px; }
+
+/* line 81, ../../../app/stylesheets/application.sass */
+.widget {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 300px;
+  margin-right: 0; }
+
+/* line 85, ../../../app/stylesheets/application.sass */
+.header {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 620px;
+  margin-left: 0;
+  text-shadow: #e6f0ff 0px 1px 1px;
+  color: #415c85; }
+  /* line 90, ../../../app/stylesheets/application.sass */
+  .header h1 {
+    height: 100px;
+    margin: 0; }
+    /* line 93, ../../../app/stylesheets/application.sass */
+    .header h1 div {
+      height: 99px;
+      display: inline-block;
+      width: 8px;
+      background: transparent; }
+    /* line 98, ../../../app/stylesheets/application.sass */
+    .header h1 span {
+      vertical-align: baseline;
+      font-size: 100px;
+      line-height: 100px; }
+
+/* line 102, ../../../app/stylesheets/application.sass */
+.navigation {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 220px;
+  padding-left: 80px;
+  margin-right: 0;
+  padding-top: 10px; }
+  /* line 107, ../../../app/stylesheets/application.sass */
+  .navigation ol {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    /* line 112, ../../../app/stylesheets/application.sass */
+    .navigation ol li {
+      -webkit-border-top-left-radius: 6px;
+      -webkit-border-bottom-left-radius: 6px;
+      -moz-border-radius-topleft: 6px;
+      -moz-border-radius-bottomleft: 6px;
+      display: block;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border: 2px solid transparent;
+      border-right: none; }
+      /* line 120, ../../../app/stylesheets/application.sass */
+      .navigation ol li a {
+        font-size: 16pt;
+        margin: 5px;
+        display: block;
+        text-decoration: none;
+        color: #415c85;
+        text-transform: uppercase; }
+        /* line 127, ../../../app/stylesheets/application.sass */
+        .navigation ol li a:hover {
+          color: #293240; }
+    /* line 129, ../../../app/stylesheets/application.sass */
+    .navigation ol .current {
+      background: #fff;
+      background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(255,255,255)),color-stop(0.49, rgb(224,224,224)),color-stop(0.5, rgb(201,201,201)),color-stop(0.93, rgb(161,161,161)));
+      background: -moz-linear-gradient(center top,rgb(255,255,255) 0%,rgb(224,224,224) 49%,rgb(201,201,201) 50%,rgb(161,161,161) 93%);
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FFFFFFFF, endColorstr=#AAAAAAAA)";
+      border-color: #415c85;
+      -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.2); }
+      /* line 136, ../../../app/stylesheets/application.sass */
+      .navigation ol .current a {
+        color: #293240; }
+
+/* line 138, ../../../app/stylesheets/application.sass */
+.main {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 620px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+  -o-box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: 0;
+  padding: 20px;
+  border: 1px solid #293240;
+  color: #e6f0ff;
+  background: #fff;
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(41,50,64,0.9)),color-stop(1, rgba(41,50,64,1)));
+  background: -moz-linear-gradient(center top,rgba(41,50,64,0.9) 0%,rgba(41,50,64,1) 100%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FF3A4351, endColorstr=#FF293240)";
+  min-height: 500px; }
+  /* line 152, ../../../app/stylesheets/application.sass */
+  .main a {
+    color: white; }
+
+/* line 155, ../../../app/stylesheets/application.sass */
+#flash_notice, #flash_error {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 940px;
+  padding: 5px 8px;
+  margin: 10px 0; }
+
+/* line 160, ../../../app/stylesheets/application.sass */
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6; }
+
+/* line 164, ../../../app/stylesheets/application.sass */
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66; }
+
+/* line 168, ../../../app/stylesheets/application.sass */
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0; }
+  /* line 175, ../../../app/stylesheets/application.sass */
+  #errorExplanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: 0;
+    background-color: #c00;
+    color: #fff; }
+  /* line 183, ../../../app/stylesheets/application.sass */
+  #errorExplanation p {
+    color: #333;
+    margin-bottom: 0;
+    padding: 8px; }
+  /* line 187, ../../../app/stylesheets/application.sass */
+  #errorExplanation ul {
+    margin: 2px 24px; }
+    /* line 189, ../../../app/stylesheets/application.sass */
+    #errorExplanation ul li {
+      font-size: 12px;
+      list-style: disc; }
+
+/* line 193, ../../../app/stylesheets/application.sass */
+input#user_openid_identifier, input#user_session_openid_identifier {
+  background: url(http://openid.net/images/login-bg.gif) no-repeat;
+  background-color: #fff;
+  background-position: 0 50%;
+  color: #000;
+  padding-left: 18px; }
+
+/* line 201, ../../../app/stylesheets/application.sass */
+.baseline .foot, .baseline .head {
+  font-weight: bold; }
+/* line 203, ../../../app/stylesheets/application.sass */
+.baseline .head {
+  vertical-align: top; }
+
+/* line 207, ../../../app/stylesheets/application.sass */
+.baseline-travel ol {
+  display: block;
+  padding: 0;
+  margin: 0; }
+  /* line 211, ../../../app/stylesheets/application.sass */
+  .baseline-travel ol li {
+    display: inline-block;
+    width: 24%;
+    padding: 0;
+    margin: 0; }
+
+/* line 217, ../../../app/stylesheets/application.sass */
+label {
+  color: white; }
+
+/* line 221, ../../../app/stylesheets/application.sass */
+.trip-form-headers span {
+  display: inline-block;
+  width: 33%;
+  padding-right: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 14pt; }
+
+/* line 231, ../../../app/stylesheets/application.sass */
+.trip .inputs ol li, .trip .buttons ol li {
+  display: inline-block;
+  width: 33%; }
+  /* line 234, ../../../app/stylesheets/application.sass */
+  .trip .inputs ol li#trip_made_at_input, .trip .buttons ol li#trip_made_at_input {
+    display: block;
+    width: auto;
+    clear: both; }
+  /* line 238, ../../../app/stylesheets/application.sass */
+  .trip .inputs ol li.commit, .trip .buttons ol li.commit {
+    display: block;
+    clear: both;
+    margin-top: 50px; }
+
+/* line 244, ../../../app/stylesheets/application.sass */
+.trip-entry .controls {
+  float: right; }
