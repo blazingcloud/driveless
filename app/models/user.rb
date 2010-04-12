@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_one :baseline
   has_many :trips
+  belongs_to :community
   
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]

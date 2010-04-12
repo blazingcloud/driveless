@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(:version => 20100412142230) do
     t.integer  "green_miles"
   end
 
+  create_table "communities", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "state",       :null => false
+    t.string   "country",     :null => false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "destinations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -105,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20100412142230) do
     t.string   "openid_identifier"
     t.string   "username"
     t.string   "pseudonym"
+    t.integer  "community_id"
     t.boolean  "admin",               :default => false
   end
 
