@@ -4,6 +4,6 @@ compass
 authlogic
 authlogic-oid
 ruby-openid
-inherited_resources --version '>=1.0.3' --source http://gems.github.com
+inherited_resources --version '=1.0.3' --source gems.github.com
 will_paginate
 formtastic
