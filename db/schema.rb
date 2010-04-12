@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100408232334) do
+ActiveRecord::Schema.define(:version => 20100412142230) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20100408232334) do
     t.string   "openid_identifier"
     t.string   "username"
     t.string   "pseudonym"
+    t.boolean  "admin",               :default => false
   end
 
 end
