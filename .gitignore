@@ -1,0 +1,7 @@
+config/database.yml
+log/*
+tmp/*
+.DS_Store
+doc/*
+public/stylesheets/*
+*.swp
