@@ -5,3 +5,4 @@ tmp/*
 doc/*
 public/stylesheets/*
 *.swp
+/test/*
