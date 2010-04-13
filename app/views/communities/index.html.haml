@@ -11,7 +11,6 @@
     %td Id
     %td Name
     %td Description
-    %td Created At
     %td Delete
   - @communities.each do |community|
     %tr
@@ -20,7 +19,6 @@
       %td= community.name
       %td= community.state
       %td= community.description
-      %td= community.created_at
       %td
         %strong
           = link_to 'x', { :action => 'destroy', :id => community }, :confirm => 'Are you sure?', :method => :delete
