@@ -1,5 +1,6 @@
 class Community < ActiveRecord::Base
   has_many :users
+  validates_presence_of :name, :state, :country
 
   before_destroy :ensure_there_are_no_members
 

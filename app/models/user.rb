@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   belongs_to :community
+  validates_presence_of :email, :username, :password
   
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
