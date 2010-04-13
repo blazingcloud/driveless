@@ -7,6 +7,7 @@ Spec::Runner.configure do |config|
 end
 
 Sham.define do
+  name        { Faker::Lorem.words(1)   }
   city        { Faker::Address.city     }
   state       { Faker::Address.us_state }
   country     { Faker::Lorem.words(1)   }
@@ -28,4 +29,14 @@ User.blueprint do
   username
   password
   password_confirmation { password }
+end
+
+Destination.blueprint do
+  name
+end
+
+Group.blueprint do
+  name
+  owner       { User.make }
+  destination
 end

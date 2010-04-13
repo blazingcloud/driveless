@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100413223410) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :null => false
   end
 
   create_table "lengths", :force => true do |t|

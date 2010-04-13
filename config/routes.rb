@@ -22,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :communities
 
+  map.resources :groups
+
   map.connect '/account/widget', :controller => "users", :action => "widget"
 
   map.resource :user_session

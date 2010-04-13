@@ -1,3 +1,19 @@
 - title "Groups"
 
-%h1 
+%h1 View Groups
+%h5= page_entries_info @groups
+
+%table
+  %thead
+    %thead
+      %th Name
+      %th Author
+      %th Destination
+      %th Description
+    - @groups.each do |group|
+      %tr
+      %tr= group.name
+      %tr= group.owner.username
+      %tr= group.destination.name
+      %tr= group.description
+
