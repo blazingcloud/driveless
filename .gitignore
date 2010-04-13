@@ -6,3 +6,4 @@ doc/*
 public/stylesheets/*
 *.swp
 /test/*
+/spec/fixtures/*
