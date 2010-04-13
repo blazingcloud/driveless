@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :user_sessions
 
+  map.resources :users
   map.resource :account, :controller => "users" do |account_map|
     account_map.resources :trips
   end
@@ -22,8 +23,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :communities
 
   map.connect '/account/widget', :controller => "users", :action => "widget"
-
-  map.resources :users
 
   map.resource :user_session
 

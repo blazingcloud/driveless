@@ -5,7 +5,10 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :memberships
   belongs_to :community
   validates_presence_of :email, :username, :password
+  cattr_reader :per_page
   
+  @@per_page = 20
+
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
   end # block optional
