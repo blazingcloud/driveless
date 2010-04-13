@@ -1,3 +1,8 @@
+config/database.yml
 log/*
-public/stylsheets/compiled/*
 tmp/*
+.DS_Store
+doc/*
+public/stylesheets/*
+*.swp
+/test/*
