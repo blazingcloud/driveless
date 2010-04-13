@@ -1,0 +1,28 @@
+- title "Communities"
+
+%p
+  = link_to "new", new_community_path
+
+%h2
+  Active Communities
+
+%table
+  %th
+    %td Id
+    %td Name
+    %td Description
+    %td Created At
+    %td Delete
+  - @communities.each do |community|
+    %tr
+      %td
+        = link_to community.id, :action => 'edit', :id => community
+      %td= community.name
+      %td= community.state
+      %td= community.description
+      %td= community.created_at
+      %td
+        %strong
+          = link_to 'x', { :action => 'destroy', :id => community }, :confirm => 'Are you sure?', :method => :delete
+
+

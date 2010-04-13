@@ -18,6 +18,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users" do |account_map|
     account_map.resources :trips
   end
+
+  map.resources :communities
+
   map.connect '/account/widget', :controller => "users", :action => "widget"
 
   map.resources :users

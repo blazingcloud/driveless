@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100408232334) do
+ActiveRecord::Schema.define(:version => 20100412142230) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -32,8 +32,24 @@ ActiveRecord::Schema.define(:version => 20100408232334) do
     t.integer  "green_miles"
   end
 
+  create_table "communities", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "state",       :null => false
+    t.string   "country",     :null => false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "destinations", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name",        :null => false
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +59,13 @@ ActiveRecord::Schema.define(:version => 20100408232334) do
     t.integer  "mode_id"
     t.integer  "distance"
     t.integer  "unit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "group_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,14 +110,14 @@ ActiveRecord::Schema.define(:version => 20100408232334) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                              :null => false
-    t.string   "crypted_password",                   :null => false
-    t.string   "password_salt",                      :null => false
-    t.string   "persistence_token",                  :null => false
-    t.string   "single_access_token",                :null => false
-    t.string   "perishable_token",                   :null => false
-    t.integer  "login_count",         :default => 0, :null => false
-    t.integer  "failed_login_count",  :default => 0, :null => false
+    t.string   "email",                                  :null => false
+    t.string   "crypted_password",                       :null => false
+    t.string   "password_salt",                          :null => false
+    t.string   "persistence_token",                      :null => false
+    t.string   "single_access_token",                    :null => false
+    t.string   "perishable_token",                       :null => false
+    t.integer  "login_count",         :default => 0,     :null => false
+    t.integer  "failed_login_count",  :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -105,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20100408232334) do
     t.string   "openid_identifier"
     t.string   "username"
     t.string   "pseudonym"
+    t.integer  "community_id"
+    t.boolean  "admin",               :default => false
   end
 
 end

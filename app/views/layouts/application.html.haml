@@ -21,6 +21,8 @@
           %span= h yield :title
       .navigation
         - if current_user
+          - if current_user.admin?
+            = render :partial => 'shared/admin_navigation'
           = render :partial => 'shared/navigation'
         - else
           = render :partial => 'shared/public_navigation'
