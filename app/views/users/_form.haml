@@ -1,5 +1,6 @@
 - form_for @user do |f|
   = f.error_messages
+  = f.hidden_field :id
   %p
     = f.label :username
     %br
@@ -17,6 +18,15 @@
       = f.label :password_confirmation
       %br
       = f.password_field :password_confirmation
+    %p
+      = f.label :community_id
+      %br
+      = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
+    - if @current_user.admin?
+      %p
+        = f.label :admin
+        %br
+        = f.check_box :admin
     %p
       = f.submit "Submit"
   %h2
