@@ -7,3 +7,4 @@ public/stylesheets/*
 *.swp
 /test/*
 /spec/fixtures/*
+/coverage/*
