@@ -5,6 +5,7 @@ tmp/*
 doc/*
 public/stylesheets/*
 *.swp
+*.swo
 /test/*
 /spec/fixtures/*
 /coverage/*
