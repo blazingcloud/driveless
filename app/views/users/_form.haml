@@ -22,7 +22,7 @@
       = f.label :community_id
       %br
       = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
-    - if @current_user.admin?
+    - if admin_logged_in?
       %p
         = f.label :admin
         %br
