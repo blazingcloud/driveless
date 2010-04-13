@@ -11,6 +11,9 @@ Sham.define do
   state       { Faker::Address.us_state }
   country     { Faker::Lorem.words(1)   }
   description { Faker::Lorem.paragraph  }
+  email       { Faker::Internet.email   }
+  username    { Faker::Internet.user_name }
+  password    { Faker::Lorem.sentence   }
 end
 
 Community.blueprint do
@@ -18,4 +21,11 @@ Community.blueprint do
   state
   country
   description
+end
+
+User.blueprint do
+  email
+  username
+  password
+  password_confirmation { password }
 end
