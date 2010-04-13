@@ -3,7 +3,7 @@ log/*
 tmp/*
 .DS_Store
 doc/*
-public/stylesheets/*
+public/stylesheets/compiled/*
 *.swp
 *.swo
 /test/*
