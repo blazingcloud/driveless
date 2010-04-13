@@ -6,3 +6,4 @@ authlogic-oid
 inherited_resources --version '=1.0.3' --source gems.github.com
 will_paginate
 formtastic
+googlecharts
