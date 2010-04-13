@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100412142230) do
+ActiveRecord::Schema.define(:version => 20100413223410) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -48,10 +48,11 @@ ActiveRecord::Schema.define(:version => 20100412142230) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "name",        :null => false
+    t.string   "name",           :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "destination_id", :null => false
   end
 
   create_table "lengths", :force => true do |t|
