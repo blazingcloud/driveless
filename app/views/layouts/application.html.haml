@@ -12,13 +12,10 @@
     = yield :head
   %body
     #container
-      .widget
-        #com-drivelesschallenge-widget
-          widget goes here
+      .title
+        %h1 Drive Less Challenge
       .header
-        %h1
-          %div
-          %span= h yield :title
+        %h1= h yield :title
       .navigation
         - if current_user
           - if current_user.admin?
