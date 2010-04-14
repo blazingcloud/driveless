@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   belongs_to :community
   validates_presence_of :email, :username, :password
 
+  before_create :create_baseline
+
   attr_protected :admin
 
   acts_as_authentic do |c|
@@ -25,5 +27,9 @@ class User < ActiveRecord::Base
   def map_openid_registration(registration)
     self.email = registration["email"] if email.blank?
     self.username = registration["nickname"] if username.blank?
+  end
+
+  def create_baseline
+    self.baseline = Baseline.create
   end
 end
