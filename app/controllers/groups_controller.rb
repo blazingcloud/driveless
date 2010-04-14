@@ -1,38 +1,56 @@
 class GroupsController < ApplicationController
 
-  before_filter :collect_destinations, :only => [ :new, :edit ]
+  before_filter :require_user
   before_filter :is_the_owner?, :only => [ :destroy, :edit ]
 
   def show
     @groups = Group.paginate(:page => params[:page] || 1)
   end
+
   def index
-    @groups = Group.paginate(:page => params[:page] || 1, :conditions => { :owner_id => current_user })
+    @owned_groups = current_user.owned_groups.by_name.paginate(:page => params[:page] || 1, :include => :destination)
+    @memberships = current_user.regular_memberships.by_group_name.paginate(:page => params[:page] || 1, :include => :destination)
   end
+
+  def index_all
+    if params[:destination_id].present?
+      destination = Destination.find(params[:destination_id])
+      @groups = destination.groups.by_name.all.paginate(:page => params[:page] || 1)
+    end
+  end
+
   def new
     @group = Group.new
   end
+
   def create
-    @group = Group.new(params[:group])
-    if @group.save
+    @group = current_user.create_group(params[:group])
+    if !@group.new_record?
       flash[:notice] = "Group #{@group.name} created successfully!"
-      redirect_to groups_url
+      redirect_to account_groups_url
     else
-      flash[:alert] = "There Are Errors in the fields!"
-      redirect_to new_group_url
+      render :new
     end
   end
+
   def edit
     @group = current_group
     render :new
   end
+
   def update
     @group = current_group
-    redirect_to groups_url
+    if @group.update_attributes(params[:group])
+      flash[:notice] = "Successfully updated group."
+      redirect_to account_groups_url
+    else
+      render :new
+    end
   end
+
   def destroy
     current_group.destroy
-    redirect_to groups_url
+    redirect_to account_groups_url
   end
 
   def current_group
@@ -42,11 +60,6 @@ class GroupsController < ApplicationController
   private
 
   def is_the_owner?
-    group = Group.find(params[:id])
-    group.owner == current_user
-  end
-
-  def collect_destinations
-    @destinations = Destination.all
+    current_group.owner == current_user
   end
 end

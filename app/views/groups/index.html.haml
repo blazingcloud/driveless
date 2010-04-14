@@ -1,8 +1,9 @@
 - title "My Groups"
 
-= link_to "Create a New Group", new_group_url
+= link_to "Create a New Group", new_account_group_url
 
-%h5= page_entries_info @groups
+%h4 My Groups
+%h5= page_entries_info @owned_groups
 
 %table
   %thead
@@ -10,11 +11,27 @@
     %th Destination
     %th Members
     %th Delete?
-  - @groups.each do |group|
+  - @owned_groups.each do |group|
     %tr
-      %td= link_to group.name, :action => 'edit', :id => group
+      %td= link_to group.name, edit_account_group_path(group)
       %td= group.destination.name
-      %td
-      %td= link_to 'x', { :action => 'destroy', :id => group }, :confirm => 'Are you sure?', :method => :delete
+      %td= group.memberships.count
+      %td= link_to 'x', [:account, group], :confirm => 'Are you sure?', :method => :delete
 
-= link_to 'Show All Groups', :action => 'show'
+%h4 Groups I Belong
+%h5= page_entries_info @memberships
+
+%table
+  %thead
+    %th Name
+    %th Destination
+    %th Members
+    %th Delete?
+    - @memberships.each do |membership|
+      %tr
+        %td= membership.group.name
+        %td= membership.group.destination.name
+        %td= membership.group.memberships.count
+        %td= link_to 'x', membership, :confirm => 'Are you sure?', :method => :delete
+
+= link_to 'Show All Groups', groups_path

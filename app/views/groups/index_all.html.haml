@@ -1,0 +1,14 @@
+- title 'All Groups'
+
+-if @groups
+  %h5= page_entries_info @groups
+
+- form_tag groups_path do |f|
+  = select_tag :destination_id, options_for_select([["Select a destination", nil]] + Destination.by_name.all.map {|d| [d.name, d.id]}, params[:destination_id].to_i)
+  = submit_tag 'List groups'
+
+- if @groups
+  %table
+    - @groups.each do |group|
+      %tr
+        %td= group.name

@@ -18,11 +18,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :account, :controller => "users" do |account_map|
     account_map.resources :trips
+    account_map.resources :groups, :except => :show
   end
 
   map.resources :communities
 
-  map.resources :groups
+  map.groups 'groups', :controller => 'groups', :action => 'index_all'
+
+  map.resources :memberships
 
   map.connect '/account/widget', :controller => "users", :action => "widget"
 

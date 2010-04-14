@@ -5,12 +5,16 @@ class Group < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   belongs_to :destination
 
-  after_create :create_membership
+  after_create :create_owner_membership
 
   validates_presence_of :name, :owner_id, :destination_id
+  validates_uniqueness_of :name
 
-  def create_membership
-    membership = Membership.new({:user_id => self.owner_id, :group_id => self.id})
-    membership.save
+  named_scope :by_name , :order => 'name ASC'
+
+  def create_owner_membership
+    memberships.create!(:user_id => self.owner_id)
   end
+
+
 end
