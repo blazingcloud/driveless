@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100413223410) do
+ActiveRecord::Schema.define(:version => 20100413230922) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20100413223410) do
     t.string   "pseudonym"
     t.integer  "community_id"
     t.boolean  "admin",               :default => false
+    t.string   "city"
   end
 
 end

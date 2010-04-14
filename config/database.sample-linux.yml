@@ -18,11 +18,11 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: dlc_development
+  database: driveless_development
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,27 +31,28 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: dlc_test
+  database: driveless_test
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
 
 staging:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: dlc_staging
+  database: driveless_staging
   pool: 5
-  username: dlc
-  password: dr1v3l3ss!
+  username: root
+  password: 
   socket: /var/run/mysqld/mysqld.sock
+
 production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: dlc_production
+  database: driveless_production
   pool: 5
-  username: dlc
-  password: dr1v3l3ss!
+  username: root
+  password: 
   socket: /var/run/mysqld/mysqld.sock

@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :memberships
   belongs_to :community
   validates_presence_of :email, :username, :password
-  cattr_reader :per_page
-  
-  @@per_page = 20
+
+  before_create :create_baseline
+
+  attr_protected :admin
 
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
@@ -26,5 +27,9 @@ class User < ActiveRecord::Base
   def map_openid_registration(registration)
     self.email = registration["email"] if email.blank?
     self.username = registration["nickname"] if username.blank?
+  end
+
+  def create_baseline
+    self.baseline = Baseline.create
   end
 end
