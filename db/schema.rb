@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414154422) do
+ActiveRecord::Schema.define(:version => 20100414232024) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(:version => 20100414154422) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id",       :null => false
     t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :null => false
   end
 
   create_table "lengths", :force => true do |t|
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(:version => 20100414154422) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token",                      :null => false
     t.string   "single_access_token",                    :null => false
     t.string   "perishable_token",                       :null => false

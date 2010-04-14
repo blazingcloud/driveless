@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :memberships
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
   belongs_to :community
-  validates_presence_of :email, :username, :password
+  validates_presence_of :email, :username
 
   before_create :create_baseline
 
