@@ -1,19 +1,20 @@
-- title "Groups"
+- title "My Groups"
 
-%h1 View Groups
+= link_to "Create a New Group", new_group_url
+
 %h5= page_entries_info @groups
 
 %table
   %thead
-    %thead
-      %th Name
-      %th Author
-      %th Destination
-      %th Description
-    - @groups.each do |group|
-      %tr
-      %tr= group.name
-      %tr= group.owner.username
-      %tr= group.destination.name
-      %tr= group.description
+    %th Name
+    %th Destination
+    %th Members
+    %th Delete?
+  - @groups.each do |group|
+    %tr
+      %td= link_to group.name, :action => 'edit', :id => group
+      %td= group.destination.name
+      %td
+      %td= link_to 'x', { :action => 'destroy', :id => group }, :confirm => 'Are you sure?', :method => :delete
 
+= link_to 'Show All Groups', :action => 'show'
