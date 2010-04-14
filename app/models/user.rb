@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   belongs_to :community
   validates_presence_of :email, :username, :password
 
+  attr_protected :admin
+
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
   end # block optional
