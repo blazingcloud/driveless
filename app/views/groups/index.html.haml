@@ -26,12 +26,12 @@
     %th Name
     %th Destination
     %th Members
-    %th Delete?
+    %th Action
     - @memberships.each do |membership|
       %tr
         %td= membership.group.name
         %td= membership.group.destination.name
         %td= membership.group.memberships.count
-        %td= link_to 'x', membership, :confirm => 'Are you sure?', :method => :delete
+        %td= link_to 'leave', membership, :confirm => 'Are you sure?', :method => :delete
 
 = link_to 'Show All Groups', groups_path

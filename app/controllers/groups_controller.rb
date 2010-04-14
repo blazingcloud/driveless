@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
 
   def index
     @owned_groups = current_user.owned_groups.by_name.paginate(:page => params[:page] || 1, :include => :destination)
-    @memberships = current_user.regular_memberships.by_group_name.paginate(:page => params[:page] || 1, :include => :destination)
+    @memberships = current_user.regular_memberships.by_group_name.paginate(:page => params[:page] || 1, :include => {:group => :destination})
   end
 
   def index_all
@@ -58,6 +58,6 @@ class GroupsController < ApplicationController
   end
 
   def is_the_owner?
-    not_allowed unless @group.owner == current_user
+    not_allowed unless @group.owned_by?(current_user)
   end
 end

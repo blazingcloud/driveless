@@ -12,9 +12,15 @@ class Group < ActiveRecord::Base
 
   named_scope :by_name , :order => 'name ASC'
 
+  def membership_for(user)
+    memberships.find_by_user_id(user.id)
+  end
+
   def create_owner_membership
     memberships.create!(:user_id => self.owner_id)
   end
 
-
+  def owned_by?(user)
+    owner_id == user.id
+  end
 end

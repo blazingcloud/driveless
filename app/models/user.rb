@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def join(group)
-    memberships.create!(:group => group)
+    memberships.create(:group => group)
   end
 
   private

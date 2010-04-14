@@ -23,9 +23,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :communities
 
+  map.group 'group/:id', :controller => 'groups', :action => 'show'
   map.groups 'groups', :controller => 'groups', :action => 'index_all'
 
-  map.resources :memberships
+  # This is not the best way to map join and leave routes. This could be done through groups resource.
+  map.resources :memberships, :only => [:create, :destroy]
 
   map.connect '/account/widget', :controller => "users", :action => "widget"
 
