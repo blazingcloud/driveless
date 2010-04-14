@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  private
+    def not_allowed
+      flash[:warning] = "You're not allowed to perform that action"
+      redirect_to root_url
+    end
+
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find

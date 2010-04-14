@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
-
   before_filter :require_user
-  before_filter :is_the_owner?, :only => [ :destroy, :edit ]
+  before_filter :load_group, :only => [:show, :edit, :update, :destroy]
+  before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ]
 
   def show
     @groups = Group.paginate(:page => params[:page] || 1)
@@ -34,12 +34,10 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = current_group
     render :new
   end
 
   def update
-    @group = current_group
     if @group.update_attributes(params[:group])
       flash[:notice] = "Successfully updated group."
       redirect_to account_groups_url
@@ -49,17 +47,17 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    current_group.destroy
+    @group.destroy
     redirect_to account_groups_url
-  end
-
-  def current_group
-    Group.find(params[:id])
   end
 
   private
 
+  def load_group
+    @group = Group.find(params[:id])
+  end
+
   def is_the_owner?
-    current_group.owner == current_user
+    not_allowed unless @group.owner == current_user
   end
 end
