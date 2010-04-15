@@ -1,29 +1,35 @@
 - title "Communities"
 
-%p
-  = link_to "new", new_community_path
+- if admin_logged_in?
+  %p
+    = link_to "new", new_community_path
 
 %h2
   Active Communities
 
 %table
   %thead
-    %th Id
     %th Name
     %th State
     %th Country
+    %th Green Miles
     %th Description
-    %th Delete
+    - if admin_logged_in?
+      %th Delete
   - @communities.each do |community|
     %tr
       %td
-        = link_to community.id, :action => 'edit', :id => community
-      %td= community.name
+        - if admin_logged_in?
+          = link_to community.name, :action => 'edit', :id => community
+        - else
+          = link_to community.name, :action => 'show', :id => community
       %td= community.state
       %td= community.country
+      %td= community.green_miles
       %td= community.description
-      %td
-        %strong
-          = link_to 'x', { :action => 'destroy', :id => community }, :confirm => 'Are you sure?', :method => :delete
+      - if admin_logged_in?
+        %td
+          %strong
+            = link_to 'x', { :action => 'destroy', :id => community }, :confirm => 'Are you sure?', :method => :delete
 
 
