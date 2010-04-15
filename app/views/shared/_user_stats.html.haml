@@ -2,9 +2,14 @@
   %li.green-miles
     .stat= current_user.green_miles.to_i
     .label green miles
-  %li.of-goal
-    .stat= current_user.percent_of_personal_goal_reached.to_i
-    .label % of goal
+  - if current_user.baseline.green_miles
+    %li.of-goal
+      .stat= current_user.percent_of_personal_goal_reached.to_i
+      .label % of goal
+  - else
+    %li.of-goal.no-baseline
+      .stat OH NO
+      .label= link_to "Make a baseline!", edit_baseline_path(current_user.baseline)
   %li.carbon-saved
     .stat= current_user.lb_co2_saved
     .label lb co2 saved

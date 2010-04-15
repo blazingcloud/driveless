@@ -11,23 +11,31 @@
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'underscore-min.js', :defaults
     = yield :head
   %body
-    #container
-      .title
-        %h1 Drive Less Challenge
-      .header
-        - if current_user
-          = render :partial => 'shared/user_stats'
-      .navigation
-        - if current_user
-          - if current_user.admin?
-            = render :partial => 'shared/admin_navigation'
-          = render :partial => 'shared/navigation'
-        - else
-          = render :partial => 'shared/public_navigation'
-        = yield :navigation
-      .main
-        - flash.each do |name, msg|
-          %div{:id => "#flash_#{name}", :class => '.flash'}= msg
-        = yield
-      .footer
-        footer goes here
+    .top
+      .container
+        .title
+          %h1 Drive Less Challenge
+        .header
+          - if current_user
+            = render :partial => 'shared/user_stats'
+    .mid
+      .container
+        .navigation
+          - if current_user
+            - if current_user.admin?
+              = render :partial => 'shared/admin_navigation'
+            = render :partial => 'shared/navigation'
+          - else
+            = render :partial => 'shared/public_navigation'
+          = yield :navigation
+        .main
+          - flash.each do |name, msg|
+            %div{:id => "flash_#{name}", :class => 'flash'}= msg
+          = yield
+    .bot
+      .container
+        .footer
+          Temporary footer....
+          Follow us on Twitter -
+          Join us on Facebook -
+          Read our Blog
