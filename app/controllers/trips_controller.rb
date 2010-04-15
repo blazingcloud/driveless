@@ -4,6 +4,10 @@ class TripsController < InheritedResources::Base
   def create
     create! { account_url }
   end
+
+  def destroy
+    destroy! { account_url }
+  end
   
   protected
     def collection

@@ -6,6 +6,7 @@ class Trip < ActiveRecord::Base
   attr_accessible :user_id, :destination_id, :mode_id, :unit_id, :distance, :made_at
 
   after_save :update_green_miles
+  after_destroy :update_green_miles
 
   named_scope :only_green, :joins => :mode, :conditions => {:"modes.green" => true}
 
