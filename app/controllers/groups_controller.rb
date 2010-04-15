@@ -4,7 +4,6 @@ class GroupsController < ApplicationController
   before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ]
 
   def show
-    @groups = Group.paginate(:page => params[:page] || 1)
   end
 
   def index
@@ -54,7 +53,7 @@ class GroupsController < ApplicationController
   private
 
   def load_group
-    @group = Group.find(params[:id])
+    @group ||= Group.find(params[:id])
   end
 
   def is_the_owner?

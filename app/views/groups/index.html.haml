@@ -11,12 +11,14 @@
     %th Destination
     %th Members
     %th Delete?
+    %th Edit?
   - @owned_groups.each do |group|
     %tr
-      %td= link_to group.name, edit_account_group_path(group)
+      %td= link_to group.name, group
       %td= group.destination.name
       %td= group.memberships.count
       %td= link_to 'x', [:account, group], :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'E', edit_account_group_path(group)
 
 %h4 Groups I Belong
 %h5= page_entries_info @memberships
@@ -29,7 +31,7 @@
     %th Action
     - @memberships.each do |membership|
       %tr
-        %td= membership.group.name
+        %td= link_to membership.group.name, membership.group
         %td= membership.group.destination.name
         %td= membership.group.memberships.count
         %td= link_to 'leave', membership, :confirm => 'Are you sure?', :method => :delete

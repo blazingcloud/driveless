@@ -1,19 +1,12 @@
-- title "Groups"
+- title "#{@group.name} Group"
 
-%h1 View Groups
-%h5= page_entries_info @groups
+%h1= "View #{@group.name.camelcase} Group"
 
 %table
   %thead
-    %thead
-      %th Name
-      %th Author
-      %th Destination
-      %th Description
-    - @groups.each do |group|
-      %tr
-        %td= group.name
-        %td= group.owner.username
-        %td= group.destination.name
-        %td= group.description
-
+    %th Username
+    %th Green Miles
+  - @group.users.by_green_miles.each do |user|
+    %tr
+      %td= user.username
+      %td= user.green_miles
