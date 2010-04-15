@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "destination_id", :null => false
     t.integer  "owner_id",       :null => false
+    t.integer  "destination_id", :null => false
   end
 
   create_table "lengths", :force => true do |t|
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.integer  "community_id"
     t.boolean  "admin",               :default => false
     t.string   "city"
+    t.integer  "green_miles",         :default => 0
   end
 
 end

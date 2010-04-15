@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users" do |account_map|
     account_map.resources :trips
     account_map.resources :groups, :except => :show
+    account_map.community 'community/:id', :controller => 'communities', :action => 'show'
   end
 
   map.resources :communities

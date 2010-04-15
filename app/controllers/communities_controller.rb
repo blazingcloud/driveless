@@ -6,12 +6,12 @@ class CommunitiesController < ApplicationController
   end
 
   def edit
-    @community = Community.find(params[:id])
+    @community = current_community
     render :new
   end
 
   def update
-    @community = Community.find(params[:id])
+    @community = current_community
     if @community.update_attributes(params[:community])
       redirect_to communities_url
     end
@@ -22,8 +22,13 @@ class CommunitiesController < ApplicationController
   end
 
   def destroy
-    Community.find(params[:id]).destroy
+    current_community.destroy
     redirect_to communities_url
+  end
+
+  def show
+    @community = current_community
+    @users = @community.users.by_green_miles
   end
 
   def create
@@ -37,4 +42,9 @@ class CommunitiesController < ApplicationController
     end
   end
 
+  private
+
+  def current_community
+    @community ||= Community.find_by_id(params[:id])
+  end
 end

@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   before_create :create_baseline
 
+  named_scope :by_green_miles, :order => 'green_miles DESC'
+
   attr_protected :admin
 
   acts_as_authentic do |c|
