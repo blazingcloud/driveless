@@ -15,7 +15,8 @@
       .title
         %h1 Drive Less Challenge
       .header
-        %h1= h yield :title
+        - if current_user
+          = render :partial => 'shared/user_stats'
       .navigation
         - if current_user
           - if current_user.admin?

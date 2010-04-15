@@ -2,7 +2,7 @@
   = f.error_messages
   = f.hidden_field :id
   %p
-    = f.label :username
+    = f.label :username, "Nickname"
     %br
     = f.text_field :username
   %p
@@ -10,6 +10,8 @@
     %br
     = f.text_field :email
   - if @user.openid_identifier.blank?
+    %h2
+      Use a Password
     %p
       = f.label :password
       %br
@@ -18,6 +20,12 @@
       = f.label :password_confirmation
       %br
       = f.password_field :password_confirmation
+  %h2
+    Or use OpenID
+  %p
+    = f.label :openid_identifier, "OpenID URL"
+    %br
+    = f.text_field :openid_identifier
     %p
       = f.label :city
       %br
@@ -31,13 +39,3 @@
         = f.label :admin
         %br
         = f.check_box :admin
-    %p
-      = f.submit "Submit"
-  %h2
-    Or use OpenID
-  %p
-    = f.label :openid_identifier, "OpenID URL"
-    %br
-    = f.text_field :openid_identifier
-  %p
-    = f.submit "Submit"
