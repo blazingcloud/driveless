@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id",       :null => false
     t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :null => false
   end
 
   create_table "lengths", :force => true do |t|
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "green"
-    t.float  "lb_co2_per_mile"
+    t.float    "lb_co2_per_mile"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|

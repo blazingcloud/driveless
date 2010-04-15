@@ -1,0 +1,12 @@
+%table.trip-stream
+  %thead
+    %tr
+      %th.where Where did you go?
+      %th.how How did you get there?
+      %th.distance How many miles did you go?
+      %th.when When did you go?
+      %th.actions Actions
+  - if @user == current_user
+    = render :partial => 'trips/form'
+  %tbody.trip-stream
+    = render :partial => 'trips/trip', :collection => @user.trips.find(:all, :order => 'created_at DESC')
