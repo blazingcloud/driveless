@@ -5,6 +5,14 @@
   =h @mode.name
 
 %p
+  %strong Green:
+  =h @mode.green
+
+%p
+  %strong lb co2 per mile:
+  =h @mode.lb_co2_per_mile
+
+%p
   = link_to "Edit", edit_mode_path(@mode)
   |
   = link_to "Destroy", @mode, :confirm => 'Are you sure?', :method => :delete

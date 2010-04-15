@@ -38,16 +38,11 @@
 =carved-text
   text-shadow = "#{!brush2} 0px 1px 1px"
 
-=rounded(!radius, !sides = "all")
-  @if !sides == "all"
-    -webkit-border-radius = !radius
-    -moz-border-radius = !radius
-    border-radius = !radius
-  @else if !sides == "left"
-    -webkit-border-top-left-radius = !radius
-    -webkit-border-bottom-left-radius = !radius
-    -moz-border-radius-topleft = !radius
-    -moz-border-radius-bottomleft = !radius
+=rounded(!radius)
+  -webkit-border-radius = !radius
+  -moz-border-radius = !radius
+  border-radius = !radius
+  behavior: url(../../javascripts/border-radius.htc)
 
 =border-box
   -webkit-box-sizing: border-box
@@ -55,11 +50,16 @@
   -o-box-sizing: border-box
   box-sizing: border-box
 
-=box-shadow(!left, !top, !spread, !color = 'rgba(0,0,0,0.3)')
+=box-shadow(!left, !top, !spread, !color = rgba(0,0,0,0.3))
   -webkit-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
   -moz-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
   -o-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
   box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
+
+=inline-block
+  display: inline-block
+  *display: inline
+  zoom: 1
 
 body
   background: white
@@ -80,21 +80,23 @@ a
   +grid(12,12)
 
 .title
-  +grid(4,12)
-  +carved-text
-  color = !header_color
+  +grid(2,12)
+  +grid-suffix(1,12)
+  +grid-prefix(1,12)
+  color = black
   text-align: right
   h1
     font-size: 200%
 .header
   +grid(8,12)
-  +carved-text
   color = !header_color
   height: 114px
   margin-bottom: 19px
 .navigation
-  +grid(4,12)
+  +grid(3,12)
+  +grid-suffix(1,12)
   clear: left
+  padding-top = 19px * 2
   ol
     display: block
     list-style: none
@@ -122,9 +124,6 @@ a
           color: black
 .main
   +grid(8,12)
-  border: 1px solid #eee
-  +rounded(5px)
-  +border-box
 
 #flash_notice, #flash_error
   +grid(12,12)
@@ -183,14 +182,14 @@ input#user_openid_identifier, input#user_session_openid_identifier
     padding: 0
     margin: 0
     li
-      display: inline-block
+      +inline-block
       width: 24%
       padding: 0
       margin: 0
 
 .trip-form-headers
   span
-    display: inline-block
+    +inline-block
     width: 33%
     padding-right: 20px
     +border-box
@@ -200,7 +199,7 @@ input#user_openid_identifier, input#user_session_openid_identifier
   .inputs,.buttons
     ol
       li
-        display: inline-block
+        +inline-block
         width: 33%
         &#trip_made_at_input
           display: block
@@ -221,18 +220,18 @@ input#user_openid_identifier, input#user_session_openid_identifier
   margin: 0
   padding: 0
   li
-    display: inline-block
+    +inline-block
     margin: 0
     padding: 0
     +border-box
     +rounded(4px)
-    +box-shadow(0px, 4px, 4px, 'rgba(0, 0, 0, 0.3)')
-    background: grey
+    +box-shadow(0px, 2px, 2px)
+    background: #060
     color: white
     text-align: center
     padding: 4px
     margin-left: 20px
-    height: 114px
+    height: 95px
     min-width: 114px
     max-width: 171px
     .stat

@@ -18,9 +18,21 @@ class User < ActiveRecord::Base
   def sum_of_trips
     "%.2f" % self.trips.map(&:distance).sum.to_f
   end
+  
+  def green_miles
+    "%.2f" % self.green_trips.map(&:distance).sum.to_f
+  end
+  
+  def green_trips
+    self.trips.select{|t| t.mode.green}
+  end
 
   def percent_of_personal_goal_reached
-    "%.2f%" % (self.sum_of_trips.to_f / self.baseline.green_miles.to_f * 100)
+    "%.2f%" % (self.green_miles.to_f / self.baseline.green_miles.to_f * 100)
+  end
+  
+  def lb_co2_saved
+    "%.1f" % self.green_trips.map{|t| t.mode.lb_co2_per_mile * t.distance}.sum.to_f
   end
 
   def regular_memberships

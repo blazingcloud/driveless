@@ -1,10 +1,10 @@
 %ul.user-stats
   %li.green-miles
-    .stat 14
+    .stat= current_user.green_miles.to_i
     .label green miles
   %li.of-goal
-    .stat 77
+    .stat= current_user.percent_of_personal_goal_reached.to_i
     .label % of goal
   %li.carbon-saved
-    .stat 28.3
+    .stat= current_user.lb_co2_saved
     .label lb co2 saved

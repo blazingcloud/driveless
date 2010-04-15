@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414232024) do
+ActiveRecord::Schema.define(:version => 20100415145552) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20100414232024) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "green"
   end
 
   create_table "groups", :force => true do |t|
@@ -78,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20100414232024) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "green"
+    t.float  "lb_co2_per_mile"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|
