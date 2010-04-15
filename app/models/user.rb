@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
   belongs_to :community
   validates_presence_of :email, :username
+  restful_easy_messages
 
   before_create :create_baseline
 

@@ -40,6 +40,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "users", :action => "new"
 
+  map.resources :messages,  
+                   :collection => {:destroy_selected => :post,  
+                                   :inbox            => :get,  
+                                   :outbox           => :get,  
+                                   :trashbin         => :get},  
+                   :member => {:reply => :get}  
+
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
