@@ -3,7 +3,7 @@
 - if @user.baseline.green_miles
   %h4
     You have logged a total of&nbsp;
-    %b>= pluralize @user.sum_of_trips, "green mile"
+    %b>= pluralize @user.green_miles, "green mile"
     \! You have achieved
     %b= @user.percent_of_personal_goal_reached
     of your goal!

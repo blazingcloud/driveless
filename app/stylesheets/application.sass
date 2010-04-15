@@ -28,26 +28,21 @@
 !brush4 = #415C85
 !brush5 = #293240
 
-!site_background = brush1
-!site_text = #000
-!header_color = !brush4
+!site_background = "white"
+!site_text = "black"
+!header_color = "rgb(51,95,134)"
 
-!serif_font = 'Palatino Linotype', 'Book Antiqua', Palatino, serif
+!serif_font = "Palatino Linotype", "Book Antiqua", "Palatino", "serif"
 !sans_font  = Helvetica, sans-serif
 
 =carved-text
   text-shadow = "#{!brush2} 0px 1px 1px"
 
-=rounded(!radius, !sides = "all")
-  @if !sides == "all"
-    -webkit-border-radius = !radius
-    -moz-border-radius = !radius
-    border-radius = !radius
-  @else if !sides == "left"
-    -webkit-border-top-left-radius = !radius
-    -webkit-border-bottom-left-radius = !radius
-    -moz-border-radius-topleft = !radius
-    -moz-border-radius-bottomleft = !radius
+=rounded(!radius)
+  -webkit-border-radius = !radius
+  -moz-border-radius = !radius
+  border-radius = !radius
+  behavior: url(../../javascripts/border-radius.htc)
 
 =border-box
   -webkit-box-sizing: border-box
@@ -55,15 +50,20 @@
   -o-box-sizing: border-box
   box-sizing: border-box
 
-=box-shadow(!left, !top, !spread, !color)
+=box-shadow(!left, !top, !spread, !color = rgba(0,0,0,0.3))
   -webkit-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
   -moz-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
   -o-box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
   box-shadow = "#{!left} #{!top} #{!spread} #{!color}"
 
+=inline-block
+  display: inline-block
+  *display: inline
+  zoom: 1
+
 body
-  background  = !brush3
-  color       = !site_text
+  background: white
+  color: black
   font-family = !sans_font
 
 a
@@ -74,52 +74,42 @@ a
 #container
   +grid-container
   +clearfix
+  margin-top: 19px
 
 .footer
   +grid(12,12)
 
-.widget
-  +grid(4,12)
-  +omega
-
+.title
+  +grid(2,12)
+  +grid-suffix(1,12)
+  +grid-prefix(1,12)
+  color = black
+  text-align: right
+  h1
+    font-size: 200%
 .header
   +grid(8,12)
-  +alpha
-  +carved-text
   color = !header_color
-  h1
-    height: 100px
-    margin: 0
-    div
-      height: 99px
-      display: inline-block
-      width: 8px
-      background: transparent
-    span
-      vertical-align: baseline
-      font-size: 100px
-      line-height: 100px
+  height: 114px
+  margin-bottom: 19px
 .navigation
   +grid(3,12)
-  +grid-prefix(1)
-  +omega
-  padding-top: 10px
+  +grid-suffix(1,12)
+  clear: left
+  padding-top = 19px * 2
   ol
     display: block
     list-style: none
     padding: 0
     margin: 0
     li
-      +rounded(6px, "left")
       display: block
       list-style: none
       padding: 0
       margin: 0
-      border: 2px solid transparent
-      border-right: none
+      text-align: right
       a
-        font-size: 16pt
-        margin: 5px
+        font-size: 150%
         display: block
         text-decoration: none
         color = !brush4
@@ -127,30 +117,13 @@ a
         &:hover
           color = !brush5
     .current
-      background: #fff
-      background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(255,255,255)),color-stop(0.49, rgb(224,224,224)),color-stop(0.5, rgb(201,201,201)),color-stop(0.93, rgb(161,161,161)))
-      background: -moz-linear-gradient(center top,rgb(255,255,255) 0%,rgb(224,224,224) 49%,rgb(201,201,201) 50%,rgb(161,161,161) 93%)      
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FFFFFFFF, endColorstr=#AAAAAAAA)"
-      border-color = !brush4
-      -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.2)
       a
-        color = !brush5
+        color: black
+        font-weight: bold
+        &:hover
+          color: black
 .main
   +grid(8,12)
-  +rounded(6px)
-  +box-shadow(0px, 2px, 2px, "rgba(0,0,0,0.4)")
-  +border-box
-  +alpha
-  padding: 20px
-  border = "1px solid #{!brush5}"
-  color = !brush2
-  background: #fff
-  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(41,50,64,0.9)),color-stop(1, rgba(41,50,64,1)))
-  background: -moz-linear-gradient(center top,rgba(41,50,64,0.9) 0%,rgba(41,50,64,1) 100%)      
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FF3A4351, endColorstr=#FF293240)"
-  min-height: 500px
-  a
-    color: white
 
 #flash_notice, #flash_error
   +grid(12,12)
@@ -209,17 +182,14 @@ input#user_openid_identifier, input#user_session_openid_identifier
     padding: 0
     margin: 0
     li
-      display: inline-block
+      +inline-block
       width: 24%
       padding: 0
       margin: 0
 
-label
-  color: white
-
 .trip-form-headers
   span
-    display: inline-block
+    +inline-block
     width: 33%
     padding-right: 20px
     +border-box
@@ -229,7 +199,7 @@ label
   .inputs,.buttons
     ol
       li
-        display: inline-block
+        +inline-block
         width: 33%
         &#trip_made_at_input
           display: block
@@ -243,3 +213,31 @@ label
 .trip-entry
   .controls
     float: right
+
+.user-stats
+  display: block
+  float: right
+  margin: 0
+  padding: 0
+  li
+    +inline-block
+    margin: 0
+    padding: 0
+    +border-box
+    +rounded(4px)
+    +box-shadow(0px, 2px, 2px)
+    background: #060
+    color: white
+    text-align: center
+    padding: 4px
+    margin-left: 20px
+    height: 95px
+    min-width: 114px
+    max-width: 171px
+    .stat
+      font-size: 47px
+      font-weight: bold
+    .label
+      font-size: 11px
+      letter-spacing: 1px
+      text-transform: uppercase

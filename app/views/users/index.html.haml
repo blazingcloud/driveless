@@ -1,0 +1,25 @@
+- title "Users"
+
+%h1 View Users
+%h5= page_entries_info @users
+%table
+  %thead
+    %th Id
+    %th Username
+    %th E-Mail
+    %th Community
+    %th Admin
+    %th Delete
+  - @users.each do |user|
+    %tr
+      %td
+        = link_to user.id, :action => 'edit', :id => user
+      %td= user.username
+      %td= user.email
+      %td= user.community ? user.community.name : 'None'
+      %td= user.admin?
+      %td
+        %strong
+          = link_to 'x', { :action => 'destroy', :id => user }, :confirm => 'Are you sure?', :method => :delete
+
+= will_paginate @users

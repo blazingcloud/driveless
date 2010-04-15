@@ -1,0 +1,14 @@
+- form_for [:account, @group] do |form|
+  = form.error_messages
+  %p
+    = form.label :name
+    = form.text_field :name
+  %p
+    = form.label :destination_id
+    = form.select :destination_id, options_from_collection_for_select(Destination.by_name.all, 'id', 'name', :selected => @group.destination_id)
+  %p
+    = form.label :description
+    = form.text_area :description
+  %p
+    = form.submit
+

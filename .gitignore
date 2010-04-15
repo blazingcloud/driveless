@@ -4,8 +4,7 @@ tmp/*
 .DS_Store
 doc/*
 public/stylesheets/compiled/*
-*.swp
-*.swo
+*.sw[g-z]
 /test/*
 /spec/fixtures/*
 /coverage/*

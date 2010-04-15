@@ -9,7 +9,7 @@ describe User do
   it { should belong_to(:community) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:username) }
-  it { should validate_presence_of(:password) }
+  #it { should validate_presence_of(:password) } # This is disabled by Casey so users can register by OpenId.
 
   it "should create a new instance given valid attributes" do
     User.make

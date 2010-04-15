@@ -3,9 +3,13 @@
 %table
   %tr
     %th Name
+    %th Green
+    %th lb co2/mile
   - for mode in @modes
     %tr
       %td= h mode.name
+      %td= h mode.green
+      %td= h mode.lb_co2_per_mile
       %td= link_to 'Show', mode
       %td= link_to 'Edit', edit_mode_path(mode)
       %td= link_to 'Destroy', mode, :confirm => 'Are you sure?', :method => :delete

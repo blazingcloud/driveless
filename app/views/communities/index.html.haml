@@ -7,17 +7,20 @@
   Active Communities
 
 %table
-  %th
-    %td Id
-    %td Name
-    %td Description
-    %td Delete
+  %thead
+    %th Id
+    %th Name
+    %th State
+    %th Country
+    %th Description
+    %th Delete
   - @communities.each do |community|
     %tr
       %td
         = link_to community.id, :action => 'edit', :id => community
       %td= community.name
       %td= community.state
+      %td= community.country
       %td= community.description
       %td
         %strong
