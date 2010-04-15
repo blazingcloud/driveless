@@ -5,6 +5,10 @@ class TripsController < InheritedResources::Base
     create! { account_url }
   end
 
+  def update
+    update!{ account_url }
+  end
+
   def destroy
     destroy! { account_url }
   end

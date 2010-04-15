@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :lengths
 
-  #map.resources :trips
+  map.resources :trips, { :only => [:update, :index, :create] }
 
   map.resources :units
 
