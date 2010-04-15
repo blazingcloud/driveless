@@ -17,24 +17,12 @@ class User < ActiveRecord::Base
     c.openid_required_fields = [:nickname, :email]
   end # block optional
 
-  def sum_of_trips
-    "%.2f" % self.trips.map(&:distance).sum.to_f
-  end
-  
-  def green_miles
-    "%.2f" % self.green_trips.map(&:distance).sum.to_f
-  end
-  
-  def green_trips
-    self.trips.select{|t| t.mode.green}
-  end
-
   def percent_of_personal_goal_reached
     "%.2f%" % (self.green_miles.to_f / self.baseline.green_miles.to_f * 100)
   end
   
   def lb_co2_saved
-    "%.1f" % self.green_trips.map{|t| t.mode.lb_co2_per_mile * t.distance}.sum.to_f
+    "%.1f" % self.trips.only_green.map{|t| t.mode.lb_co2_per_mile * t.distance}.sum.to_f
   end
 
   def regular_memberships
@@ -43,6 +31,10 @@ class User < ActiveRecord::Base
 
   def create_group(params)
     owned_groups.create(params)
+  end
+
+  def update_green_miles
+    self.update_attribute( :green_miles, self.trips.only_green.map(&:distance).sum )
   end
 
   def join(group)

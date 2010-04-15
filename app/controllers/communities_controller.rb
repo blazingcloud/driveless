@@ -11,8 +11,7 @@ class CommunitiesController < ApplicationController
   end
 
   def update
-    @community = current_community
-    if @community.update_attributes(params[:community])
+    if current_community.update_attributes(params[:community])
       redirect_to communities_url
     end
   end
@@ -27,8 +26,7 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @community = current_community
-    @users = @community.users.by_green_miles
+    redirect_to root_path unless current_community
   end
 
   def create

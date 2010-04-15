@@ -7,7 +7,11 @@ class Trip < ActiveRecord::Base
 
   after_save :update_green_miles
 
+  named_scope :only_green, :joins => :mode, :conditions => {:"modes.green" => true}
+
+  private
+
   def update_green_miles
-    user.update_attribute( :green_miles, user.trips.map(&:distance).sum )
+    user.update_green_miles
   end
 end

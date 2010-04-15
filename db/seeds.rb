@@ -6,14 +6,6 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-u = User.create!(
-  :email => 'change-me@example.com',
-  :username => 'admin',
-  :password => 'admin',
-  :password_confirmation => 'admin'
-)
-u.update_attribute(:admin, true)
-
 Unit.create([
   :name => "Mile", :in_miles => 1.0
 ])
@@ -25,7 +17,7 @@ Mode.create([
   {:name => 'Train',       :green => true, :lb_co2_per_mile => 0.84},
   {:name => 'Carpool',     :green => true, :lb_co2_per_mile => 0.84},
   {:name => 'Shuttle',     :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Drive Alone', :green => false, :lb_co2_per_mile => 0.0},
+  {:name => 'Drive Alone', :green => false, :lb_co2_per_mile => 0.0}
 ])
 
 Destination.create([
@@ -40,3 +32,12 @@ Destination.create([
 ['Palo Alto', 'Menlo Park', 'Mountain View'].each do |community_name|
   Community.create!(:name => community_name, :state => 'California', :country => 'United States')
 end
+
+u = User.create!(
+  :email => 'change-me@example.com',
+  :username => 'admin',
+  :password => 'admin',
+  :password_confirmation => 'admin',
+  :community => Community.first
+)
+u.update_attribute(:admin, true)
