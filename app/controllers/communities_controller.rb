@@ -1,5 +1,6 @@
 class CommunitiesController < ApplicationController
-  before_filter :require_admin, :except => :show
+  before_filter :require_user
+  before_filter :require_admin, :only => [ :update, :edit, :new, :create, :destroy ]
 
   def new
     @community = Community.new
@@ -17,7 +18,7 @@ class CommunitiesController < ApplicationController
   end
 
   def index
-    @communities = Community.find(:all)
+    @communities = Community.by_green_miles
   end
 
   def destroy

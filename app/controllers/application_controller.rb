@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_admin
-      return current_user.admin?
+      not_allowed unless admin_logged_in?
     end
 
     def require_no_user
