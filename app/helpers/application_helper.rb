@@ -17,4 +17,13 @@ module ApplicationHelper
       link_to 'join', memberships_path(:group_id => group.id), :method => :post
     end
   end
+
+  def link_to_friendship_action( user )
+    friend = current_user.friendship_for(user)
+    if friend
+      link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?"
+    else
+      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post
+    end
+  end
 end
