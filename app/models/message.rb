@@ -22,14 +22,14 @@ class Message < ActiveRecord::Base
                       :maximum => 1000, 
                       :message => "is too long.  No one wants to read that.  The maximum length is %d characters."
     
-  # Returns user.login for the sender
+  # Returns user.username for the sender
   def sender_name
-    User.find(sender_id).login || ""
+    User.find(sender_id).username || ""
   end
   
-  # Returns user.login for the receiver
+  # Returns user.username for the receiver
   def receiver_name
-    User.find(receiver_id).login || ""
+    User.find(receiver_id).username || ""
   end
   
   def mark_message_read(user)
@@ -49,13 +49,13 @@ class Message < ActiveRecord::Base
   # Assigns the recipient to the receiver_id.
   # I'm sure there is a better way.  Please let me know.
   def before_create
-    u = User.find_by_login(recipient)
+    u = User.find_by_username(recipient)
     self.receiver_id = u.id
   end
   
-  # Validates that a user has entered a valid user.login name for the message recipient
+  # Validates that a user has entered a valid user.username name for the message recipient
   def validate_on_create
-    u = User.find_by_login(recipient)
+    u = User.find_by_username(recipient)
     errors.add(:recipient, "is not a valid user.") if u.nil?
   end        
 end
