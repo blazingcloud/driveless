@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
   config.gem "will_paginate"
   config.gem "will_paginate"
   config.gem 'formtastic'
-  config.gem "googlecharts"
+  config.gem "googlecharts", :lib => "gchart"
   # config.gem "compass-960-plugin"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
