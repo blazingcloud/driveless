@@ -6,10 +6,14 @@ class Community < ActiveRecord::Base
 
   # Is there any 'rubiest' way to do this?
   named_scope :by_green_miles,
-    :select => ['communities.*, SUM(users.green_miles) as green_miles'],
+    :select => ['communities.id, communities.name, communities.state, communities.country, communities.description, SUM(users.green_miles) as green_miles'],
     :joins => :users,
-    :group => [:"users.community_id"],
+    :group => ['users.community_id, communities.id, communities.name, communities.state, communities.country, communities.description'],
     :order => ['green_miles DESC']
+
+  def lb_co2_saved
+     self.users.map{|u| u.lb_co2_saved.to_f}.sum
+  end
 
   private
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100413123702) do
+ActiveRecord::Schema.define(:version => 20100415145552) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(:version => 20100413123702) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",        :null => false
+    t.integer  "owner_id",       :null => false
     t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :null => false
   end
 
   create_table "lengths", :force => true do |t|
@@ -72,10 +73,14 @@ ActiveRecord::Schema.define(:version => 20100413123702) do
     t.datetime "updated_at"
   end
 
+  add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
+
   create_table "modes", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "green"
+    t.float    "lb_co2_per_mile"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|
@@ -113,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20100413123702) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token",                      :null => false
     t.string   "single_access_token",                    :null => false
     t.string   "perishable_token",                       :null => false
@@ -132,6 +137,8 @@ ActiveRecord::Schema.define(:version => 20100413123702) do
     t.string   "pseudonym"
     t.integer  "community_id"
     t.boolean  "admin",               :default => false
+    t.string   "city"
+    t.integer  "green_miles",         :default => 0
   end
 
 end

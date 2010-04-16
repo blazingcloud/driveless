@@ -1,15 +1,11 @@
 - title @user.username
 
-- if @user.baseline.green_miles
-  %h4
-    You have logged a total of&nbsp;
-    %b>= pluralize @user.green_miles, "green mile"
-    \! You have achieved
-    %b= @user.percent_of_personal_goal_reached
-    of your goal!
-- else
-  %p
-    = link_to "Fill out your baseline!", edit_baseline_path(@user.baseline)
+- unless @user.baseline.green_miles
+  .baseline-alert
+    = link_to "Click here to complete your baseline now!", edit_baseline_path(@user.baseline)
+    %span Enter a baseline to measure your progress and win prizes!
 
-= render :partial => 'trips/form'
-= render :partial => 'trips/trip', :collection => @user.trips.find(:all, :order => 'created_at DESC')
+%h1 Log a new trip
+%p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
+
+= render :partial => 'trips/stream'
