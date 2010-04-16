@@ -10,6 +10,16 @@
       alert("This feature isn't finished yet...");
     });
     
+    $('a.activate-section').click(function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      var link = $(this).attr('href').substr(1).split(/-/);
+      var container = $('.' + link[0]);
+      var section   = $('.' + link[1]);
+      section.show().siblings().hide();
+      $(this).removeClass('inactive').parent().find('a.button').not(this).addClass('inactive')
+    })
+    
     $('.datepicker').datepicker()
     
     $('.baseline-travel input').change(function(e){

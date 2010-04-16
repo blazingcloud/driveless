@@ -1,8 +1,8 @@
 %ol
-  = link_to_nav "My Trips",  account_path
-  = link_to_nav "My Baseline", edit_baseline_path(current_user.baseline)
-  = link_to_nav "My Community", account_community_path(current_user.community)
-  = link_to_nav "My Groups", account_groups_path
-  = link_to_nav "My Friends", account_friendships_path
-  = link_to_nav "My Settings", edit_account_path
+  = link_to_nav "My Trips",  account_path, :description => "see your progress"
+  = link_to_nav "My Baseline", edit_baseline_path(current_user.baseline), :description => "set your goals"
+  = link_to_nav "My Community", account_community_path(current_user.community), :description => "join your community"
+  = link_to_nav "My Groups", account_groups_path, :description => "join your friends"
+  = link_to_nav "My Friends", account_friends_path, :description => "see your friends' progress"
+  = link_to_nav "My Settings", edit_account_path, :description => "your personal information"
   = link_to_nav "Logout", logout_path

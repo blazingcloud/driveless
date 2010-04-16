@@ -1,9 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   def link_to_nav(name, options, html_options = {})
+    description = html_options[:description] ? html_options.delete(:description) : ''
     html_class = current_page?(options) ? 'current' : ''
     "<li class='#{html_class}'>" + 
       link_to(name, options, html_options) +
+      "<span class='desc'>#{description}</span>" +
     '</li>'
   end
 
@@ -12,9 +14,9 @@ module ApplicationHelper
 
     membership = group.membership_for(current_user)
     if membership
-      link_to 'leave', membership, :method => :delete, :confirm => "Are you sure?"
+      link_to 'leave', membership, :method => :delete, :confirm => "Are you sure?", :class => 'button'
     else
-      link_to 'join', memberships_path(:group_id => group.id), :method => :post
+      link_to 'join', memberships_path(:group_id => group.id), :method => :post, :class => 'button'
     end
   end
 
@@ -22,9 +24,11 @@ module ApplicationHelper
     return "you" if user == current_user
     friend = current_user.friendship_for(user)
     if friend
-      link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?"
+      link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button'
     else
-      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post
+      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post, :class => 'button'
     end
   end
 end
+
+

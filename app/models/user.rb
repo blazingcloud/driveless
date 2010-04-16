@@ -43,12 +43,18 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)
   end
 
+  def deliver_friendship_notification!(friend)
+    Notifier.deliver_friendship_notification(self, friend)
+  end
+
   def friendship_for( user )
     friendships.find_by_friend_id(user.id)
   end
 
   def friendship_to( user_id )
     friendships.create(:friend_id => user_id)
+    friend = User.find_by_id( user_id )
+    deliver_friendship_notification!( friend )
   end
 
   def unfriendship_to( id )

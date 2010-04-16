@@ -117,6 +117,16 @@ a
       padding: 0
       margin: 0
       text-align: right
+      &:hover
+        .desc
+          opacity: 1
+      .desc
+        display: block
+        height: 19px
+        line-height: 19px
+        font-size: 12px
+        opacity: 0
+        color: #666
       a
         font-size: 150%
         display: block
@@ -209,7 +219,9 @@ input#user_openid_identifier, input#user_session_openid_identifier
       padding-right: 20px
     &.when
       padding-right: 20px
+  td
     &.actions
+      text-align: right
   #trip_distance
     width: 120px
   #trip_made_at
@@ -300,3 +312,21 @@ input#user_openid_identifier, input#user_session_openid_identifier
       .members
         float: right
         text-align: right
+
+.button
+  display: inline-block
+  +border-box
+  +rounded(10px)
+  +box-shadow(0px, 2px, 2px)
+  +carved-text
+  background: #9f9
+  color: #333
+  text-decoration: none
+  font-size: 19px
+  font-weight: bold
+  line-height: 1.5
+  padding: 5px 10px
+  &.inactive
+    opacity: 0.6
+    &:hover
+      opacity: 0.9

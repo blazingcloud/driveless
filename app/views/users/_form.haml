@@ -9,35 +9,41 @@
     = f.label :email
     %br
     = f.text_field :email
-  - if @user.openid_identifier.blank?
-    %h2
-      Use a Password
-    %p
-      = f.label :password
-      %br
-      = f.password_field :password
-    %p
-      = f.label :password_confirmation
-      %br
-      = f.password_field :password_confirmation
-  %h2
-    Or use OpenID
   %p
-    = f.label :openid_identifier, "OpenID URL"
+    = f.label :city
     %br
-    = f.text_field :openid_identifier
+    = f.text_field :city
+  %p
+    = f.label :community_id
+    %br
+    = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
+  - if admin_logged_in?
     %p
-      = f.label :city
+      = f.label :admin
       %br
-      = f.text_field :city
-    %p
-      = f.label :community_id
-      %br
-      = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
-    - if admin_logged_in?
+      = f.check_box :admin
+
+  %h2
+    Signup using
+    %a{:class => 'button activate-section', :href => '#auth-openid'} Open ID
+    or
+    %a{:class => 'button inactive activate-section', :href => '#auth-password'} Password
+
+  .auth
+    - if @user.openid_identifier.blank?
+      .password{:style => "display: none"}
+        %p
+          = f.label :password
+          %br
+          = f.password_field :password
+        %p
+          = f.label :password_confirmation
+          %br
+          = f.password_field :password_confirmation
+    .openid
       %p
-        = f.label :admin
+        = f.label :openid_identifier, "OpenID URL"
         %br
-        = f.check_box :admin
+        = f.text_field :openid_identifier
   %p
     = f.submit submit_button_label
