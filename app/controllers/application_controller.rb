@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
-
+    
     def require_admin
       not_allowed unless admin_logged_in?
     end

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_filter :collect_communities, :only => [ :edit, :update, :new, :create ]
   before_filter :require_admin, :only => [ :destroy ]
   
+  
   def new
     @user = User.new
   end
