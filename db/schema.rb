@@ -9,27 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100415145552) do
+ActiveRecord::Schema.define(:version => 20100416173900) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "work_green",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "work_alone",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "school_green",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "school_alone",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "kids_green",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "kids_alone",    :limit => 10, :precision => 10, :scale => 0
-    t.integer  "errands_green", :limit => 10, :precision => 10, :scale => 0
-    t.integer  "errands_alone", :limit => 10, :precision => 10, :scale => 0
-    t.integer  "faith_green",   :limit => 10, :precision => 10, :scale => 0
-    t.integer  "faith_alone",   :limit => 10, :precision => 10, :scale => 0
-    t.integer  "social_green",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "social_alone",  :limit => 10, :precision => 10, :scale => 0
-    t.integer  "total_miles",   :limit => 10, :precision => 10, :scale => 0
-    t.integer  "green_miles",   :limit => 10, :precision => 10, :scale => 0
+    t.integer  "work_green"
+    t.integer  "work_alone"
+    t.integer  "school_green"
+    t.integer  "school_alone"
+    t.integer  "kids_green"
+    t.integer  "kids_alone"
+    t.integer  "errands_green"
+    t.integer  "errands_alone"
+    t.integer  "faith_green"
+    t.integer  "faith_alone"
+    t.integer  "social_green"
+    t.integer  "social_alone"
+    t.integer  "total_miles"
+    t.integer  "green_miles"
   end
 
   create_table "communities", :force => true do |t|
@@ -47,12 +47,20 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.datetime "updated_at"
   end
 
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "friend_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
+
   create_table "groups", :force => true do |t|
     t.string   "name",           :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id",       :null => false
     t.integer  "destination_id", :null => false
     t.integer  "owner_id",       :null => false
   end
@@ -60,7 +68,7 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
   create_table "lengths", :force => true do |t|
     t.integer  "trip_id"
     t.integer  "mode_id"
-    t.integer  "distance",   :limit => 10, :precision => 10, :scale => 0
+    t.integer  "distance"
     t.integer  "unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.datetime "updated_at"
   end
 
-  add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
+  add_index "memberships", ["group_id", "user_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
 
   create_table "modes", :force => true do |t|
     t.string   "name"
@@ -104,14 +112,14 @@ ActiveRecord::Schema.define(:version => 20100415145552) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "mode_id"
-    t.integer  "distance",       :limit => 10, :precision => 10, :scale => 0
+    t.integer  "distance"
     t.integer  "unit_id"
     t.date     "made_at"
   end
 
   create_table "units", :force => true do |t|
     t.string   "name"
-    t.integer  "in_miles",   :limit => 10, :precision => 10, :scale => 0
+    t.integer  "in_miles"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

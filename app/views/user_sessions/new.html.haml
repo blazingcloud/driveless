@@ -1,3 +1,5 @@
+- title "Join the challenge"
+
 - form_for @user_session do |f|
   = f.error_messages
   %p
@@ -8,6 +10,8 @@
     = f.label :password
     %br
     = f.password_field :password
+  %p
+    = link_to "Forgot your password?", password_resets_url
   %p
     = f.submit "Submit"
   %h2

@@ -1,10 +1,15 @@
 class User < ActiveRecord::Base
   has_one :baseline
+
   has_many :trips
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
+  has_many :friendships, :dependent => :destroy
+  has_many :friends, :through => :friendships
+  
   belongs_to :community
+  
   validates_presence_of :email, :username
   restful_easy_messages
 
@@ -32,6 +37,23 @@ class User < ActiveRecord::Base
 
   def create_group(params)
     owned_groups.create(params)
+  end
+
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)
+  end
+
+  def friendship_for( user )
+    friendships.find_by_friend_id(user.id)
+  end
+
+  def friendship_to( user_id )
+    friendships.create(:friend_id => user_id)
+  end
+
+  def unfriendship_to( id )
+    friendships.destroy(id)
   end
 
   def update_green_miles

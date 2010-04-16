@@ -7,9 +7,10 @@
 
 - @community.users.by_green_miles.each do |user|
   .leaderboard
-    .user= user.username
+    .user= link_to user.username, user_path(user)
     .miles= h pluralize user.green_miles, "mile"
     .co2-saved
       = user.lb_co2_saved
       lb co2 saved
+    .friendship= link_to_friendship_action(user)
 = link_to 'Show All Communities', communities_url
