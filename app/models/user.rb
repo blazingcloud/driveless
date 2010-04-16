@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     owned_groups.create(params)
   end
 
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)
+  end
+
   def update_green_miles
     self.update_attribute( :green_miles, self.trips.only_green.map(&:distance).sum )
   end

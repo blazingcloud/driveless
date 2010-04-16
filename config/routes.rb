@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/account/widget', :controller => "users", :action => "widget"
 
+  map.resources :password_resets
+
   map.resource :user_session
 
   map.login "login", :controller => "user_sessions", :action => "new"
