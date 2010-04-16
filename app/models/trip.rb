@@ -5,6 +5,7 @@ class Trip < ActiveRecord::Base
   belongs_to :unit
   attr_accessible :user_id, :destination_id, :mode_id, :unit_id, :distance, :made_at
   validates_presence_of :destination, :mode, :unit, :distance
+  validates_numericality_of :distance, :greater_than_or_equal_to => 0
 
   after_save :update_green_miles
   after_destroy :update_green_miles
