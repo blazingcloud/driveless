@@ -1,41 +1,39 @@
 - title "My Groups"
 
 - if @owned_groups.total_entries > 0
+  .group-grouping
+    %h2 Groups I Created
+    %h5= page_entries_info @owned_groups
 
-  %h4 Groups I Created
-  %h5= page_entries_info @owned_groups
-
-  %table
-    %thead
-      %th Name
-      %th Destination
-      %th Members
-      %th Delete?
-      %th Edit?
     - @owned_groups.each do |group|
-      %tr
-        %td= link_to group.name, group
-        %td= group.destination.name
-        %td= group.memberships.count
-        %td= link_to 'x', [:account, group], :confirm => 'Are you sure?', :method => :delete
-        %td= link_to 'E', edit_account_group_path(group)
+      .leaderboard
+        .user= link_to group.name, group
+        .miles= h pluralize group.green_miles, "mile"
+        .co2-saved
+          = group.lb_co2_saved
+          lb co2 saved
+        .details
+          .members= h pluralize group.memberships.count, "member"
+          .type
+            Type:
+            = group.destination.name
 
 - if @memberships.total_entries > 0
-  %h4 Groups I Belong To
-  %h5= page_entries_info @memberships
-
-  %table
-    %thead
-      %th Name
-      %th Destination
-      %th Members
-      %th Action
-      - @memberships.each do |membership|
-        %tr
-          %td= link_to membership.group.name, membership.group
-          %td= membership.group.destination.name
-          %td= membership.group.memberships.count
-          %td= link_to 'leave', membership, :confirm => 'Are you sure?', :method => :delete
+  .group-grouping
+    %h2 Groups I Belong To
+    %h5= page_entries_info @memberships
+    - @memberships.each do |membership|
+      .leaderboard
+        .user= link_to membership.group.name, membership.group
+        .miles= h pluralize membership.group.green_miles, "mile"
+        .co2-saved
+          = membership.group.lb_co2_saved
+          lb co2 saved
+        .details
+          .members= h pluralize membership.group.memberships.count, "member"
+          .type
+            Type:
+            = membership.group.destination.name
 
 = link_to 'Show All Groups', groups_path
 

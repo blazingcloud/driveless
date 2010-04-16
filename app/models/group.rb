@@ -12,6 +12,14 @@ class Group < ActiveRecord::Base
 
   named_scope :by_name , :order => 'name ASC'
 
+  def lb_co2_saved
+     self.users.map{|u| u.lb_co2_saved.to_f}.sum
+  end
+
+  def green_miles
+     self.users.map{|u| u.green_miles.to_f}.sum
+  end
+
   def membership_for(user)
     memberships.find_by_user_id(user.id)
   end
