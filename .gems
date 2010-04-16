@@ -1,3 +1,4 @@
+haml --version '2.2.23'
 authlogic-oid
 compass
 authlogic
