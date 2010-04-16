@@ -2,19 +2,19 @@
 
 - form_for @user_session do |f|
   = f.error_messages
-  %p
-    = f.label :username
-    %br
-    = f.text_field :username
-
   %h2
     Login using
     %a{:class => 'button activate-section', :href => '#auth-openid'} Open ID
     or
-    %a{:class => 'button inactive activate-section', :href => '#auth-password'} Password
+    %a{:class => 'button inactive activate-section', :href => '#auth-password'} Username & Password
 
   .auth
     .password{:style => "display: none"}
+      %p
+        = f.label :username
+        %br
+        = f.text_field :username
+
       %p
         = f.label :password
         %br
