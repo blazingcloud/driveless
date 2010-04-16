@@ -6,7 +6,8 @@
       %th.how How did you get there?
       %th.distance How many miles did you go?
       %th.when When did you go?
-      %th.actions Actions
+      - if @user == current_user
+        %th.actions Actions
   - if @user == current_user
     = render :partial => 'trips/form'
   %tbody.trip-stream

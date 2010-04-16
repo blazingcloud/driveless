@@ -3,7 +3,8 @@
   %td.how= h trip.mode.name
   %td.distance= h pluralize trip.distance, trip.unit.name
   %td.when{:title => trip.made_at.to_s}= h trip.made_at.strftime("%B, %d")
-  %td.actions
-    = link_to 'Edit', edit_account_trip_path(trip)
-    = link_to 'Delete', account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete
-    %a{:href => "#", :class => 'copy-trip-to-form'} Copy
+  - if @user == current_user
+    %td.actions
+      = link_to 'Edit', edit_account_trip_path(trip)
+      = link_to 'Delete', account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete
+      %a{:href => "#", :class => 'copy-trip-to-form'} Copy
