@@ -12,9 +12,9 @@ module ApplicationHelper
 
     membership = group.membership_for(current_user)
     if membership
-      link_to 'leave', membership, :method => :delete, :confirm => "Are you sure?"
+      link_to 'leave', membership, :method => :delete, :confirm => "Are you sure?", :class => 'button'
     else
-      link_to 'join', memberships_path(:group_id => group.id), :method => :post
+      link_to 'join', memberships_path(:group_id => group.id), :method => :post, :class => 'button'
     end
   end
 
@@ -22,9 +22,11 @@ module ApplicationHelper
     return "you" if user == current_user
     friend = current_user.friendship_for(user)
     if friend
-      link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?"
+      link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button'
     else
-      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post
+      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post, :class => 'button'
     end
   end
 end
+
+

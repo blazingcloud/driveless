@@ -8,4 +8,13 @@ class Notifier < ActionMailer::Base
     sent_on       Time.now
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
+
+  def friendship_notification(user, friend)
+    subject       ""
+    from          "Driveless Challange"
+    recipients    friend.email
+    sent_on       Time.now
+    body          :friend_username => user.username, :friend_url => user_url( user )
+  end
+
 end
