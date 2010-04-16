@@ -20,7 +20,7 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   # config.gem "nifty-generators"
-  config.gem "haml", :version => "2.2.3"
+  config.gem "haml", :version => "~> 2.2.3"
   config.gem "compass"
   config.gem "authlogic"
   config.gem "authlogic-oid", :lib => "authlogic_openid"
