@@ -16,3 +16,7 @@
         %td= link_to group.name, group
         %td= group.memberships.count
         %td= link_to_membership_action group
+
+%p
+  Can't find the group you're looking for?
+  = link_to "Create a New Group", new_account_group_url

@@ -10,7 +10,7 @@ rescue LoadError
     raise e unless defined?(Rake) &&
       (Rake.application.top_level_tasks.include?('gems') ||
         Rake.application.top_level_tasks.include?('gems:install'))
-  end
+    end
 end
 
 # Load Haml and Sass.
