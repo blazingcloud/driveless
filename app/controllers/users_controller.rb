@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = @current_user
+    @user = params[:id] ? User.find(params[:id]) : current_user
     @trip = Trip.new
   end
 
