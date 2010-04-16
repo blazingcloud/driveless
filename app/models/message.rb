@@ -15,7 +15,7 @@ class Message < ActiveRecord::Base
                         :body
                         
   validates_length_of :body, 
-                      :minimum => 25, 
+                      :minimum => 10, 
                       :message => "is too short.  The mimum length is %d characters. Please don't spam."
                       
   validates_length_of :body, 
