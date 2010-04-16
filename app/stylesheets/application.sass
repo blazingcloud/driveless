@@ -71,10 +71,21 @@ a
   img
     border: none
 
-#container
+.container
   +grid-container
   +clearfix
-  margin-top: 19px
+
+.top
+  padding-top: 19px
+  background: #cfc
+  border-bottom: #060 1px solid
+.mid
+  padding-top: 19px
+  background: white
+.bot
+  background: white
+  padding-top: 19px
+
 
 .footer
   +grid(12,12)
@@ -91,12 +102,10 @@ a
   +grid(8,12)
   color = !header_color
   height: 114px
-  margin-bottom: 19px
 .navigation
   +grid(3,12)
   +grid-suffix(1,12)
   clear: left
-  padding-top = 19px * 2
   ol
     display: block
     list-style: none
@@ -112,10 +121,10 @@ a
         font-size: 150%
         display: block
         text-decoration: none
-        color = !brush4
+        color = rgba(0,102,0,0.5)
         text-transform: uppercase
         &:hover
-          color = !brush5
+          color = rgba(0,102,0,1.0)
     .current
       a
         color: black
@@ -126,7 +135,6 @@ a
   +grid(8,12)
 
 #flash_notice, #flash_error
-  +grid(12,12)
   padding: 5px 8px
   margin: 10px 0
 
@@ -187,32 +195,28 @@ input#user_openid_identifier, input#user_session_openid_identifier
       padding: 0
       margin: 0
 
-.trip-form-headers
-  span
-    +inline-block
-    width: 33%
-    padding-right: 20px
-    +border-box
+.trip-stream
+  margin: 0
+  padding: 0
+  border-collapse: collapse
+  th
     font-weight: bold
-    font-size: 14pt
-.trip
-  .inputs,.buttons
-    ol
-      li
-        +inline-block
-        width: 33%
-        &#trip_made_at_input
-          display: block
-          width: auto
-          clear: both
-        &.commit
-          display: block
-          clear: both
-          margin-top: 50px
-
-.trip-entry
-  .controls
-    float: right
+    &.where
+      padding-right: 20px
+    &.how
+      padding-right: 20px
+    &.distance
+      padding-right: 20px
+    &.when
+      padding-right: 20px
+    &.actions
+  #trip_distance
+    width: 120px
+  #trip_made_at
+    width: 80px
+  tr
+    height = 19px * 2
+    border-bottom: 1px solid #aaa
 
 .user-stats
   display: block
@@ -220,6 +224,8 @@ input#user_openid_identifier, input#user_session_openid_identifier
   margin: 0
   padding: 0
   li
+    &.no-baseline
+      background: #900
     +inline-block
     margin: 0
     padding: 0
@@ -241,3 +247,32 @@ input#user_openid_identifier, input#user_session_openid_identifier
       font-size: 11px
       letter-spacing: 1px
       text-transform: uppercase
+      a
+        color: white
+
+.baseline-alert
+  +border-box
+  +rounded(4px)
+  +box-shadow(0px, 2px, 4px)
+  background: #900
+  color: white
+  a
+    +border-box
+    +rounded(4px)
+    color: white
+    background: #a00
+    display: block
+    height = 19px * 2 + 10
+    line-height = 19px * 2
+    font-size = 19px
+    text-transform: uppercase
+    font-weight: bold
+    vertical-align: middle
+    padding: 5px
+  span
+    height = 19px + 10
+    line-height = 19px + 10
+    vertical-align: middle
+    +border-box
+    margin: 5px
+    display: inline-block
