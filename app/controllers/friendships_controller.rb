@@ -9,7 +9,7 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    current_user.unfriendship_to(params[:username])
+    current_user.unfriendship_to(params[:id])
     redirect_to account_friendships_url
   end
 
@@ -17,7 +17,7 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    current_user.friendship_to(params[:username])
+    current_user.friendship_to(params[:friend_id])
     redirect_to account_friendships_url
   end
 

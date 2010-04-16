@@ -1,7 +1,14 @@
 - title "Friendships"
 
-I'll list all the friends in here
+I'll list all the friends in here, already in green miles order
 
 - @friends.each do |friend|
-  %p
-    = link_to friend.name, friend
+  .leaderboard
+    .user
+      =link_to friend.username, friend
+    .miles= h pluralize friend.green_miles, "mile"
+    .co2-saved
+      = friend.lb_co2_saved
+      lb co2 saved
+    .friendship= link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?"
+

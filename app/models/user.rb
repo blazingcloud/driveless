@@ -47,12 +47,12 @@ class User < ActiveRecord::Base
     friendships.find_by_friend_id(user.id)
   end
 
-  def friendship_to( user )
-    friendships.create(:friend => user)
+  def friendship_to( user_id )
+    friendships.create(:friend_id => user_id)
   end
 
   def unfriendship_to( id )
-    friendships.destroy(:friend => id)
+    friendships.destroy(id)
   end
 
   def update_green_miles

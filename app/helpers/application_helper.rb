@@ -19,6 +19,7 @@ module ApplicationHelper
   end
 
   def link_to_friendship_action( user )
+    return "you" if user == current_user
     friend = current_user.friendship_for(user)
     if friend
       link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?"
