@@ -6,19 +6,24 @@
     = f.label :username
     %br
     = f.text_field :username
-  %p
-    = f.label :password
-    %br
-    = f.password_field :password
-  %p
-    = link_to "Forgot your password?", password_resets_url
-  %p
-    = f.submit "Submit"
+
   %h2
-    Or use OpenID
-  %p
-    = f.label :openid_identifier, "OpenID URL"
-    %br
-    = f.text_field :openid_identifier
+    Login using
+    %a{:class => 'button activate-section', :href => '#auth-openid'} Open ID
+    or
+    %a{:class => 'button inactive activate-section', :href => '#auth-password'} Password
+
+  .auth
+    .password{:style => "display: none"}
+      %p
+        = f.label :password
+        %br
+        = f.password_field :password
+    .openid
+      %p
+        = f.label :openid_identifier, "OpenID URL"
+        %br
+        = f.text_field :openid_identifier
+
   %p
     = f.submit "Submit"
