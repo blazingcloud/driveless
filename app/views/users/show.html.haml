@@ -1,7 +1,6 @@
 - title @user.username
 
-- if @user.baseline.green_miles
-- else
+- unless @user.baseline.green_miles
   .baseline-alert
     = link_to "Click here to complete your baseline now!", edit_baseline_path(@user.baseline)
     %span Enter a baseline to measure your progress and win prizes!
@@ -10,4 +9,3 @@
 %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
 
 = render :partial => 'trips/stream'
-
