@@ -5,6 +5,6 @@
   %td.when{:title => trip.made_at.to_s}= h trip.made_at.strftime("%B, %d")
   - if @user == current_user
     %td.actions
-      = link_to 'Edit', edit_account_trip_path(trip)
-      = link_to 'Delete', account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete
-      %a{:href => "#", :class => 'copy-trip-to-form'} Copy
+      = link_to image_tag('icons/cog_edit.png'), edit_account_trip_path(trip), :title => 'Edit this trip' 
+      = link_to image_tag('icons/cog_delete.png'), account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete, :title => "Delete this trip"
+      %a{:href => "#", :class => 'copy-trip-to-form', :title => "Copy this trip"}= image_tag('icons/page_copy.png')
