@@ -1,12 +1,16 @@
 - title @user.username
 
-- unless @user.baseline.green_miles
-  .baseline-alert
-    = link_to "Click here to complete your baseline now!", edit_baseline_path(@user.baseline)
-    %span Enter a baseline to measure your progress and win prizes!
+- if @user == current_user
+  - unless @user.baseline.green_miles
+    .baseline-alert
+      = link_to "Click here to complete your baseline now!", edit_baseline_path(@user.baseline)
+      %span Enter a baseline to measure your progress and win prizes!
 
-%h1 Log a new trip
-%p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
+  %h1 Log a new trip
+  %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
+- else
+  %h1 #{@user.username}'s profile
+  %p This is the drive less profile for #{@user.username}. Text needed here.  
 
 = render :partial => 'trips/stream'
 = render :partial => 'trips/chart'
