@@ -10,9 +10,14 @@ class FriendshipsController < ApplicationController
     @friends = User.find_by_name(params[:username]).friends.by_green_miles
   end
 
+  def friends_of
+    @friends = User.find(Friendship.of(current_user).map{|f| f.user_id})
+    render :index
+  end
+
   def destroy
     current_user.unfriendship_to(params[:id])
-    redirect_to account_friendships_url
+    redirect_to account_friends_url
   end
 
   def new
@@ -20,7 +25,7 @@ class FriendshipsController < ApplicationController
 
   def create
     current_user.friendship_to(params[:friend_id])
-    redirect_to account_friendships_url
+    redirect_to account_friends_url
   end
 
 end
