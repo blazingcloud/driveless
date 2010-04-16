@@ -1,15 +1,15 @@
 - title "Friendships"
 
-I'll list all the friends in here, already in green miles order
+%h2 Your Friends
 
-- @friends.each do |friend|
-  .leaderboard
-    .user
-      =link_to friend.username, friend
-    .miles= h pluralize friend.green_miles, "mile"
-    .co2-saved
-      = friend.lb_co2_saved
-      lb co2 saved
-    .friendship= link_to_friendship_action( friend )
+- if @friends.any?
+  = render :partial => 'friendships/friends', :collection => @friends
+- else
+  %p You don't have any friends yet on Drive Less Challenge. Try looking them up in your groups, community, or using Facebook Connect.
 
-=link_to 'Check who considere you as a friend', account_friends_of_path
+%h2 Your Fans
+
+- if @friends.any?
+  = render :partial => 'friendships/friends', :collection => @fans
+- else
+  %p Don't worry, everybody has to start somewhere. Go find some friends, and perhaps they'll reciprocate.

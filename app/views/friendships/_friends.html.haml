@@ -1,0 +1,9 @@
+- friends.each do |friend|
+  .leaderboard
+    .user
+      =link_to friend.username, friend
+    .miles= h pluralize friend.green_miles, "mile"
+    .co2-saved
+      = friend.lb_co2_saved
+      lb co2 saved
+    .friendship= link_to_friendship_action( friend )

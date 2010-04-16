@@ -8,11 +8,7 @@ class FriendshipsController < ApplicationController
 
   def show
     @friends = User.find_by_name(params[:username]).friends.by_green_miles
-  end
-
-  def friends_of
-    @friends = User.find(Friendship.of(current_user).map{|f| f.user_id})
-    render :index
+    @fans = User.find(Friendship.of(current_user).map{|f| f.user_id})
   end
 
   def destroy
