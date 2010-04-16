@@ -19,6 +19,7 @@
         = f.label :password
         %br
         = f.password_field :password
+      = link_to 'Forgot your password?', password_resets_url
     .openid
       %p
         = f.label :openid_identifier, "OpenID URL"
