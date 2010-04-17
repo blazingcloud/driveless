@@ -1,5 +1,5 @@
 !!! XHTML 1.1
-%html
+%html{'xmlns:fb' => "http://www.facebook.com/2008/fbml"}
   %head
     %title= "Drive Less Challenge | " + h(yield(:title) || "Untitled")
     = stylesheet_link_tag 'flick/jquery-ui-1.7.2.custom.css',    :media => 'screen, projection'
@@ -11,6 +11,8 @@
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'underscore-min.js', :defaults
     = yield :head
   %body
+    = fb_connect_javascript_tag
+    = init_fb_connect "XFBML"
     .top
       .container
         .title
