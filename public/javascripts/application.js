@@ -44,12 +44,19 @@
       var g_miles = _.reduce($('.baseline-travel input.green', $form).get(), 0, function(t,i){return t+(parseFloat($(i).val()) || 0)});
       $('.total-miles', $form).text(t_miles);
       $('.total-green', $form).text(g_miles);
+      $('.total-combined-miles', $form).text(t_miles + g_miles);
       if (t_miles) {
         $('.foot .number', $form).text(((g_miles/(t_miles+g_miles))*100+'').substr(0,5));
         $('.foot .line-percent', $form).show();
       } else {
         $('.foot .line-percent', $form).hide();
       }
+/*      $('.goal-total').change(function(e){
+        if (!$('.green-total').val()) return;
+        if (!$('.goal-green').val()) {
+          $('.goal-green').val((parseFloat($('.total-combined-miles').text()) || 0) - (parseFloat($('.goal-total').val()) || 0))
+        }
+      })*/
     }).trigger('change');
   });
 })(jQuery);

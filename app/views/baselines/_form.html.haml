@@ -24,11 +24,17 @@
   .baseline-travel.head
     %ol
       %li 
-      %li Total Driving Alone
+        Total Combined Milage
+        %br
+        in a Week
+      %li
+        Total Driving Alone
+        %br
+        In a Car
       %li Total Green Miles
       %li Green Travel Goal
   - form.inputs :class => 'baseline-travel' do
-    %li
+    %li.total-combined-miles ...
     = form.input :total_miles, :label => false, :input_html => {:class => 'goal-total'}
     = form.input :green_miles, :label => false, :input_html => {:class => 'goal-green'}
     %li.line-percent
