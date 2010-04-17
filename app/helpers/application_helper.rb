@@ -24,7 +24,7 @@ module ApplicationHelper
     return "you" if user == current_user
     friend = current_user.friendship_for(user)
     if friend
-      link_to 'delete friend', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button'
+      link_to 'end friendship', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button'
     else
       link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post, :class => 'button'
     end

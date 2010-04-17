@@ -4,11 +4,12 @@ class FriendshipsController < ApplicationController
 
   def index
     @friends = current_user.friends.by_green_miles
+    @fans = User.find(Friendship.of(current_user).map{|f| f.user_id})
   end
 
   def show
     @friends = User.find_by_name(params[:username]).friends.by_green_miles
-    @fans = User.find(Friendship.of(current_user).map{|f| f.user_id})
+    @fans = User.find( Friendship.of( User.find_by_name(params[:username]) ).map{|f| f.user_id} )
   end
 
   def destroy
