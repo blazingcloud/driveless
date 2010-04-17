@@ -10,14 +10,23 @@ Unit.create([
   :name => "Mile", :in_miles => 1.0
 ])
 
+=begin
+Solo Car Trips (averaging 24 mpg)         0.843
+Bus (VTA)         0.240
+Train (Caltrain, BART)         0.370
+Carpool (2 people)         0.422
+Hybrid / Electric Car (averaging 50 mpg)         0.405
+=end
+
 Mode.create([
-  {:name => 'Walk',        :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Bike',        :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Bus',         :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Train',       :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Carpool',     :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Shuttle',     :green => true, :lb_co2_per_mile => 0.84},
-  {:name => 'Drive Alone', :green => false, :lb_co2_per_mile => 0.0}
+  {:name => 'Walk',                             :green => true,   :lb_co2_per_mile => 0.840},
+  {:name => 'Bike',                             :green => true,   :lb_co2_per_mile => 0.840},
+  {:name => 'Solo Car Trips (avg 24mpg)',       :green => true,   :lb_co2_per_mile => 0.843},
+  {:name => 'Bus (VTA)',                        :green => true,   :lb_co2_per_mile => 0.240},
+  {:name => 'Train (Caltrain,BART)',            :green => true,   :lb_co2_per_mile => 0.370},
+  {:name => 'Carpool (2 people)',               :green => true,   :lb_co2_per_mile => 0.422},
+  {:name => 'Hybrid/Electric Car (avg 50mpg)',  :green => true,   :lb_co2_per_mile => 0.405},
+  {:name => 'Drive Alone',                      :green => false,  :lb_co2_per_mile => 0.000}
 ])
 
 Destination.create([
