@@ -42,7 +42,6 @@
   -webkit-border-radius = !radius
   -moz-border-radius = !radius
   border-radius = !radius
-  behavior: url(../../javascripts/border-radius.htc)
 
 =border-box
   -webkit-box-sizing: border-box
@@ -77,7 +76,7 @@ a
 
 .top
   padding-top: 19px
-  background: #cfc
+  background = !brush2
   border-bottom: #060 1px solid
 .mid
   padding-top: 19px
@@ -103,6 +102,11 @@ a
   text-align: right
   h1
     font-size: 200%
+    a
+      color: inherit
+      text-decoration: none
+      img
+        border: none
 .header
   +grid(8,12)
   color = !header_color
@@ -125,6 +129,7 @@ a
       &:hover
         .desc
           opacity: 1
+          color: #666
       .desc
         display: block
         height: 19px
@@ -132,13 +137,16 @@ a
         font-size: 12px
         opacity: 0
         color: #666
+        color: white
       a
         font-size: 150%
         display: block
         text-decoration: none
+        color: rgb(0,51,0)
         color = rgba(0,102,0,0.5)
         text-transform: uppercase
         &:hover
+          color: rgb(0,102,0)
           color = rgba(0,102,0,1.0)
     .current
       a
@@ -318,19 +326,29 @@ input#user_openid_identifier, input#user_session_openid_identifier
         float: right
         text-align: right
 
+.friendship
+
 .button
-  display: inline-block
+  +inline-block
   +border-box
   +rounded(10px)
   +box-shadow(0px, 2px, 2px)
   +carved-text
   background: #9f9
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0.12, rgb(204,255,204)),color-stop(0.49, rgb(170,255,170)),color-stop(0.5, rgb(153,204,153)),color-stop(1, rgb(102,153,102)))
+  background: -moz-linear-gradient(center top,rgb(204,255,204) 12%,rgb(170,255,170) 49%,rgb(153,204,153) 50%,rgb(102,153,102) 100%)
   color: #333
   text-decoration: none
   font-size: 19px
   font-weight: bold
   line-height: 1.5
   padding: 5px 10px
+  &.small
+    font-size: 10px
+    text-transform: uppercase
+    padding: 2px 5px
+    +box-shadow(0px, 1px, 1px)
+    +rounded(8px)
   &.inactive
     opacity: 0.6
     &:hover

@@ -14,7 +14,8 @@
     .top
       .container
         .title
-          %h1 Drive Less Challenge
+          %h1
+            =link_to 'Drive Less Challenge', root_path
         .header
           - if current_user
             = render :partial => 'shared/user_stats'
