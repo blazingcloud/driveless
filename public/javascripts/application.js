@@ -6,8 +6,15 @@
     $('.copy-trip-to-form').click(function(e){
       e.preventDefault();
       e.stopImmediatePropagation();
-      console.log("clicked");
-      alert("This feature isn't finished yet...");
+      var $toCopy = $(this).parents('.trip-entry');
+      var $form   = $('.new_trip');
+      var where = $('.where', $toCopy).text(),
+          how   = $('.how', $toCopy).text(),
+          distance = parseFloat($('.distance', $toCopy).text());
+      $('option:contains("'+where+'")').attr('selected', 'selected');
+      $('option:contains("'+how+'")').attr('selected', 'selected');
+      $('#trip_distance').val(distance);
+      $('.trip-form').stop().css({backgroundColor: '#ccffcc'}).animate({backgroundColor: '#ffffff'}, 2000);
     });
     
     $('a.activate-section').click(function(e){
