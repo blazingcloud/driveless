@@ -4,7 +4,7 @@
   = f.error_messages
   %h2
     Login using
-    %a{:class => 'button activate-section', :href => '#auth-openid'} Open ID
+    %a{:class => 'button activate-section', :href => '#auth-open_id'} Open ID
     or
     %a{:class => 'button inactive activate-section', :href => '#auth-password'} Username & Password
 
@@ -20,11 +20,8 @@
         %br
         = f.password_field :password
       = link_to 'Forgot your password?', password_resets_url
-    .openid
       %p
-        = f.label :openid_identifier, "OpenID URL"
-        %br
-        = f.text_field :openid_identifier
+        = f.submit "Login"
+    .open_id
+      = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => "Login", :model => "user_session"}
 
-  %p
-    = f.submit "Submit"

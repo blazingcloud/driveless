@@ -1,0 +1,49 @@
+= f.hidden_field :id
+%p
+  = f.label :username, "Nickname"
+  %br
+  = f.text_field :username
+%p
+  = f.label :email
+  %br
+  = f.text_field :email
+%p
+  = f.label :city
+  %br
+  = f.text_field :city
+%p
+  = f.label :community_id
+  %br
+  = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
+- if admin_logged_in?
+  %p
+    = f.label :admin
+    %br
+    = f.check_box :admin
+
+%h2
+  Signup using
+  %a{:class => 'button activate-section', :href => '#auth-open_id'} Open ID
+  or
+  %a{:class => 'button inactive activate-section', :href => '#auth-password'} Password
+
+.auth
+  - if @user.openid_identifier.blank?
+    .password{:style => "display: none"}
+      %p
+        = f.label :password
+        %br
+        = f.password_field :password
+      %p
+        = f.label :password_confirmation
+        %br
+        = f.password_field :password_confirmation
+      %p
+        = f.submit submit_button_label
+  .open_id
+    = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
+    / 
+      %p
+        = f.label :openid_identifier, "OpenID URL"
+        %br
+        = f.text_field :openid_identifier

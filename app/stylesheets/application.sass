@@ -196,7 +196,9 @@ a
     margin: 2px 24px
     li
       font-size: 12px
+      line-height: 19px !important
       list-style: disc
+      cursor: default !important
 
 input#user_openid_identifier, input#user_session_openid_identifier
   background: url(http://openid.net/images/login-bg.gif) no-repeat
@@ -361,4 +363,84 @@ input#user_openid_identifier, input#user_session_openid_identifier
   &.inactive
     opacity: 0.6
     &:hover
-      opacity: 0.9
+      opacity: 0.9﻿body
+  font-family: Arial
+
+
+fieldset, img
+  border-style: none
+
+
+div.openid
+  ul
+    text-align: center
+    list-style-type: none
+    display: inline
+
+    li
+      float: left
+      padding: 4px
+
+      span
+        padding: 0 1em 0 3px
+
+  fieldset
+    clear: both
+    padding: 1em 0
+
+  div+fieldset
+    display: none
+
+  label
+    display: block
+    font-weight: bold
+    font-size: larger
+    margin-bottom: .5em
+
+
+input
+  &[name=openid_username]
+    width: 8em
+
+  &[name=openid_identifier]
+    width: 18em
+
+
+div.openid
+  ul li
+    margin-left: 0
+  ul li.highlight
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    background-color: #FD6
+
+  fieldset div
+    font-family: arial
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    background: #DCDCDC url(../../images/openid/fadegrey.png)
+    padding: 10px
+    display: inline-block
+
+  input[type='submit']
+    margin-left: 1em
+
+
+.openid_logo
+  color: #F7931E
+  padding: 6px 0px 8px 28px
+  background: url(../../images/openid/openidico.png) no-repeat
+
+
+#openid_login
+  float: left
+  font-size: larger
+  width: 30%
+  margin: 2em 1em
+  text-align: center
+
+  div
+    margin-top: 0.5em
+
+  div+span
+    font-size: smaller

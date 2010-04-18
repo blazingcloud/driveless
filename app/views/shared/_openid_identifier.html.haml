@@ -1,0 +1,101 @@
+﻿
+%div.openid
+  %div
+    %ul.providers
+      %li.openid{ :title => "OpenID" }
+        = image_tag "openid/openidW.png", :alt => "icon"
+        %span
+          %strong> http://{your-openid-url}
+      /
+        %li.direct{ :title => "Google" }
+          = image_tag "openid/googleW.png", :alt => "icon"
+          %span> https://www.google.com/accounts/o8/id
+        %li.direct{ :title => "Yahoo" }
+          = image_tag "openid/yahooW.png", :alt => "icon"
+          %span> http://yahoo.com/
+      %li.username{ :title => "AOL screen name" }
+        = image_tag "openid/aolW.png", :alt => "icon"
+        %span
+          http://openid.aol.com/
+          %strong
+            username
+      %li.username{ :title => "MyOpenID user name" }
+        = image_tag "openid/myopenid.png", :alt => "icon"
+        %span
+          http://
+          %strong
+            username
+          \.myopenid.com/
+      %li.username{ :title => "Flickr user name" }
+        = image_tag "openid/flickr.png", :alt => "icon"
+        %span
+          http://flickr.com/
+          %strong
+            username
+          \/
+      %li.username{ :title => "Technorati user name" }
+        = image_tag "openid/technorati.png", :alt => "icon"
+        %span
+          http://technorati.com/people/technorati/
+          %strong
+            username
+          \/
+      %li.username{ :title => "Wordpress blog name" }
+        = image_tag "openid/wordpress.png", :alt => "icon"
+        %span
+          http://
+          %strong
+            username
+          \.wordpress.com
+      %li.username{ :title => "Blogger blog name" }
+        = image_tag "openid/blogger.png", :alt => "icon"
+        %span
+          http://
+          %strong
+            username
+          \.blogspot.com/
+      %li.username{ :title => "LiveJournal blog name" }
+        = image_tag "openid/livejournal.png", :alt => "icon"
+        %span
+          http://
+          %strong
+            username
+          \.livejournal.com
+      %li.username{ :title => "ClaimID user name" }
+        = image_tag "openid/claimid.png", :alt => "icon"
+        %span
+          http://claimid.com/
+          %strong
+            username
+      %li.username{ :title => "Vidoop user name" }
+        = image_tag "openid/vidoop.png", :alt => "icon"
+        %span
+          http://
+          %strong
+            username
+          \.myvidoop.com/
+      %li.username{ :title => "Verisign user name" }
+        = image_tag "openid/verisign.png", :alt => "icon"
+        %span
+          http://
+          %strong
+            username
+          \.pip.verisignlabs.com/
+  %fieldset
+    %label{ :for => "openid_username" }
+      Enter your
+      %span
+        Provider user name
+    %div
+      %span>
+      %input{ :name => "openid_username", :type => "text" }>
+      %span>
+      %input{ :type => "submit", :value => "Login" }
+  %fieldset
+    %label{ :for => "openid_identifier" }
+      Enter your
+      %a.openid_logo{ :href => "http://openid.net" }
+        OpenID
+    %div
+      %input{ :id => 'openid_identifier', :name => "#{model}[openid_identifier]", :type => "text" }
+      %input{ :type => "submit", :value => submit_button_label }
