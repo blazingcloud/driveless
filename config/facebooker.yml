@@ -36,10 +36,10 @@ test:
     server_alive_interval: 0
 
 production:
-  api_key: 
-  secret_key: 
+  api_key: "f4d437b757f1f8a88c1ab4c7e4fd3077"
+  secret_key: "2b057ad872df6915ff2f861eeb577a5a"
   canvas_page_name: 
-  callback_url: 
+  callback_url: "http://my.drivelesschallenge.com"
   set_asset_host_to_callback_url: false
   tunnel:
     public_host_username: 
