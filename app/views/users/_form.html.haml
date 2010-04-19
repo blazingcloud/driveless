@@ -25,7 +25,7 @@
   Signup using
   %a{:class => 'button activate-section', :href => '#auth-open_id'} Open ID
   or
-  %a{:class => 'button inactive activate-section', :href => '#auth-password'} Password
+  %a{:class => 'button activate-section', :href => '#auth-password'} Password
 
 .auth
   - if @user.openid_identifier.blank?
@@ -40,7 +40,7 @@
         = f.password_field :password_confirmation
       %p
         = f.submit submit_button_label
-  .open_id
+  .open_id{:style => "display: none"}
     = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
     / 
       %p
