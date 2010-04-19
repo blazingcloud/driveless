@@ -35,10 +35,8 @@ development:
     server_alive_interval: 0
 
 test:
-  api_key: 
-  secret_key: 
+  <<: *fbapp
   canvas_page_name: 
-  callback_url:
   set_asset_host_to_callback_url: false
   tunnel:
     public_host_username: 

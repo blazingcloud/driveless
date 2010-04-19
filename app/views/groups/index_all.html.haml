@@ -5,13 +5,16 @@
     %dt
       %a{:href => '#' + d.name.downcase.gsub(/\W+/,'_')}=h d.name
     %dd{:id => d.name.downcase.gsub(/\W+/,'_')}
-      %ol
-        - d.groups.by_name.all.each do |g|
-          %li
-            %span.membership-action= link_to_membership_action g
-            = link_to g.name, g, :class => 'group-name'
-            %span.total-members= pluralize g.memberships.count, 'member'
-
+      - if d.groups.by_name.all.length > 0
+        %ol
+          - d.groups.by_name.all.each do |g|
+            %li
+              %span.membership-action= link_to_membership_action g
+              = link_to g.name, g, :class => 'group-name'
+              %span.total-members= pluralize g.memberships.count, 'member'
+      - else
+        No groups of this type exist yet.
+        = link_to "Creat one!", new_account_group_url, :class => 'button small'
 
 - render :layout => 'shared/tip' do
   %p

@@ -1,13 +1,13 @@
 - form_for [:account, @group] do |form|
   = form.error_messages
   %p
-    = form.label :name
+    = form.label :name, "Group Name"
     = form.text_field :name
   %p
-    = form.label :destination_id
+    = form.label :destination_id, "Type of Group"
     = form.select :destination_id, options_from_collection_for_select(Destination.by_name.all, 'id', 'name', :selected => @group.destination_id)
   %p
-    = form.label :description
+    = form.label :description, "Group Description"
     = form.text_area :description
   %p
     = form.submit
