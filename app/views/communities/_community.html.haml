@@ -1,0 +1,17 @@
+- @community ||= current_user.community
+
+- render :layout => 'shared/info' do
+  %p You have joined a geographic community that is participating in the challenge together. Check out your progress as a local community!
+
+%h3= "Community: Challenge for #{@community.name.camelcase}"
+
+- @community.users.by_green_miles.each do |user|
+  .leaderboard
+    .user= link_to user.username, user_path(user)
+    .miles= h pluralize user.green_miles, "mile"
+    .co2-saved
+      = user.lb_co2_saved
+      lb co2 saved
+    .details
+      .friendship= link_to_friendship_action(user)
+= link_to 'Show All Communities', communities_url, :class => 'button'

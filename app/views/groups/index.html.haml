@@ -34,10 +34,14 @@
           .type
             Type:
             = membership.group.destination.name
+- else
+  - render :layout => 'shared/tip' do
+    %p You aren't currently a member of any groups. The Drive Less Challenge encourages you to socialize and engage in friendly competition with your peers at work, school, hobbies, and more. Join a group today!
 
-= link_to 'Show All Groups', groups_path
+%p
+  = link_to 'Find a Group and Join!', groups_path, :class => 'button'
 
-or
 
-= link_to "Create a New Group", new_account_group_url
+
+= render current_user.community if current_user.community
 
