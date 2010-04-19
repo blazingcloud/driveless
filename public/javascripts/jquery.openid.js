@@ -15,7 +15,6 @@ $.fn.openid = function() {
       return false;
     }
     $id.val(($front.text() + $usr.val() + $end.text()).replace(/\s*/g, ''));
-    alert($id.val())
     return true;
   };
 
