@@ -1,3 +1,1 @@
-%div.tip
-  %div.tip-header Tip!
-  %div= yield
+= render :layout => 'shared/info', :locals => {:html_class => 'tip', :title => 'Tip!'}

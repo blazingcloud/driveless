@@ -1,0 +1,6 @@
+- html_class ||= ''
+- title ||= 'Did You Know?'
+%div.info{:class => html_class}
+  %div.info-header
+    = title
+  %div= yield
