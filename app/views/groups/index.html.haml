@@ -3,37 +3,14 @@
 - if @owned_groups.total_entries > 0
   .group-grouping
     %h2 Groups I Created
-    %h5= page_entries_info @owned_groups
-
-    - @owned_groups.each do |group|
-      .leaderboard
-        .user= link_to group.name, group
-        .miles= h pluralize group.green_miles, "mile"
-        .co2-saved
-          = group.lb_co2_saved
-          lb co2 saved
-        .details
-          .members= h pluralize group.memberships.count, "member"
-          .type
-            Type:
-            = group.destination.name
+    = render :partial => 'shared/leaderboard', :locals => { :items => @owned_groups, :group => false, :friendship => false }
 
 - if @memberships.total_entries > 0
+
   .group-grouping
     %h2 Groups I Belong To
-    %h5= page_entries_info @memberships
-    - @memberships.each do |membership|
-      .leaderboard
-        .user= link_to membership.group.name, membership.group
-        .miles= h pluralize membership.group.green_miles, "mile"
-        .co2-saved
-          = membership.group.lb_co2_saved
-          lb co2 saved
-        .details
-          .members= h pluralize membership.group.memberships.count, "member"
-          .type
-            Type:
-            = membership.group.destination.name
+    = render :partial => 'shared/leaderboard', :locals => { :items => @memberships, :group => true, :friendship => false }
+
 - else
   - render :layout => 'shared/tip' do
     %p You aren't currently a member of any groups. The Drive Less Challenge encourages you to socialize and engage in friendly competition with your peers at work, school, hobbies, and more. Join a group today!

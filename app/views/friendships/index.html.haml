@@ -3,13 +3,13 @@
 %h2 Your Friends
 
 - if @friends.any?
-  = render :partial => 'friendships/friends', :local => {:friends => @friends } 
+  = render :partial => 'shared/leaderboard', :locals => {:items => @friends, :group => false, :friendship => true }
 - else
   %p You don't have any friends yet on Drive Less Challenge. Try looking them up in your groups, community, or using Facebook Connect.
 
 %h2 Your Fans
 
-- if @friends.any?
-  = render :partial => 'friendships/friends', :local => {:friends => @fans}
+- if @fans.any?
+  = render :partial => 'shared/leaderboard', :locals => {:items => @fans, :group => false, :friendship => true }
 - else
   %p Don't worry, everybody has to start somewhere. Go find some friends, and perhaps they'll reciprocate.
