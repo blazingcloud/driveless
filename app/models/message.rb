@@ -21,7 +21,7 @@ class Message < ActiveRecord::Base
   validates_length_of :body, 
                       :maximum => 1000, 
                       :message => "is too long.  No one wants to read that.  The maximum length is %d characters."
-    
+
   # Returns user.username for the sender
   def sender_name
     User.find(sender_id).username || ""

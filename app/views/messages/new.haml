@@ -1,4 +1,6 @@
-%h1 RESTful Easy Messages - haml
+- title 'New Message'
+
+%h1 New Message
 = flash[:notice]
 = rezm_menu
 %p
@@ -9,7 +11,8 @@
     %p
       %label{ :for => "message_recepient" }Recipient:
       %br/
-      = form.text_field :recipient, :size => 40, :value => @message.recipient
+      =# form.text_field :recipient, :size => 40, :value => @message.recipient
+      = text_field_with_auto_complete :user, :username, :value =>  @message.recipient, :size => 40
     %p
       %label{ :for => "message_subject" }Subject:
       %br/

@@ -2,6 +2,8 @@ class MessagesController < ApplicationController
   
   include RestfulEasyMessagesControllerSystem
   
+  auto_complete_for :user, :username
+  
   # Restful_authentication Filter
   before_filter :require_user
 
@@ -32,7 +34,9 @@ class MessagesController < ApplicationController
 
   # POST /messages
   def create
-    @message = Message.new((params[:message] || {}).merge(:sender => rezm_user))
+    new_params = params
+    new_params[:message][:recipient] = params[:user][:username]
+    @message = Message.new((new_params[:message] || {}).merge(:sender => rezm_user))
     
     respond_to do |format|
       if @message.save
@@ -168,7 +172,7 @@ class MessagesController < ApplicationController
         message.mark_message_read(rezm_user)
       # "outbox"
       elsif rezm_user.id == message.sender_id
-        message.sender_deleted = true
+        message.sender_deleted = false
         message.sender_purged = true
             
       # "trash_bin"

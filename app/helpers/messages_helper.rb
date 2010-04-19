@@ -43,7 +43,7 @@ module MessagesHelper
   
   # Link to view the message
   def rezm_link_to_message(message)
-     link_to "#{h(rezm_subject_and_status(message))}", message_path(message)
+     link_to rezm_subject_and_status(message), message_path(message)
   end
   
   # Dynamic data for the sender/receiver column in the messages.rhtml view
@@ -66,7 +66,7 @@ module MessagesHelper
     if message.receiver_deleted?
       message.subject + " (Deleted)" 
     elsif message.read_at.nil?
-      message.subject + " (Unread)"  
+      "<b class='unread'>" + message.subject + "</b>"  
     else 
       message.subject
     end
@@ -74,12 +74,12 @@ module MessagesHelper
   
   # Link to User for Message View
   def rezm_to_user_link(message)
-    link_to message.receiver_name, user_path(message.receiver_name)
+    link_to message.receiver_name, user_path(message.receiver_id)
   end
   
   # Link from User for Message View
   def rezm_from_user_link(message)
-    link_to message.sender_name, user_path(message.sender_name)
+    link_to message.sender_name, user_path(message.sender_id)
   end
   
   # Reply Button
