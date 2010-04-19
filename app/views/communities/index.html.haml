@@ -6,10 +6,4 @@
 
 %h1 All Communities in The Challenge
 %h3 Leading Communities by Green Miles
-- @communities.by_green_miles.each do |community|
-  .leaderboard
-    .user= link_to community.name, :action => 'show', :id => community
-    .miles= h pluralize community.green_miles, "mile"
-    .co2-saved
-      = community.lb_co2_saved
-      lb co2 saved
+= render :partial => 'shared/leaderboard', :locals => { :items => @communities, :group => false, :friendship => false }

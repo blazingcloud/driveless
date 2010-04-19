@@ -1,0 +1,25 @@
+%h5=page_entries_info items
+- items.each do |item|
+  .leaderboard
+    .user
+      - if group
+        = link_to item.group.name, item.group
+      - else
+        - name = friendship ? item.username : item.name
+        = link_to name, item
+
+    - green_miles = group ? item.group.green_miles : item.green_miles
+    .miles= h pluralize green_miles , "mile"
+    .co2-saved
+      - co2saved = group ? item.group.lb_co2_saved : item.lb_co2_saved
+      = co2saved
+      lb co2 saved
+    .details
+      - if group
+        .members= h pluralize item.group.memberships.count, "member"
+        .type
+          Type:
+          = item.group.destination.name
+      - if friendship
+        .friendship= link_to_friendship_action( item )
+
