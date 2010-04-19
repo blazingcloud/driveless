@@ -1,0 +1,61 @@
+# The api key, secret key, and canvas page name are required to get started
+# Tunnel configuration is only needed if you are going to use the facebooker:tunnel Rake tasks
+# Your callback url in Facebook should be set to http://public_host:public_port
+# If you're building a Facebook connect site, 
+#    change the value of set_asset_host_to_callback_url to false
+# To develop for the new profile design, add the following key..
+# api: new
+# remove the key or set it to anything else to use the old facebook design.
+# This should only be necessary until the final version of the new profile is released.
+
+# Whichever is the current configuration for development, assign it the '&fbapp' name.
+
+
+cwest_dev: &fbapp
+  api_key: "9c881e800eb58edfa724410b82b9dd85"
+  secret_key: "fa1c78d45c44103972ec068b3cc0f724"
+  callback_url: "http://localhost:3000"
+
+cubox_dev:
+  api_key: "d173412282a58a7b824e8d34ab4d24de"
+  secret_key: "e73285dd67c15d0be4853326dba9f75a"
+  callback_url: "http://cubox.office-on-the.net:20888"
+
+
+development:
+  <<: *fbapp
+  canvas_page_name:
+  pretty_errors: false
+  set_asset_host_to_callback_url: false
+  tunnel:
+    public_host_username: 
+    public_host: 
+    public_port: 4007
+    local_port: 3000
+    server_alive_interval: 0
+
+test:
+  api_key: 
+  secret_key: 
+  canvas_page_name: 
+  callback_url:
+  set_asset_host_to_callback_url: false
+  tunnel:
+    public_host_username: 
+    public_host: 
+    public_port: 4007
+    local_port: 3000
+    server_alive_interval: 0
+
+production:
+  api_key: "f4d437b757f1f8a88c1ab4c7e4fd3077"
+  secret_key: "2b057ad872df6915ff2f861eeb577a5a"
+  canvas_page_name: 
+  callback_url: "http://my.drivelesschallenge.com"
+  set_asset_host_to_callback_url: false
+  tunnel:
+    public_host_username: 
+    public_host: 
+    public_port: 4007
+    local_port: 3000
+    server_alive_interval: 0
