@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
   end
 
   def index_all
+    @destinations = Destination.find(:all)
     if params[:destination_id].present?
       destination = Destination.find(params[:destination_id])
       @groups = destination.groups.by_name.all.paginate(:page => params[:page] || 1)
