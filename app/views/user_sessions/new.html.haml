@@ -1,5 +1,8 @@
 - title "Login"
-
+- render :layout => 'shared/tip' do
+  %p
+    If you don't have an account with the Drive Less Challenge,
+    = link_to "create one now!", register_path
 / = authlogic_facebook_login_button
 - form_for @user_session do |f|
   = f.error_messages
