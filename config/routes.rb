@@ -26,6 +26,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :communities
 
+  map.resources :invitations, :only => [ :index, :create ]
+
   map.group 'group/:id', :controller => 'groups', :action => 'show'
   map.groups 'groups', :controller => 'groups', :action => 'index_all'
 

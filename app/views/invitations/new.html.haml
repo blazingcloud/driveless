@@ -1,0 +1,17 @@
+- title "Send an Invite"
+
+%h1 Send an Invite
+
+%p
+- form_for @invitation do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :email
+    = f.text_field :email
+  = f.label :invitation
+  %p
+    = f.text_area :invitation
+  = submit_tag "Send the invitation"

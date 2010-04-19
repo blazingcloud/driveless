@@ -17,4 +17,12 @@ class Notifier < ActionMailer::Base
     body          :friend_username => user.username, :friend_url => user_url( user )
   end
 
+  def join_invitation( user, invitation )
+    subject       "You're invited to Drive Less by #{user.username}"
+    from          "Driveless Challange <noreply@driveless.heroku.com>"
+    recipients    invitation[:email]
+    sent_on       Time.now
+    body          :invited => invitation[:name], :user => user.username, :body => invitation[:invitation]
+  end
+
 end

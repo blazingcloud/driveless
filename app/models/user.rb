@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_one :baseline
 
   has_many :trips
+  has_many :invitations
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
@@ -46,6 +47,15 @@ class User < ActiveRecord::Base
 
   def deliver_friendship_notification!(friend)
     Notifier.deliver_friendship_notification(self, friend)
+  end
+
+  def send_invitation!( invitation )
+   user_invitation = invitations.create( invitation )
+   if !user_invitation.new_record?
+     Notifier.deliver_join_invitation( self, invitation )
+   else
+     false
+   end
   end
 
   def friendship_for( user )
