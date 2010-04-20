@@ -1,0 +1,9 @@
+- render :layout => 'shared/guide' do
+  - render :layout => 'step', :locals => {:url => edit_account_path, :done => current_user.has_complete_profile?} do
+    %p Fill out your profile. Add your name and address so you can win prizes. Join a participating community to compete with your neighbors.
+  - render :layout => 'step', :locals => {:url => groups_path, :done => current_user.has_joined_groups?} do
+    %p Join groups to play and challenge your friends, family, and co-workers.
+  - render :layout => 'step', :locals => {:url => edit_baseline_path(current_user.baseline), :done => current_user.has_complete_baseline?} do
+    %p Create a baseline by telling us how you get around now, and challenge yourself to use more green transportation.
+  - render :layout => 'step', :locals => {:url => '#trip-entry', :done => current_user.has_logged_trips?} do
+    %p Log a trip using the form below. Watch your green miles grow and your co2 output shrink!

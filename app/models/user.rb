@@ -24,6 +24,26 @@ class User < ActiveRecord::Base
     c.openid_required_fields = [:nickname, :email]
   end # block optional
 
+  def has_complete_profile?
+    username && email
+  end
+  
+  def has_joined_groups?
+    groups.count > 0
+  end
+  
+  def has_complete_baseline?
+    baseline.green_miles
+  end
+  
+  def has_logged_trips?
+    trips.count > 0
+  end
+
+  def has_completed_workflow?
+    has_complete_profile? && has_joined_groups? && has_complete_baseline? && has_logged_trips?
+  end
+
   def percent_of_personal_goal_reached
     "%.2f%" % (self.green_miles.to_f / self.baseline.green_miles.to_f * 100)
   end
