@@ -50,10 +50,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if  @current_user.admin? and params[:id]
+    if current_user.admin? and params[:id]
       @user = User.find(params[:id])
     else
-      @user = @current_user
+      @user = current_user
     end
   end
   
@@ -61,10 +61,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @current_user.admin? and params[:user]
+    if current_user.admin? and params[:user]
       @user = User.find(params[:user][:id])
     else
-      @user = @current_user
+      @user = current_user
     end
     @user.attributes = params[:user]
     @user.save do |result|
