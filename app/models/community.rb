@@ -15,6 +15,12 @@ class Community < ActiveRecord::Base
      self.users.map{|u| u.green_miles.to_f}.sum
   end
 
+  def members_leaderboard_by(mode_id)
+    user_ids_sql = "SELECT id FROM users WHERE community_id = ?"
+
+    User.find_for_leaderboard(mode_id, user_ids_sql, id)
+  end
+
   def lb_co2_saved
      self.users.map{|u| u.lb_co2_saved.to_f}.sum
   end

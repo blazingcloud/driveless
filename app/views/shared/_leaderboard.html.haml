@@ -1,22 +1,22 @@
-/%h5=page_entries_info items
+%h5=# page_entries_info items
 - items.each do |item|
   .leaderboard
     .user
       - if group
-        = link_to item.group.name, item.group
+        = link_to item.name, item
       - else
         - name = friendship ? item.username : item.name
         = link_to name, item
 
-    - green_miles = group ? item.group.green_miles : item.green_miles
-    - co2saved = group ? item.group.lb_co2_saved : item.lb_co2_saved
+    - green_miles = group ? item.green_miles : item.distance_sum
+    - co2saved = group ? item.lb_co2_saved : item.lb_co2_sum
     = render :partial => 'shared/badges', :locals => {:small => true, :badges => [{:class => 'green-miles', :stat => green_miles.to_i, :label => 'green miles'}, {:class => 'co2-saved', :stat => co2saved.to_f.round(1), :label => 'lb co2 saved'}]}
     .details
       - if group
-        .members= h pluralize item.group.memberships.count, "member"
+        .members= h pluralize(item.memberships.count, "member")
         .type
           Type:
-          = item.group.destination.name
+          = item.destination.name
       - if friendship
         .friendship= link_to_friendship_action( item )
 

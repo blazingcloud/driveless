@@ -4,11 +4,14 @@ class GroupsController < ApplicationController
   before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ]
 
   def show
+    @members_leaderboard = @group.members_leaderboard_by(params[:mode_id])
   end
 
   def index
     @owned_groups = current_user.owned_groups.by_name.paginate(:page => params[:page] || 1, :include => :destination)
-    @memberships = current_user.regular_memberships.by_group_name.paginate(:page => params[:page] || 1, :include => {:group => :destination})
+    memberships = current_user.regular_memberships.by_group_name.paginate(:page => params[:page] || 1, :include => {:group => :destination})
+    @groups_as_member = memberships.map(&:group)
+    @community_members_leaderboard = current_user.community.members_leaderboard_by(params[:mode_id])
   end
 
   def index_all

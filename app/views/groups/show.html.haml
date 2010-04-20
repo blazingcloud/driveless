@@ -2,10 +2,13 @@
 
 %h1= "Group: Challenge for #{@group.name.camelcase}"
 
+= render :partial => 'shared/leaderboard_filter_form'
 
 %h3 Leading Participants by Green Miles
 
-- @group.users.by_green_miles.each do |user|
+= render :partial => 'shared/leaderboard', :locals => {:items => @members_leaderboard, :group => false, :friendship => true }
+
+-# @group.users.by_green_miles.each do |user|
   .leaderboard
     .user
       =link_to user.username, user

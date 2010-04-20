@@ -12,6 +12,12 @@ class Group < ActiveRecord::Base
 
   named_scope :by_name , :order => 'name ASC'
 
+  def members_leaderboard_by(mode_id)
+    user_ids_sql = "SELECT user_id FROM memberships WHERE group_id = ?"
+
+    User.find_for_leaderboard(mode_id, user_ids_sql, id)
+  end
+
   def lb_co2_saved
      self.users.map{|u| u.lb_co2_saved.to_f}.sum
   end

@@ -1,0 +1,3 @@
+- form_tag nil, :method => :get do |f|
+  = select_tag :mode_id, options_from_collection_for_select(Mode.by_name.all, :id, :name, params[:mode_id].to_i)
+  = submit_tag 'Filter leaderboard'

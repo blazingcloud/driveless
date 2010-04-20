@@ -17,6 +17,8 @@ Sham.define do
   password    { Faker::Lorem.sentence   }
   address     { Faker::Address.street_address  }
   person_name { Faker::Name.name        }
+  lb_co2_per_mile { rand }
+  distance        { rand(10) + 1 }
 end
 
 Community.blueprint do
@@ -44,4 +46,27 @@ Group.blueprint do
   name
   owner       { User.make }
   destination
+end
+
+Mode.blueprint do
+  name
+  green           true
+  lb_co2_per_mile
+end
+
+Destination.blueprint do
+  name
+end
+
+Unit.blueprint do # This is useless!
+  name
+  in_miles 1
+end
+
+Trip.blueprint do
+  user
+  destination
+  mode
+  distance
+  unit        { Unit.first || Unit.make }
 end

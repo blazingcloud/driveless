@@ -17,17 +17,6 @@ class User < ActiveRecord::Base
 
   before_create :create_baseline
 
-  named_scope :by_green_miles, :order => 'green_miles DESC'
-  named_scope :by_lb_co2, :order => 'lb_co2 DESC'
-  named_scope :in, lambda { |id| { :conditions => [ 'users.id IN (?)', id ] } }
-  named_scope :filter_trip_destination, lambda { |id| { :conditions => [ 'trips.destination_id = ?', id ] }}
-
-  named_scope :with_aggregated_stats_for_destination, {
-    :select => ['users.id, users.username, users.community_id, sum(trips.distance) AS green_miles, max(modes.lb_co2_per_mile)*sum(trips.distance) AS lb_co2'],
-    :joins => {:trips => :mode},
-    :group => "trips.user_id, users.id, users.username, users.community_id"
-  }
-
   attr_protected :admin
 
   acts_as_authentic do |c|
@@ -66,6 +55,31 @@ class User < ActiveRecord::Base
         :label      => 'lb co2 saved',
       },
     ]
+  end
+
+  def self.find_for_leaderboard(mode_id, user_ids_sql, filter_id)
+    sql = <<-SQL
+      SELECT users.*, distance_sum, (distance_sum * modes.lb_co2_per_mile) AS lb_co2_sum FROM users
+      INNER JOIN (SELECT user_id, mode_id, sum(distance) as distance_sum FROM trips WHERE mode_id = ? AND user_id IN
+      (#{user_ids_sql})
+      GROUP BY user_id, mode_id) AS distance_per_user ON distance_per_user.user_id = users.id
+      INNER JOIN modes ON modes.id = distance_per_user.mode_id
+      ORDER BY distance_sum DESC
+    SQL
+
+    find_by_sql([sql, mode_id, filter_id])
+  end
+
+  def friends_leaderboard_by(mode_id)
+    user_ids_sql = "SELECT friend_id FROM friendships WHERE user_id = ?"
+
+    self.class.find_for_leaderboard(mode_id, user_ids_sql, id)
+  end
+
+  def fans_leaderboard_by(mode_id)
+    user_ids_sql = "SELECT user_id FROM friendships WHERE friend_id = ?"
+
+    self.class.find_for_leaderboard(mode_id, user_ids_sql, id)
   end
 
   def has_complete_profile?

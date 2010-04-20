@@ -1,10 +1,8 @@
 - title "Friendships"
 
-%h2 Your Friends
-- form_tag nil, :method => :get do
-  = select_tag :destination_id, (options_from_collection_for_select Destination.all, :id, :name)
-  = submit_tag 'Filter'
+= render :partial => 'shared/leaderboard_filter_form'
 
+%h2 Your Friends
 
 - if @friends.any?
   = render :partial => 'shared/leaderboard', :locals => {:items => @friends, :group => false, :friendship => true }

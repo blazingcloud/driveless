@@ -5,13 +5,6 @@
 
 %h3= "Community: Challenge for #{@community.name.camelcase}"
 
-- @community.users.by_green_miles.each do |user|
-  .leaderboard
-    .user= link_to user.username, user_path(user)
-    .miles= h pluralize user.green_miles, "mile"
-    .co2-saved
-      = user.lb_co2_saved
-      lb co2 saved
-    .details
-      .friendship= link_to_friendship_action(user)
+= render :partial => 'shared/leaderboard', :locals => { :items => @community_members_leaderboard, :group => false, :friendship => false }
+
 = link_to 'Show All Communities', communities_url, :class => 'button'
