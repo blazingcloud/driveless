@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     username && email
   end
   
+  def non_green_miles
+    "%0.1f" % self.trips.not_green.map(&:distance).sum
+  end
+  
   def has_joined_groups?
     groups.count > 0
   end
