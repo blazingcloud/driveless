@@ -7,4 +7,5 @@ class Friendship < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => :friend_id
 
   named_scope :of, lambda { |user| { :conditions => ['friendships.friend_id IN (?)', user.id]} }
+
 end

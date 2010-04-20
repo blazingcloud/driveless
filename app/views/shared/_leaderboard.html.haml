@@ -1,3 +1,5 @@
+Make some cool link based filter
+
 %h5=page_entries_info items
 - items.each do |item|
   .leaderboard
@@ -11,8 +13,8 @@
     - green_miles = group ? item.group.green_miles : item.green_miles
     .miles= h pluralize green_miles , "mile"
     .co2-saved
-      - co2saved = group ? item.group.lb_co2_saved : item.lb_co2_saved
-      = co2saved
+      - co2saved = group ? item.group.lb_co2_saved : item.lb_co2
+      = co2saved.to_f.round(2)
       lb co2 saved
     .details
       - if group
