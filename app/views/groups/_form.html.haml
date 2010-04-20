@@ -5,7 +5,7 @@
     = form.text_field :name
   %p
     = form.label :destination_id, "Type of Group"
-    = form.select :destination_id, options_from_collection_for_select(Destination.by_name.all, 'id', 'name', :selected => @group.destination_id)
+    = form.select :destination_id, options_from_collection_for_select(Destination.all, 'id', 'name', :selected => @group.destination_id)
   %p
     = form.label :description, "Group Description"
     = form.text_area :description
