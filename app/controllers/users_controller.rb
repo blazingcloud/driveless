@@ -57,6 +57,9 @@ class UsersController < ApplicationController
     end
   end
   
+  def privacy
+  end
+
   def update
     if @current_user.admin? and params[:user]
       @user = User.find(params[:user][:id])

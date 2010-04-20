@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20100420120436) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "green"
   end
 
   create_table "friendships", :force => true do |t|
@@ -90,7 +91,7 @@ ActiveRecord::Schema.define(:version => 20100420120436) do
     t.datetime "updated_at"
   end
 
-  add_index "memberships", ["group_id", "user_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
+  add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
 
   create_table "messages", :force => true do |t|
     t.boolean  "receiver_deleted"

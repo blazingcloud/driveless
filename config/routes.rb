@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
   map.register "register", :controller => "users", :action => "new"
+  map.privacy "privacy", :controller => "users", :action => "privacy"
 
   map.root :controller => "user_sessions", :action => "new"
 
