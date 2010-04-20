@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   
   belongs_to :community
   
-  validates_presence_of :email, :name, :address, :username
+  validates_presence_of :email, :username
   restful_easy_messages
 
   before_create :create_baseline

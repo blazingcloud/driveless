@@ -175,8 +175,8 @@ ActiveRecord::Schema.define(:version => 20100420120436) do
     t.integer  "green_miles",                       :default => 0
     t.integer  "facebook_uid",         :limit => 8
     t.string   "facebook_session_key"
-    t.string   "name"
-    t.string   "address"
+    t.string   "name",                              :default => ""
+    t.string   "address",                           :default => ""
   end
 
 end
