@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
     memberships.create(:group => group)
   end
 
+  def profile_complete?
+    email.present? && username.present?
+  end
+
   private
 
   def map_openid_registration(registration)

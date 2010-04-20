@@ -42,7 +42,23 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "You must be logged in to access this page"
         redirect_to new_user_session_url
         return false
+      else
+        require_complete_profile unless completing_profile?
       end
+    end
+
+    def require_complete_profile
+      unless current_user.profile_complete?
+        store_location
+        flash[:notice] = "We need you to complete your profile before being able to use the site"
+        redirect_to edit_account_url
+        return false
+      end
+    end
+
+    def completing_profile?
+      (params[:controller] == "users" && %w(edit update).include?(params[:action])) ||
+        (params[:controller] == "user_sessions" && params[:action] == "destroy")
     end
     
     def require_admin
