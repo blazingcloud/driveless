@@ -1,19 +1,15 @@
 - title "Login"
-- render :layout => 'shared/tip' do
-  %p
-    If you don't have an account with the Drive Less Challenge,
-    = link_to "create one now!", register_path
 / = authlogic_facebook_login_button
 - form_for @user_session do |f|
   = f.error_messages
   %h2
-    Login using
-    %a{:class => 'button activate-section', :href => '#auth-open_id'} Open ID
+    Login using your
+    %a{:class => 'button activate-section', :href => '#auth-password'} Username & Password
     or
-    %a{:class => 'button inactive activate-section', :href => '#auth-password'} Username & Password
+    %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Open ID
 
   .auth
-    .password{:style => "display: none"}
+    .password
       %p
         = f.label :username
         %br
@@ -26,6 +22,10 @@
       = link_to 'Forgot your password?', password_resets_url
       %p
         = f.submit "Login"
-    .open_id
+    .open_id{:style => "display: none"}
       = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => "Login", :model => "user_session"}
 
+- render :layout => 'shared/tip' do
+  %p
+    Don't have an account?
+    = link_to "Signup!", register_path, :class => 'button'
