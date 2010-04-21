@@ -1,5 +1,10 @@
 - title "Friendships"
 
+- render :layout => 'shared/tip' do
+  %p
+    You can find other Drive Less Challenge users in your
+    = link_to 'groups and communities.', account_groups_path
+    Make friends with them there and watch their progress here!
 = render :partial => 'shared/leaderboard_filter_form'
 
 %h2 Your Friends
