@@ -4,6 +4,7 @@
   %p You have joined a geographic community that is participating in the challenge together. Check out your progress as a local community!
 
 %h3= "Community: Challenge for #{@community.name.camelcase}"
+= render :partial => 'shared/leaderboard_filter_form'
 
 = render :partial => 'shared/leaderboard', :locals => { :items => @community_members_leaderboard, :group => false, :friendship => false }
 
