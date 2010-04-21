@@ -5,20 +5,15 @@
     %h2 Groups I Created
     = render :partial => 'shared/leaderboard', :locals => { :items => @owned_groups, :group => false, :friendship => false }
 
-- if @memberships.total_entries > 0
+.group-grouping
+  %h2 Groups I Belong To
+  = render :partial => 'shared/leaderboard', :locals => { :items => @memberships, :group => true, :friendship => false }
+  - if current_user.community
+    = render :partial => 'shared/leaderboard', :locals => { :items => [Community.find(current_user.community)], :group => false, :friendship => false }
 
-  .group-grouping
-    %h2 Groups I Belong To
-    = render :partial => 'shared/leaderboard', :locals => { :items => @memberships, :group => true, :friendship => false }
+- render :layout => 'shared/tip' do
+  %p The Drive Less Challenge encourages you to socialize and engage in friendly competition with your peers at work, school, hobbies, and more. Join a group today!
 
-- else
-  - render :layout => 'shared/tip' do
-    %p You aren't currently a member of any groups. The Drive Less Challenge encourages you to socialize and engage in friendly competition with your peers at work, school, hobbies, and more. Join a group today!
+%p= link_to 'Find, Join, and Create more Groups!', groups_path, :class => 'button'
 
-%p
-  = link_to 'Find a Group and Join!', groups_path, :class => 'button'
-
-
-
-= render current_user.community if current_user.community
 

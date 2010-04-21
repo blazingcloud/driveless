@@ -11,6 +11,10 @@ class Community < ActiveRecord::Base
     :group => ['users.community_id, communities.id, communities.name, communities.state, communities.country, communities.description'],
     :order => ['green_miles DESC']
 
+  def green_miles
+     self.users.map{|u| u.green_miles.to_f}.sum
+  end
+
   def lb_co2_saved
      self.users.map{|u| u.lb_co2_saved.to_f}.sum
   end
