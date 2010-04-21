@@ -12,6 +12,12 @@ class Group < ActiveRecord::Base
 
   named_scope :by_name , :order => 'name ASC'
 
+  def members_leaderboard(order)
+    user_ids_sql = "SELECT user_id FROM memberships WHERE group_id = ?"
+
+    User.find_leaderboard(user_ids_sql, id, order)
+  end
+
   def members_leaderboard_by(mode_id)
     user_ids_sql = "SELECT user_id FROM memberships WHERE group_id = ?"
 

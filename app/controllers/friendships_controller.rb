@@ -5,8 +5,9 @@ class FriendshipsController < ApplicationController
   def index
     mode_id = params[:mode_id].to_i
     if mode_id.zero?
-      @friends = current_user.friends_leaderboard
-      @fans = current_user.fans_leaderboard
+      sort_by = params[:sort_by].to_sym if params[:sort_by].present?
+      @friends = current_user.friends_leaderboard(sort_by)
+      @fans = current_user.fans_leaderboard(sort_by)
     else
       @friends = current_user.friends_leaderboard_by(mode_id)
       @fans = current_user.fans_leaderboard_by(mode_id)
