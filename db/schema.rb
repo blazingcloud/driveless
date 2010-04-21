@@ -154,8 +154,8 @@ ActiveRecord::Schema.define(:version => 20100420182724) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.string   "crypted_password"
-    t.string   "password_salt"
+    t.string   "crypted_password", :default => nil, :null => true
+    t.string   "password_salt", :default => nil, :null => true
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"

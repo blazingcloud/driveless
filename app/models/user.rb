@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   
   belongs_to :community
   
-  validates_presence_of :email, :username
+  validates_presence_of :email, :username, :name, :address, :city
   restful_easy_messages
 
   before_create :create_baseline
@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
+    c.validate_password_field = true
   end # block optional
 
   def badges
@@ -68,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def has_complete_profile?
-    username && email
+    username && email && name && address && city
   end
   
   def non_green_miles
@@ -149,6 +150,13 @@ class User < ActiveRecord::Base
 
   def profile_complete?
     email.present? && username.present?
+  end
+
+  def newpass( len )
+      chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+      newpass = ""
+      1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
+      return newpass
   end
 
   private

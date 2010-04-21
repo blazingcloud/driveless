@@ -1,31 +1,39 @@
 - title "Login"
-/ = authlogic_facebook_login_button
-- form_for @user_session do |f|
-  = f.error_messages
-  %h2
-    Login using your
-    %a{:class => 'button activate-section', :href => '#auth-password'} Username & Password
-    or
-    %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Open ID
+%fieldset.outline
+  %legend
+    Login using&nbsp;
+    %a{:class => 'button activate-section', :href => '#auth-facebook'}> Facebook
+    , a&nbsp;
+    %a{:class => 'button inactive activate-section', :href => '#auth-password'}> Password
+    , or a
+    %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Login You Already Have
 
   .auth
-    .password
+    .facebook
       %p
-        = f.label :username
-        %br
-        = f.text_field :username
-
-      %p
-        = f.label :password
-        %br
-        = f.password_field :password
-        = link_to 'Forgot your password?', password_resets_url, :class => 'button small'
-      %p
-        = f.submit "Login"
+      - render :layout => 'shared/tip' do
+        %p If you connect with Facebook you don't need to signup!
+      %p= authlogic_facebook_login_button :js => :jquery
+    .password{:style => "display: none"}
+      - form_for @user_session do |f|
+        = f.error_messages
+        %p
+        - render :layout => 'shared/tip' do
+          %p
+            If you don't have an account already then
+            = link_to 'Signup now!', register_path, :class => 'button small'
+        %p
+          = f.label :username, "Nickname"
+          %br
+          = f.text_field :username
+        %p
+          = f.label :password
+          %br
+          = f.password_field :password
+          = link_to 'Forgot your password?', password_resets_url, :class => 'button small'
+        %p
+          = f.submit "Login"
     .open_id{:style => "display: none"}
-      = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => "Login", :model => "user_session"}
-
-- render :layout => 'shared/tip' do
-  %p
-    Don't have an account?
-    = link_to "Signup!", register_path, :class => 'button'
+      - form_for @user_session do |f|
+        = f.error_messages
+        = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => "Login", :model => "user_session"}

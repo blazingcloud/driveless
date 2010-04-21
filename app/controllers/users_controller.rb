@@ -67,6 +67,11 @@ class UsersController < ApplicationController
       @user = current_user
     end
     @user.attributes = params[:user]
+    if @user.facebook_uid && !@user.crypted_password
+      p = @user.newpass(8)
+      @user.password= p
+      @user.password_confirmation= p
+    end
     @user.save do |result|
       if result
         flash[:notice] = "Successfully updated profile."

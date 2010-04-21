@@ -1,51 +1,77 @@
 = f.hidden_field :id
-%p
-  = f.label :username, "Nickname"
-  %br
-  = f.text_field :username
-%p
-  = f.label :name
-  %br
-  = f.text_field :name
-%p
-  = f.label :address
-  %br
-  = f.text_field :address
-%p
-  = f.label :email
-  %br
-  = f.text_field :email
-%p
-  = f.label :city
-  %br
-  = f.text_field :city
-%p
-  = f.label :community_id
-  %br
-  = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
+%fieldset.outline
+  %legend Your Nickname
+  %p
+    This is the name everyone will see on your profile.
+  %p
+    %b> If you are under 18
+    , do not include your last or family name in your Nickname. First names and first letter of last names are OK.   For example, you can enter
+    %i Mary K
+    if your first name is&nbsp;
+    %i> Mary Keller
+    , or&nbsp;
+    %i> Marybiker
+    , or similar nicknames.
+  %p
+    = f.text_field :username
+%fieldset.outline
+  %legend Your Profile
+  - render :layout => 'shared/info' do
+    %p
+      Participating in the Drive Less Challenge makes you eligible for some prizes and awards. We need this information so we can send you prizes when you win!
+      %b Your privacy is very important to us and this information will not be made public.
+  %p
+    = f.label :email, "Email Address"
+    %br
+    = f.text_field :email
+  %p
+    = f.label :name, "Real Name"
+    %br
+    = f.text_field :name
+  %p
+    = f.label :address, "Street Address"
+    %br
+    = f.text_field :address
+  %p
+    = f.label :city
+    %br
+    = f.text_field :city
+
+%fieldset.outline
+  %legend Join a Participating Community
+  %p
+    Some geographic communities are officially participating in the Drive Less Challenge. If you live, work, or play in one of the communities listed below you can earn green miles for them by joining up!
+  %p
+    = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
+
 - if admin_logged_in?
   %p
     = f.label :admin
     %br
     = f.check_box :admin
 
-%h2
-  Signup using a
-  %a{:class => 'button activate-section', :href => '#auth-password'} Password
-  or try
-  %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Open ID
+- if show_password
+  %fieldset.outline
+    %legend
+      Signup using a
+      %a{:class => 'button activate-section', :href => '#auth-password'} Password
+      or a
+      %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Login You Already Have
 
-.auth
-  - if @user.openid_identifier.blank?
-    .password
-      %p
-        = f.label :password
-        %br
-        = f.password_field :password
-      %p
-        = f.label :password_confirmation
-        %br
-        = f.password_field :password_confirmation
-      %p
-        = f.submit submit_button_label
-    .open_id{:style => "display: none"}= render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
+    .auth
+      - if @user.openid_identifier.blank?
+        .password
+          %p
+            = f.label :password
+            %br
+            = f.password_field :password
+          %p
+            = f.label :password_confirmation
+            %br
+            = f.password_field :password_confirmation
+          %p
+            = f.submit submit_button_label
+        .open_id{:style => "display: none"}= render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
+- else
+  %p= f.submit submit_button_label
+  %p= link_to 'Reset Your Password', password_resets_url, :class => 'button'

@@ -574,3 +574,22 @@ div.openid
     +grid(4,12)
     +omega
     text-align: right
+
+.outline
+  +border-box
+  +rounded(5px)
+  border: 1px #ccf solid
+  legend
+    font-weight: bold
+    font-size: 125%
+    .button
+      background: none
+      border: none
+      +box-shadow(0px, 0px, 0px)
+      +rounded(0px)
+      padding: 0
+      color: black
+      font-size: inherit
+      &.inactive
+        border-bottom: 2px solid black
+  padding: 0px 19px

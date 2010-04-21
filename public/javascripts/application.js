@@ -56,12 +56,13 @@
         }
       })*/
     }).trigger('change');
-    $(".new_user, .new_user_session").openid().submit(function(){
+    $(".new_user, .new_user_session, .edit_user").openid().submit(function(){
       if (window.location.hash && !$(this).attr('action').match(/#\w/))
         $(this).attr('action', $(this).attr('action') + window.location.hash)
     });
     if (window.location.hash) {
       $('a[href="'+window.location.hash+'"]').trigger('click')
     }
+    $('.trans-form').jqTransform();
   });
 })(jQuery);

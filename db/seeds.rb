@@ -47,6 +47,9 @@ u = User.create!(
   :username => 'admin',
   :password => 'admin',
   :password_confirmation => 'admin',
+  :name => "Administrator",
+  :address => '218 Dell Ave',
+  :city => 'Pittsburgh',
   :community => Community.first
 )
 u.update_attribute(:admin, true)

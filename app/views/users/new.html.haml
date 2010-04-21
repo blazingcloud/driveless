@@ -2,4 +2,4 @@
 
 - form_for @user, :url => account_path do |f|
   = f.error_messages
-  = render :partial => "form", :object => f, :locals => {:f => f, :submit_button_label => 'Register'}
+  = render :partial => "form", :object => f, :locals => {:f => f, :submit_button_label => 'Register', :show_password => true}

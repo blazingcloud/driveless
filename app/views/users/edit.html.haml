@@ -1,6 +1,9 @@
 %h1
   Edit My Account
 - form_for @user, :url => account_path do |f|
+  - unless @user.has_complete_profile?
+    - render :layout => 'shared/tip' do
+      %p It looks like your profile is incomplete. Fill in the form below.
   = f.error_messages
-  = render :partial => "form", :object => f, :locals => {:f => f, :submit_button_label => 'Update'}
+  = render :partial => "form", :object => f, :locals => {:f => f, :submit_button_label => 'Update', :show_password => false}
 %br
