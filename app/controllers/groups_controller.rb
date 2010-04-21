@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
     @owned_groups = current_user.owned_groups.by_name.paginate(:page => params[:page] || 1, :include => :destination)
     memberships = current_user.regular_memberships.by_group_name.paginate(:page => params[:page] || 1, :include => {:group => :destination})
     @groups_as_member = memberships.map(&:group)
-    @community_members_leaderboard = current_user.community.members_leaderboard_by(params[:mode_id])
+    @community_members_leaderboard = current_user.community ? current_user.community.members_leaderboard_by(params[:mode_id]) : nil
   end
 
   def index_all

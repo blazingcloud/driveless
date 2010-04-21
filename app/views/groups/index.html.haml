@@ -3,7 +3,7 @@
 - if @owned_groups.total_entries > 0
   .group-grouping
     %h2 Groups I'm Administering
-    = render :partial => 'shared/leaderboard', :locals => { :items => @owned_groups, :group => false, :friendship => false }
+    = render :partial => 'shared/leaderboard', :locals => { :items => @owned_groups, :group => true, :friendship => false }
 
 .group-grouping
   %h2 Groups I'm Participating In
