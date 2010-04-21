@@ -3,6 +3,7 @@
 %dl.all-groups
   - @destinations.each do |d|
     %dt
+      = link_to "Create a new group", new_account_group_url, :class => 'button small'
       %a{:href => '#' + d.name.downcase.gsub(/\W+/,'_')}=h d.name
     %dd{:id => d.name.downcase.gsub(/\W+/,'_')}
       - if d.groups.by_name.all.length > 0
@@ -14,7 +15,6 @@
               %span.total-members= pluralize g.memberships.count, 'member'
       - else
         No groups of this type exist yet.
-        = link_to "Creat one!", new_account_group_url, :class => 'button small'
 
 - render :layout => 'shared/tip' do
   %p
