@@ -42,7 +42,7 @@
   %p
     Some geographic communities are officially participating in the Drive Less Challenge. If you live, work, or play in one of the communities listed below you can earn green miles for them by joining up!
   %p
-    = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id)
+    = f.select :community_id, options_from_collection_for_select(@communities, 'id', 'name', :selected => @user.community_id), {:include_blank => true}
 
 - if admin_logged_in?
   %p
