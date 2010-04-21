@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_one :baseline
 
+  has_many :modes, :through => :trips
   has_many :trips
   has_many :invitations
   has_many :memberships, :dependent => :destroy
@@ -17,6 +18,15 @@ class User < ActiveRecord::Base
   before_create :create_baseline
 
   named_scope :by_green_miles, :order => 'green_miles DESC'
+  named_scope :by_lb_co2, :order => 'lb_co2 DESC'
+  named_scope :in, lambda { |id| { :conditions => [ 'users.id IN (?)', id ] } }
+  named_scope :filter_trip_destination, lambda { |id| { :conditions => [ 'trips.destination_id = ?', id ] }}
+
+  named_scope :with_aggregated_stats_for_destination, {
+    :select => ['users.id, users.username, users.community_id, sum(trips.distance) AS green_miles, max(modes.lb_co2_per_mile)*sum(trips.distance) AS lb_co2'],
+    :joins => {:trips => :mode},
+    :group => "trips.user_id, users.id, users.username, users.community_id"
+  }
 
   attr_protected :admin
 

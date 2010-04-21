@@ -12,7 +12,7 @@
     .miles= h pluralize green_miles , "mile"
     .co2-saved
       - co2saved = group ? item.group.lb_co2_saved : item.lb_co2_saved
-      = co2saved
+      = co2saved.to_f.round(2)
       lb co2 saved
     .details
       - if group
