@@ -9,7 +9,7 @@ class Community < ActiveRecord::Base
     :select => ['communities.id, communities.name, communities.state, communities.country, 
       communities.description, SUM(users.green_miles) as green_miles, SUM(users.green_miles)*modes.lb_co2_per_mile'],
     :joins => [:users => {:trips => :mode}],
-    :group => ['users.community_id, trips.user_id, communities.id, communities.name, communities.state, communities.country, communities.description, modes.lb_co2_per_mile']
+    :group => ['communities.id, users.community_id, trips.user_id, communities.name, communities.state, communities.country, communities.description, modes.lb_co2_per_mile']
 
   def green_miles
      self.users.map{|u| u.green_miles.to_f}.sum
