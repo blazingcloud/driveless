@@ -4,7 +4,13 @@ class GroupsController < ApplicationController
   before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ]
 
   def show
-    @members_leaderboard = @group.members_leaderboard_by(params[:mode_id])
+    mode_id = params[:mode_id].to_i
+    if mode_id.zero?
+      sort_by = params[:sort_by].to_sym if params[:sort_by].present?
+      @members_leaderboard = @group.members_leaderboard(sort_by)
+    else
+      @members_leaderboard = @group.members_leaderboard_by(params[:mode_id])
+    end
   end
 
   def index

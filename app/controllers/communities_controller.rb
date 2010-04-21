@@ -28,7 +28,14 @@ class CommunitiesController < ApplicationController
 
   def show
     redirect_to root_path unless current_community
-    @community_members_leaderboard = current_community.members_leaderboard_by(params[:mode_id])
+
+    mode_id = params[:mode_id].to_i
+    if mode_id.zero?
+      sort_by = params[:sort_by].to_sym if params[:sort_by].present?
+      @community_members_leaderboard = current_community.members_leaderboard(sort_by)
+    else
+      @community_members_leaderboard = current_community.members_leaderboard_by(params[:mode_id])
+    end
   end
 
   def create
