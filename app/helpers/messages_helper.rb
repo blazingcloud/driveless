@@ -3,27 +3,27 @@ module MessagesHelper
   
   # Generic menu
   def rezm_menu
-    rezm_link_to_inbox + "|" + rezm_link_to_create_message + "|" + rezm_link_to_outbox + "|" + rezm_link_to_trash_bin
+    rezm_link_to_inbox + rezm_link_to_create_message + rezm_link_to_outbox + rezm_link_to_trash_bin
   end
   
   # Link to view the inbox
   def rezm_link_to_inbox
-    link_to "Inbox", inbox_messages_path
+    link_to "Inbox", inbox_messages_path, :class => 'button small'
   end
   
   # Link to compose a message
   def rezm_link_to_create_message
-    link_to "Write", new_message_path
+    link_to "Write", new_message_path, :class => 'button small'
   end
   
   # Link to view the outbox
   def rezm_link_to_outbox
-    link_to "Outbox", outbox_messages_path
+    link_to "Outbox", outbox_messages_path, :class => 'button small'
   end
   
   # Link to view the trash bin
   def rezm_link_to_trash_bin
-    link_to "Trash", trashbin_messages_path
+    link_to "Trash", trashbin_messages_path, :class => 'button small'
   end
   
   # Dynamic label for the sender/receiver column in the messages.rhtml view

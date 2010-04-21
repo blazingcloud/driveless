@@ -2,11 +2,11 @@
 
 - if @owned_groups.total_entries > 0
   .group-grouping
-    %h2 Groups I Created
+    %h2 Groups I'm Administering
     = render :partial => 'shared/leaderboard', :locals => { :items => @owned_groups, :group => false, :friendship => false }
 
 .group-grouping
-  %h2 Groups I Belong To
+  %h2 Groups I'm Participating In
   = render :partial => 'shared/leaderboard', :locals => { :items => @memberships, :group => true, :friendship => false }
   - if current_user.community
     = render :partial => 'shared/leaderboard', :locals => { :items => [Community.find(current_user.community)], :group => false, :friendship => false }

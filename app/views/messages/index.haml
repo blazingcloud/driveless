@@ -2,7 +2,7 @@
 
 %h1 My Messages
 %p= flash[:notice]
-= rezm_menu
+.messages-menu= rezm_menu
 %p
 - form_for :message, :url => destroy_selected_messages_path do |form|
   %table{:border => "1"}
