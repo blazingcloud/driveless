@@ -9,27 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420182724) do
+ActiveRecord::Schema.define(:version => 20100421212624) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "work_green"
-    t.integer  "work_alone"
-    t.integer  "school_green"
-    t.integer  "school_alone"
-    t.integer  "kids_green"
-    t.integer  "kids_alone"
-    t.integer  "errands_green"
-    t.integer  "errands_alone"
-    t.integer  "faith_green"
-    t.integer  "faith_alone"
-    t.integer  "social_green"
-    t.integer  "social_alone"
-    t.integer  "total_miles"
-    t.integer  "green_miles"
+    t.float    "work_green"
+    t.float    "work_alone"
+    t.float    "school_green"
+    t.float    "school_alone"
+    t.float    "kids_green"
+    t.float    "kids_alone"
+    t.float    "errands_green"
+    t.float    "errands_alone"
+    t.float    "faith_green"
+    t.float    "faith_alone"
+    t.float    "social_green"
+    t.float    "social_alone"
+    t.float    "total_miles"
+    t.float    "green_miles"
   end
 
   create_table "communities", :force => true do |t|
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20100420182724) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "mode_id"
-    t.integer  "distance"
+    t.float    "distance"
     t.integer  "unit_id"
     t.date     "made_at"
   end
@@ -179,6 +179,10 @@ ActiveRecord::Schema.define(:version => 20100420182724) do
     t.string   "facebook_session_key"
     t.string   "name",                              :default => ""
     t.string   "address",                           :default => ""
+    t.boolean  "is_13"
+    t.boolean  "is_parent"
+    t.boolean  "read_privacy"
+    t.string   "zip"
   end
 
 end
