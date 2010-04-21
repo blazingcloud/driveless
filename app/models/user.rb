@@ -34,6 +34,39 @@ class User < ActiveRecord::Base
     c.openid_required_fields = [:nickname, :email]
   end # block optional
 
+  def badges
+    [
+      (
+        has_complete_baseline? ?
+          ({
+            :html_class => 'of-goal',
+            :stat       => percent_of_personal_goal_reached.to_i,
+            :label      => "% of goal",
+          }) :
+          ({
+            :html_class => 'of-goal no-baseline',
+            :stat       => '&nbsp;',
+            :label      => "<a href='/baselines/#{baseline.id}/edit'>make a baseline</a>",
+          })       
+      ),
+      {
+        :html_class => 'non-green-miles',
+        :stat       => non_green_miles.to_i,
+        :label      => 'non-green miles'
+      },
+      {
+        :html_class => 'green-miles',
+        :stat       => green_miles.to_i,
+        :label      => 'green miles',
+      },
+      {
+        :html_class => 'carbon-saved',
+        :stat       => lb_co2_saved,
+        :label      => 'lb co2 saved',
+      },
+    ]
+  end
+
   def has_complete_profile?
     username && email
   end

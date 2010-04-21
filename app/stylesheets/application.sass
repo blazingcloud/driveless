@@ -136,7 +136,6 @@ a
       width: 70%
 
 .top
-  padding-top: 19px
   background = !light_blue
   border-bottom = "#{!light_blue_border} 1px solid"
 .mid
@@ -166,6 +165,7 @@ a
       color: inherit
       text-decoration: none
       text-indent: -2000px
+      margin-top: 19px
       background: transparent url("../../images/drive-less-logo.png") top left no-repeat
       height: 95px
       width: 186px
@@ -175,7 +175,9 @@ a
 .header
   +grid(8,12)
   color = !header_color
-  height: 114px
+  height = 19px * 7
+  .badge
+    float: right
 .navigation
   +grid(3,12)
   +grid-suffix(1,12)
@@ -313,9 +315,28 @@ input#user_openid_identifier, input#user_session_openid_identifier
     height = 19px * 2
     border-bottom: 1px solid #aaa
 
-.user-stats
-  display: block
+.badge-name
+  +border-box
+  +inline-block
   float: right
+  color: black
+
+.badge
+  &.small
+    li
+      padding: 2px
+      margin-left: 10px
+      height = 19px * 2
+      min-width = 19px * 3
+      max-width = 19px * 4.5
+      .stat
+        font-size = 16px
+        display: block
+      .label
+        font-size: 8px
+        letter-spacing: 0px
+        font-weight: 100
+  +inline-block
   margin: 0
   padding: 0
   li
@@ -380,19 +401,16 @@ input#user_openid_identifier, input#user_session_openid_identifier
   margin-bottom = 19px * 3
 
 .leaderboard
-  font-size: 200%
   border-bottom: 1px solid #eee
+  .badge
+    float: right
   div
     +inline-block
     +border-box
-    width: 25%
     &.user
-      width: 30%
-    &.co2-saved
-      width: 40%
+      font-size: 200%
     &.details
       display: block
-      font-size: 50%
       width: auto
       .members
         float: right

@@ -2,14 +2,15 @@
 - render :layout => 'shared/tip' do
   %p
     Fill in this form with the distances you have traveled
-    %strong in miles
-    for each of the categories.
+    %b in miles
+    for each of the categories&nbsp;
+    %b> in a typical week.
 
 - semantic_form_for @baseline do |form|
   .baseline-travel.head
     %ol
       %li Destination
-      %li Driving alone
+      %li Miles Driving alone
       %li Green Miles (carpool, walk, bike, transit)
       %li Your Green Travel
   = render :partial => 'form_baseline_section', :locals => {:form => form, :name => :work,    :title => "Work"}
@@ -34,9 +35,9 @@
         %br
         Mileage in a Week
       %li
-        Total Driving Alone
+        Total Miles Driving
         %br
-        In a Car
+        Alone In a Car
       %li Total Green Miles
       %li Green Travel Goal
   - form.inputs :class => 'baseline-travel' do

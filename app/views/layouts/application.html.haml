@@ -20,7 +20,7 @@
             =link_to 'Drive Less Challenge', root_path
         .header
           - if current_user
-            = render :partial => 'shared/user_stats'
+            = render :partial => 'shared/user_badges', :locals => {:user => current_user}
     .mid
       .container
         .navigation

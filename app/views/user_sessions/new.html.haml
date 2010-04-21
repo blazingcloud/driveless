@@ -19,7 +19,7 @@
         = f.label :password
         %br
         = f.password_field :password
-      = link_to 'Forgot your password?', password_resets_url
+        = link_to 'Forgot your password?', password_resets_url, :class => 'button small'
       %p
         = f.submit "Login"
     .open_id{:style => "display: none"}
