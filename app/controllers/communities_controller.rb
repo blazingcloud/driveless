@@ -18,7 +18,7 @@ class CommunitiesController < ApplicationController
   end
 
   def index
-    @communities = Community.by_green_miles.paginate(:page => params[:page] || 1)
+    @communities_leaderboard = Community.find_leaderboard(params[:sort_by] || :miles)
   end
 
   def destroy

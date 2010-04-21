@@ -11,6 +11,27 @@ class Community < ActiveRecord::Base
     :joins => [:users => {:trips => :mode}],
     :group => ['communities.id, users.community_id, trips.user_id, communities.name, communities.state, communities.country, communities.description, modes.lb_co2_per_mile']
 
+  def self.find_leaderboard(order = :miles)
+    order_sql = order.to_sym == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'
+
+    sql = <<-SQL
+      SELECT communities.*, distance_sum, lb_co2_sum FROM communities
+      INNER JOIN (
+
+      SELECT community_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
+        SELECT users.community_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN users ON trips.user_id = users.id
+        INNER JOIN modes ON trips.mode_id = modes.id
+        GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+      GROUP BY community_id) AS stats_per_community
+
+      ON stats_per_community.community_id = communities.id
+      ORDER BY #{order_sql} DESC
+    SQL
+
+    find_by_sql(sql)
+  end
+
   def green_miles
      self.users.map{|u| u.green_miles.to_f}.sum
   end
