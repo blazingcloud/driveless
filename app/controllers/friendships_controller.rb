@@ -3,8 +3,14 @@ class FriendshipsController < ApplicationController
   before_filter :require_user
 
   def index
-    @friends = current_user.friends_leaderboard_by(params[:mode_id])
-    @fans = current_user.fans_leaderboard_by(params[:mode_id])
+    mode_id = params[:mode_id].to_i
+    if mode_id.zero?
+      @friends = current_user.friends_leaderboard
+      @fans = current_user.fans_leaderboard
+    else
+      @friends = current_user.friends_leaderboard_by(mode_id)
+      @fans = current_user.fans_leaderboard_by(mode_id)
+    end
   end
 
   def show

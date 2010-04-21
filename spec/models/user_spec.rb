@@ -36,8 +36,35 @@ describe User do
       @fred_bike_distance_sum = bike_trips.inject(0) {|sum, trip| sum += (trip.user == @fred) ? trip.distance : 0}
       @fred_bike_lb_co2_sum   = @fred_bike_distance_sum * @bike.lb_co2_per_mile
 
+      @fred_walk_distance_sum = walk_trips.inject(0) {|sum, trip| sum += (trip.user == @fred) ? trip.distance : 0}
+      @fred_walk_lb_co2_sum   = @fred_walk_distance_sum * @walk.lb_co2_per_mile
+
       @pete_bike_distance_sum = bike_trips.inject(0) {|sum, trip| sum += (trip.user == @pete) ? trip.distance : 0}
       @pete_bike_lb_co2_sum   = @pete_bike_distance_sum * @bike.lb_co2_per_mile
+
+      @pete_walk_distance_sum = walk_trips.inject(0) {|sum, trip| sum += (trip.user == @pete) ? trip.distance : 0}
+      @pete_walk_lb_co2_sum   = @pete_walk_distance_sum * @walk.lb_co2_per_mile
+
+      @fred_distance_sum = @fred_bike_distance_sum + @fred_walk_distance_sum
+      @fred_lb_co2_sum   = @fred_bike_lb_co2_sum + @fred_walk_lb_co2_sum
+
+      @pete_distance_sum = @pete_bike_distance_sum + @pete_walk_distance_sum
+      @pete_lb_co2_sum   = @pete_bike_lb_co2_sum + @pete_walk_lb_co2_sum
+    end
+
+    it "should return a friends leaderboard sorted by miles" do
+      user = User.make
+      user.friends << @fred << @pete
+
+      bike_leaderboard = user.friends_leaderboard
+
+      bike_leaderboard[0].should == @fred
+      bike_leaderboard[0].distance_sum.to_i.should == @fred_distance_sum
+      bike_leaderboard[0].lb_co2_sum.to_i.should == @fred_lb_co2_sum
+
+      bike_leaderboard[1].should == @pete
+      bike_leaderboard[1].distance_sum.to_i.should == @pete_distance_sum
+      bike_leaderboard[1].lb_co2_sum.to_i.should == @pete_lb_co2_sum
     end
 
     it "should return a friends leaderboard filtered by mode" do
