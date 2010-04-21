@@ -36,6 +36,25 @@
     = f.label :city
     %br
     = f.text_field :city
+  %p
+    = f.label :zip, "Postal/Zip Code"
+    %br
+    = f.text_field :zip
+
+%fieldset.outline
+  %legend Agreements
+  - if @user.id
+  - else
+    %p
+      = f.check_box :is_13
+      = f.label :is_13, "I am 13 years of age or older."
+    %p
+      = f.check_box :is_parent
+      = f.label :is_parent, "I am a parent or legal guardian using this service on behalf of my minor."
+    %p
+      = f.check_box :read_privacy
+      = f.label :read_privacy, "I have read the privacy policy."
+
 
 %fieldset.outline
   %legend Join a Participating Community
