@@ -15,6 +15,8 @@ Sham.define do
   email       { Faker::Internet.email   }
   username    { Faker::Internet.user_name }
   password    { Faker::Lorem.sentence   }
+  address     { Faker::Address.street_address  }
+  person_name { Faker::Name.name        }
 end
 
 Community.blueprint do
@@ -29,6 +31,9 @@ User.blueprint do
   username
   password
   password_confirmation { password }
+  name      { Sham.person_name }
+  address
+  city
 end
 
 Destination.blueprint do
