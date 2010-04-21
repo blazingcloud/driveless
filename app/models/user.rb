@@ -70,10 +70,44 @@ class User < ActiveRecord::Base
     find_by_sql([sql, mode_id, filter_id])
   end
 
+  def self.find_leaderboard(user_ids_sql, filter_id, order = :miles)
+    order_sql = order == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'
+
+    sql = <<-SQL
+      SELECT users.*, distance_sum, lb_co2_sum FROM users
+      INNER JOIN (
+
+      SELECT user_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
+        SELECT trips.user_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE user_id IN
+        (#{user_ids_sql})
+        GROUP BY trips.user_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+      GROUP BY user_id) AS stats_per_user
+
+      ON stats_per_user.user_id = users.id
+      ORDER BY #{order_sql} DESC
+    SQL
+
+    find_by_sql([sql, filter_id])
+  end
+
+  def friends_leaderboard(order = :miles)
+    user_ids_sql = "SELECT friend_id FROM friendships WHERE user_id = ?"
+
+    self.class.find_leaderboard(user_ids_sql, id, order)
+  end
+
   def friends_leaderboard_by(mode_id)
     user_ids_sql = "SELECT friend_id FROM friendships WHERE user_id = ?"
 
     self.class.find_for_leaderboard(mode_id, user_ids_sql, id)
+  end
+
+  def fans_leaderboard(order = :miles)
+    user_ids_sql = "SELECT user_id FROM friendships WHERE friend_id = ?"
+
+    self.class.find_leaderboard(user_ids_sql, id, order)
   end
 
   def fans_leaderboard_by(mode_id)
