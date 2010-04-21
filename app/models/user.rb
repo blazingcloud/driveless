@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   named_scope :with_aggregated_stats_for_destination, {
     :select => ['users.id, users.username, users.community_id, sum(trips.distance) AS green_miles, max(modes.lb_co2_per_mile)*sum(trips.distance) AS lb_co2'],
     :joins => {:trips => :mode},
-    :group => ["trips.user_id"]
+    :group => "trips.user_id, users.id, users.username, users.community_id"
   }
 
   attr_protected :admin
