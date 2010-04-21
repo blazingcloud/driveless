@@ -12,7 +12,7 @@
     - co2saved = group ? item.lb_co2_saved : item.lb_co2_sum
     = render :partial => 'shared/badges', :locals => {:small => true, :badges => [{:class => 'green-miles', :stat => green_miles.to_i, :label => 'green miles'}, {:class => 'co2-saved', :stat => co2saved.to_f.round(1), :label => 'lb co2 saved'}]}
     .details
-      - if group
+      - if group && item.respond_to?(:memberships)
         .members= h pluralize(item.memberships.count, "member")
         .type
           Type:
