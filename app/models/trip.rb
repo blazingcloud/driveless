@@ -11,6 +11,7 @@ class Trip < ActiveRecord::Base
   after_save :update_green_miles
   after_destroy :update_green_miles
 
+  named_scope :not_green, :joins => :mode, :conditions => {:"modes.green" => false}
   named_scope :only_green, :joins => :mode, :conditions => {:"modes.green" => true}
   named_scope :made_since, lambda { |date| {:conditions => ['trips.made_at >= ?', date.to_date]} }
   named_scope :summed_by_mode_and_date,

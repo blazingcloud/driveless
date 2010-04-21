@@ -37,8 +37,4 @@
           = yield
     .bot
       .container
-        .footer
-          Temporary footer....
-          Follow us on Twitter -
-          Join us on Facebook -
-          Read our Blog
+        .footer= render :partial => 'shared/footer'

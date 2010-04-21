@@ -1,4 +1,6 @@
 class BaselinesController < InheritedResources::Base
+  before_filter :require_user
+
   actions :index, :show, :new, :create, :edit, :update, :destroy
 
   def update

@@ -1,0 +1,8 @@
+.step{:class => done ? 'done' : ''}
+  .status
+    - if done
+      Done!
+    - else
+      = link_to 'Do it!', url
+  .description
+    = yield

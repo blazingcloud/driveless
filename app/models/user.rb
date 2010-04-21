@@ -34,6 +34,30 @@ class User < ActiveRecord::Base
     c.openid_required_fields = [:nickname, :email]
   end # block optional
 
+  def has_complete_profile?
+    username && email
+  end
+  
+  def non_green_miles
+    "%0.1f" % self.trips.not_green.map(&:distance).sum
+  end
+  
+  def has_joined_groups?
+    groups.count > 0
+  end
+  
+  def has_complete_baseline?
+    baseline.green_miles
+  end
+  
+  def has_logged_trips?
+    trips.count > 0
+  end
+
+  def has_completed_workflow?
+    has_complete_profile? && has_joined_groups? && has_complete_baseline? && has_logged_trips?
+  end
+
   def percent_of_personal_goal_reached
     "%.2f%" % (self.green_miles.to_f / self.baseline.green_miles.to_f * 100)
   end
@@ -88,6 +112,10 @@ class User < ActiveRecord::Base
 
   def join(group)
     memberships.create(:group => group)
+  end
+
+  def profile_complete?
+    email.present? && username.present?
   end
 
   private

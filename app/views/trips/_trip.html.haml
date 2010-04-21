@@ -1,6 +1,6 @@
 %tr.trip-entry
   %td.where= h trip.destination.name
-  %td.how= h trip.mode.name
+  %td.how{:title => trip.mode.description}= h trip.mode.name
   %td.distance= h pluralize trip.distance, trip.unit.name
   %td.when{:title => trip.made_at.to_s}= h trip.made_at.strftime("%B, %d")
   - if @user == current_user

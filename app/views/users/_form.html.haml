@@ -30,14 +30,14 @@
     = f.check_box :admin
 
 %h2
-  Signup using
-  %a{:class => 'button activate-section', :href => '#auth-open_id'} Open ID
-  or
-  %a{:class => 'button inactive activate-section', :href => '#auth-password'} Password
+  Signup using a
+  %a{:class => 'button activate-section', :href => '#auth-password'} Password
+  or try
+  %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Open ID
 
 .auth
   - if @user.openid_identifier.blank?
-    .password{:style => "display: none"}
+    .password
       %p
         = f.label :password
         %br
@@ -48,4 +48,4 @@
         = f.password_field :password_confirmation
       %p
         = f.submit submit_button_label
-    .open_id= render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
+    .open_id{:style => "display: none"}= render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}

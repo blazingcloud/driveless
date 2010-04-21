@@ -70,6 +70,8 @@ body
   font-family = !sans_font
 
 a
+  &[name]
+    color: black
   color: #00f
   img
     border: none
@@ -94,6 +96,44 @@ a
 .tip
   background = !light_blue
   border = "#{!light_blue_border} 1px solid"
+.guide
+  background: #cfc
+  border-color: #aca
+  .step
+    .status
+      +border-box
+      +inline-block
+      +rounded(8px)
+      +box-shadow(0px, 2px, 4px)
+      +carved-text
+      border: 1px solid #a00
+      vertical-align: top
+      color: white
+      background: #a00
+      background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(255,0,0)),color-stop(0.49, rgb(238,0,0)),color-stop(0.5, rgb(204,0,0)),color-stop(1, rgb(187,0,0)))
+      background: -moz-linear-gradient(center top,rgb(255,0,0) 0%,rgb(238,0,0) 49%,rgb(204,0,0) 50%,rgb(187,0,0) 100%)
+      text-transform: uppercase
+      font-size: 19px
+      font-weight: bold
+      width: 120px
+      padding = 19px / 2
+      margin-right: 19px
+      margin-bottom: 19px
+      text-align: center
+      a
+        color: white
+        text-decoration: none
+    &.done
+      .status
+        +box-shadow(0px, 0px, 0px)
+        border-color: #0a0
+        background: #0c0
+        background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(0,255,0)),color-stop(0.49, rgb(0,238,0)),color-stop(0.5, rgb(0,204,0)),color-stop(1, rgb(0,187,0)))
+        background: -moz-linear-gradient(center top,rgb(0,255,0) 0%,rgb(0,238,0) 49%,rgb(0,204,0) 50%,rgb(0,187,0) 100%)
+    .description
+      +border-box
+      +inline-block
+      width: 70%
 
 .top
   padding-top: 19px
@@ -265,8 +305,6 @@ input#user_openid_identifier, input#user_session_openid_identifier
   td
     &.actions
       text-align: right
-  #trip_destination_id,#trip_mode_id
-    width: 100px
   #trip_distance
     width: 120px
   #trip_made_at
@@ -282,6 +320,8 @@ input#user_openid_identifier, input#user_session_openid_identifier
   padding: 0
   li
     &.no-baseline
+      background: #900
+    &.non-green-miles
       background: #900
     +inline-block
     margin: 0
@@ -501,3 +541,18 @@ div.openid
           font-size: 18px
         .membership-action
           float: right
+
+.footer
+  font-size: 14px
+  a
+    color: #fc0
+  .get-help
+    +grid(3, 12)
+    +grid-suffix(1,12)
+    +alpha
+  .facebook,.twitter,.email,.website
+    +grid(1,12)
+  .copyright
+    +grid(4,12)
+    +omega
+    text-align: right
