@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100422143407) do
+ActiveRecord::Schema.define(:version => 20100422172623) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.float    "total_miles"
     t.float    "green_miles"
   end
+
+  add_index "baselines", ["user_id"], :name => "index_baselines_on_user_id", :unique => true
 
   create_table "communities", :force => true do |t|
     t.string   "name",        :null => false
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.datetime "updated_at"
   end
 
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
   add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
 
   create_table "groups", :force => true do |t|
@@ -66,6 +69,9 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.integer  "owner_id",       :null => false
   end
 
+  add_index "groups", ["destination_id"], :name => "index_groups_on_destination_id"
+  add_index "groups", ["owner_id"], :name => "index_groups_on_owner_id"
+
   create_table "invitations", :force => true do |t|
     t.string   "email",      :null => false
     t.integer  "user_id",    :null => false
@@ -74,6 +80,8 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.datetime "updated_at"
     t.string   "name",       :null => false
   end
+
+  add_index "invitations", ["user_id"], :name => "index_invitations_on_user_id"
 
   create_table "lengths", :force => true do |t|
     t.integer  "trip_id"
@@ -84,6 +92,10 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.datetime "updated_at"
   end
 
+  add_index "lengths", ["mode_id"], :name => "index_lengths_on_mode_id"
+  add_index "lengths", ["trip_id"], :name => "index_lengths_on_trip_id"
+  add_index "lengths", ["unit_id"], :name => "index_lengths_on_unit_id"
+
   create_table "memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "group_id",   :null => false
@@ -91,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.datetime "updated_at"
   end
 
+  add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
 
   create_table "messages", :force => true do |t|
@@ -145,6 +158,11 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.date     "made_at"
   end
 
+  add_index "trips", ["destination_id"], :name => "index_trips_on_destination_id"
+  add_index "trips", ["mode_id"], :name => "index_trips_on_mode_id"
+  add_index "trips", ["unit_id"], :name => "index_trips_on_unit_id"
+  add_index "trips", ["user_id"], :name => "index_trips_on_user_id"
+
   create_table "units", :force => true do |t|
     t.string   "name"
     t.integer  "in_miles"
@@ -184,5 +202,7 @@ ActiveRecord::Schema.define(:version => 20100422143407) do
     t.boolean  "read_privacy"
     t.string   "zip"
   end
+
+  add_index "users", ["community_id"], :name => "index_users_on_community_id"
 
 end
