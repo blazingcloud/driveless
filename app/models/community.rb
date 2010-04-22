@@ -22,6 +22,7 @@ class Community < ActiveRecord::Base
         SELECT users.community_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
         INNER JOIN users ON trips.user_id = users.id
         INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE modes.green = ?
         GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY community_id) AS stats_per_community
 
@@ -43,6 +44,7 @@ class Community < ActiveRecord::Base
         INNER JOIN users ON trips.user_id = users.id
         INNER JOIN modes ON trips.mode_id = modes.id
         WHERE users.community_id = ?
+        AND modes.green = ?
         GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
 
       ON stats_per_mode.community_id = communities.id

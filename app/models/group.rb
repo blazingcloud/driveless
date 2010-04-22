@@ -25,6 +25,7 @@ class Group < ActiveRecord::Base
         INNER JOIN modes ON trips.mode_id = modes.id
         WHERE memberships.group_id IN
         (#{group_ids_sql})
+        AND modes.green = ?
         GROUP BY memberships.group_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY group_id) AS stats_per_group
 
@@ -32,7 +33,7 @@ class Group < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, user_id])
+    find_by_sql([sql, user_id, true])
   end
 
   def self.find_leaderboard_owned_by(user, order = :miles)

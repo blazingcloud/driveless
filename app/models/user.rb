@@ -80,8 +80,9 @@ class User < ActiveRecord::Base
       SELECT user_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
         SELECT trips.user_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
         INNER JOIN modes ON trips.mode_id = modes.id
-        WHERE user_id IN
+        WHERE trips.user_id IN
         (#{user_ids_sql})
+        AND modes.green = ?
         GROUP BY trips.user_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY user_id) AS stats_per_user
 
@@ -89,7 +90,7 @@ class User < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, filter_id])
+    find_by_sql([sql, filter_id, true])
   end
 
   def friends_leaderboard(order = :miles)
