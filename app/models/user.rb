@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates_acceptance_of :is_13, :allow_nil => false, :accept => true
   validates_acceptance_of :read_privacy, :allow_nil => false, :accept => true
 
-  validates_presence_of :email, :username, :name, :address, :city
+  validates_presence_of :email, :username, :name, :address, :city, :zip
 
   restful_easy_messages
 

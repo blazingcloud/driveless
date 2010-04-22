@@ -72,6 +72,7 @@ class UsersController < ApplicationController
       @user.password= p
       @user.password_confirmation= p
       @user.is_13= true
+      @user.read_privacy= true
     end
     @user.save do |result|
       if result
