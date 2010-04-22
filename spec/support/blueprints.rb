@@ -36,6 +36,8 @@ User.blueprint do
   name      { Sham.person_name }
   address
   city
+  is_13     true
+  read_privacy true
 end
 
 Destination.blueprint do
