@@ -13,5 +13,8 @@
     %br
     = form.text_area :description
   %p
+    = check_box_tag :not_member
+    = label_tag :not_member, "Don't include me as a member"
+  %p
     = form.submit
 

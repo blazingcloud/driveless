@@ -31,7 +31,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = current_user.create_group(params[:group])
+    @group = current_user.create_group(params[:group], params[:not_member])
     if !@group.new_record?
       flash[:notice] = "Group #{@group.name} created successfully!"
       redirect_to account_groups_url
