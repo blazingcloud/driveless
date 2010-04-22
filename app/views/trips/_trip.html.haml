@@ -1,14 +1,15 @@
-%tr.trip-entry
-  %td.where= h trip.destination.name
-  %td.how{:title => trip.mode.description}= h trip.mode.name
-  %td.distance= h pluralize trip.distance, trip.unit.name
-  %td.when{:title => trip.made_at.to_s}= h trip.made_at.strftime("%B %d")
-  - if @user == current_user
-    %td.actions
-      = link_to image_tag('icons/cog_edit.png', :alt => 'Edit this trip'), edit_account_trip_path(trip), :title => 'Edit this trip' 
-      = link_to image_tag('icons/cog_delete.png', :alt => 'Delete this trip'), account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete, :title => "Delete this trip"
-      %a{:href => "#", :class => 'copy-trip-to-form', :title => "Copy this trip"}= image_tag('icons/page_copy.png', :alt => 'Copy this trip')
-      - if trip.mode.green
-        %a{:target => '_blank', :href => "http://twitter.com/home?status=#{trip.to_tweet}", :class => 'tweet-trip', :title => "Tweet this trip!"}= image_tag('twitter_25.png', :alt => 'Tweet this trip')
-      - else
-        .tweet-trip &nbsp;
+- unless trip.is_hidden
+  %tr.trip-entry
+    %td.where= h trip.destination.name
+    %td.how{:title => trip.mode.description}= h trip.mode.name
+    %td.distance= h pluralize trip.distance, trip.unit.name
+    %td.when{:title => trip.made_at.to_s}= h trip.made_at.strftime("%B %d")
+    - if @user == current_user
+      %td.actions
+        = link_to image_tag('icons/cog_edit.png', :alt => 'Edit this trip'), edit_account_trip_path(trip), :title => 'Edit this trip' 
+        = link_to image_tag('icons/cog_delete.png', :alt => 'Delete this trip'), account_trip_path(trip), :confirm => 'Are you sure?', :method => :delete, :title => "Delete this trip"
+        %a{:href => "#", :class => 'copy-trip-to-form', :title => "Copy this trip"}= image_tag('icons/page_copy.png', :alt => 'Copy this trip')
+        - if trip.mode.green
+          %a{:target => '_blank', :href => "http://twitter.com/home?status=#{trip.to_tweet}", :class => 'tweet-trip', :title => "Tweet this trip!"}= image_tag('twitter_25.png', :alt => 'Tweet this trip')
+        - else
+          .tweet-trip &nbsp;
