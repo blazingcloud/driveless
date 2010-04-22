@@ -14,8 +14,8 @@ class Group < ActiveRecord::Base
     order_sql = order.to_sym == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'
 
     sql = <<-SQL
-      SELECT groups.*, distance_sum, lb_co2_sum FROM groups
-      INNER JOIN (
+      SELECT groups.*, COALESCE(distance_sum, 0) AS distance_sum, COALESCE(lb_co2_sum, 0) AS lb_co2_sum FROM groups
+      LEFT JOIN (
 
       SELECT group_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
         SELECT memberships.group_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
@@ -28,10 +28,12 @@ class Group < ActiveRecord::Base
       GROUP BY group_id) AS stats_per_group
 
       ON stats_per_group.group_id = groups.id
+      WHERE groups.id IN
+      (#{group_ids_sql})
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, user_id, true])
+    find_by_sql([sql, user_id, true, user_id])
   end
 
   def stats

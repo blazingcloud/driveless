@@ -15,8 +15,8 @@ class Community < ActiveRecord::Base
     order_sql = order.to_sym == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'
 
     sql = <<-SQL
-      SELECT communities.*, distance_sum, lb_co2_sum FROM communities
-      INNER JOIN (
+      SELECT communities.*, COALESCE(distance_sum, 0) AS distance_sum, COALESCE(lb_co2_sum, 0) AS lb_co2_sum FROM communities
+      LEFT JOIN (
 
       SELECT community_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
         SELECT users.community_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
