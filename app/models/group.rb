@@ -36,6 +36,20 @@ class Group < ActiveRecord::Base
     find_by_sql([sql, user_id, true])
   end
 
+  def badges
+    s = stats
+    [
+      {
+        :stat => s[:distance_sum].to_i,
+        :label => 'green miles'
+      },
+      {
+        :stat => "%.2f" % s[:lb_co2_sum].to_f,
+        :label => 'lb co2 saved'
+      }
+    ]
+  end
+
   def self.find_leaderboard_owned_by(user, order = :miles)
     group_ids_sql = "SELECT id FROM groups WHERE owner_id = ?"
 

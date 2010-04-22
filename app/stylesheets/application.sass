@@ -321,7 +321,10 @@ input#user_openid_identifier, input#user_session_openid_identifier
   tr
     height = 19px * 2
     border-bottom: 1px solid #aaa
-
+.header
+  .badge-name
+    +carved-text
+    color: #66c
 .badge-name
   +border-box
   +inline-block
@@ -409,6 +412,7 @@ input#user_openid_identifier, input#user_session_openid_identifier
   margin-bottom = 19px * 3
 .clear
   clear: both
+  height: 19px
 .in-page-badges
   .badge-name
     display: block

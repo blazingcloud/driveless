@@ -3,9 +3,8 @@
 - unless small
   .badge-name
     - if name
-      Hi,&nbsp;
       %span>= name
-      \. This is your progress!
+      \'s progress
 %ul.badge{:class => small ? 'small' : ''}
   - badges.each do |badge|
     %li{:class => badge[:html_class]}

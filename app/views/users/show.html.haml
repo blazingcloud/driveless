@@ -9,8 +9,9 @@
     - render :layout => 'shared/tip' do
       %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
 - else
-  %h1 #{@user.username}'s profile
-  %p This is the drive less profile for #{@user.username}. Text needed here.  
-  %p= link_to 'Send a Message!', new_message_url( :recipient => @user.id )
+  %h1 #{@user.username}'s Profile
+  .in-page-badges= render :partial => 'shared/user_badges', :locals => {:user => @user, :name => nil}
+  .clear
+  %p= link_to 'Send a Message!', new_message_url( :recipient => @user.id ), :class => 'button'
 
 = render :partial => 'trips/stream'

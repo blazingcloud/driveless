@@ -1,5 +1,6 @@
 - title "#{@group.name} Group"
 
+/.in-page-badges= render :partial => 'shared/community_badges', :locals => {:badges => @group.badges}
 %h1= "Group: Challenge for #{@group.name.camelcase}"
 
 = render :partial => 'shared/leaderboard_filter_form'
