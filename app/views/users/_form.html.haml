@@ -47,13 +47,13 @@
   - else
     %p
       = f.check_box :is_13
-      = f.label :is_13, "I am 13 years of age or older."
+      = f.label :is_13, "I am 13 years of age or older. (required)"
     %p.is-parent
       = f.check_box :is_parent
       = f.label :is_parent, "I am a parent or legal guardian using this service on behalf of my minor."
     %p
       = f.check_box :read_privacy
-      = f.label :read_privacy, "I have read the privacy policy."
+      = f.label :read_privacy, "I have read the <a href='/privacy' target='_blank'>privacy policy</a>. (required)"
 
 
 %fieldset.outline
