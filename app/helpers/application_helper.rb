@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def link_to_membership_action(group)
-    return "yours" if group.owned_by?(current_user)
+    return "<span class='you'>this is your group!</span>" if group.owned_by?(current_user)
 
     membership = group.membership_for(current_user)
     if membership
@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def link_to_friendship_action( user )
-    return "you" if user == current_user
+    return "<span class='you'>this is you!</span>" if user == current_user
     friend = current_user.friendship_for(user)
     if friend
       link_to 'hide friend', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button small'
