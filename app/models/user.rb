@@ -148,8 +148,10 @@ class User < ActiveRecord::Base
     memberships.except_owned_by(self)
   end
 
-  def create_group(params)
-    owned_groups.create(params)
+  def create_group(params, dont_become_member = false)
+    group = owned_groups.create(params)
+    group.memberships.create!(:user_id => self) unless dont_become_member || group.new_record?
+    group
   end
 
   def deliver_password_reset_instructions!
