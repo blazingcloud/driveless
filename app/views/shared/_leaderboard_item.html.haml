@@ -5,7 +5,7 @@
     - if group
       = link_to leaderboard_item.name, leaderboard_item
     - else
-      - name = friendship ? leaderboard_item.username : leaderboard_item.name
+      - name = leaderboard_item.respond_to?(:username) ? leaderboard_item.username : leaderboard_item.name
       = link_to name, leaderboard_item
       - if friendship
         .friendship= link_to_friendship_action( leaderboard_item )
