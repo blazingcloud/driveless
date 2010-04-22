@@ -9,7 +9,6 @@
       = link_to name, leaderboard_item
 
   .details
-    &nbsp;
     - if group && leaderboard_item.respond_to?(:memberships)
       .members= h pluralize(leaderboard_item.memberships.count, "member")
       .type
