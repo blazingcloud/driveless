@@ -68,7 +68,7 @@ class Group < ActiveRecord::Base
         :label => 'green miles'
       },
       {
-        :stat => "%.2f" % s[:lb_co2_sum].to_f,
+        :stat => "%.1f" % s[:lb_co2_sum].to_f,
         :label => 'lb co2 saved'
       }
     ]

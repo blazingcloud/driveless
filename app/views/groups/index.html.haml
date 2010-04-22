@@ -9,7 +9,7 @@
   %h2 Groups I'm Participating In
   = render :partial => 'shared/leaderboard', :locals => { :items => @groups_as_member, :group => true, :friendship => false }
   - if current_user.community
-    = render :partial => 'shared/leaderboard_item', :object => current_user.community, :locals => { :item_stats => current_user.community.stats, :group => false, :friendship => false }
+    = render :partial => 'shared/leaderboard_item', :object => current_user.community, :locals => { :item_stats => current_user.community.stats, :group => true, :friendship => false }
 
 - render :layout => 'shared/tip' do
   %p The Drive Less Challenge encourages you to socialize and engage in friendly competition with your peers at work, school, hobbies, and more. Join a group today!
