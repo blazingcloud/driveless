@@ -2,9 +2,9 @@
 
 %h1
   Edit My Profile
-  - if @user.zip == 'Replace me!' && @user.facebook_uid
-    - render :layout => 'shared/tip' do
-      %p You have logged in with Facebook and your profile has temporary information for some fields. Please fill them in correctly!
+- if @user.zip == 'Replace me!' && @user.facebook_uid
+  - render :layout => 'shared/tip' do
+    %p You have logged in with Facebook and your profile has temporary information for some fields. Please fill them in correctly!
 - form_for @user, :url => account_path do |f|
   - unless @user.has_complete_profile?
     - render :layout => 'shared/tip' do
