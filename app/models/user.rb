@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
   
   belongs_to :community
   
-  validates_presence_of :email, :username, :name, :address, :city, :is_13, :read_privacy
+  validates_acceptance_of :is_13, :allow_nil => false, :accept => true
+  validates_acceptance_of :read_privacy, :allow_nil => false, :accept => true
 
-#  validates_acceptance_of :is_13
-#  validates_acceptance_of :read_privacy
+  validates_presence_of :email, :username, :name, :address, :city
 
   restful_easy_messages
 
