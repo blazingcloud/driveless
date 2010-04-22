@@ -19,12 +19,22 @@ class Trip < ActiveRecord::Base
     :joins => :mode,
     :group => 'modes.name, trips.made_at'
 
+  def to_tweet
+    "I decided to %s for %0.2f %s on %s and saved %0.2f\lbs of co2 for the @driveless challenge! http://xrl.us/mdlc" % [
+      mode.name.downcase,
+      distance,
+      (distance == 1 ? "mile" : "mile".pluralize()),
+      made_at.strftime("%B %d"),
+      distance * mode.lb_co2_per_mile
+    ]
+  end
+
   private
 
   def update_green_miles
     user.update_green_miles
   end
-
+  
   def self.graphicable_since(date)
     only_green.made_since(date).summed_by_mode_and_date
   end

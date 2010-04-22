@@ -5,8 +5,9 @@
 
   %h1
     %a{:name => 'trip-entry'} Log a new trip
-  - render :layout => 'shared/tip' do
-    %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
+  - if current_user.has_completed_workflow?
+    - render :layout => 'shared/tip' do
+      %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving.
 - else
   %h1 #{@user.username}'s profile
   %p This is the drive less profile for #{@user.username}. Text needed here.  
