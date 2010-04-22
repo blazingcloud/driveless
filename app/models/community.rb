@@ -56,6 +56,20 @@ class Community < ActiveRecord::Base
     @stats = {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
   end
 
+  def badges
+    s = stats
+    [
+      {
+        :stat => s[:distance_sum].to_i,
+        :label => 'green miles'
+      },
+      {
+        :stat => "%.2f" % s[:lb_co2_sum].to_f,
+        :label => 'lb co2 saved'
+      }
+    ]
+  end
+
   def green_miles
      self.users.map{|u| u.green_miles.to_f}.sum
   end

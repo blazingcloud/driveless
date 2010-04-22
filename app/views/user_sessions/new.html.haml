@@ -13,7 +13,7 @@
       %p
       - render :layout => 'shared/tip' do
         %p If you connect with Facebook you don't need to signup!
-      %p= authlogic_facebook_login_button :js => :jquery
+        %p= authlogic_facebook_login_button :js => :jquery
     .password{:style => "display: none"}
       - form_for @user_session do |f|
         = f.error_messages
