@@ -7,6 +7,8 @@
     - else
       - name = friendship ? leaderboard_item.username : leaderboard_item.name
       = link_to name, leaderboard_item
+      - if friendship
+        .friendship= link_to_friendship_action( leaderboard_item )
 
   .details
     - if group && leaderboard_item.respond_to?(:memberships)
@@ -14,5 +16,3 @@
       .type
         Type:
         = leaderboard_item.destination.name
-    - if friendship
-      .friendship= link_to_friendship_action( leaderboard_item )
