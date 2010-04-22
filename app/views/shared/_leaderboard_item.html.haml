@@ -1,0 +1,18 @@
+.leaderboard
+  .user
+    - if group
+      = link_to leaderboard_item.name, leaderboard_item
+    - else
+      - name = friendship ? leaderboard_item.username : leaderboard_item.name
+      = link_to name, leaderboard_item
+
+  - green_miles, co2saved = defined?(item_stats) ? [item_stats[:distance_sum], item_stats[:lb_co2_sum]] : [leaderboard_item.distance_sum, leaderboard_item.lb_co2_sum]
+  = render :partial => 'shared/badges', :locals => {:small => true, :badges => [{:class => 'green-miles', :stat => green_miles.to_i, :label => 'green miles'}, {:class => 'co2-saved', :stat => co2saved.to_f.round(1), :label => 'lb co2 saved'}]}
+  .details
+    - if group && leaderboard_item.respond_to?(:memberships)
+      .members= h pluralize(leaderboard_item.memberships.count, "member")
+      .type
+        Type:
+        = leaderboard_item.destination.name
+    - if friendship
+      .friendship= link_to_friendship_action( leaderboard_item )
