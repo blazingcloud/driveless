@@ -1,6 +1,9 @@
 - form_for @trip do |form|
   = form.hidden_field :user_id,     :as => :hidden, :value => current_user.id
   = form.hidden_field :unit_id,     :as => :hidden, :value => Unit.find(:first).id
+  - if @trip.errors
+    %tr
+      %td{:colspan => 5}= form.error_messages
   %tr.trip-form
     %td= form.collection_select :destination_id, Destination.all, :id, :name
     %td= form.collection_select :mode_id, Mode.all, :id, :name

@@ -1,22 +1,2 @@
 %h5=# page_entries_info items
-- items.each do |item|
-  .leaderboard
-    .user
-      - if group
-        = link_to item.name, item
-      - else
-        - name = friendship ? item.username : item.name
-        = link_to name, item
-
-    - green_miles = item.respond_to?(:green_miles) ? item.green_miles : (item.respond_to?(:distance_sum) ? item.distance_sum : 0)
-    - co2saved = item.respond_to?(:lb_co2_saved) ? item.lb_co2_saved : item.lb_co2_sum
-    = render :partial => 'shared/badges', :locals => {:small => true, :badges => [{:class => 'green-miles', :stat => green_miles.to_i, :label => 'green miles'}, {:class => 'co2-saved', :stat => co2saved.to_f.round(1), :label => 'lb co2 saved'}]}
-    .details
-      - if group && item.respond_to?(:memberships)
-        .members= h pluralize(item.memberships.count, "member")
-        .type
-          Type:
-          = item.destination.name
-      - if friendship
-        .friendship= link_to_friendship_action( item )
-
+= render :partial => 'shared/leaderboard_item', :collection => items, :locals => {:group => group, :friendship => friendship}

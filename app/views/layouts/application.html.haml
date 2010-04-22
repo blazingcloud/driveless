@@ -9,6 +9,8 @@
     = stylesheet_link_tag 'formtastic'
     = stylesheet_link_tag 'formtastic_changes'
     = stylesheet_link_tag 'compiled/application', :media => 'screen, projection'
+    /[if lt IE 8]
+      = stylesheet_link_tag 'compiled/ie7', :media => 'screen, projection'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'jquery.color.js', 'underscore-min.js', 'jquery.openid.js', '/jquery.jqtransform.js', :defaults
     = yield :head
   %body

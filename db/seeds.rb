@@ -23,6 +23,7 @@ Drove Car Alone	Solo Car Trips (assumes 24 mpg average, includes all categories 
 Mode.create([
   {:name => 'Walk',            :green => true,   :lb_co2_per_mile => 0.843, :description => 'Walk (includes skateboard, rollerblade, etc)'},
   {:name => 'Bike',            :green => true,   :lb_co2_per_mile => 0.843, :description => 'Bike'},
+  {:name => 'Small Electric Vehicle',            :green => true,   :lb_co2_per_mile => 0.707, :description => 'Neighborhood Electric Vehicle, Low Speed Vehicle (20 - 25 mph maximum speed, not highway capable)'},
   {:name => 'Bus',             :green => true,   :lb_co2_per_mile => 0.603, :description => 'Bus (e.g. VTA)'},
   {:name => 'Train',           :green => true,   :lb_co2_per_mile => 0.473, :description => 'Train (e.g. Caltrain, BART)'},
   {:name => 'Carpool',         :green => true,   :lb_co2_per_mile => 0.422, :description => 'Carpool (2 people or more)'},

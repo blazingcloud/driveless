@@ -12,6 +12,42 @@ class Group < ActiveRecord::Base
 
   named_scope :by_name , :order => 'name ASC'
 
+  def self.find_leaderboard(group_ids_sql, user_id, order = :miles)
+    order_sql = order.to_sym == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'
+
+    sql = <<-SQL
+      SELECT groups.*, distance_sum, lb_co2_sum FROM groups
+      INNER JOIN (
+
+      SELECT group_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
+        SELECT memberships.group_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN memberships ON trips.user_id = memberships.user_id
+        INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE memberships.group_id IN
+        (#{group_ids_sql})
+        AND modes.green = ?
+        GROUP BY memberships.group_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+      GROUP BY group_id) AS stats_per_group
+
+      ON stats_per_group.group_id = groups.id
+      ORDER BY #{order_sql} DESC
+    SQL
+
+    find_by_sql([sql, user_id, true])
+  end
+
+  def self.find_leaderboard_owned_by(user, order = :miles)
+    group_ids_sql = "SELECT id FROM groups WHERE owner_id = ?"
+
+    find_leaderboard(group_ids_sql, user.id, order)
+  end
+
+  def self.find_leaderboard_for_member(user, order = :miles)
+    group_ids_sql = "SELECT group_id FROM memberships WHERE user_id = ?"
+
+    find_leaderboard(group_ids_sql, user.id, order)
+  end
+
   def members_leaderboard(order)
     user_ids_sql = "SELECT user_id FROM memberships WHERE group_id = ?"
 
@@ -21,15 +57,7 @@ class Group < ActiveRecord::Base
   def members_leaderboard_by(mode_id)
     user_ids_sql = "SELECT user_id FROM memberships WHERE group_id = ?"
 
-    User.find_for_leaderboard(mode_id, user_ids_sql, id)
-  end
-
-  def lb_co2_saved
-     self.users.map{|u| u.lb_co2_saved.to_f}.sum
-  end
-
-  def green_miles
-     self.users.map{|u| u.green_miles.to_f}.sum
+    User.find_leaderboard(user_ids_sql, id, :miles, mode_id)
   end
 
   def membership_for(user)

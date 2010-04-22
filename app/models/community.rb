@@ -22,6 +22,7 @@ class Community < ActiveRecord::Base
         SELECT users.community_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
         INNER JOIN users ON trips.user_id = users.id
         INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE modes.green = ?
         GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY community_id) AS stats_per_community
 
@@ -29,7 +30,30 @@ class Community < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql(sql)
+    find_by_sql([sql, true])
+  end
+
+  def stats
+    return @stats if @stats
+
+    sql = <<-SQL
+      SELECT communities.id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM communities
+      INNER JOIN (
+
+        SELECT users.community_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN users ON trips.user_id = users.id
+        INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE users.community_id = ?
+        AND modes.green = ?
+        GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+
+      ON stats_per_mode.community_id = communities.id
+      GROUP BY communities.id
+    SQL
+
+    c = self.class.find_by_sql([sql, id, true])[0]
+
+    @stats = {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
   end
 
   def green_miles
@@ -45,7 +69,7 @@ class Community < ActiveRecord::Base
   def members_leaderboard_by(mode_id)
     user_ids_sql = "SELECT id FROM users WHERE community_id = ?"
 
-    User.find_for_leaderboard(mode_id, user_ids_sql, id)
+    User.find_leaderboard(user_ids_sql, id, :miles, mode_id)
   end
 
   def lb_co2_saved
