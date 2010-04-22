@@ -69,7 +69,7 @@ class Community < ActiveRecord::Base
   def members_leaderboard_by(mode_id)
     user_ids_sql = "SELECT id FROM users WHERE community_id = ?"
 
-    User.find_for_leaderboard(mode_id, user_ids_sql, id)
+    User.find_leaderboard(user_ids_sql, id, :miles, mode_id)
   end
 
   def lb_co2_saved

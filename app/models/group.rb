@@ -57,7 +57,7 @@ class Group < ActiveRecord::Base
   def members_leaderboard_by(mode_id)
     user_ids_sql = "SELECT user_id FROM memberships WHERE group_id = ?"
 
-    User.find_for_leaderboard(mode_id, user_ids_sql, id)
+    User.find_leaderboard(user_ids_sql, id, :miles, mode_id)
   end
 
   def membership_for(user)
