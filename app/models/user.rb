@@ -151,13 +151,6 @@ class User < ActiveRecord::Base
   def create_group(params, dont_become_member = false)
     group = owned_groups.create(params)
     group.memberships.create!(:user_id => self) unless dont_become_member || group.new_record?
-    trips.create!(
-      :mode_id => Mode.find(:first).id,
-      :unit_id => Unit.find(:first).id,
-      :destination_id => Destination.find(:first).id,
-      :distance => 0,
-      :is_hidden => true
-    )
     group
   end
 
