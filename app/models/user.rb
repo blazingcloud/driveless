@@ -59,15 +59,24 @@ class User < ActiveRecord::Base
 
   def self.find_for_leaderboard(mode_id, user_ids_sql, filter_id)
     sql = <<-SQL
-      SELECT users.*, distance_sum, (distance_sum * modes.lb_co2_per_mile) AS lb_co2_sum FROM users
-      INNER JOIN (SELECT user_id, mode_id, sum(distance) as distance_sum FROM trips WHERE mode_id = ? AND user_id IN
-      (#{user_ids_sql})
-      GROUP BY user_id, mode_id) AS distance_per_user ON distance_per_user.user_id = users.id
-      INNER JOIN modes ON modes.id = distance_per_user.mode_id
+      SELECT users.*, distance_sum, lb_co2_sum FROM users
+      INNER JOIN (
+
+      SELECT user_id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM (
+        SELECT trips.user_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE trips.user_id IN
+        (#{user_ids_sql})
+        AND trips.mode_id = ?
+        AND modes.green = ?
+        GROUP BY trips.user_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+      GROUP BY user_id) AS stats_per_user
+
+      ON stats_per_user.user_id = users.id
       ORDER BY distance_sum DESC
     SQL
 
-    find_by_sql([sql, mode_id, filter_id])
+    find_by_sql([sql, filter_id, mode_id, true])
   end
 
   def self.find_leaderboard(user_ids_sql, filter_id, order = :miles)
