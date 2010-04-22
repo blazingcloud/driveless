@@ -71,6 +71,7 @@ class UsersController < ApplicationController
       p = @user.newpass(8)
       @user.password= p
       @user.password_confirmation= p
+      @user.is_13= true
     end
     @user.save do |result|
       if result

@@ -43,7 +43,7 @@
 
 %fieldset.outline
   %legend Agreements
-  - if @user.id
+  - if @user.id && @user.read_privacy
     %p You have agreed to the terms of service.
   - else
     %p
