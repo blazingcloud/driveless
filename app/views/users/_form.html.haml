@@ -44,6 +44,7 @@
 %fieldset.outline
   %legend Agreements
   - if @user.id
+    %p You have agreed to the terms of service.
   - else
     %p
       = f.check_box :is_13
