@@ -33,6 +33,8 @@ class Community < ActiveRecord::Base
   end
 
   def stats
+    return @stats if @stats
+
     sql = <<-SQL
       SELECT communities.id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM communities
       INNER JOIN (
@@ -49,7 +51,7 @@ class Community < ActiveRecord::Base
 
     c = self.class.find_by_sql([sql, id])[0]
 
-    {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
+    @stats = {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
   end
 
   def green_miles
