@@ -11,13 +11,6 @@ class MembershipsController < ApplicationController
   def create
     group = Group.find(params[:group_id])
     membership = current_user.join(group)
-    current_user.trips.create!(
-      :mode_id => Mode.find(:first).id,
-      :unit_id => Unit.find(:first).id,
-      :destination_id => Destination.find(:first).id,
-      :distance => 0,
-      :is_hidden => true
-    ) if current_user.trips.length == 0
     if !membership.new_record?
       flash[:notice] = "Successfully joined #{group.name}!"
     else
