@@ -34,6 +34,29 @@ class Group < ActiveRecord::Base
     find_by_sql([sql, user_id, true])
   end
 
+  def stats
+    return @stats if @stats
+
+    sql = <<-SQL
+      SELECT groups.id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM groups
+      INNER JOIN (
+
+        SELECT memberships.group_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN memberships ON trips.user_id = memberships.user_id
+        INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE memberships.group_id = ?
+        AND modes.green = ?
+        GROUP BY memberships.group_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+
+      ON stats_per_mode.group_id = groups.id
+      GROUP BY groups.id
+    SQL
+
+    c = self.class.find_by_sql([sql, id, true])[0]
+
+    @stats = {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
+  end
+
   def badges
     s = stats
     [
