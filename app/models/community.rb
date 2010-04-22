@@ -53,7 +53,10 @@ class Community < ActiveRecord::Base
 
     c = self.class.find_by_sql([sql, id, true])[0]
 
-    @stats = {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
+    @stats = {
+      :lb_co2_sum   => c.nil? ? 0 : c.lb_co2_sum,
+      :distance_sum => c.nil? ? 0 : c.distance_sum
+    }
   end
 
   def badges
