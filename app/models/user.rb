@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
 
   def create_group(params, dont_become_member = false)
     group = owned_groups.create(params)
-    group.memberships.create!(:user_id => self) unless dont_become_member || group.new_record?
+    group.memberships.create!(:user => self) unless dont_become_member || group.new_record?
     group
   end
 
