@@ -9,10 +9,15 @@ class User < ActiveRecord::Base
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
   has_many :friendships, :dependent => :destroy
   has_many :friends, :through => :friendships
+  has_many :messages, :foreign_key => :receiver_id
   
   belongs_to :community
   
-  validates_presence_of :email, :username, :name, :address, :city
+  validates_presence_of :email, :username, :name, :address, :city, :is_13, :read_privacy
+
+#  validates_acceptance_of :is_13
+#  validates_acceptance_of :read_privacy
+
   restful_easy_messages
 
   before_create :create_baseline

@@ -11,6 +11,7 @@
 - else
   %h1 #{@user.username}'s profile
   %p This is the drive less profile for #{@user.username}. Text needed here.  
+  %p= link_to 'Send a Message!', new_message_url( :recipient => @user.id )
 
 = render :partial => 'trips/stream'
 = render :partial => 'trips/chart'

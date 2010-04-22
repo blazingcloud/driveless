@@ -1,25 +1,25 @@
 class Message < ActiveRecord::Base
 
   attr_accessor :recipient
-  
+
   belongs_to :sender,
              :class_name => "User",
              :foreign_key => "sender_id"
-                     
+
   belongs_to :receiver,
              :class_name => "User",
              :foreign_key => "receiver_id"
 
-  validates_presence_of :recipient, 
+  validates_presence_of :recipient,
                         :subject,
                         :body
-                        
-  validates_length_of :body, 
-                      :minimum => 10, 
+
+  validates_length_of :body,
+                      :minimum => 1,
                       :message => "is too short.  The mimum length is %d characters. Please don't spam."
-                      
-  validates_length_of :body, 
-                      :maximum => 1000, 
+
+  validates_length_of :body,
+                      :maximum => 1000,
                       :message => "is too long.  No one wants to read that.  The maximum length is %d characters."
 
   # Returns user.username for the sender

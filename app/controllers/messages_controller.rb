@@ -29,7 +29,11 @@ class MessagesController < ApplicationController
   
   # GET /messages/new
   def new
-    @message= Message.new
+    @message = Message.new
+    user_to = User.find_by_id( params[:recipient] )
+    if user_to.present?
+      @message.recipient = user_to.username
+    end
   end
 
   # POST /messages
