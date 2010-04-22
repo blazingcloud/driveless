@@ -83,8 +83,8 @@ describe User do
     end
 
     it "should return a group members leaderboard filtered by mode" do
-      group = @fred.create_group(:name => "my group", :destination => Destination.make)
-      group.users << @pete
+      group = @fred.create_group({:name => "my group", :destination => Destination.make}, true)
+      group.users << @fred << @pete
 
       bike_leaderboard = group.members_leaderboard_by(@bike)
 
