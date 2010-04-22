@@ -32,6 +32,26 @@ class Community < ActiveRecord::Base
     find_by_sql(sql)
   end
 
+  def stats
+    sql = <<-SQL
+      SELECT communities.id, sum(lb_co2_per_mode_sum) AS lb_co2_sum, sum(distance_per_mode_sum) AS distance_sum FROM communities
+      INNER JOIN (
+
+        SELECT users.community_id, trips.mode_id, (modes.lb_co2_per_mile * sum(trips.distance)) AS lb_co2_per_mode_sum, sum(trips.distance) AS distance_per_mode_sum FROM trips
+        INNER JOIN users ON trips.user_id = users.id
+        INNER JOIN modes ON trips.mode_id = modes.id
+        WHERE users.community_id = ?
+        GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
+
+      ON stats_per_mode.community_id = communities.id
+      GROUP BY communities.id
+    SQL
+
+    c = self.class.find_by_sql([sql, id])[0]
+
+    {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
+  end
+
   def green_miles
      self.users.map{|u| u.green_miles.to_f}.sum
   end
