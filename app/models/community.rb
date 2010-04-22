@@ -30,7 +30,7 @@ class Community < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql(sql)
+    find_by_sql([sql, true])
   end
 
   def stats
@@ -51,7 +51,7 @@ class Community < ActiveRecord::Base
       GROUP BY communities.id
     SQL
 
-    c = self.class.find_by_sql([sql, id])[0]
+    c = self.class.find_by_sql([sql, id, true])[0]
 
     @stats = {:lb_co2_sum => c.lb_co2_sum, :distance_sum => c.distance_sum}
   end
