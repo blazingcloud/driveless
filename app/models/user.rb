@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
-    c.validate_password_field = true
   end # block optional
 
   def badges
@@ -203,6 +202,17 @@ class User < ActiveRecord::Base
       newpass = ""
       1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
       return newpass
+  end
+
+  def before_connect(facebook_session)
+    self.name = facebook_session.user.name
+    self.username = facebook_session.user.name
+    self.is_13 = true
+    self.read_privacy = true
+    self.email = 'facebook+temporary@my.drivelesschallenge.com'
+    self.address = 'Replace me!'
+    self.city = 'Replace me!'
+    self.zip = 'Replace me!'
   end
 
   private

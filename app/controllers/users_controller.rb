@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
+    @user = User.find(@user.id)
     @user.attributes = params[:user]
     if @user.facebook_uid && !@user.crypted_password
       p = @user.newpass(8)
@@ -71,6 +72,7 @@ class UsersController < ApplicationController
       @user.password_confirmation= p
       @user.is_13= true
       @user.read_privacy= true
+      @user.save
     end
     @user.save do |result|
       if result
