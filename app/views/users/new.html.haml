@@ -1,5 +1,8 @@
 - title "Signup"
 
+- render :layout => 'shared/tip' do
+  %p This web application supports the following web browsers: Internet Explorer 7+, Safari 4+, Firefox 3.5+, and Chrome.
+
 - form_for @user, :url => account_path do |f|
   = f.error_messages
   = render :partial => "form", :object => f, :locals => {:f => f, :submit_button_label => 'Register', :show_password => true}
