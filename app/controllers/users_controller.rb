@@ -24,6 +24,29 @@ class UsersController < ApplicationController
     @users = User.paginate :page => params[:page], :order => 'created_at DESC'
   end
 
+  def csv
+    redirect_to root_path if not current_user.admin?
+    @list = User.find(:all).select{|u| u.email !~ /my.drivelesschallenge.com/}
+
+    csv_string = FasterCSV.generate do |csv|
+      csv << ["Username", "Email", "Facebook?", "OpenID?", "Parent?"]
+
+      @list.each do |record|
+        csv << [record['username'],
+                record['email'],
+                record['facebook_uid'] ? 'Yes' : '',
+                record['openid_identifier'] ? 'Yes' : '',
+                record['is_parent'] ? 'Yes' : '',
+               ]
+      end
+    end
+
+    filename = "dlc-tool-userlist.csv"
+    send_data(csv_string,
+      :type => 'text/csv; charset=utf-8; header=present',
+      :filename => filename)
+  end
+
   def destroy
     User.find(params[:id]).destroy
     redirect_to users_url
