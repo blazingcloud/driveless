@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def link_to_membership_action(group)
-    return "<span class='you'>this is your group!</span>" if group.owned_by?(current_user)
+    #return "<span class='you'>this is your group!</span>" if group.owned_by?(current_user)
 
     membership = group.membership_for(current_user)
     if membership
