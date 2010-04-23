@@ -56,7 +56,7 @@
         }
       })*/
     }).trigger('change');
-    $(".new_user, .new_user_session, .edit_user").openid().submit(function(){
+    $(".new_user:not(:plain), .new_user_session, .edit_user").openid().submit(function(){
       if (window.location.hash && !$(this).attr('action').match(/#\w/))
         $(this).attr('action', $(this).attr('action') + window.location.hash)
     });

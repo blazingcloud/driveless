@@ -47,7 +47,7 @@ $.fn.openid = function() {
     $li.addClass('highlight');
     $usrfs.hide();
     $idfs.show();
-    $id.focus();
+    //$id.focus();
     $this.unbind('submit').submit(submitid);
     return false;
   };
