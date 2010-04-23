@@ -18,3 +18,6 @@
       = user.lb_co2_saved
       lb co2 saved
     .friendship= link_to_friendship_action(user)
+
+%h3 All Members
+%p= @group.users.map{|u| link_to u.username, u}.join(", ")
