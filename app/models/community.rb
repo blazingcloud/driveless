@@ -63,6 +63,10 @@ class Community < ActiveRecord::Base
     s = stats
     [
       {
+        :stat => users.length,
+        :label => users.length == 1 ? 'member' : 'members'
+      },
+      {
         :stat => s[:distance_sum].to_i,
         :label => 'green miles'
       },

@@ -67,7 +67,7 @@ class Group < ActiveRecord::Base
     [
       {
         :stat => users.length,
-        :label => 'members'
+        :label => users.length == 1 ? 'member' : 'members'
       },
       {
         :stat => s[:distance_sum].to_i,
