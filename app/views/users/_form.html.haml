@@ -95,4 +95,6 @@
         .open_id{:style => "display: none"}= render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
 - else
   %p= f.submit submit_button_label
+
+- unless @user.openid_identifier || @user.facebook_uid
   %p= link_to 'Reset Your Password', password_resets_url, :class => 'button'
