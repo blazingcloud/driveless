@@ -1,5 +1,7 @@
 - title "Users"
 
+%p= link_to "Download Users as CSV", users_csv_path, :class => 'button'
+
 %h1 View Users
 %h5= page_entries_info @users
 %table
