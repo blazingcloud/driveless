@@ -28,3 +28,16 @@ without explicit agreement from the author in writing.
 Modifications to this source code and software is
 prohibited without explicit agreement from the author
 in writing.
+
+Installation
+============
+
+git clone git@github.com:blazingcloud/driveless-repo.git
+Create gemset: 1.8.7@driveless
+bundle install
+copy database.sample-mac.yml to database.yml and edit per your environment
+rake db:create
+rake db:migrate
+rake db:seed
+rake spec
+script/server
