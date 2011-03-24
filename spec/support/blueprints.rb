@@ -10,6 +10,7 @@ Sham.define do
   name        { Faker::Lorem.words(1)   }
   city        { Faker::Address.city     }
   state       { Faker::Address.us_state }
+  zip         { Faker::Address.zip_code }
   country     { Faker::Lorem.words(1)   }
   description { Faker::Lorem.paragraph  }
   email       { Faker::Internet.email   }
@@ -38,6 +39,7 @@ User.blueprint do
   city
   is_13     true
   read_privacy true
+  zip
 end
 
 Destination.blueprint do
