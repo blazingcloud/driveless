@@ -8,3 +8,4 @@ public/stylesheets/compiled/*
 /test/*
 /spec/fixtures/*
 /coverage/*
+.idea/*

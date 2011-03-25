@@ -12,6 +12,7 @@ gem 'googlecharts'
 gem 'facebooker', '1.0.67'
 gem 'ruby-openid',  '>= 2.0.4'
 gem 'mysql'
+gem 'authlogic-connect'
 
 group :test do
   gem 'rspec',  '~> 1.3.0'
