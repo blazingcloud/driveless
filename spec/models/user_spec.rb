@@ -97,4 +97,17 @@ describe User do
       bike_leaderboard[1].lb_co2_sum.to_i.should == @pete_bike_lb_co2_sum
     end
   end
+  
+  describe "Associations" do
+    before(:each) do
+      @user = User.create!(@attr)
+      @trip = Trip.create!(:trip, :user => @user)
+    end
+    
+    xit 'has many trips' do
+      Trip.all.should == [@trip]
+      @user.loans.should == [@trip]
+      @user.should respond_to(:trips)
+    end
+  end
 end
