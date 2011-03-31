@@ -19,9 +19,11 @@ group :development, :test do
 	gem 'rspec-rails',  '1.3.0'
 	gem 'rspec',  '1.3.0' # Redundant, runs with rspec-rails alone.
 	
-	gem 'autotest-rails', '4.1.0' # Added autotest.
+	gem 'autotest-rails', '4.1.0' # Set 'RSPEC=true autotest' to sync with rspec.
 	gem 'autotest-growl', '0.2.9' # Required for autotest-rails.
 	gem 'autotest-fsevent', '0.2.5' # Required for autotest-rails.		
+		
+	gem 'factory_girl', '1.3.3'		
 		
   gem 'shoulda',  '~> 2.10.3'
   gem 'machinist',  '~> 1.0.6'

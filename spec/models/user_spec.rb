@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'factory_girl'
 
 describe User do
   it { should be_invalid }
@@ -98,15 +99,16 @@ describe User do
     end
   end
   
-  describe "Associations" do
+  describe "associations" do
     before(:each) do
-      @user = User.create!(@attr)
-      @trip = Trip.create!(:trip, :user => @user)
+      @user = Factory(:user)
+      @trip1 = Factory(:trip, :user => @user)
+      @trip2 = Factory(:trip, :user => @user)      
     end
     
     xit 'has many trips' do
-      Trip.all.should == [@trip]
-      @user.loans.should == [@trip]
+      Trip.all.should == [@trip1, @trip2]
+      @user.loans.should == [@trip1, @trip2]
       @user.should respond_to(:trips)
     end
   end
