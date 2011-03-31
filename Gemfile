@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
+
 gem 'rails', '2.3.5'
 gem 'haml', '2.2.23'
 gem 'compass'
@@ -14,12 +15,17 @@ gem 'ruby-openid',  '>= 2.0.4'
 gem 'mysql'
 gem 'authlogic-connect'
 
-group :test do
-  gem 'rspec',  '~> 1.3.0'
-  gem 'rspec-rails',  '~> 1.3.0'
+group :development, :test do # Added :development.
+	gem 'rspec-rails',  '1.3.0'
+	gem 'rspec',  '1.3.0' # Redundant, runs with rspec-rails alone.
+	
+	gem 'autotest-rails', '4.1.0' # Added autotest.
+	gem 'autotest-growl', '0.2.9' # Required for autotest-rails.
+	gem 'autotest-fsevent', '0.2.5' # Required for autotest-rails.		
+		
   gem 'shoulda',  '~> 2.10.3'
   gem 'machinist',  '~> 1.0.6'
   gem 'faker',  '= 0.3.1'
   gem 'capybara', '0.3.9'
-  gem 'launchy'
+  gem 'launchy', '0.4.0'
 end
