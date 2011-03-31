@@ -15,7 +15,7 @@ gem 'ruby-openid',  '>= 2.0.4'
 gem 'mysql'
 gem 'authlogic-connect'
 
-group :development, :test do # Added :development.
+group :development, :test do 
 	gem 'rspec-rails',  '1.3.0'
 	gem 'rspec',  '1.3.0' # Redundant, runs with rspec-rails alone.
 	
