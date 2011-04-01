@@ -8,3 +8,11 @@ Factory.define :user do |f|
   f.city      "SF"
   f.zip       "94105"
 end
+
+Factory.define :trip do |trip|
+  trip.destination  "Daly City"
+  trip.mode         "Bus"
+  trip.unit         "miles"
+  trip.distance     "50"
+  trip.association  :user
+end

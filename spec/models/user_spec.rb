@@ -108,7 +108,7 @@ describe User do
     
     xit 'has many trips' do
       Trip.all.should == [@trip1, @trip2]
-      @user.loans.should == [@trip1, @trip2]
+      @user.trip.should == [@trip1, @trip2]
       @user.should respond_to(:trips)
     end
   end
