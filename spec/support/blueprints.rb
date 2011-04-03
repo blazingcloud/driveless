@@ -22,11 +22,78 @@ Sham.define do
   distance        { rand(10) + 1 }
 end
 
+# Same ordering as db/schema.rb.
+Baseline.blueprint do # Light model, blueprint as place holder.
+  user_id
+  duration
+end
+
 Community.blueprint do
   name        { Sham.city }
   state
   country
   description
+end
+
+Destination.blueprint do
+  name
+end
+
+Friendship.blueprint do
+  user_id
+  friend_id
+end
+
+Group.blueprint do
+  name
+  owner       { User.make }
+  destination
+  description
+end
+
+Invitation.blueprint do
+  email
+  user_id
+  invitation
+  name
+end
+
+Length.blueprint do
+  trip_id
+  mode_id
+  distance
+  unit_id
+end
+
+Membership.blueprint do
+  user_id
+  group_id
+end
+
+Message.blueprint do
+  receiver_id
+  sender_id
+  subject
+  body
+end
+
+Mode.blueprint do
+  name
+  green           true
+  lb_co2_per_mile
+end
+
+Trip.blueprint do
+  user
+  destination
+  mode
+  distance
+  unit        { Unit.first || Unit.make }
+end
+
+Unit.blueprint do # This is useless!
+  name
+  in_miles 1
 end
 
 User.blueprint do
@@ -40,37 +107,4 @@ User.blueprint do
   is_13     true
   read_privacy true
   zip
-end
-
-Destination.blueprint do
-  name
-end
-
-Group.blueprint do
-  name
-  owner       { User.make }
-  destination
-end
-
-Mode.blueprint do
-  name
-  green           true
-  lb_co2_per_mile
-end
-
-Destination.blueprint do
-  name
-end
-
-Unit.blueprint do # This is useless!
-  name
-  in_miles 1
-end
-
-Trip.blueprint do
-  user
-  destination
-  mode
-  distance
-  unit        { Unit.first || Unit.make }
 end
