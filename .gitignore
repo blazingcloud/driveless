@@ -9,3 +9,4 @@ public/stylesheets/compiled/*
 /spec/fixtures/*
 /coverage/*
 .idea/*
+.autotest
