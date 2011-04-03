@@ -12,6 +12,11 @@ describe User do
   it { should validate_presence_of(:username) }
   #it { should validate_presence_of(:password) } # This is disabled by Casey so users can register by OpenId.
 
+  it { should validate_presence_of(:name) } # Update against validations shown in User model.
+  it { should validate_presence_of(:address) }
+  it { should validate_presence_of(:city) }
+  it { should validate_presence_of(:zip) }
+
   it "should create a new instance given valid attributes" do
     User.make
   end
