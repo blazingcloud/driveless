@@ -13,6 +13,7 @@ Sham.define do
   zip         { Faker::Address.zip_code }
   country     { Faker::Lorem.words(1)   }
   description { Faker::Lorem.paragraph  }
+  invitation  { Faker::Lorem.paragraph  }
   email       { Faker::Internet.email   }
   username    { Faker::Internet.user_name }
   password    { Faker::Lorem.sentence   }
@@ -24,87 +25,87 @@ end
 
 # Same ordering as db/schema.rb.
 Baseline.blueprint do # Light model, blueprint as place holder.
-  user_id
+  user
   duration
 end
 
 Community.blueprint do
-  name        { Sham.city }
-  state
-  country
-  description
+  name        { Sham.name }
+  state       { Sham.state }
+  country     { Sham.country }
+  description { Sham.description }
 end
 
 Destination.blueprint do
-  name
+  name        { Sham.name }
 end
 
 Friendship.blueprint do
-  user_id
-  friend_id
+  user        { User.make } 
+  friend
 end
 
 Group.blueprint do
-  name
-  owner       { User.make }
-  destination
-  description
+  name        { Sham.name }
+  owner       { User.make } 
+  description { Sham.description }
+  destination { Sham.city }
 end
 
 Invitation.blueprint do
-  email
-  user_id
-  invitation
-  name
+  name        { Sham.name }
+  email       { Sham.email }
+  invitation  { Sham.invitation }
+  user
 end
 
 Length.blueprint do
-  trip_id
-  mode_id
-  distance
-  unit_id
+  trip
+  mode
+  distance    { Sham.distance }
+  unit        { Unit.first || Unit.make }
 end
 
 Membership.blueprint do
-  user_id
-  group_id
+  user
+  group
 end
 
 Message.blueprint do
-  receiver_id
-  sender_id
+  receiver
+  sender
   subject
   body
 end
 
 Mode.blueprint do
-  name
-  green           true
+  name        { Sham.person_name }
+  green       true
   lb_co2_per_mile
 end
 
 Trip.blueprint do
   user
-  destination
+  destination { Sham.ncity }
   mode
-  distance
+  distance    { Sham.distance }
   unit        { Unit.first || Unit.make }
 end
 
 Unit.blueprint do # This is useless!
-  name
-  in_miles 1
+  name        { Sham.name }
+  in_miles    1
 end
 
 User.blueprint do
-  email
-  username
+  email                 { Sham.email }
+  username              { Sham.username }
   password
   password_confirmation { password }
-  name      { Sham.person_name }
-  address
-  city
-  is_13     true
-  read_privacy true
-  zip
+  name                  { Sham.person_name }
+  address               { Sham.address }
+  city                  { Sham.city }
+  zip                   { Sham.zip }
+  is_13                 true
+  read_privacy          true
 end

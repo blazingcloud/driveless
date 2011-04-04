@@ -7,8 +7,7 @@ describe Invitation do
 
   it { should validate_presence_of(:user_id) }
 
-  it { should validate_format_of(:email).with(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i).message('email must be valid') }
-  # it { should validate_format_of(:email) }
+  xit { should validate_format_of(:email).with(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i).with_message('email must be valid') }
 
   it "should create a new instance given valid attributes" do
     Invitation.make
