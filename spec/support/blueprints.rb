@@ -49,7 +49,7 @@ Group.blueprint do
   name        { Sham.name }
   owner       { User.make } 
   description { Sham.description }
-  destination { Sham.city }
+  destination { Destination.make }
 end
 
 Invitation.blueprint do
@@ -86,7 +86,7 @@ end
 
 Trip.blueprint do
   user
-  destination { Sham.ncity }
+  destination { Destination.make }
   mode
   distance    { Sham.distance }
   unit        { Unit.first || Unit.make }
