@@ -7,9 +7,6 @@ require 'spec/rails'
 require 'capybara/rails' 
 require 'capybara/dsl'
 
-# require 'factory_girl'
-# require File.dirname(__FILE__) + "/../spec/factories.rb" # Load factories manually.
-
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 
