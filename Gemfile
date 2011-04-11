@@ -1,7 +1,9 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
+
 gem 'rails', '2.3.5'
 gem 'haml', '2.2.23'
+gem 'sqlite3'
 gem 'compass'
 gem 'authlogic'
 gem 'authlogic-oid'

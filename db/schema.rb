@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(:version => 20100422182509) do
   add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
 
   create_table "groups", :force => true do |t|
-    t.string   "name",           :null => false
+    t.string   "name",                           :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id",       :null => false
-    t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :default => -1, :null => false
+    t.integer  "destination_id", :default => -1, :null => false
   end
 
   add_index "groups", ["destination_id"], :name => "index_groups_on_destination_id"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20100422182509) do
   create_table "lengths", :force => true do |t|
     t.integer  "trip_id"
     t.integer  "mode_id"
-    t.integer  "distance",   :limit => 10, :precision => 10, :scale => 0
+    t.decimal  "distance"
     t.integer  "unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20100422182509) do
 
   create_table "units", :force => true do |t|
     t.string   "name"
-    t.integer  "in_miles",   :limit => 10, :precision => 10, :scale => 0
+    t.decimal  "in_miles"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
