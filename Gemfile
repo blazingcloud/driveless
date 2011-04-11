@@ -1,16 +1,16 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
 
-gem 'rails', '2.3.5'
+gem 'rails', '=2.3.11'
 gem 'haml', '2.2.23'
 gem 'sqlite3'
 gem 'compass'
 gem 'authlogic'
-gem 'authlogic-oid'
+gem 'authlogic-oid', :require => "authlogic_openid"
 gem 'inherited_resources', '=1.0.3'
 gem 'will_paginate'
 gem 'formtastic'
-gem 'googlecharts'
+gem 'googlecharts', :require => "gchart"
 gem 'facebooker', '1.0.67'
 gem 'ruby-openid',  '>= 2.0.4'
 gem 'mysql'
