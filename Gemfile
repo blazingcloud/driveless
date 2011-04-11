@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
 
-gem 'rails', '=2.3.11'
+gem 'rails', '=2.3.5'
 gem 'haml', '2.2.23'
 gem 'sqlite3'
 gem 'compass'
@@ -24,4 +24,5 @@ group :test do
   gem 'faker',  '= 0.3.1'
   gem 'capybara', '0.3.9'
   gem 'launchy'
+  gem 'ruby-debug'
 end

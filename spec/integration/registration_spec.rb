@@ -27,6 +27,7 @@ describe "Registration" do
         
         it "should take us to the right page" do
           current_path.should == account_path
+          save_and_open_page
           page.should have_content("Registration successful.")
         end
         
@@ -41,6 +42,7 @@ describe "Registration" do
             fill_in "user_session[username]", :with => "Moogles"
             fill_in "user_session[password]", :with => "password"
             click_button "Login"
+          save_and_open_page
             page.should have_content("Successfully logged in.")
           end
         end
@@ -58,6 +60,7 @@ describe "Registration" do
         
         it "should take us to the right page" do
           current_path.should == account_path
+          save_and_open_page
           page.should have_content("Registration successful.")
         end
       end
