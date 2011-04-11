@@ -17,8 +17,8 @@ gem 'mysql'
 gem 'authlogic-connect'
 
 group :test do
-  gem 'rspec',  '~> 1.3.0'
-  gem 'rspec-rails',  '~> 1.3.0'
+  gem 'rspec',  '~> 1.3.1'
+  gem 'rspec-rails',  '~> 1.3.3'
   gem 'shoulda',  '~> 2.10.3'
   gem 'machinist',  '~> 1.0.6'
   gem 'faker',  '= 0.3.1'

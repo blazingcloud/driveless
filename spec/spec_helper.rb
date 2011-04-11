@@ -2,9 +2,6 @@
 # from the project root directory.
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
-module Spec::Rails
-  
-end
 require 'spec/autorun'
 require 'spec/rails'
 require 'capybara/rails' 
