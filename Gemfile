@@ -13,9 +13,8 @@ gem 'formtastic', '~>1.2.3'
 gem 'googlecharts', :require => "gchart"
 gem 'facebooker', '~>1.0.75'
 gem 'ruby-openid', '>= 2.0.4'
-gem 'mysql'
 gem 'authlogic-connect', '0.0.6',
-    :git => "git@github.com:blazingcloud/authlogic-connect.git",
+    :git => "https://github.com/blazingcloud/authlogic-connect.git",
     :branch => "fix"
 
 group :test do
