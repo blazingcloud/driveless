@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 source 'http://gems.github.com'
 
 gem 'rails', '=2.3.11'
+gem 'rack', '1.1.2'
 gem 'haml', '2.2.23'
 gem 'sqlite3'
 gem 'compass'
@@ -32,5 +33,5 @@ group :test, :development do
 end
 
 group :development do
-  gem 'heroku'
+  gem 'heroku', '~>1.20.1'
 end
