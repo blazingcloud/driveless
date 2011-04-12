@@ -23,9 +23,4 @@
           = f.submit "Login"
 
 %fieldset.outline
-  %legend Login using An Account on Another Social Service
-  .open_id
-    - form_for @user_session do |f|
-      = f.error_messages if @user_session.openid_identifier
-      %p= link_to 'Signup now!', register_path, :class => 'button small'
-      = render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => "Login", :model => "user_session"}
+

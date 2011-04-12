@@ -74,11 +74,7 @@
 - if show_password
   %fieldset.outline
     %legend
-      Signup using a
       %a{:class => 'button activate-section', :href => '#auth-password'} Password
-      or a
-      %a{:class => 'button inactive activate-section', :href => '#auth-open_id'} Login You Already Have
-
     .auth
       - if @user.openid_identifier.blank?
         .password
@@ -92,7 +88,6 @@
             = f.password_field :password_confirmation
           %p
             = f.submit submit_button_label
-        .open_id{:style => "display: none"}= render :partial => 'shared/openid_identifier', :locals => {:submit_button_label => submit_button_label, :model => "user"}
 - else
   %p= f.submit submit_button_label
 
