@@ -96,5 +96,5 @@
 - else
   %p= f.submit submit_button_label
 
-- unless @user.openid_identifier || @user.facebook_uid
+- unless @user.openid_identifier
   %p= link_to 'Reset Your Password', password_resets_url, :class => 'button'

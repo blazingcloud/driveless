@@ -23,16 +23,6 @@
           = f.submit "Login"
 
 %fieldset.outline
-  %legend Login using Facebook
-  .facebook
-    %p
-    - render :layout => 'shared/tip' do
-      %p
-        If you connect with Facebook you don't need to signup!
-        = authlogic_facebook_login_button :js => :jquery
-
-
-%fieldset.outline
   %legend Login using An Account on Another Social Service
   .open_id
     - form_for @user_session do |f|
