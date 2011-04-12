@@ -14,17 +14,24 @@ gem 'googlecharts', :require => "gchart"
 gem 'facebooker', '~>1.0.75'
 gem 'ruby-openid', '>= 2.0.4'
 gem 'mysql'
-gem 'authlogic-connect', '0.0.6', 
-  :git => "git@github.com:blazingcloud/authlogic-connect.git", 
-  :branch => "fix"
+gem 'authlogic-connect', '0.0.6',
+    :git => "git@github.com:blazingcloud/authlogic-connect.git",
+    :branch => "fix"
 
 group :test do
-  gem 'rspec',  '~> 1.3.1'
-  gem 'rspec-rails',  '~> 1.3.3'
-  gem 'shoulda',  '~> 2.10.3'
-  gem 'machinist',  '~> 1.0.6'
-  gem 'faker',  '= 0.3.1'
+  gem 'rspec', '~> 1.3.1'
+  gem 'rspec-rails', '~> 1.3.3'
+  gem 'shoulda', '~> 2.10.3'
+  gem 'machinist', '~> 1.0.6'
+  gem 'faker', '= 0.3.1'
   gem 'capybara', '0.3.9'
   gem 'launchy'
+end
+
+group :test, :development do
   gem 'ruby-debug'
+end
+
+group :development do
+  gem 'heroku'
 end
