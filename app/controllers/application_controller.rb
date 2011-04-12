@@ -12,19 +12,9 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user, :logged_in?, :admin_logged_in?
 
-  prepend_before_filter :save_notice
+  before_filter :flash
 
   private
-
-  def save_notice
-    # When we upgraded Rails and Ruby Gems from 2.3.5 and 1.3.7 respectively,
-    # flash messages disappeared for logged in users. So we save the notice
-    # in an instance variable to restore later. May need to do this for other
-    # types of messages, too. Seems like they were disappearing in cases where
-    # ApplicationController#require_no_user was invoked and may have happened
-    # inside that method.
-    @notice = flash[:notice]
-  end
 
     def not_allowed
       flash[:warning] = "You're not allowed to perform that action"
@@ -80,9 +70,14 @@ class ApplicationController < ActionController::Base
     def require_no_user
       if current_user
         store_location
-        # Even though flash[:notice] is still populated, unless we refresh the value
-        # here, it will be emptied out. @notice is set in #save_notice above.
-        flash[:notice] = @notice
+        # When we upgraded Rails and Ruby Gems from 2.3.5 and 1.3.7 respectively,
+        # flash messages disappeared for logged in users. We resolve this by
+        # keeping the flash for the next action. Pretty straight-forward, except
+        # that flash.keep doesn't work unless flash is called in a before_filter
+        # that is called before this one (even if it's the filter called 
+        # immediately before this one). It may be just that @_flash needs to 
+        # exist before this filter is invoked.
+        flash.keep
         redirect_to account_url
       end
     end
