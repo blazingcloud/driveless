@@ -32,6 +32,7 @@ GEM
       activesupport
     authlogic-oid (1.0.4)
       authlogic
+    builder (3.0.0)
     capybara (0.3.9)
       culerity (>= 0.2.4)
       mime-types (>= 1.16)
@@ -65,6 +66,9 @@ GEM
     heroku (1.20.1)
       launchy (~> 0.3.2)
       rest-client (>= 1.4.0, < 1.7.0)
+    hoptoad_notifier (2.4.9)
+      activesupport
+      builder
     i18n (0.5.0)
     inherited_resources (1.0.3)
       has_scope (~> 0.4.2)
@@ -136,6 +140,7 @@ DEPENDENCIES
   googlecharts
   haml (= 2.2.23)
   heroku (~> 1.20.1)
+  hoptoad_notifier
   inherited_resources (= 1.0.3)
   launchy
   machinist (~> 1.0.6)

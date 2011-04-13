@@ -18,6 +18,10 @@ gem 'authlogic-connect', '0.0.6',
     :git => "https://github.com/blazingcloud/authlogic-connect.git",
     :branch => "fix"
 
+group :production do
+  gem 'hoptoad_notifier'
+end
+
 group :test do
   gem 'rspec', '~> 1.3.1'
   gem 'rspec-rails', '~> 1.3.3'
