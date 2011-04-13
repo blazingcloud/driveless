@@ -72,7 +72,7 @@ describe "Registration" do
     end
     
     it "should have 'Forgot Your Password?' button" do
-      page.should have_content("Forgot your password?")
+      page.should have_content("Forgot your nickname or password?")
     end
   end
 end
