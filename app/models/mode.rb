@@ -4,5 +4,5 @@ class Mode < ActiveRecord::Base
 
   has_many :trips
 
-  named_scope :by_name, :order => 'modes.name'
+  scope :by_name, :order => 'modes.name'
 end

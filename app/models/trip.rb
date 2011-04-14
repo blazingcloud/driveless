@@ -11,10 +11,10 @@ class Trip < ActiveRecord::Base
   after_save :update_green_miles
   after_destroy :update_green_miles
 
-  named_scope :not_green, :joins => :mode, :conditions => {:"modes.green" => false}
-  named_scope :only_green, :joins => :mode, :conditions => {:"modes.green" => true}
-  named_scope :made_since, lambda { |date| {:conditions => ['trips.made_at >= ?', date.to_date]} }
-  named_scope :summed_by_mode_and_date,
+  scope :not_green, :joins => :mode, :conditions => {:"modes.green" => false}
+  scope :only_green, :joins => :mode, :conditions => {:"modes.green" => true}
+  scope :made_since, lambda { |date| {:conditions => ['trips.made_at >= ?', date.to_date]} }
+  scope :summed_by_mode_and_date,
     :select => 'modes.name AS mode_name, trips.made_at, sum(trips.distance) AS distance_sum',
     :joins => :mode,
     :group => 'modes.name, trips.made_at'
