@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.robots 'robots.txt', :controller => 'robots', :action => 'robots_txt'
+
   map.resources :modes
 
   map.resources :baseline_trips
