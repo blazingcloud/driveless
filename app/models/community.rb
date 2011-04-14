@@ -5,7 +5,7 @@ class Community < ActiveRecord::Base
   before_destroy :ensure_there_are_no_members
 
   # Is there any 'rubiest' way to do this?
-  named_scope :by_green_miles,
+  scope :by_green_miles,
     :select => ['communities.id, communities.name, communities.state, communities.country, 
       communities.description, SUM(users.green_miles) as green_miles, SUM(users.green_miles)*modes.lb_co2_per_mile'],
     :joins => [:users => {:trips => :mode}],

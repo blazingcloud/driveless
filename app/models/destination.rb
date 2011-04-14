@@ -3,5 +3,5 @@ class Destination < ActiveRecord::Base
 
   attr_accessible :name
 
-  named_scope :by_name, :order => 'name'
+  scope :by_name, :order => 'name'
 end

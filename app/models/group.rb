@@ -8,7 +8,7 @@ class Group < ActiveRecord::Base
   validates_presence_of :name, :owner_id, :destination_id
   validates_uniqueness_of :name
 
-  named_scope :by_name , :order => 'name ASC'
+  scope :by_name , :order => 'name ASC'
 
   def self.find_leaderboard(group_ids_sql, user_id, order = :miles)
     order_sql = order.to_sym == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'
