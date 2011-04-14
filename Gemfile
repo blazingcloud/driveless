@@ -1,17 +1,15 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
 
-gem 'rails', '=2.3.11'
-gem 'rack', '1.1.2'
+gem 'rails', '~>3.0.5'
 gem 'haml', '~>3.0.25' # latest as of 2011-04-13
-gem 'sqlite3'
 gem 'compass'
 gem 'authlogic'
 #gem 'authlogic-oid', :require => "authlogic_openid"
-gem 'inherited_resources', '=1.0.3'
+gem 'inherited_resources', '~>1.2.1'
 gem 'will_paginate'
 gem 'formtastic', '~>1.2.3' # latest as of 2011-04-13
-gem 'googlecharts', :require => "gchart"
+gem 'googlecharts', '~>1.6.1' #, :require => "gchart"
 #gem 'facebooker', '~>1.0.75'
 #gem 'ruby-openid', '>= 2.0.4'
 #gem 'authlogic-connect', '0.0.6',
@@ -22,19 +20,16 @@ group :production do
   gem 'hoptoad_notifier'
 end
 
-group :test do
-  gem 'rspec', '~> 1.3.1'
-  gem 'rspec-rails', '~> 1.3.3'
-  gem 'shoulda', '~> 2.10.3'
-  gem 'machinist', '~> 1.0.6'
-  gem 'faker', '= 0.3.1'
-  gem 'capybara', '0.3.9'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'machinist'
+  gem 'faker'
+  gem 'capybara'
   gem 'launchy'
-  gem 'rr', '1.0.2'
-end
-
-group :test, :development do
+  gem 'rr'
   gem 'ruby-debug'
+  gem 'sqlite3'
 end
 
 group :development do
