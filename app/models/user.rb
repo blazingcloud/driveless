@@ -18,15 +18,11 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email, :username, :name, :address, :city, :zip
 
-  restful_easy_messages
-
   before_create :create_baseline
 
   attr_protected :admin
 
-  acts_as_authentic do |c|
-    c.openid_required_fields = [:nickname, :email]
-  end # block optional
+  acts_as_authentic 
 
   def badges
     [

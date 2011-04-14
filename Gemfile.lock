@@ -1,18 +1,3 @@
-GIT
-  remote: https://github.com/blazingcloud/authlogic-connect.git
-  revision: e60e9c4c1e2523be3b41011b9f3d4eec32d51b0e
-  branch: fix
-  specs:
-    authlogic-connect (0.0.6)
-      activerecord (>= 2.1.2)
-      activesupport (>= 2.1.2)
-      authlogic
-      json
-      oauth
-      oauth2
-      rack-openid (>= 0.2.1)
-      ruby-openid
-
 GEM
   remote: http://rubygems.org/
   remote: http://gems.github.com/
@@ -27,11 +12,8 @@ GEM
     activeresource (2.3.11)
       activesupport (= 2.3.11)
     activesupport (2.3.11)
-    addressable (2.2.5)
     authlogic (2.1.6)
       activesupport
-    authlogic-oid (1.0.4)
-      authlogic
     builder (3.0.0)
     capybara (0.3.9)
       culerity (>= 0.2.4)
@@ -43,17 +25,11 @@ GEM
     childprocess (0.1.8)
       ffi (~> 1.0.6)
     columnize (0.3.2)
-    compass (0.8.17)
-      haml (>= 2.2.0)
+    compass (0.10.6)
+      haml (>= 3.0.4)
     configuration (1.2.0)
     culerity (0.2.15)
-    facebooker (1.0.75)
-      json_pure (>= 1.0.0)
     faker (0.3.1)
-    faraday (0.6.0)
-      addressable (~> 2.2.4)
-      multipart-post (~> 1.1.0)
-      rack (>= 1.1.0, < 2)
     ffi (1.0.7)
       rake (>= 0.8.7)
     formtastic (1.2.3)
@@ -61,11 +37,11 @@ GEM
       activesupport (>= 2.3.7)
       i18n (~> 0.4)
     googlecharts (1.6.1)
-    haml (2.2.23)
+    haml (3.0.25)
     has_scope (0.4.2)
     heroku (1.20.1)
       launchy (~> 0.3.2)
-      rest-client (>= 1.4.0, < 1.7.0)
+      rest-client (< 1.7.0, >= 1.4.0)
     hoptoad_notifier (2.4.9)
       activesupport
       builder
@@ -73,7 +49,6 @@ GEM
     inherited_resources (1.0.3)
       has_scope (~> 0.4.2)
       responders (~> 0.4.3)
-    json (1.5.1)
     json_pure (1.5.1)
     launchy (0.3.7)
       configuration (>= 0.0.5)
@@ -81,17 +56,8 @@ GEM
     linecache (0.43)
     machinist (1.0.6)
     mime-types (1.16)
-    multi_json (0.0.5)
-    multipart-post (1.1.0)
     nokogiri (1.4.4)
-    oauth (0.4.4)
-    oauth2 (0.3.0)
-      faraday (~> 0.6.0)
-      multi_json (~> 0.0.4)
     rack (1.1.2)
-    rack-openid (1.3.1)
-      rack (>= 1.1.0)
-      ruby-openid (>= 2.1.8)
     rack-test (0.5.7)
       rack (>= 1.0)
     rails (2.3.11)
@@ -105,6 +71,7 @@ GEM
     responders (0.4.7)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    rr (1.0.2)
     rspec (1.3.2)
     rspec-rails (1.3.4)
       rack (>= 1.0.0)
@@ -114,7 +81,6 @@ GEM
       ruby-debug-base (~> 0.10.4.0)
     ruby-debug-base (0.10.4)
       linecache (>= 0.3)
-    ruby-openid (2.1.8)
     rubyzip (0.9.4)
     selenium-webdriver (0.1.4)
       childprocess (>= 0.1.7)
@@ -130,15 +96,12 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic
-  authlogic-connect (= 0.0.6)!
-  authlogic-oid
   capybara (= 0.3.9)
   compass
-  facebooker (~> 1.0.75)
   faker (= 0.3.1)
   formtastic (~> 1.2.3)
   googlecharts
-  haml (= 2.2.23)
+  haml (~> 3.0.25)
   heroku (~> 1.20.1)
   hoptoad_notifier
   inherited_resources (= 1.0.3)
@@ -146,10 +109,10 @@ DEPENDENCIES
   machinist (~> 1.0.6)
   rack (= 1.1.2)
   rails (= 2.3.11)
+  rr (= 1.0.2)
   rspec (~> 1.3.1)
   rspec-rails (~> 1.3.3)
   ruby-debug
-  ruby-openid (>= 2.0.4)
   shoulda (~> 2.10.3)
   sqlite3
   will_paginate
