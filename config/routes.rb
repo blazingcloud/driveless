@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-
   map.robots 'robots.txt', :controller => 'robots', :action => 'robots_txt'
+
+  devise_for :users
 
   map.resources :modes
 
@@ -50,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   map.privacy "privacy", :controller => "users", :action => "privacy"
   map.users_csv "users_csv", :controller => "users", :action => "csv"
 
-  map.root :controller => "user_sessions", :action => "new"
+  root :to => "user_sessions#new"
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
