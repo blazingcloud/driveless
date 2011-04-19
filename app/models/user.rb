@@ -22,8 +22,6 @@ class User < ActiveRecord::Base
 
   attr_protected :admin
 
-  acts_as_authentic 
-
   def badges
     [
       (
