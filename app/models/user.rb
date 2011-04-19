@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  cattr_reader :per_page
+  @@per_page = 10
   has_one :baseline
 
   has_many :modes, :through => :trips
@@ -9,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
   has_many :friendships, :dependent => :destroy
   has_many :friends, :through => :friendships
-  has_many :messages, :foreign_key => :receiver_id
   
   belongs_to :community
   
