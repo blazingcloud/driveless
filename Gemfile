@@ -13,6 +13,7 @@ gem 'will_paginate'
 gem 'formtastic', '~>1.2.3' # latest as of 2011-04-13
 gem 'googlecharts', '~>1.6.1' #, :require => "gchart"
 gem 'hoptoad_notifier'
+gem 'dynamic_form'
 
 group :development, :test do
   gem 'rspec-rails'
