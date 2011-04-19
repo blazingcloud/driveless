@@ -30,8 +30,6 @@ GEM
       activesupport (= 3.0.7)
     activesupport (3.0.7)
     arel (2.0.9)
-    authlogic (2.1.6)
-      activesupport
     builder (2.1.2)
     capybara (0.4.1.2)
       celerity (>= 0.7.9)
@@ -156,7 +154,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  authlogic
   capybara
   compass (= 0.11.beta.7)
   compass-960-plugin

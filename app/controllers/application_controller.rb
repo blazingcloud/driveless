@@ -3,10 +3,9 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  require 'authlogic'
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  helper_method :current_user
+  helper_method :current_user, :admin_logged_in?
 
   private
 
@@ -26,6 +25,10 @@ class ApplicationController < ActionController::Base
 
   def require_no_user
     redirect_to account_path
+  end
+
+  def admin_logged_in?
+    true
   end
 
 end
