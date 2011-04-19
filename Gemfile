@@ -2,8 +2,9 @@ source 'http://rubygems.org'
 source 'http://gems.github.com'
 
 gem 'rails', '~>3.0.5'
-gem 'haml', '~>3.0.25' # latest as of 2011-04-13
-gem 'compass'
+gem 'haml', '3.1.0.alpha.147'
+gem 'compass', '0.11.beta.7'
+gem 'compass-960-plugin'
 gem 'authlogic'
 gem 'fastercsv'
 #gem 'hassle'

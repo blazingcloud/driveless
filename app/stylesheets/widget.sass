@@ -1,5 +1,5 @@
 =carved-text
-  text-shadow = "#000 0px -1px 1px"
+  text-shadow: unquote("#000 0px -1px 1px")
 
 body
   +carved-text
@@ -10,10 +10,10 @@ body
   .widget
     font-family: Helvetica, sans-serif
     background: black
-    background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(102,102,102)),color-stop(0.24, rgb(32,32,32)),color-stop(0.25, rgb(20,20,20)),color-stop(0.93, rgb(0,0,0)))
-    background: -moz-linear-gradient(center top,rgb(255,255,255) 0%,rgb(224,224,224) 49%,rgb(201,201,201) 50%,rgb(161,161,161) 93%)      
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(102, 102, 102)), color-stop(0.24, rgb(32, 32, 32)), color-stop(0.25, rgb(20, 20, 20)), color-stop(0.93, rgb(0, 0, 0)))
+    background: -moz-linear-gradient(center top, rgb(255, 255, 255) 0%, rgb(224, 224, 224) 49%, rgb(201, 201, 201) 50%, rgb(161, 161, 161) 93%)
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FFFFFFFF, endColorstr=#AAAAAAAA)"
-    color: #fff
+    color: white
     padding: 2px 5px
     left: 4px
     right: 4px
@@ -24,9 +24,9 @@ body
     -moz-box-sizing: border-box
     -webkit-border-radius: 5px
     -moz-border-radius: 5px
-    border: 1px solid #666
-    -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.5)
-    -moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.5)
+    border: 1px solid #666666
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5)
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5)
   .username
     float: right
   .add-trip
