@@ -12,6 +12,5 @@
   %h1 #{@user.username}'s Profile
   .in-page-badges= render :partial => 'shared/user_badges', :locals => {:user => @user, :name => nil}
   .clear
-  %p= link_to 'Send a Message!', new_message_url( :recipient => @user.id ), :class => 'button'
 
 = render :partial => 'trips/stream'
