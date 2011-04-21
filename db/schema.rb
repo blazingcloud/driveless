@@ -157,8 +157,8 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "password_salt"
-    t.integer  "login_count",                       :default => 0,     :null => false
-    t.integer  "failed_login_count",                :default => 0,     :null => false
+    t.integer  "login_count",                         :default => 0,     :null => false
+    t.integer  "failed_login_count",                  :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -170,20 +170,26 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
     t.string   "username"
     t.string   "pseudonym"
     t.integer  "community_id"
-    t.boolean  "admin",                             :default => false
+    t.boolean  "admin",                               :default => false
     t.string   "city"
-    t.integer  "green_miles",                       :default => 0
-    t.integer  "facebook_uid",         :limit => 8
+    t.integer  "green_miles",                         :default => 0
+    t.integer  "facebook_uid",           :limit => 8
     t.string   "facebook_session_key"
-    t.string   "name",                              :default => ""
-    t.string   "address",                           :default => ""
+    t.string   "name",                                :default => ""
+    t.string   "address",                             :default => ""
     t.boolean  "is_13"
     t.boolean  "is_parent"
     t.boolean  "read_privacy"
     t.string   "zip"
     t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.string   "remember_token"
     t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.string   "authentication_token"
   end
 
