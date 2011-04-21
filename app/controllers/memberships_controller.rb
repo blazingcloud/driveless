@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_filter :require_user
+  before_filter :authenticate_user!
 
   def destroy
     membership = current_user.memberships.find(params[:id])

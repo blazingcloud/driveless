@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
 
-  before_filter :require_user
+  before_filter :authenticate_user!
 
   def index
     mode_id = params[:mode_id].to_i

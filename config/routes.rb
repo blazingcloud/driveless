@@ -48,7 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.privacy "privacy", :controller => "users", :action => "privacy"
   map.users_csv "users_csv", :controller => "users", :action => "csv"
 
-  root :to => "user_sessions#new"
+  root :to => "home#index"
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

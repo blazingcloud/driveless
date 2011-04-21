@@ -15,6 +15,7 @@ gem 'dynamic_form'
 gem 'devise'
 #gem 'omniauth'
 
+gem 'pg', '0.11.0' # Not using ~> because when pg is installed it needs ARCHFLAGS="-arch x86_64"
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda'
@@ -29,4 +30,5 @@ end
 
 group :development do
   gem 'heroku', '~>1.20.1'
+  gem 'taps'
 end
