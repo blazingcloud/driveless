@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  #helper_method :admin_logged_in?
+  helper_method :admin_logged_in?
 
   #private
 
@@ -15,16 +15,16 @@ class ApplicationController < ActionController::Base
     #true
   #end
 
-  #def require_admin
-    #true
-  #end
+  def require_admin
+    not_allowed unless admin_logged_in?
+  end
 
   #def require_no_user
     #redirect_to account_path
   #end
 
-  #def admin_logged_in?
-    #true
-  #end
+  def admin_logged_in?
+    current_user && current_user.admin?
+  end
 
 end
