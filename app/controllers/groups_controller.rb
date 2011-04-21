@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_filter :require_user
+  before_filter :authenticate_user!
   before_filter :load_group, :only => [:show, :edit, :update, :destroy]
   before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ]
 

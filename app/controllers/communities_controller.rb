@@ -1,5 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_filter :require_user
+  before_filter :authenticate_user!
   before_filter :require_admin, :only => [ :update, :edit, :new, :create, :destroy ]
 
   def new

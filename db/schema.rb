@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110419221702) do
+ActiveRecord::Schema.define(:version => 20110420234333) do
 
   create_table "baselines", :force => true do |t|
     t.integer  "user_id"
@@ -155,11 +155,8 @@ ActiveRecord::Schema.define(:version => 20110419221702) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.string   "crypted_password"
+    t.string   "encrypted_password"
     t.string   "password_salt"
-    t.string   "persistence_token"
-    t.string   "single_access_token"
-    t.string   "perishable_token"
     t.integer  "login_count",                       :default => 0,     :null => false
     t.integer  "failed_login_count",                :default => 0,     :null => false
     t.datetime "last_request_at"
@@ -184,6 +181,10 @@ ActiveRecord::Schema.define(:version => 20110419221702) do
     t.boolean  "is_parent"
     t.boolean  "read_privacy"
     t.string   "zip"
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["community_id"], :name => "index_users_on_community_id"
