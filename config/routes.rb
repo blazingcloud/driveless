@@ -42,10 +42,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :user_session
 
-  map.login "login", :controller => "user_sessions", :action => "new"
-  map.logout "logout", :controller => "user_sessions", :action => "destroy"
-  map.register "register", :controller => "users", :action => "new"
-  map.privacy "privacy", :controller => "users", :action => "privacy"
+  match 'login' => redirect('/users/sign_in')
+  match 'logout' => redirect('/users/sign_out')
+  match 'register' => redirect('/users/sign_up')
+  match 'privacy' => 'users#privacy'
+
   map.users_csv "users_csv", :controller => "users", :action => "csv"
 
   root :to => "home#index"
