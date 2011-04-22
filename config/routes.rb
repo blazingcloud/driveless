@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   resources :invitations, :only => [ :index, :create ]
 
-  match 'group/:id', :to => 'groups#show'
+  match 'group/:id', :to => 'groups#show', :as => 'group'
   match 'groups', :to => 'groups#index_all'
 
   # This is not the best way to map join and leave routes. This could be done through groups resource.
