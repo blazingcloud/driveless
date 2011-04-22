@@ -179,7 +179,7 @@ class User < ActiveRecord::Base
   end
 
   def friendship_to( user_id )
-    friendships.create(:friend_id => user_id)
+    friendships.create!(:friend_id => user_id)
     friend = User.find_by_id( user_id )
     deliver_friendship_notification!( friend )
   end

@@ -24,9 +24,11 @@ module ApplicationHelper
     return "<span class='you'>this is you!</span>" if user == current_user
     friend = current_user.friendship_for(user)
     if friend
-      link_to 'hide friend', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button small'
+#      link_to 'hide friend', friend, :method => :delete, :confirm => "Are you sure?", :class => 'button small'
+      button_to 'hide friend', {:controller => 'friendships', :action => "destroy", :id => friend.id}, :method => :delete, :confirm => "Are you sure?", :class => 'button small'
     else
-      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post, :class => 'button small'
+#      link_to 'add friend', friendships_path(:friend_id => user.id), :method => :post, :class => 'button small'
+      button_to 'add friend', {:controller => 'friendships', :action => 'create', :friend_id => user.id}, :method => :post, :class => 'button small'
     end
   end
 end
