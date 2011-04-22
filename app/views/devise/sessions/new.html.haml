@@ -1,0 +1,28 @@
+- title "Login"
+%fieldset.outline
+  %legend Login
+  .auth
+    .password
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'plain'}) do |f|
+        %p
+        = render :layout => 'shared/tip' do
+          %p
+            If you don't have an account yet or you have only pre-registered then
+            = link_to 'Signup now!', register_path, :class => 'button small'
+        %p
+          = f.label :email
+          %br
+          = f.email_field :email
+        %p
+          = f.label :password
+          %br
+          = f.password_field :password
+
+        - if devise_mapping.rememberable?
+          %p
+            = f.check_box :remember_me
+            = f.label :remember_me
+            - if devise_mapping.recoverable? && controller_name != 'passwords'
+              = link_to "Forgot your password?", new_password_path(resource_name), :class => 'button small'
+        %p
+          = f.submit "Login"

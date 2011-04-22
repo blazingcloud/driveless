@@ -1,0 +1,98 @@
+= f.hidden_field :id
+%fieldset.outline
+  %legend Your Username
+  %p
+    This is the name everyone will see on your profile.
+  %p
+    %b> If you are under 18
+    , do not include your last or family name in your Nickname. First names and first letter of last names are OK.   For example, you can enter
+    %i Mary K
+    if your first name is&nbsp;
+    %i> Mary Keller
+    , or&nbsp;
+    %i> Marybiker
+    , or similar nicknames.
+  %p
+    = f.text_field :username
+%fieldset.outline
+  %legend Your Profile
+  - render :layout => 'shared/info' do
+    %p
+      Participating in the Drive Less Challenge makes you eligible for some prizes and awards. We need this information so we can send you prizes when you win!
+      %b Your privacy is very important to us and this information will not be made public.
+  %p
+    = f.label :email, "Email Address"
+    %br
+    = f.email_field :email
+  %p
+    = f.label :name, "Real Name"
+    %br
+    = f.text_field :name
+  %p
+    = f.label :address, "Street Address"
+    %br
+    = f.text_field :address
+  %p
+    = f.label :city
+    %br
+    = f.text_field :city
+  %p
+    = f.label :zip, "Postal/Zip Code"
+    %br
+    = f.text_field :zip
+
+%fieldset.outline
+  %legend Agreements
+  - if @user.id && @user.read_privacy
+    %p You have agreed to the terms of service.
+  - else
+    %p
+      = f.check_box :is_13
+      = f.label :is_13, "I am 13 years of age or older. (required)"
+    %p Kids under 13 years old can participate only if a responsible parent or guardian agrees to register and use this system on behalf of the minor by checking the box below. We also recommend that anyone 13 to 17 years of age ask their parents or guardian for permission before registering.
+    %p.is-parent
+      = f.check_box :is_parent
+      = f.label :is_parent, "I am a parent or legal guardian using this service on behalf of my minor."
+    %p
+      = f.check_box :read_privacy
+      = f.label :read_privacy, "I have read the <a href='/privacy' target='_blank'>privacy policy</a>. (required)"
+
+
+%fieldset.outline
+  %legend Join a Participating Community
+  %p
+    Some geographic communities are officially participating in the Drive Less Challenge. If you live, work, or play in one of the communities listed below you can earn green miles for them by joining up!
+  %p
+    = f.select :community_id, options_from_collection_for_select(communities, 'id', 'name', :selected => @user.community_id), {:include_blank => true}
+
+- if admin_logged_in?
+  %p
+    = f.label :admin
+    %br
+    = f.check_box :admin
+
+-#- if show_password
+- if true # set to true because we don't support other ways of logging in yet
+  %fieldset.outline
+    %legend
+      %a{:class => 'button activate-section', :href => '#auth-password'} Password
+    .auth
+      -#- if @user.openid_identifier.blank?
+      - if true # set to true because we don't support other ways of logging in yet
+        .password
+          %p
+            = f.label :password
+            %br
+            = f.password_field :password
+          %p
+            = f.label :password_confirmation
+            %br
+            = f.password_field :password_confirmation
+          %p
+            = f.submit submit_button_label
+- else
+  %p= f.submit submit_button_label
+
+- unless @user.openid_identifier
+  %p= link_to 'Reset Your Password', new_user_password_path, :class => 'button'
+

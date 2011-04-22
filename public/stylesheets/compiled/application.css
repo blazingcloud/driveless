@@ -293,7 +293,7 @@ a img {
 }
 
 /* line 243, ../../../app/stylesheets/application.sass */
-#errorExplanation {
+#errorExplanation, #error_explanation {
   width: 400px;
   border: 2px solid #cf0000;
   padding: 0px;
@@ -302,7 +302,7 @@ a img {
   background-color: #f0f0f0;
 }
 /* line 250, ../../../app/stylesheets/application.sass */
-#errorExplanation h2 {
+#errorExplanation h2, #error_explanation h2 {
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
@@ -312,17 +312,17 @@ a img {
   color: white;
 }
 /* line 258, ../../../app/stylesheets/application.sass */
-#errorExplanation p {
+#errorExplanation p, #error_explanation p {
   color: #333333;
   margin-bottom: 0;
   padding: 8px;
 }
 /* line 262, ../../../app/stylesheets/application.sass */
-#errorExplanation ul {
+#errorExplanation ul, #error_explanation ul {
   margin: 2px 24px;
 }
 /* line 264, ../../../app/stylesheets/application.sass */
-#errorExplanation ul li {
+#errorExplanation ul li, #error_explanation ul li {
   font-size: 12px;
   line-height: 19px !important;
   list-style: disc;
