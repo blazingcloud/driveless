@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  helper_method :admin_logged_in?
+  helper_method :admin_logged_in?, :communities
 
   #private
 
@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
 
   def admin_logged_in?
     current_user && current_user.admin?
+  end
+
+  def communities
+    @communities ||= Community.find(:all, :order => "name")
   end
 
 end
