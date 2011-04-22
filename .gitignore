@@ -6,3 +6,4 @@ tmp/
 .idea/*
 db/*.sqlite3
 tags
+.sass-cache/**/*
