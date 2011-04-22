@@ -31,4 +31,5 @@ end
 group :development do
   gem 'heroku', '~>1.20.1'
   gem 'taps'
+  gem 'pivotal_git_scripts'
 end

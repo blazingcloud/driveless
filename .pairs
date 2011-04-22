@@ -1,0 +1,13 @@
+pairs:
+  cde: Carmen Diaz Echauri
+  jw: Jen-Mei Wu
+  lh: Liah Hansen
+  al: Amy Lee
+  rm: Rachel Myers
+  sa: Sarah Allen
+  wy: Walter Yu
+
+email:
+  prefix: pair
+  domain: blazingcloud.net
+
