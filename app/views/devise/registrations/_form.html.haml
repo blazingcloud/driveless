@@ -91,7 +91,3 @@
             = f.submit submit_button_label
 - else
   %p= f.submit submit_button_label
-
-- unless @user.openid_identifier
-  %p= link_to 'Reset Your Password', new_user_password_path, :class => 'button'
-
