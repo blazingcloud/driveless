@@ -14,9 +14,9 @@ module ApplicationHelper
 
     membership = group.membership_for(current_user)
     if membership
-      link_to 'leave', membership, :method => :delete, :confirm => "Are you sure?", :class => 'button small'
+      button_to 'leave', {:controller => "memberships", :action => "destroy", :id => membership.id}, :method => :delete, :class => 'button small'
     else
-      link_to 'join', memberships_path(:group_id => group.id), :method => :post, :class => 'button small'
+      button_to 'join', {:controller => "memberships", :action => "create", :group_id => group.id}, :class => 'button small'
     end
   end
 

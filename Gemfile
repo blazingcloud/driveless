@@ -13,6 +13,7 @@ gem 'googlecharts', '~>1.6.1' #, :require => "gchart"
 gem 'hoptoad_notifier'
 gem 'dynamic_form'
 gem 'devise'
+gem 'jquery-rails'
 #gem 'omniauth'
 
 gem 'pg', '0.11.0' # Not using ~> because when pg is installed it needs ARCHFLAGS="-arch x86_64"
