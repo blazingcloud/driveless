@@ -26,12 +26,12 @@ describe User do
       bike_trips = []
       walk_trips = []
 
-      bike_trips << @fred.trips.make(:mode => @bike, :distance => 10)
-      bike_trips << @fred.trips.make(:mode => @bike, :distance => 5)
-      bike_trips << @pete.trips.make(:mode => @bike, :distance => 10)
+      bike_trips << @fred.trips.make(:mode => @bike, :distance => 10, :made_at => Date.new(2011, 4, 23))
+      bike_trips << @fred.trips.make(:mode => @bike, :distance => 5, :made_at => Date.new(2011, 4, 24))
+      bike_trips << @pete.trips.make(:mode => @bike, :distance => 10, :made_at => Date.new(2011, 4, 25))
 
-      walk_trips << @fred.trips.make(:mode => @walk, :distance => 5)
-      walk_trips << @pete.trips.make(:mode => @walk, :distance => 5)
+      walk_trips << @fred.trips.make(:mode => @walk, :distance => 5, :made_at => Date.new(2011, 4, 26))
+      walk_trips << @pete.trips.make(:mode => @walk, :distance => 5, :made_at => Date.new(2011, 4, 27))
 
       @fred_bike_distance_sum = bike_trips.inject(0) {|sum, trip| sum += (trip.user == @fred) ? trip.distance : 0}
       @fred_bike_lb_co2_sum   = @fred_bike_distance_sum * @bike.lb_co2_per_mile

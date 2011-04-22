@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "green"
   end
 
   create_table "friendships", :force => true do |t|
@@ -61,12 +62,12 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
   add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
 
   create_table "groups", :force => true do |t|
-    t.string   "name",                           :null => false
+    t.string   "name",           :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id",       :default => -1, :null => false
-    t.integer  "destination_id", :default => -1, :null => false
+    t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :null => false
   end
 
   add_index "groups", ["destination_id"], :name => "index_groups_on_destination_id"
@@ -78,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
     t.text     "invitation", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",       :null => false
   end
 
   add_index "invitations", ["user_id"], :name => "index_invitations_on_user_id"
@@ -86,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
   create_table "lengths", :force => true do |t|
     t.integer  "trip_id"
     t.integer  "mode_id"
-    t.decimal  "distance"
+    t.integer  "distance"
     t.integer  "unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -105,6 +106,23 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
+
+  create_table "messages", :force => true do |t|
+    t.boolean  "receiver_deleted"
+    t.boolean  "receiver_purged"
+    t.boolean  "sender_deleted"
+    t.boolean  "sender_purged"
+    t.datetime "read_at"
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.string   "subject",          :null => false
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "modes", :force => true do |t|
     t.string   "name"
@@ -148,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20110420234333) do
 
   create_table "units", :force => true do |t|
     t.string   "name"
-    t.decimal  "in_miles"
+    t.integer  "in_miles"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

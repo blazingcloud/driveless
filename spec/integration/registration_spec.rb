@@ -12,7 +12,7 @@ describe "Registration" do
     context "clicking 'Signup now!'" do
       before do
         click_link("Signup now!")
-        current_path.should == register_path       
+        current_path.should == '/users/sign_up'
       end
       
       context "filling out form with valid attributes" do

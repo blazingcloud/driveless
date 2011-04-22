@@ -24,6 +24,7 @@ class Group < ActiveRecord::Base
         WHERE memberships.group_id IN
         (#{group_ids_sql})
         AND modes.green = ?
+        AND trips.made_at >= ?
         GROUP BY memberships.group_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY group_id) AS stats_per_group
 
@@ -33,7 +34,7 @@ class Group < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, user_id, true, user_id])
+    find_by_sql([sql, user_id, true, Date.new(2011, 4, 22), user_id])
   end
 
   def stats
@@ -48,13 +49,14 @@ class Group < ActiveRecord::Base
         INNER JOIN modes ON trips.mode_id = modes.id
         WHERE memberships.group_id = ?
         AND modes.green = ?
+        AND trips.made_at >= ?
         GROUP BY memberships.group_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
 
       ON stats_per_mode.group_id = groups.id
       GROUP BY groups.id
     SQL
 
-    c = self.class.find_by_sql([sql, id, true])[0]
+    c = self.class.find_by_sql([sql, id, true, Date.new(2011, 4, 22)])[0]
 
     @stats = {
       :lb_co2_sum   => c.nil? ? 0 : c.lb_co2_sum,
