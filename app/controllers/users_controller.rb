@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Registration successful."
-      redirect_to root_url
+      redirect_to root_path
     else
       render :action => 'new'
     end
@@ -86,7 +86,13 @@ class UsersController < ApplicationController
       @user = current_user
     end
     @user = User.find(@user.id)
-    @user.attributes = params[:user]
+    attr = params[:user]
+    if attr[:password].blank? && attr[:password_confirmation].blank?
+      attr.delete(:password)
+      attr.delete(:password_confirmation)
+    end
+    @user.attributes = attr
+
     if @user.facebook_uid && !@user.crypted_password
       p = @user.newpass(8)
       @user.password= p
@@ -95,13 +101,11 @@ class UsersController < ApplicationController
       @user.read_privacy= true
       @user.save
     end
-    @user.save do |result|
-      if result
-        flash[:notice] = "Successfully updated profile."
-        redirect_to root_url
-      else
-        render :action => 'edit'
-      end
+    if @user.save
+      flash[:notice] = "Successfully updated profile."
+      redirect_to root_path
+    else
+      render :action => 'edit'
     end
   end
 end
