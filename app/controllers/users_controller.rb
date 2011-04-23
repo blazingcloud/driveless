@@ -24,18 +24,39 @@ class UsersController < ApplicationController
 
   def csv
     redirect_to root_path if not current_user.admin?
-    @list = User.find(:all).select{|u| u.email !~ /my.drivelesschallenge.com/}
+    users = User.order(:name).where("email not like '%my.drivelesschallenge.com'")
 
     csv_string = FasterCSV.generate do |csv|
-      csv << ["Username", "Email", "Facebook?", "OpenID?", "Parent?"]
+      csv << [
+        "Name",
+        "Username",
+        "Email",
+        "Address",
+        "City",
+        "Community",
+        "Last login at",
+        "Date created",
+        "Has baseline",
+        "# logged trips",
+        "Date of last trip",
+        "Is parent"
+      ]
 
-      @list.each do |record|
-        csv << [record['username'],
-                record['email'],
-                record['facebook_uid'] ? 'Yes' : '',
-                record['openid_identifier'] ? 'Yes' : '',
-                record['is_parent'] ? 'Yes' : '',
-               ]
+      users.each do |user|
+        csv << [
+          user.name,
+          user.username,
+          user.email,
+          user.address,
+          user.city,
+          user.community.try(:name),
+          user.current_sign_in_at.try(:to_s, :short),
+          user.created_at.try(:to_s, :short),
+          user.baseline.present? ? "yes" : "no",
+          user.trips.count,
+          user.trips.order('made_at desc').try(:first).try(:made_at).try(:to_s, :short),
+          user.is_parent? ? "yes" : "no"
+        ]
       end
     end
 
