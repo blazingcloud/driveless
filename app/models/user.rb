@@ -218,6 +218,46 @@ class User < ActiveRecord::Base
     self.zip = 'Replace me!'
   end
 
+  def self.to_csv
+    csv_string = FasterCSV.generate do |csv|
+        csv << [
+        "Name",
+        "Username",
+        "Email",
+        "Address",
+        "City",
+        "Community",
+        "Last login at",
+        "Date created",
+        "Has baseline",
+        "# logged trips",
+        "Date of last trip",
+        "Is parent"
+      ]
+      order(:name).where("email not like '%my.drivelesschallenge.com'").each do |user|
+        csv << user.to_a_for_csv
+      end
+    end
+    csv_string
+  end
+
+  def to_a_for_csv
+    [
+      name,
+      username,
+      email,
+      address,
+      city,
+      community.try(:name).to_s,
+      current_sign_in_at.try(:to_s, :long).to_s,
+      created_at.try(:to_s, :long).to_s,
+      baseline.updated_for_current_challenge? ? "yes" : "no",
+      trips.count,
+      trips.order('made_at desc').try(:first).try(:made_at).try(:to_s).to_s,
+      is_parent? ? "yes" : "no"
+    ]
+  end
+
   private
 
   def map_openid_registration(registration)

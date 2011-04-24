@@ -15,6 +15,103 @@ describe User do
     User.make
   end
 
+  describe ".to_csv" do
+    attr_reader :csv_array
+    before do
+      User.make
+      User.make
+      User.make(:email => "ignore.me@my.drivelesschallenge.com")
+      @csv = User.to_csv
+      @csv_array = FasterCSV.parse(@csv)
+    end
+
+    it "should print a header line first" do
+      csv_array.first.should include("Username")
+    end
+
+    it "all lines should have same number of fields" do
+      num_fields = csv_array.first.size
+      csv_array.each do |row|
+        row.length.should == num_fields
+      end 
+    end
+
+    it "should exclude users with emails from my.drivelesschallenge.com" do
+      csv_array.length.should == User.count # Header increases count by one; there should only be one @my.drivelesschallenge.com email
+    end
+  end
+
+  describe "#to_a_for_csv" do
+    describe "if no parameters are passed" do
+      attr_reader :user, :current_year, :earth_day
+
+      before do
+        @current_year = Date.today.year
+        @user = User.make(
+          :name => "sally alley",
+          :username => "sally",
+          :email => "sally@example.com",
+          :address => "123 main",
+          :city => "sf",
+          :community => nil
+        )
+        @earth_day = Time.zone.local(current_year, 4, 22, 9)
+        mock(user).created_at { earth_day }
+      end
+      
+      it "should return an array of fields in string format" do
+        user.to_a_for_csv.should == [
+          "sally alley",
+          "sally",
+          "sally@example.com",
+          "123 main", 
+          "sf",
+          "",
+          "",
+          "April 22, 2011 09:00",
+          "no",
+          0,
+          "",
+          "no"
+        ]
+      end
+
+      describe "when user is a parent who lives in Palo Alto, has updated Baseline, and has logged a trip" do
+        before do
+          user.community = Community.find_by_name("Palo Alto")
+          user.current_sign_in_at = Time.zone.local(current_year, 4, 22, 9)
+          mock(user.baseline).updated_for_current_challenge? { true }
+          attrs = {
+            :destination_id => Destination.find_by_name("Work").id,
+            :mode_id => Mode.find_by_name("Bike").id,
+            :distance => 10.0,
+            :unit_id => Unit.find_by_name("Mile").id,
+            :made_at => Date.new(current_year, 4, 22)
+          }
+          user.trips.create!(attrs)
+          user.is_parent = true
+        end
+
+        it "should return an array of fields with the proper values" do
+          user.to_a_for_csv.should == [
+            "sally alley",
+            "sally",
+            "sally@example.com",
+            "123 main", 
+            "sf",
+            "Palo Alto",
+            "April 22, 2011 09:00",
+            "April 22, 2011 09:00",
+            "yes",
+            1,
+            "2011-04-22",
+            "yes"
+          ]
+        end
+      end
+    end
+  end
+
   describe "leaderboards" do
     before do
       @fred = User.make

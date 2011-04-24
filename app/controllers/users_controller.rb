@@ -18,52 +18,18 @@ class UsersController < ApplicationController
   end
 
   def index
-    redirect_to root_path if not current_user.admin?
+    redirect_to root_path unless admin_logged_in?
     @users = User.paginate :page => params[:page], :order => 'created_at DESC'
   end
 
   def csv
-    redirect_to root_path if not current_user.admin?
-    users = User.order(:name).where("email not like '%my.drivelesschallenge.com'")
-
-    csv_string = FasterCSV.generate do |csv|
-      csv << [
-        "Name",
-        "Username",
-        "Email",
-        "Address",
-        "City",
-        "Community",
-        "Last login at",
-        "Date created",
-        "Has baseline",
-        "# logged trips",
-        "Date of last trip",
-        "Is parent"
-      ]
-
-      users.each do |user|
-        csv << [
-          user.name,
-          user.username,
-          user.email,
-          user.address,
-          user.city,
-          user.community.try(:name),
-          user.current_sign_in_at.try(:to_s, :short),
-          user.created_at.try(:to_s, :short),
-          user.baseline.present? ? "yes" : "no",
-          user.trips.count,
-          user.trips.order('made_at desc').try(:first).try(:made_at).try(:to_s, :short),
-          user.is_parent? ? "yes" : "no"
-        ]
-      end
-    end
-
+    redirect_to root_path unless admin_logged_in?
     filename = "dlc-tool-userlist.csv"
-    send_data(csv_string,
+    send_data(
+      User.to_csv,
       :type => 'text/csv; charset=utf-8; header=present',
-      :filename => filename)
+      :filename => filename
+    )
   end
 
   def destroy
