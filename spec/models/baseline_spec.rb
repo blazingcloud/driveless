@@ -6,8 +6,8 @@ describe Baseline do
 
   before do
     @baseline = Baseline.new
-    @current_challenge_start = Time.zone.local(Date.today.year, 4, 1)
-    @current_challenge_end = Time.zone.local(Date.today.year, 5, 1) - 1
+    @current_challenge_start = Time.zone.local(Date.today.year, 1, 1)
+    @current_challenge_end = Time.zone.local(Date.today.year + 1, 1, 1) - 1
   end
 
   describe "#updated_by_user?" do
@@ -42,14 +42,14 @@ describe Baseline do
         stub(baseline).has_non_blank_values? {true}
       end
 
-      it "should return true if updated_at is in April of current challenge year" do
+      it "should return true if updated_at is in current year" do
         stub(baseline).updated_at {current_challenge_start}
         baseline.updated_for_current_challenge?.should == true
         stub(baseline).updated_at {current_challenge_end}
         baseline.updated_for_current_challenge?.should == true
       end
 
-      it "should return false if updated_at is outside April of current challenge year" do
+      it "should return false if updated_at is outside current year" do
         stub(baseline).updated_at {current_challenge_start - 1}
         baseline.updated_for_current_challenge?.should == false
         stub(baseline).updated_at {current_challenge_end + 1}

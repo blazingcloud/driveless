@@ -61,6 +61,7 @@ describe User do
       
       it "should return an array of fields in string format" do
         user.to_a_for_csv.should == [
+          user.id,
           "sally alley",
           "sally",
           "sally@example.com",
@@ -94,6 +95,7 @@ describe User do
 
         it "should return an array of fields with the proper values" do
           user.to_a_for_csv.should == [
+            user.id,
             "sally alley",
             "sally",
             "sally@example.com",

@@ -27,10 +27,10 @@ class Baseline < ActiveRecord::Base
   end
 
   def current_challenge_start
-    Time.zone.local(Date.today.year, 4, 1)
+    Time.zone.local(Date.today.year, 1, 1)
   end
 
   def current_challenge_end
-    Time.zone.local(Date.today.year, 5, 1) - 1
+    Time.zone.local(Date.today.year + 1, 1, 1) - 1
   end
 end
