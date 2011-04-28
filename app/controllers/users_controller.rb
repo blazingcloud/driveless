@@ -72,13 +72,14 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
-    @user = User.find(@user.id)
+    admin = params[:user].delete(:admin)
     attr = params[:user]
     if attr[:password].blank? && attr[:password_confirmation].blank?
       attr.delete(:password)
       attr.delete(:password_confirmation)
     end
     @user.attributes = attr
+    @user.admin = admin if admin_logged_in?
 
     if @user.facebook_uid && !@user.crypted_password
       p = @user.newpass(8)

@@ -3,7 +3,7 @@
 %h1
   Edit My Profile
 - if @user.facebook_uid && @user.login_count == 1
-  - render :layout => 'shared/tip' do
+  = render :layout => 'shared/tip' do
     %p
       This is your first login using Facebook. Before you can edit your profile you need
       to logout and log back in again. You will only have to do this once. When you
@@ -12,11 +12,11 @@
       = link_to "Reconnect using Facebook to Edit Your Profile", logout_path, :class => 'button'
 - else
   - if @user.zip == 'Replace me!' && @user.facebook_uid
-    - render :layout => 'shared/tip' do
+    = render :layout => 'shared/tip' do
       %p You have logged in with Facebook and your profile has temporary information for some fields. Please fill them in correctly!
-  - form_for @user, :url => account_path do |f|
+  = form_for @user, :url => account_path do |f|
     - unless @user.has_complete_profile?
-      - render :layout => 'shared/tip' do
+      = render :layout => 'shared/tip' do
         %p It looks like your profile is incomplete. Fill in the form below.
     = f.error_messages
     = render :partial => "form", :object => f, :locals => {:f => f, :submit_button_label => 'Update', :show_password => false}
