@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
          :validatable, :encryptable #, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :openid_identifier, :username, :pseudonym, 
+    :community_id, :city, :green_miles, :name, :address, :is_13, 
+    :is_parent, :read_privacy, :zip, :password, :password_confirmation
   
   has_one :baseline
 
@@ -27,8 +29,6 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :username, :name, :address, :city, :zip
 
   before_create :create_baseline
-
-  attr_protected :admin
 
   def badges
     [
