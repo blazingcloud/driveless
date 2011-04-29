@@ -16,7 +16,11 @@
     = f.text_field :username
 %fieldset.outline
   %legend Your Profile
+<<<<<<< HEAD
   - render :layout => 'shared/info' do
+=======
+  = render :layout => 'shared/info' do
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
     %p
       Participating in the Drive Less Challenge makes you eligible for some prizes and awards. We need this information so we can send you prizes when you win!
       %b Your privacy is very important to us and this information will not be made public.
@@ -55,8 +59,12 @@
       = f.label :is_parent, "I am a parent or legal guardian using this service on behalf of my minor."
     %p
       = f.check_box :read_privacy
+<<<<<<< HEAD
       = f.label :read_privacy, "I have read the <a href='/privacy' target='_blank'>privacy policy</a>. (required)"
 
+=======
+      != f.label :read_privacy, "I have read the <a href='/privacy' target='_blank'>privacy policy</a>. (required)".html_safe
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 
 %fieldset.outline
   %legend Join a Participating Community

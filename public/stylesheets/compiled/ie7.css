@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* line 1, ../../../app/stylesheets/ie7.sass */
 .badge-name {
   float: none;
@@ -7,3 +8,8 @@
 .leaderboard .badge {
   float: right;
 }
+=======
+.badge-name { float: none; }
+
+.leaderboard .badge { float: right; }
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733

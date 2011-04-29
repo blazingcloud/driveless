@@ -1,47 +1,54 @@
+<<<<<<< HEAD
 ActionController::Routing::Routes.draw do |map|
   devise_for :users
   map.resources :modes
+=======
+Rails.application.routes.draw do
+  match 'robots.txt', :to => 'robots#robots_txt', :as => 'robots'
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 
-  map.resources :baseline_trips
+  devise_for :users
 
-  map.resources :baselines
+  resources :modes
 
-  map.resources :lengths
+  resources :baseline_trips
 
-  map.resources :trips, { :only => [:update, :index, :create] }
+  resources :baselines
 
-  map.resources :units
+  resources :lengths
 
-  map.resources :destinations
+  resources :trips, :only => [:update, :index, :create]
 
-  map.resources :user_sessions
+  resources :units
 
-  map.resources :users
-  map.resource :account, :controller => "users" do |account_map|
-    account_map.resources :trips
-    account_map.resources :groups, :except => :show
-    account_map.friends 'friends', :controller => 'friendships'
-    account_map.friends_of 'friends_of', :controller => 'friendships', :action => 'friends_of'
-    account_map.community 'community/:id', :controller => 'communities', :action => 'show'
+  resources :destinations
+
+  resources :user_sessions
+
+  resources :users
+  resource :account, :controller => "users" do
+    resources :trips
+    resources :groups, :except => :show
   end
 
-  map.resources :communities
+  match '/account/friends', :to => 'friendships#index'
+  match '/account/friends_of', :to => 'friendships#friends_of'
+  match '/account/community/:id', :to => 'communities#show', :as => 'account_community'
 
-  map.resources :invitations, :only => [ :index, :create ]
+  resources :communities
 
-  map.group 'group/:id', :controller => 'groups', :action => 'show'
-  map.groups 'groups', :controller => 'groups', :action => 'index_all'
+  resources :invitations, :only => [ :index, :create ]
+
+  match 'group/:id', :to => 'groups#show', :as => 'group'
+  match 'groups', :to => 'groups#index_all'
 
   # This is not the best way to map join and leave routes. This could be done through groups resource.
-  map.resources :memberships, :only => [:create, :destroy]
-  map.resources :friendships, :only => [:create, :destroy]
+  resources :memberships, :only => [:create, :destroy]
+  resources :friendships, :only => [:create, :destroy]
 
-  map.connect '/account/widget', :controller => "users", :action => "widget"
+  match '/account/widget', :to => 'users#widget'
 
-  map.resources :password_resets
-
-  map.resource :user_session
-
+<<<<<<< HEAD
   match 'login' => redirect('/users/sign_in')
   match 'logout' => redirect('/users/sign_out')
   match 'register' => redirect('/users/sign_up')
@@ -50,7 +57,18 @@ ActionController::Routing::Routes.draw do |map|
   map.users_csv "users_csv", :controller => "users", :action => "csv"
 
   root :to => "home#index"
+=======
+  resources :password_resets
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  resource :user_session
+
+  match 'login' => redirect('/users/sign_in')
+  match 'logout' => redirect('/users/sign_out')
+  match 'register' => redirect('/users/sign_up')
+  match 'privacy' => 'users#privacy'
+
+  match "users_csv", :to => 'users#csv'
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
+
+  root :to => "home#index"
 end

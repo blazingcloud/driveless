@@ -23,6 +23,7 @@ class Community < ActiveRecord::Base
         INNER JOIN users ON trips.user_id = users.id
         INNER JOIN modes ON trips.mode_id = modes.id
         WHERE modes.green = ?
+        AND trips.made_at >= ?
         GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY community_id) AS stats_per_community
 
@@ -30,7 +31,7 @@ class Community < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, true])
+    find_by_sql([sql, true, Date.new(2011, 4, 22)])
   end
 
   def stats
@@ -45,13 +46,14 @@ class Community < ActiveRecord::Base
         INNER JOIN modes ON trips.mode_id = modes.id
         WHERE users.community_id = ?
         AND modes.green = ?
+        AND trips.made_at >= ?
         GROUP BY users.community_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
 
       ON stats_per_mode.community_id = communities.id
       GROUP BY communities.id
     SQL
 
-    c = self.class.find_by_sql([sql, id, true])[0]
+    c = self.class.find_by_sql([sql, id, true, Date.new(2011, 4, 22)])[0]
 
     @stats = {
       :lb_co2_sum   => c.nil? ? 0 : c.lb_co2_sum,

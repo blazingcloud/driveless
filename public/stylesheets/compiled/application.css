@@ -338,16 +338,33 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   padding-left: 18px;
 }
 
+<<<<<<< HEAD
 /* line 278, ../../../app/stylesheets/application.sass */
 .baseline .foot, .baseline .head {
   font-weight: bold;
 }
 /* line 280, ../../../app/stylesheets/application.sass */
+=======
+/* line 277, ../../../app/stylesheets/application.sass */
+form.baseline fieldset.baseline-travel {
+  width: 100%;
+}
+
+/* line 281, ../../../app/stylesheets/application.sass */
+.baseline .foot, .baseline .head {
+  font-weight: bold;
+}
+/* line 283, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .baseline .head {
   vertical-align: top;
 }
 
+<<<<<<< HEAD
 /* line 284, ../../../app/stylesheets/application.sass */
+=======
+/* line 287, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .baseline-travel ol {
   display: block;
   width: 100%;
@@ -355,7 +372,11 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   margin: 0;
   *clear: both;
 }
+<<<<<<< HEAD
 /* line 290, ../../../app/stylesheets/application.sass */
+=======
+/* line 293, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .baseline-travel ol li {
   *float: left;
   display: inline-block;
@@ -366,12 +387,17 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   margin: 0;
 }
 
+<<<<<<< HEAD
 /* line 297, ../../../app/stylesheets/application.sass */
+=======
+/* line 300, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .trip-stream {
   margin: 0;
   padding: 0;
   border-collapse: collapse;
 }
+<<<<<<< HEAD
 /* line 301, ../../../app/stylesheets/application.sass */
 .trip-stream th {
   font-weight: bold;
@@ -397,11 +423,39 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   text-align: right;
 }
 /* line 314, ../../../app/stylesheets/application.sass */
+=======
+/* line 304, ../../../app/stylesheets/application.sass */
+.trip-stream th {
+  font-weight: bold;
+}
+/* line 306, ../../../app/stylesheets/application.sass */
+.trip-stream th.where {
+  padding-right: 20px;
+}
+/* line 308, ../../../app/stylesheets/application.sass */
+.trip-stream th.how {
+  padding-right: 20px;
+}
+/* line 310, ../../../app/stylesheets/application.sass */
+.trip-stream th.distance {
+  padding-right: 20px;
+}
+/* line 312, ../../../app/stylesheets/application.sass */
+.trip-stream th.when {
+  padding-right: 20px;
+}
+/* line 315, ../../../app/stylesheets/application.sass */
+.trip-stream td.actions {
+  text-align: right;
+}
+/* line 317, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .trip-stream td.actions div.tweet-trip {
   display: inline-block;
   *display: inline;
   zoom: 1;
 }
+<<<<<<< HEAD
 /* line 316, ../../../app/stylesheets/application.sass */
 .trip-stream td.actions .tweet-trip {
   width: 25px;
@@ -419,18 +473,45 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   width: 80px;
 }
 /* line 324, ../../../app/stylesheets/application.sass */
+=======
+/* line 319, ../../../app/stylesheets/application.sass */
+.trip-stream td.actions .tweet-trip {
+  width: 25px;
+}
+/* line 321, ../../../app/stylesheets/application.sass */
+.trip-stream td.actions .tweet-trip img {
+  vertical-align: bottom;
+}
+/* line 323, ../../../app/stylesheets/application.sass */
+.trip-stream #trip_distance {
+  width: 120px;
+}
+/* line 325, ../../../app/stylesheets/application.sass */
+.trip-stream #trip_made_at {
+  width: 80px;
+}
+/* line 327, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .trip-stream tr {
   height: 38px;
   border-bottom: 1px solid #aaaaaa;
 }
 
+<<<<<<< HEAD
 /* line 329, ../../../app/stylesheets/application.sass */
+=======
+/* line 332, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .header .badge-name {
   text-shadow: #e6f0ff 0px 1px 1px;
   color: #6666cc;
 }
 
+<<<<<<< HEAD
 /* line 333, ../../../app/stylesheets/application.sass */
+=======
+/* line 336, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge-name {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -443,7 +524,11 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   color: black;
 }
 
+<<<<<<< HEAD
 /* line 339, ../../../app/stylesheets/application.sass */
+=======
+/* line 342, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge {
   display: inline-block;
   *display: inline;
@@ -451,7 +536,11 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   margin: 0;
   padding: 0;
 }
+<<<<<<< HEAD
 /* line 341, ../../../app/stylesheets/application.sass */
+=======
+/* line 344, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge.small li {
   padding: 2px;
   margin-left: 10px;
@@ -459,19 +548,31 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   min-width: 57px;
   max-width: 95px;
 }
+<<<<<<< HEAD
 /* line 347, ../../../app/stylesheets/application.sass */
+=======
+/* line 350, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge.small li .stat {
   font-size: 16px;
   display: block;
   line-height: 19px;
 }
+<<<<<<< HEAD
 /* line 351, ../../../app/stylesheets/application.sass */
+=======
+/* line 354, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge.small li .label {
   font-size: 10px;
   letter-spacing: 0px;
   font-weight: 100;
 }
+<<<<<<< HEAD
 /* line 358, ../../../app/stylesheets/application.sass */
+=======
+/* line 361, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge li {
   display: inline-block;
   *display: inline;
@@ -498,6 +599,7 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   min-width: 114px;
   max-width: 171px;
 }
+<<<<<<< HEAD
 /* line 359, ../../../app/stylesheets/application.sass */
 .badge li.no-baseline {
   background: #990000;
@@ -507,22 +609,45 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   background: #990000;
 }
 /* line 377, ../../../app/stylesheets/application.sass */
+=======
+/* line 362, ../../../app/stylesheets/application.sass */
+.badge li.no-baseline {
+  background: #990000;
+}
+/* line 364, ../../../app/stylesheets/application.sass */
+.badge li.non-green-miles {
+  background: #990000;
+}
+/* line 380, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge li .stat {
   font-size: 47px;
   font-weight: bold;
 }
+<<<<<<< HEAD
 /* line 380, ../../../app/stylesheets/application.sass */
+=======
+/* line 383, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge li .label {
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
+<<<<<<< HEAD
 /* line 384, ../../../app/stylesheets/application.sass */
+=======
+/* line 387, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .badge li .label a {
   color: white;
 }
 
+<<<<<<< HEAD
 /* line 387, ../../../app/stylesheets/application.sass */
+=======
+/* line 390, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .baseline-alert {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -538,7 +663,11 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   background: #990000;
   color: white;
 }
+<<<<<<< HEAD
 /* line 393, ../../../app/stylesheets/application.sass */
+=======
+/* line 396, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .baseline-alert a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -558,7 +687,11 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   vertical-align: middle;
   padding: 5px;
 }
+<<<<<<< HEAD
 /* line 406, ../../../app/stylesheets/application.sass */
+=======
+/* line 409, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .baseline-alert span {
   height: 29px;
   line-height: 29px;
@@ -573,29 +706,46 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   zoom: 1;
 }
 
+<<<<<<< HEAD
 /* line 414, ../../../app/stylesheets/application.sass */
+=======
+/* line 417, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .group-grouping {
   border-bottom: 2px solid #aaaaaa;
   padding-bottom: 19px;
   margin-bottom: 57px;
 }
 
+<<<<<<< HEAD
 /* line 419, ../../../app/stylesheets/application.sass */
+=======
+/* line 422, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .clear {
   clear: both;
   height: 19px;
 }
 
+<<<<<<< HEAD
 /* line 423, ../../../app/stylesheets/application.sass */
 .in-page-badges {
   float: right;
 }
 /* line 424, ../../../app/stylesheets/application.sass */
+=======
+/* line 426, ../../../app/stylesheets/application.sass */
+.in-page-badges {
+  float: right;
+}
+/* line 427, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .in-page-badges .badge-name {
   display: block;
   float: none;
 }
 
+<<<<<<< HEAD
 /* line 429, ../../../app/stylesheets/application.sass */
 .leaderboard {
   border-bottom: 1px solid #eeeeee;
@@ -605,6 +755,17 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   float: right;
 }
 /* line 433, ../../../app/stylesheets/application.sass */
+=======
+/* line 432, ../../../app/stylesheets/application.sass */
+.leaderboard {
+  border-bottom: 1px solid #eeeeee;
+}
+/* line 434, ../../../app/stylesheets/application.sass */
+.leaderboard .badge {
+  float: right;
+}
+/* line 436, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .leaderboard div {
   display: inline-block;
   *display: inline;
@@ -614,23 +775,39 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   -o-box-sizing: border-box;
   box-sizing: border-box;
 }
+<<<<<<< HEAD
 /* line 436, ../../../app/stylesheets/application.sass */
 .leaderboard div.user {
   font-size: 200%;
 }
 /* line 438, ../../../app/stylesheets/application.sass */
+=======
+/* line 439, ../../../app/stylesheets/application.sass */
+.leaderboard div.user {
+  font-size: 200%;
+}
+/* line 441, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .leaderboard div.details {
   display: block;
   clear: both;
   width: auto;
 }
+<<<<<<< HEAD
 /* line 442, ../../../app/stylesheets/application.sass */
+=======
+/* line 445, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .leaderboard div.details .members {
   float: right;
   text-align: right;
 }
 
+<<<<<<< HEAD
 /* line 446, ../../../app/stylesheets/application.sass */
+=======
+/* line 449, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .button {
   display: inline-block;
   *display: inline;
@@ -659,7 +836,11 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   padding: 5px 10px;
   font-family: Arial;
 }
+<<<<<<< HEAD
 /* line 462, ../../../app/stylesheets/application.sass */
+=======
+/* line 465, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .button.small {
   font-size: 10px;
   text-transform: uppercase;
@@ -672,45 +853,81 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
+<<<<<<< HEAD
 /* line 468, ../../../app/stylesheets/application.sass */
 .button.inactive {
   opacity: 0.6;
 }
 /* line 470, ../../../app/stylesheets/application.sass */
+=======
+/* line 471, ../../../app/stylesheets/application.sass */
+.button.inactive {
+  opacity: 0.6;
+}
+/* line 473, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .button.inactive:hover {
   opacity: 0.9 ﻿body;
 }
 
+<<<<<<< HEAD
 /* line 474, ../../../app/stylesheets/application.sass */
+=======
+/* line 477, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 fieldset, img {
   border-style: none;
 }
 
+<<<<<<< HEAD
 /* line 478, ../../../app/stylesheets/application.sass */
+=======
+/* line 481, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid ul {
   text-align: center;
   list-style-type: none;
   display: inline;
 }
+<<<<<<< HEAD
 /* line 482, ../../../app/stylesheets/application.sass */
+=======
+/* line 485, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid ul li {
   float: left;
   padding: 4px;
 }
+<<<<<<< HEAD
 /* line 485, ../../../app/stylesheets/application.sass */
 div.openid ul li span {
   padding: 0 1em 0 3px;
 }
 /* line 487, ../../../app/stylesheets/application.sass */
+=======
+/* line 488, ../../../app/stylesheets/application.sass */
+div.openid ul li span {
+  padding: 0 1em 0 3px;
+}
+/* line 490, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid fieldset {
   clear: both;
   padding: 1em 0;
 }
+<<<<<<< HEAD
 /* line 490, ../../../app/stylesheets/application.sass */
 div.openid div + fieldset {
   display: none;
 }
 /* line 492, ../../../app/stylesheets/application.sass */
+=======
+/* line 493, ../../../app/stylesheets/application.sass */
+div.openid div + fieldset {
+  display: none;
+}
+/* line 495, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid label {
   display: block;
   font-weight: bold;
@@ -718,26 +935,46 @@ div.openid label {
   margin-bottom: 0.5em;
 }
 
+<<<<<<< HEAD
 /* line 499, ../../../app/stylesheets/application.sass */
 input[name=openid_username] {
   width: 8em;
 }
 /* line 501, ../../../app/stylesheets/application.sass */
+=======
+/* line 502, ../../../app/stylesheets/application.sass */
+input[name=openid_username] {
+  width: 8em;
+}
+/* line 504, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 input[name=openid_identifier] {
   width: 18em;
 }
 
+<<<<<<< HEAD
 /* line 505, ../../../app/stylesheets/application.sass */
 div.openid ul li {
   margin-left: 0;
 }
 /* line 507, ../../../app/stylesheets/application.sass */
+=======
+/* line 508, ../../../app/stylesheets/application.sass */
+div.openid ul li {
+  margin-left: 0;
+}
+/* line 510, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid ul li.highlight {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   background-color: #ffdd66;
 }
+<<<<<<< HEAD
 /* line 511, ../../../app/stylesheets/application.sass */
+=======
+/* line 514, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid fieldset div {
   font-family: arial;
   -moz-border-radius: 4px;
@@ -746,19 +983,31 @@ div.openid fieldset div {
   padding: 10px;
   display: inline-block;
 }
+<<<<<<< HEAD
 /* line 518, ../../../app/stylesheets/application.sass */
+=======
+/* line 521, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 div.openid input[type='submit'] {
   margin-left: 1em;
 }
 
+<<<<<<< HEAD
 /* line 521, ../../../app/stylesheets/application.sass */
+=======
+/* line 524, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .openid_logo {
   color: #f7931e;
   padding: 6px 0px 8px 28px;
   background: url(../../images/openid/openidico.png) no-repeat;
 }
 
+<<<<<<< HEAD
 /* line 526, ../../../app/stylesheets/application.sass */
+=======
+/* line 529, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 #openid_login {
   float: left;
   font-size: larger;
@@ -766,16 +1015,28 @@ div.openid input[type='submit'] {
   margin: 2em 1em;
   text-align: center;
 }
+<<<<<<< HEAD
 /* line 532, ../../../app/stylesheets/application.sass */
 #openid_login div {
   margin-top: 0.5em;
 }
 /* line 534, ../../../app/stylesheets/application.sass */
+=======
+/* line 535, ../../../app/stylesheets/application.sass */
+#openid_login div {
+  margin-top: 0.5em;
+}
+/* line 537, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 #openid_login div + span {
   font-size: smaller;
 }
 
+<<<<<<< HEAD
 /* line 538, ../../../app/stylesheets/application.sass */
+=======
+/* line 541, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dt {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -786,19 +1047,31 @@ div.openid input[type='submit'] {
   border: #aaccaa solid 1px;
   padding: 0px 19px;
 }
+<<<<<<< HEAD
 /* line 539, ../../../app/stylesheets/application.sass */
+=======
+/* line 542, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dt .button {
   float: right;
   margin-top: 3px;
 }
+<<<<<<< HEAD
 /* line 547, ../../../app/stylesheets/application.sass */
+=======
+/* line 550, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dt a {
   color: black;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
 }
+<<<<<<< HEAD
 /* line 552, ../../../app/stylesheets/application.sass */
+=======
+/* line 555, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dd {
   border: #aaccaa solid 1px;
   border-top: none;
@@ -809,14 +1082,22 @@ div.openid input[type='submit'] {
   padding: 19px 19px 19px 19px;
   margin-bottom: 19px;
 }
+<<<<<<< HEAD
 /* line 558, ../../../app/stylesheets/application.sass */
+=======
+/* line 561, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dd ol {
   display: block;
   list-style: none;
   margin: 0;
   padding: 0;
 }
+<<<<<<< HEAD
 /* line 563, ../../../app/stylesheets/application.sass */
+=======
+/* line 566, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dd ol li {
   dipslay: block;
   list-style: none;
@@ -824,16 +1105,25 @@ div.openid input[type='submit'] {
   padding-bottom: 9.5px;
   border-bottom: 1px solid #eeeeee;
 }
+<<<<<<< HEAD
 /* line 569, ../../../app/stylesheets/application.sass */
+=======
+/* line 572, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dd ol li .group-name {
   display: block;
   font-size: 18px;
 }
+<<<<<<< HEAD
 /* line 572, ../../../app/stylesheets/application.sass */
+=======
+/* line 575, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .all-groups dd ol li .membership-action {
   float: right;
 }
 
+<<<<<<< HEAD
 /* line 575, ../../../app/stylesheets/application.sass */
 .footer {
   font-size: 14px;
@@ -843,6 +1133,17 @@ div.openid input[type='submit'] {
   color: #ffcc00;
 }
 /* line 579, ../../../app/stylesheets/application.sass */
+=======
+/* line 578, ../../../app/stylesheets/application.sass */
+.footer {
+  font-size: 14px;
+}
+/* line 580, ../../../app/stylesheets/application.sass */
+.footer a {
+  color: #ffcc00;
+}
+/* line 582, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .footer .get-help {
   display: inline;
   float: left;
@@ -852,7 +1153,11 @@ div.openid input[type='submit'] {
   padding-right: 80px;
   margin-left: 0;
 }
+<<<<<<< HEAD
 /* line 583, ../../../app/stylesheets/application.sass */
+=======
+/* line 586, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .footer .facebook, .footer .twitter, .footer .email, .footer .website {
   display: inline;
   float: left;
@@ -860,7 +1165,11 @@ div.openid input[type='submit'] {
   margin-right: 10px;
   width: 60px;
 }
+<<<<<<< HEAD
 /* line 585, ../../../app/stylesheets/application.sass */
+=======
+/* line 588, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .footer .copyright {
   display: inline;
   float: left;
@@ -871,7 +1180,11 @@ div.openid input[type='submit'] {
   text-align: right;
 }
 
+<<<<<<< HEAD
 /* line 590, ../../../app/stylesheets/application.sass */
+=======
+/* line 593, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .outline {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -883,12 +1196,20 @@ div.openid input[type='submit'] {
   border: 1px #ccccff solid;
   padding: 0px 19px;
 }
+<<<<<<< HEAD
 /* line 594, ../../../app/stylesheets/application.sass */
+=======
+/* line 597, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .outline legend {
   font-weight: bold;
   font-size: 125%;
 }
+<<<<<<< HEAD
 /* line 597, ../../../app/stylesheets/application.sass */
+=======
+/* line 600, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .outline legend .button {
   background: none;
   border: none;
@@ -903,22 +1224,38 @@ div.openid input[type='submit'] {
   color: black;
   font-size: inherit;
 }
+<<<<<<< HEAD
 /* line 605, ../../../app/stylesheets/application.sass */
+=======
+/* line 608, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .outline legend .button.inactive {
   border-bottom: 2px solid black;
 }
 
+<<<<<<< HEAD
 /* line 610, ../../../app/stylesheets/application.sass */
+=======
+/* line 613, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .messages-menu .button {
   margin-right: 20px;
 }
 
+<<<<<<< HEAD
 /* line 613, ../../../app/stylesheets/application.sass */
+=======
+/* line 616, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .you {
   color: #999999;
 }
 
+<<<<<<< HEAD
 /* line 616, ../../../app/stylesheets/application.sass */
+=======
+/* line 619, ../../../app/stylesheets/application.sass */
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 .is-parent {
   padding-left: 38px;
 }

@@ -83,6 +83,12 @@ GEM
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
+<<<<<<< HEAD
+=======
+    jquery-rails (0.2.7)
+      rails (~> 3.0)
+      thor (~> 0.14.4)
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
     json_pure (1.5.1)
     launchy (0.3.7)
       configuration (>= 0.0.5)
@@ -98,6 +104,10 @@ GEM
     nokogiri (1.4.4)
     orm_adapter (0.0.4)
     pg (0.11.0)
+<<<<<<< HEAD
+=======
+    pivotal_git_scripts (1.1.0)
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
     polyglot (0.3.1)
     rack (1.2.2)
     rack-mount (0.6.14)
@@ -187,9 +197,17 @@ DEPENDENCIES
   heroku (~> 1.20.1)
   hoptoad_notifier
   inherited_resources (~> 1.2.1)
+<<<<<<< HEAD
   launchy
   machinist
   pg (= 0.11.0)
+=======
+  jquery-rails
+  launchy
+  machinist
+  pg (= 0.11.0)
+  pivotal_git_scripts
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
   rails (~> 3.0.5)
   rr
   rspec-rails

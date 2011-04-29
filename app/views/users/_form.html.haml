@@ -71,12 +71,14 @@
     %br
     = f.check_box :admin
 
-- if show_password
+-#- if show_password
+- if true # Changed because we don't support any other auth types besides password yet
   %fieldset.outline
     %legend
       %a{:class => 'button activate-section', :href => '#auth-password'} Password
     .auth
-      - if @user.openid_identifier.blank?
+      -#- if @user.openid_identifier.blank?
+      - if true # Changed because we don't support any other auth types besides password yet
         .password
           %p
             = f.label :password
@@ -90,6 +92,3 @@
             = f.submit submit_button_label
 - else
   %p= f.submit submit_button_label
-
-- unless @user.openid_identifier
-  %p= link_to 'Reset Your Password', password_resets_url, :class => 'button'

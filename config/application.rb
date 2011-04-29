@@ -31,7 +31,11 @@ module Driveless
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
+<<<<<<< HEAD
     config.action_view.javascript_expansions[:defaults] = %w(jquery)
+=======
+    config.action_view.javascript_expansions[:defaults] = %w()
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

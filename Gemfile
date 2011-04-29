@@ -13,6 +13,10 @@ gem 'googlecharts', '~>1.6.1' #, :require => "gchart"
 gem 'hoptoad_notifier'
 gem 'dynamic_form'
 gem 'devise'
+<<<<<<< HEAD
+=======
+gem 'jquery-rails'
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 #gem 'omniauth'
 
 gem 'pg', '0.11.0' # Not using ~> because when pg is installed it needs ARCHFLAGS="-arch x86_64"
@@ -31,4 +35,8 @@ end
 group :development do
   gem 'heroku', '~>1.20.1'
   gem 'taps'
+<<<<<<< HEAD
+=======
+  gem 'pivotal_git_scripts'
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 end

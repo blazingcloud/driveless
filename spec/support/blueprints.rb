@@ -18,6 +18,7 @@ Sham.define do
   password    { Faker::Lorem.sentence   }
   address     { Faker::Address.street_address  }
   person_name { Faker::Name.name        }
+  made_at { Date.today }
   lb_co2_per_mile { rand }
   distance        { rand(10) + 1 }
 end
@@ -73,4 +74,5 @@ Trip.blueprint do
   mode
   distance
   unit        { Unit.first || Unit.make }
+  made_at
 end

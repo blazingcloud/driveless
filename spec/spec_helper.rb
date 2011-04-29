@@ -14,8 +14,13 @@ RSpec.configure do |config|
   #
   # config.mock_with :mocha
   # config.mock_with :flexmock
+<<<<<<< HEAD
   # config.mock_with :rr
   config.mock_with :rspec
+=======
+  config.mock_with :rr
+  #config.mock_with :rspec
+>>>>>>> f4c8989de81c88b92ecebc7a5f547d1f50a3d733
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

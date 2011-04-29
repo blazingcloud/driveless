@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_one :baseline
 
   has_many :modes, :through => :trips
-  has_many :trips
+  has_many :trips, :conditions => ['made_at >= ?', Date.new(2011, 4, 22)]
   has_many :invitations
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
@@ -79,6 +79,7 @@ class User < ActiveRecord::Base
         (#{user_ids_sql})
         AND modes.green = ?
         #{modes_filter_sql}
+        AND trips.made_at >= ?
         GROUP BY trips.user_id, trips.mode_id, modes.lb_co2_per_mile) AS stats_per_mode
       GROUP BY user_id) AS stats_per_user
 
@@ -86,7 +87,7 @@ class User < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, filter_id, true])
+    find_by_sql([sql, filter_id, true, Date.new(2011, 4, 22)])
   end
 
   def friends_leaderboard(order = :miles)
