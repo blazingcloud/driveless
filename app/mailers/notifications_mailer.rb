@@ -15,6 +15,16 @@ class NotificationsMailer < ActionMailer::Base
       :to => "#{invitation.name} <#{invitation.email}>", 
       :subject => "You're invited to Drive Less by #{user.name}"
     )  
+  end
+  
+  def friendships_notification(user, friend)
+    @friend = friend
+    @user = user
     
+    mail(
+      :from => "#{user.name} <#{user.email}>", 
+      :to => "#{friend.name} <#{friend.email}>", 
+      :subject => "#{user.username} added you as a friend"
+    )
   end
 end
