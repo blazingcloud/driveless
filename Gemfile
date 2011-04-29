@@ -27,6 +27,7 @@ group :development, :test do
   gem 'rr'
   gem 'ruby-debug'
   gem 'sqlite3'
+  gem 'email_spec'
 end
 
 group :development do

@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
   def send_invitation!( invitation )
    user_invitation = invitations.create( invitation )
    if !user_invitation.new_record?
-     Notifier.deliver_join_invitation( self, invitation )
+     NotificationsMailer.join_invitation(self, user_invitation).deliver
    else
      false
    end
