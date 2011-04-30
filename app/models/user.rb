@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :token_authenticatable, :registerable, #:confirmable,
          :recoverable, :rememberable, :trackable, 
-         :validatable, :encryptable #, :omniauthable
+         :validatable, :encryptable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :openid_identifier, :username, :pseudonym, 
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_one :baseline
 
   has_many :modes, :through => :trips
-  has_many :trips, :conditions => ['made_at >= ?', Date.new(2011, 4, 22)]
+  has_many :trips, :conditions => ['made_at >= ?', Date.new(2011, 4, 22)]        
   has_many :invitations
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
@@ -258,6 +258,23 @@ class User < ActiveRecord::Base
       trips.order('made_at desc').try(:first).try(:made_at).try(:to_s).to_s,
       is_parent? ? "yes" : "no"
     ]
+  end
+  
+#   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+#    data = access_token['extra']['user_hash']
+#    if user = User.find_by_email(data["email"])
+#      user
+#    else # Create a user with a stub password. 
+#      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20]) 
+#    end
+#  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["user_hash"]
+        user.email = data["email"]
+      end
+    end
   end
 
   private

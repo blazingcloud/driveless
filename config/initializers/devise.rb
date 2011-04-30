@@ -4,6 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = "info@drivelesschallenge.com"
+  config.omniauth :facebook, "f4d437b757f1f8a88c1ab4c7e4fd3077", "2b057ad872df6915ff2f861eeb577a5a"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
