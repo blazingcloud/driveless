@@ -22,21 +22,10 @@ class NotificationsMailer < ActionMailer::Base
     @user = user
     
     mail(
-      :from => "#{user.name} <#{user.email}>", 
+      :from => "drivelesschallenge@gmail.com",
       :to => "#{friend.name} <#{friend.email}>", 
-      :subject => "#{user.username} added you as a friend",
-      :body => "Hello Acme Supply,"
+      :subject => "#{user.name} added you as a friend"
     )
   end
   
-  def password_reset_instructions(user)
-    @user = user
-    
-    mail(
-      :from => "#{user.name} <#{user.email}>", 
-      :to => "#{user.name} <#{user.email}>", 
-      :subject => "Password reset for #{user.username}.",
-      :body => "Hello Wile E. Coyote,"
-    )
-  end
 end
