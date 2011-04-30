@@ -31,4 +31,6 @@ class ApplicationController < ActionController::Base
     @communities ||= Community.find(:all, :order => "name")
   end
 
+  def index
+  end
 end

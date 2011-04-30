@@ -1,24 +1,16 @@
 Rails.application.routes.draw do
   match 'robots.txt', :to => 'robots#robots_txt', :as => 'robots'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
 
   resources :modes
-
   resources :baseline_trips
-
   resources :baselines
-
   resources :lengths
-
   resources :trips, :only => [:update, :index, :create]
-
   resources :units
-
   resources :destinations
-
   resources :user_sessions
-
   resources :users
   resource :account, :controller => "users" do
     resources :trips
