@@ -43,20 +43,20 @@ describe NotificationsMailer do
      end
   end
   
-  describe "friendship_notification" do
-    let(:mail) { NotificationsMailer.friendship_notification(user, friend) }
+  describe "friendships_notification" do
+    let(:mail) { NotificationsMailer.friendships_notification(user, friend) }
 
       it "renders the headers" do
         mail.subject.should eq("#{user.username} added you as a friend")
-        mail.to.should eq(["rr@example.com"])
+        mail.to.should eq(["acme@example.com"])
         mail.from.should eq(["wile@example.com"])
       end
 
       it "should have the invitee's name in the salutation" do
-        mail.body.encoded.should match("Hello Road Runner,")
+        mail.body.encoded.should match("Hello Acme Supply,")
       end
  
-     it "should have user name and link" do 
+     it "should have user name and link" do # fail, fail, fail...
        mail.body.encoded.should match(
          "Wile E. Coyote is driving less with the Drive Less Challenge and has added you as a friend!" +
          "Signup at http://my.drivelesschallenge.com/users/sign_up."

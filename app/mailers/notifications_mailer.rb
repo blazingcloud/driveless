@@ -24,7 +24,8 @@ class NotificationsMailer < ActionMailer::Base
     mail(
       :from => "#{user.name} <#{user.email}>", 
       :to => "#{friend.name} <#{friend.email}>", 
-      :subject => "#{user.username} added you as a friend"
+      :subject => "#{user.username} added you as a friend",
+      :body => "Hello Acme Supply,"
     )
   end
 end
