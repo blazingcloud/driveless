@@ -28,4 +28,15 @@ class NotificationsMailer < ActionMailer::Base
       :body => "Hello Acme Supply,"
     )
   end
+  
+  def password_reset_instructions(user)
+    @user = user
+    
+    mail(
+      :from => "#{user.name} <#{user.email}>", 
+      :to => "#{user.name} <#{user.email}>", 
+      :subject => "Password reset for #{user.username}.",
+      :body => "Hello Wile E. Coyote,"
+    )
+  end
 end

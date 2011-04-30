@@ -63,4 +63,24 @@ describe NotificationsMailer do
        )
      end
   end
+  
+  describe "password_reset_instructions" do
+    let(:mail) { NotificationsMailer.password_reset_instructions(user) }
+
+      it "renders the headers" do
+        mail.subject.should eq("Password reset for #{user.username}.")
+        mail.to.should eq(["wile@example.com"])
+        mail.from.should eq(["wile@example.com"])
+      end
+
+      it "should have the invitee's name in the salutation" do
+        mail.body.encoded.should match("Hello Wile E. Coyote,")
+      end
+ 
+     it "should have user name and link" do # fail, fail, fail...
+       mail.body.encoded.should match(
+         "You have changed your password! Login with new password at: http://my.drivelesschallenge.com/password/reset"
+       )
+     end
+  end
 end
