@@ -30,6 +30,15 @@ class User < ActiveRecord::Base
 
   before_create :create_baseline
 
+  cattr_reader :per_page
+  @@per_page = 10
+  
+  @user = User.paginate :page => params[:page], :order => 'created_at DESC'
+  
+  # def self.search(search, page)
+  #   where('username LIKE ? OR green_miles LIKE ?', "%#{search}%", "%#{search}%")
+  # end
+
   def badges
     [
       (

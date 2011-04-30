@@ -1,0 +1,13 @@
+<%= will_paginate %>
+
+<table class="uers sortable">
+	<thead>
+		<th><%= sortable "created_at", "Created" %></th>
+		<th></th>
+	</thead>
+	<tbody>
+		<%= render @users %>
+	</tbody>
+</table>
+
+<%= will_paginate %>

@@ -196,4 +196,9 @@ describe User do
       bike_leaderboard[1].lb_co2_sum.to_i.should == @pete_bike_lb_co2_sum
     end
   end
+  
+  xit "should return user by green miles" do
+    user_green_miles = User.search(search)
+    user_green_miles.should_not == nil
+  end
 end
