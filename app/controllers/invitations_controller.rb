@@ -11,7 +11,7 @@ class InvitationsController < ApplicationController
     @invitation = current_user.send_invitation!(params[:invitation])
     # TODO, just for now, will fix this later
     if @invitation
-      flash[:notice] = "The invitation were sent"
+      flash[:notice] = "The invitation was sent"
     else
       flash[:alert] = "There were errors in your invitation"
     end
