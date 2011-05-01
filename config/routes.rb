@@ -2,15 +2,20 @@ Rails.application.routes.draw do
 
   match 'robots.txt', :to => 'robots#robots_txt', :as => 'robots'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
-
-  devise_scope :user do
-    get 'users/auth/facebook', :to => 'sessions#new'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
+    get 'login', :to => 'home#index', :as => :new_user_session
+    get 'logout', :to => 'sessions#destroy', :as => :destroy_user_session
   end
 
-  devise_scope :user do
-    get "sign_in", :to => "devise/sessions#new"
-  end
+  match 'users/auth/facebook' => 'user_sessions#new'
+
+  # devise_scope :user do
+  #   get 'users/auth/facebook', :to => 'sessions#new'
+  # end
+
+  # devise_scope :user do
+  #   get "login", :to => "devise/sessions#new"
+  # end
 
   resources :modes
   resources :baseline_trips
