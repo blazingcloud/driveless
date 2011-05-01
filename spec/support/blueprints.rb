@@ -18,6 +18,7 @@ Sham.define do
   password    { Faker::Lorem.sentence   }
   address     { Faker::Address.street_address  }
   person_name { Faker::Name.name        }
+  uid         { '123456abc' }
   made_at { Date.today }
   lb_co2_per_mile { rand }
   distance        { rand(10) + 1 }
@@ -28,6 +29,10 @@ Community.blueprint do
   state
   country
   description
+end
+
+Facebook_User.blueprint do
+  uid { Sham.uid }
 end
 
 User.blueprint do

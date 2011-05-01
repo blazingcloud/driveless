@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   match 'robots.txt', :to => 'robots#robots_txt', :as => 'robots'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
-    get 'login', :to => 'home#index', :as => :new_user_session
-    get 'logout', :to => 'sessions#destroy', :as => :destroy_user_session
+    # get 'login', :to => 'home#index', :as => :new_user_session
+    # get 'logout', :to => 'sessions#destroy', :as => :destroy_user_session
   end
 
-  match 'users/auth/facebook' => 'user_sessions#new'
+  match 'users/auth/facebook' => 'sessions#setup'
 
   # devise_scope :user do
   #   get 'users/auth/facebook', :to => 'sessions#new'
