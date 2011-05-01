@@ -19,6 +19,14 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :current_login_ip                                   # optional, see Authlogic::Session::MagicColumns
       t.string    :last_login_ip                                      # optional, see Authlogic::Session::MagicColumns
 
+      # Devise helpers for User model.
+      t.database_authenticatable
+      t.confirmable
+      t.recoverable
+      t.rememberable
+      t.trackable
+      t.timestamps
+
       t.timestamps
     end
   end
