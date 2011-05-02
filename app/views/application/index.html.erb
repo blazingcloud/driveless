@@ -1,16 +1,3 @@
-<div id="fb-root"></div>
-<script src="http://connect.facebook.net/en_US/all.js"></script>
-<script>
-FB.init({appId: 'your app id', status: true, cookie: true, xfbml: true});
-FB.Event.subscribe('auth.sessionchange', function(response) {
-if (response.session) {
-// A user has logged in, and a new cookie has been saved
-} else {
-// The user has logged out, and the cookie has been cleared
-}
-});
-</script>
-
 <div id="user_nav">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?

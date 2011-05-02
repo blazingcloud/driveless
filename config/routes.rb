@@ -5,20 +5,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do
     get 'sign_in', :to => 'application#index', :as => :new_user_session
     get 'sign_out', :to => 'sessions#destroy', :as => :destroy_user_session
-    # get 'login', :to => 'home#index', :as => :new_user_session
-    # get 'logout', :to => 'sessions#destroy', :as => :destroy_user_session
   end
-
-  # match 'users/auth/facebook' => 'sessions#setup'
-
-  # devise_scope :user do
-  #   get 'users/auth/facebook', :to => 'sessions#new'
-  # end
-
-  # devise_scope :user do
-  #   get "login", :to => "devise/sessions#new"
-  # end
-
+  
   resources :modes
   resources :baseline_trips
   resources :baselines
