@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # get 'logout', :to => 'sessions#destroy', :as => :destroy_user_session
   end
 
-  match 'users/auth/facebook' => 'sessions#setup'
+  # match 'users/auth/facebook' => 'sessions#setup'
 
   # devise_scope :user do
   #   get 'users/auth/facebook', :to => 'sessions#new'
