@@ -5,11 +5,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = "info@drivelesschallenge.com"
   
-  # Walter's Facebook key (take out for production):
-  config.omniauth :facebook, "142002082536997", "7a3ca28b9735f1ee666fdcb507577e9c"
-  
-  # Driveless Facebook key (use for production):
-  # config.omniauth :facebook, "f4d437b757f1f8a88c1ab4c7e4fd3077", "2b057ad872df6915ff2f861eeb577a5a"
+  config.omniauth :facebook, "f4d437b757f1f8a88c1ab4c7e4fd3077", "2b057ad872df6915ff2f861eeb577a5a"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
