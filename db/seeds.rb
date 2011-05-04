@@ -20,6 +20,7 @@ Carpool	        Carpool (2 people or more)	                    0.422
 Drove Car Alone	Solo Car Trips (assumes 24 mpg average, includes all categories of car, hybrid or electric, SUV, pickups )	0.000
 =end
 
+
 Mode.create([
   {:name => 'Walk',            :green => true,   :lb_co2_per_mile => 0.843, :description => 'Walk (includes skateboard, rollerblade, etc)'},
   {:name => 'Bike',            :green => true,   :lb_co2_per_mile => 0.843, :description => 'Bike'},
@@ -28,7 +29,7 @@ Mode.create([
   {:name => 'Train',           :green => true,   :lb_co2_per_mile => 0.473, :description => 'Train (e.g. Caltrain, BART)'},
   {:name => 'Carpool',         :green => true,   :lb_co2_per_mile => 0.422, :description => 'Carpool (2 people or more)'},
   {:name => 'Drove Car Alone', :green => false,  :lb_co2_per_mile => 0.000, :description => 'Drove Car Alone	Solo Car Trips (assumes 24 mpg average, includes all categories of car, hybrid or electric, SUV, pickups)'}
-])
+]) if Mode.count == 0
 
 Destination.create([
   {:name => 'Work'},
@@ -37,11 +38,11 @@ Destination.create([
   {:name => 'Errands & Other'},
   {:name => 'Faith Community'},
   {:name => 'Social/Civic/Fun'}
-])
+]) if Destination.count == 0
 
 ['Palo Alto', 'Menlo Park', 'Mountain View', 'Burlingame'].each do |community_name|
   Community.create!(:name => community_name, :state => 'California', :country => 'United States')
-end
+end if Community.count == 0
 
 u = User.create!(
   :email => 'change-me@example.com',
@@ -55,5 +56,5 @@ u = User.create!(
   :community => Community.first,
   :is_13 => true,
   :read_privacy => true
-)
+) if User.count == 0
 u.update_attribute(:admin, true)
