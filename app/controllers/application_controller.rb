@@ -3,8 +3,6 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
   helper_method :admin_logged_in?, :communities
 
   #private
@@ -16,7 +14,7 @@ class ApplicationController < ActionController::Base
   #end
 
   def require_admin
-    not_allowed unless admin_logged_in?
+    redirect_to root_path unless admin_logged_in?
   end
 
   #def require_no_user
