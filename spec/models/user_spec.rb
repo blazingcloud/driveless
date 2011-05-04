@@ -15,6 +15,27 @@ describe User do
     User.make
   end
 
+  context "prize result" do
+    before do
+      work = Destination.find_by_name("Work")
+      work.should_not be_nil
+      school = Destination.find_by_name("School")
+      school.should_not be_nil
+      walk = Mode.find_by_name("Walk")
+      walk.should_not be_nil
+      bike = Mode.find_by_name("Bike")
+      bike.should_not be_nil
+      mile = Unit.find_by_name("Mile")
+      mile.should_not be_nil
+      @user1 = User.make
+      @user1.save!
+      @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
+                        :distance => 10.0, :unit_id => mile.id, :made_at => Date.today)
+    end
+    it "should report the User with the max miles for a mode" do
+      User.max_miles('Bike').should == {:user => @user1, :total_miles => 10.0}
+    end
+  end
   describe ".to_csv" do
     attr_reader :csv_array
     before do
