@@ -31,9 +31,26 @@ describe User do
       @user1.save!
       @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
                         :distance => 10.0, :unit_id => mile.id, :made_at => Date.today)
+      @user1.trips.create!(:destination_id => work.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today)
+      @user2 = User.make
+      @user2.save!
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 2.0, :unit_id => mile.id, :made_at => Date.today)
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today - 1.day)
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today - 1.year)
+
     end
     it "should report the User with the max miles for a mode" do
       User.max_miles('Bike').should == {:user => @user1, :total_miles => 10.0}
+    end
+    it "should calculate max miles for walking with several users" do
+      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0}
+    end
+    it "should not include trips from last year in max miles result" do
+      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0}      
     end
   end
   describe ".to_csv" do
