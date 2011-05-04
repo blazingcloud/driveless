@@ -21,6 +21,8 @@ describe User do
       work.should_not be_nil
       school = Destination.find_by_name("School")
       school.should_not be_nil
+      walk = Mode.find_by_name("Bus")
+      walk.should_not be_nil
       walk = Mode.find_by_name("Walk")
       walk.should_not be_nil
       bike = Mode.find_by_name("Bike")
@@ -44,13 +46,16 @@ describe User do
 
     end
     it "should report the User with the max miles for a mode" do
-      User.max_miles('Bike').should == {:user => @user1, :total_miles => 10.0}
+      User.max_miles('Bike').should == {:user => @user1, :total_miles => 10.0, :name => 'Bike'}
     end
     it "should calculate max miles for walking with several users" do
-      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0}
+      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0, :name => 'Walk'}
     end
     it "should not include trips from last year in max miles result" do
-      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0}      
+      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0, :name => 'Walk'}
+    end
+    it "should not return nil user and 0 total_miles if there is no one with a matching trip" do
+      User.max_miles('Bus').should == {:user => nil, :total_miles => 0.0, :name => 'Bus'}
     end
   end
   describe ".to_csv" do
