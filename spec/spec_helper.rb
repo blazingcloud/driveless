@@ -34,3 +34,10 @@ def login_as(user, password="password")
   click_button 'Login'
 end
 
+def login_as_admin
+  admin = User.make(:password => "password")
+  admin.update_attribute(:admin, true)
+  admin.reload.should be_admin
+  login_as(admin, "password")
+  admin
+end

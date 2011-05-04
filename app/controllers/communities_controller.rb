@@ -1,6 +1,6 @@
 class CommunitiesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :require_admin, :only => [ :update, :edit, :new, :create, :destroy ]
+  before_filter :require_admin, :except => [ :index, :show]
 
   def new
     @community = Community.new
