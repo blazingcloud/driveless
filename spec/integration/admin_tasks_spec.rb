@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe "When user is an administrator" do
   before do
-    @admin = User.make(:password => "password")
-    @admin.update_attribute(:admin, true)
-    @admin.reload.should be_admin
-    login_as(@admin, "password")
+    @admin = login_as_admin
   end
 
   describe "When editing a user" do
