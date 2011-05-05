@@ -31,31 +31,55 @@ describe User do
       mile.should_not be_nil
       @user1 = User.make
       @user1.save!
+      # 6 green trips, 6 days
+      # 39 greem miles, 30 miles bike, 9 miles walk
       @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
                         :distance => 10.0, :unit_id => mile.id, :made_at => Date.today)
       @user1.trips.create!(:destination_id => work.id, :mode_id => walk.id,
-                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today)
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 1.day)
+      @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
+                        :distance => 10.0, :unit_id => mile.id, :made_at => Date.today+ 2.day)
+      @user1.trips.create!(:destination_id => work.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 3.day)
+      @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
+                        :distance => 10.0, :unit_id => mile.id, :made_at => Date.today + 4.day)
+      @user1.trips.create!(:destination_id => work.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 5.day)
+
       @user2 = User.make
       @user2.save!
+      # 7 green trips in this challenge, 6 days (one trip last year)
+      # 20 green miles, 20 miles walk
       @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
                         :distance => 2.0, :unit_id => mile.id, :made_at => Date.today)
       @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
-                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today - 1.day)
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 1.day)
       @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
-                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today - 1.year)
+                        :distance => 4.0, :unit_id => mile.id, :made_at => Date.today + 2.day)
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 2.0, :unit_id => mile.id, :made_at => Date.today + 3.day)
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 4.day)
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 6.day)
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 6.day)
+                        
+      @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
+                        :distance => 4.0, :unit_id => mile.id, :made_at => Date.today - 1.year)
 
     end
     it "should report the User with the max miles for a mode" do
-      User.max_miles('Bike').should == {:user => @user1, :total_miles => 10.0, :name => 'Bike'}
+      User.max_miles('Bike').should == {:user => @user1, :total_miles => 30.0, :name => 'Bike'}
     end
-    it "should calculate max miles for walking with several users" do
-      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0, :name => 'Walk'}
-    end
-    it "should not include trips from last year in max miles result" do
-      User.max_miles('Walk').should == {:user => @user2, :total_miles => 5.0, :name => 'Walk'}
+    it "should calculate max miles for walking with several users (ignoring last year)" do
+      User.max_miles('Walk').should == {:user => @user2, :total_miles => 20.0, :name => 'Walk'}
     end
     it "should not return nil user and 0 total_miles if there is no one with a matching trip" do
       User.max_miles('Bus').should == {:user => nil, :total_miles => 0.0, :name => 'Bus'}
+    end
+    it "should report user with most green trips" do
+      User.max_green_trips('Walk').should == {:user => @user2, :total_trips_count => 7.0, :name => 'Walk' }
     end
   end
   describe ".to_csv" do
