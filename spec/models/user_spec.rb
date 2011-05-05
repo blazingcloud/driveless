@@ -79,7 +79,7 @@ describe User do
       User.max_miles('Bus').should == {:user => nil, :total_miles => 0.0, :name => 'Bus'}
     end
     it "should report user with most green trips" do
-      User.max_green_trips('Walk').should == {:user => @user2, :total_trips_count => 7.0, :name => 'Walk' }
+      User.max_green_trips.should == {:user => @user2, :total_trips_count => 7.0 }
     end
   end
   describe ".to_csv" do

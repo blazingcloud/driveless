@@ -37,6 +37,11 @@ describe "When checking the results" do
         page.should have_content("#{mode.name}")
       end
     end
+    it "shows most green trips for green modes" do
+      Mode.green.each do |mode|
+        page.should have_content("Most Green Trips - #{mode.name}")
+      end
+    end
 
   end
 

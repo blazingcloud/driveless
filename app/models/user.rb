@@ -266,11 +266,10 @@ class User < ActiveRecord::Base
     { :user => User.where(:id => user_id).first, :total_miles => total_miles.to_f, :name => mode_name }
   end
   
-  def self.max_green_trips(mode_name)
+  def self.max_green_trips
     trips_for_all_users_count = self.joins(:trips => :mode).where(:modes => {:green => true}).count(:group => :user_id)
-    # user_id, total_trips_distance = trips_for_all_users_count.max { |a,b| a[1].to_f <=> b[1].to_f }
     user_id, total_trips_count = trips_for_all_users_count.max { |a,b| a[1].to_f <=> b[1].to_f }
-    { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_f, :name => mode_name }
+    { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_f }
   end
   
   private
