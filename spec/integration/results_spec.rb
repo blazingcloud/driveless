@@ -34,7 +34,7 @@ describe "When checking the results" do
     end
     it "shows most miles for green modes" do
       Mode.green.each do |mode|
-        page.should have_content("Most Green Miles - #{mode.name}")
+        page.should have_content("#{mode.name}")
       end
     end
 

@@ -1,0 +1,69 @@
+/*
+Syntax error: Undefined mixin 'grid-container'.
+        on line 79 of app/stylesheets/application.sass, in `grid-container'
+        from line 79 of app/stylesheets/application.sass
+
+74:   color: blue
+75:   img
+76:     border: none
+77: 
+78: .container
+79:   +grid-container
+80:   +clearfix
+81: 
+82: .info
+83:   background: #ffffcc
+84:   border: #ccccaa 1px solid
+
+Backtrace:
+app/stylesheets/application.sass:79:in `grid-container'
+app/stylesheets/application.sass:79
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/mixin_node.rb:62:in `perform!'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:305:in `_perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:213:in `perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:327:in `perform_children'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:327:in `map'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:327:in `perform_children'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:317:in `perform!'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/rule_node.rb:191:in `perform!'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:305:in `_perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:213:in `perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:327:in `perform_children'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:327:in `map'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:327:in `perform_children'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:317:in `perform!'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/root_node.rb:59:in `perform!'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:305:in `_perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/node.rb:213:in `perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/root_node.rb:37:in `perform'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/tree/root_node.rb:29:in `render'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/plugin.rb:223:in `update_stylesheet'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/plugin.rb:75:in `update_stylesheets'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/plugin.rb:73:in `each'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/plugin.rb:73:in `update_stylesheets'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/plugin.rb:195:in `watch'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/path.rb:71:in `call'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/path.rb:71:in `run_callback'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/path.rb:54:in `callback_action'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/path.rb:34:in `update'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/state/file.rb:19:in `refresh'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/backends/polling.rb:17:in `run'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/backends/polling.rb:17:in `each'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/backends/polling.rb:17:in `run'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/backends/polling.rb:15:in `loop'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/backends/polling.rb:15:in `run'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm/monitor.rb:24:in `run'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/vendor/fssm/lib/fssm.rb:17:in `monitor'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/sass/plugin.rb:167:in `watch'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/haml/exec.rb:457:in `watch_or_update'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/haml/exec.rb:360:in `process_result'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/haml/exec.rb:41:in `parse'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/../lib/haml/exec.rb:21:in `parse!'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/gems/haml-3.0.25/bin/sass:8
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/bin/sass:19:in `load'
+/Users/sarah/.rvm/gems/ree-1.8.7-2011.03@driveless/bin/sass:19
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'grid-container'.\A         on line 79 of app/stylesheets/application.sass, in `grid-container'\A         from line 79 of app/stylesheets/application.sass\A \A 74:   color: blue\A 75:   img\A 76:     border: none\A 77: \A 78: .container\A 79:   +grid-container\A 80:   +clearfix\A 81: \A 82: .info\A 83:   background: #ffffcc\A 84:   border: #ccccaa 1px solid"; }

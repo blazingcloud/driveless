@@ -1,22 +1,27 @@
-
+<div class="results">
+  <p>Most Green Miles for All Users by Mode of Transporation:</p>
 <ul>
   <% @green_mode_results.each do |result| %>
-    <li><%= "Most Green Miles - #{result[:name]}" %>
+    <li><%= "#{result[:name]}:" %>
       <% if result[:user].nil? %>
           <p>no winner</p>
       <% else %>
-      <ul>
-             <li><%= result[:user].trips.count %></li>
-             <li>   <%= result[:total_miles] %></li>
-            <li>###</li>
-            <li><%= link_to result[:user].username, result[:user] %> </li>
-            <li><%= result[:user].name %></li>
-            <li><%= result[:user].address %></li>
-            <li><%= result[:user].city %></li>
-            <li><%= result[:user].email %>   </li>
-            <li><%= result[:user].is_parent %></li>
+          <ul>
+         <li><%= link_to result[:user].name, result[:user]  %></li>
+         <li><%= result[:user].address %></li>
+         <li><%= result[:user].city %></li>
+         <li><%= result[:user].email %>   </li>
         </ul>
-       <% end %>     
+          <div class="clear"/>
+
+      <ul>
+             <li><%= "#{result[:user].trips.count} trips, #{result[:total_miles]} miles" %></li>
+            <li>###</li>
+        <li><%=  result[:user].username %> </li>
+        <li><%= "parent" if result[:user].is_parent %></li>
+      </ul>
+       <% end %>
     </li>
   <% end %>
 </ul>
+</div>
