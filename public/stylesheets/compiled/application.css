@@ -927,20 +927,3 @@ div.openid input[type='submit'] {
 .is-parent {
   padding-left: 38px;
 }
-
-/* line 622, ../../../app/stylesheets/application.sass */
-.results {
-  width: 1000px;
-  overflow: visible;
-}
-/* line 625, ../../../app/stylesheets/application.sass */
-.results div, .results ul, .results p {
-  margin: 0;
-  display: block;
-  width: 620px;
-}
-/* line 629, ../../../app/stylesheets/application.sass */
-.results li {
-  display: inline;
-  float: left;
-}

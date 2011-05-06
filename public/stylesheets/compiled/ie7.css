@@ -1,3 +1,9 @@
-.badge-name { float: none; }
+/* line 1, ../../../app/stylesheets/ie7.sass */
+.badge-name {
+  float: none;
+}
 
-.leaderboard .badge { float: right; }
+/* line 5, ../../../app/stylesheets/ie7.sass */
+.leaderboard .badge {
+  float: right;
+}

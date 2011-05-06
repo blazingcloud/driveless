@@ -1,0 +1,26 @@
+/* line 1, ../../../app/stylesheets/results.sass */
+.container {
+  width: 1340px;
+}
+
+/* line 4, ../../../app/stylesheets/results.sass */
+.main {
+  width: 1000px;
+}
+
+/* line 7, ../../../app/stylesheets/results.sass */
+.results {
+  width: 1000px;
+  overflow: visible;
+}
+/* line 10, ../../../app/stylesheets/results.sass */
+.results div, .results ul, .results p {
+  margin: 0;
+  display: block;
+  width: 1000px;
+}
+/* line 14, ../../../app/stylesheets/results.sass */
+.results li {
+  display: inline;
+  float: left;
+}

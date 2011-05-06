@@ -1,0 +1,20 @@
+- content_for :head do
+  = stylesheet_link_tag 'compiled/results.css'
+
+.results
+  %p Most Green Miles for All Users by Mode of Transporation:
+  %ul
+    - @green_mode_results.each do |result|
+      %li
+        = "#{result[:name]}:"
+        - if result[:user].nil?
+          %p no winner
+        - else
+          %ul
+            %li= result[:user].name
+            %li= link_to "#{result[:user].trips.count} trips, #{result[:total_miles]} miles", result[:user]
+            %li= "#{result[:user].address}, #{result[:user].city}"
+            %li ###
+            %li= mail_to result[:user].email            
+            %li= result[:user].username
+            %li= "parent" if result[:user].is_parent
