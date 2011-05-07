@@ -273,11 +273,8 @@ class User < ActiveRecord::Base
   end
   
   def self.max_green_shopping_trips
-    errands = Destination.create(:name => "Errands & Other")
-    
-    trips_for_all_users_count = self.joins(:trips => [:destination, :mode]).where([{:destination => errands}, {:modes => {:green => true}}]).count(:group => :user_id)
+    trips_for_all_users_count = Trip.joins(:destination, :mode).where({:destinations => {:name => "Errands & Other"}, :modes => {:green => true}}).count(:group => :user_id)  
     user_id, total_trips_count = trips_for_all_users_count.max { |a,b| a[1].to_f <=> b[1].to_f }
-    { :user => User.first }
     { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_i}
   end
   
