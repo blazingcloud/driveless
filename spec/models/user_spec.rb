@@ -21,6 +21,8 @@ describe User do
       work.should_not be_nil
       school = Destination.find_by_name("School")
       school.should_not be_nil
+      errands = Destination.find_by_name("Errands & Other")
+      errands.should_not be_nil
       walk = Mode.find_by_name("Bus")
       walk.should_not be_nil
       walk = Mode.find_by_name("Walk")
@@ -63,10 +65,27 @@ describe User do
       @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
                         :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 6.day)
       @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
-                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 6.day)
+                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 7.day)
                         
       @user2.trips.create!(:destination_id => school.id, :mode_id => walk.id,
                         :distance => 4.0, :unit_id => mile.id, :made_at => Date.today - 1.year)
+
+      @user3 = User.make
+      @user3.save!
+      # Green shopping trips winner (errands, faith, social).
+      @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
+                        :distance => 1.0, :unit_id => mile.id, :made_at => Date.today)
+      @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
+                        :distance => 2.0, :unit_id => mile.id, :made_at => Date.today + 1.day)
+      @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
+                        :distance => 1.0, :unit_id => mile.id, :made_at => Date.today + 2.day)
+      @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
+                        :distance => 2.0, :unit_id => mile.id, :made_at => Date.today + 3.day)      
+      @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
+                        :distance => 1.0, :unit_id => mile.id, :made_at => Date.today + 4.day)
+      @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
+                        :distance => 2.0, :unit_id => mile.id, :made_at => Date.today + 5.day)      
+
 
     end
     it "should report the User with the max miles for a mode" do
@@ -81,7 +100,11 @@ describe User do
     it "should report user with most green trips" do
       User.max_green_trips.should == {:user => @user2, :total_trips_count => 7.0 }
     end
+    it "should report user with most green shopping trips" do
+      User.max_green_shopping_trips.should == {:user => @user3, :total_trips_count => 6.0 }
+    end
   end
+  
   describe ".to_csv" do
     attr_reader :csv_array
     before do

@@ -1,0 +1,8 @@
+%ul
+  %li= link_to user.name, user
+  %li "description"
+  %li= "#{user.address}, #{user.city}"
+  %li ###
+  %li= mail_to user.email            
+  %li= user.username
+  %li= "parent" if user.is_parent

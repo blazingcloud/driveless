@@ -1,12 +1,15 @@
 require 'spec_helper'
 
 describe "When checking the results" do
-  context "as an admin" do
+  
+   context "as an admin" do
     before do
       work = Destination.find_by_name("Work")
       work.should_not be_nil
       school = Destination.find_by_name("School")
       school.should_not be_nil
+      errands = Destination.find_by_name("Errands & Other")
+      errands.should_not be_nil
       walk = Mode.find_by_name("Walk")
       walk.should_not be_nil
       bike = Mode.find_by_name("Bike")
@@ -38,9 +41,12 @@ describe "When checking the results" do
       end
     end
     it "shows most green trips" do
-      page.should have_content("Most Green Trips")
+      winner = User.max_green_trips
+      page.should have_content(:winner) 
     end
-
+    it "shows most green shopping trips" do
+      winner = User.max_green_shopping_trips
+      page.should have_content(:winner)
+    end  
   end
-
 end
