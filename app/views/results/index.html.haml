@@ -7,10 +7,7 @@
     - @green_mode_results.each do |result|
       %li
         = "#{result[:name]}:"
-        - if result[:user].nil?
-          %p no winner
-        - else
-          = render :partial => "result", :locals => { :user => result[:user], :description => "#{result[:user].trips.count} trips, #{result[:total_miles]} miles" }
+        = render :partial => "result", :locals => { :user => result[:user], :description => ("#{result[:user].trips.count} trips, #{result[:total_miles]} miles" unless result[:user].nil?) }
   %p Most Green Trips for All Users
   %ul
     %li 
