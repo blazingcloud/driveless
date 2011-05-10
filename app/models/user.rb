@@ -260,6 +260,26 @@ class User < ActiveRecord::Base
     ]
   end
 
+  def miles_for_mode(mode)
+    @miles_for_mode ||= {}
+    unless @miles_for_mode[mode.name] 
+      @miles_for_mode[mode.name] = self.trips.where(:mode_id => mode.id).inject(0) {|sum, trip| sum + trip.distance}
+    end
+    @miles_for_mode[mode.name].to_f
+  end
+
+  def self.by_miles_for_mode(mode)
+    self.all.sort {|a,b| b.miles_for_mode(mode) <=> a.miles_for_mode(mode) }
+  end
+    
+  #def self.max_miles(mode)
+    ##miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
+    ##user_id, total_miles = miles_for_all_users.max { |a,b| a[1].to_f <=> b[1].to_f }
+    #self.by_miles_for_mode(mode)[0..4].map do |user|
+      #{ :user => user, :total_miles => user.miles_for_mode(mode), :name => mode.name }
+    #end
+  #end
+  
   def self.max_miles(mode_name)
     miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
     results = miles_for_all_users.sort { |a,b| a[1].to_f <=> b[1].to_f }

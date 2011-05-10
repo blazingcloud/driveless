@@ -1,12 +1,11 @@
 %tr
-  %td
   - if user.nil?
     %td{:colspan => 7}
       no winner
   - else
     %td= link_to user.name, user
     %td= description
-    %td.address= "#{user.address}, #{user.city}"
+    %td= "#{user.address}, #{user.city}"
     %td= user.days_logged
     %td= mail_to user.email
     %td= user.username

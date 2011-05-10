@@ -2,16 +2,25 @@ body.section_results
   div.container
     width: 1600px
     div.results
-      h1
-        width: 1280px
+      width: 70em
       table
-        width: 1280px
+        width: 70em
+        tr.result_type, td.result_type 
+          background-color: #ccc
         th, td
           padding-right: 5px
           padding-left: 5px
-        th.address, td.address
-          width: 200px
-          padding-right: 5px
-          padding-left: 5px
-        tr.result_type, td.result_type 
-          background-color: #ccc
+          &.name
+            width: 10em
+          &.description
+            width: 15em
+          &.address
+            width: 15em
+          &.days_logged
+            width: 7em
+          &.email
+            width: 13em
+          &.username
+            width: 5em
+          &.parent
+            width: 5em

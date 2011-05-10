@@ -2,26 +2,48 @@
 body.section_results div.container {
   width: 1600px;
 }
-/* line 5, ../../../app/stylesheets/results.sass */
-body.section_results div.container div.results h1 {
-  width: 1280px;
+/* line 4, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results {
+  width: 70em;
 }
-/* line 7, ../../../app/stylesheets/results.sass */
+/* line 6, ../../../app/stylesheets/results.sass */
 body.section_results div.container div.results table {
-  width: 1280px;
+  width: 70em;
 }
-/* line 9, ../../../app/stylesheets/results.sass */
+/* line 8, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table tr.result_type, body.section_results div.container div.results table td.result_type {
+  background-color: #ccc;
+}
+/* line 10, ../../../app/stylesheets/results.sass */
 body.section_results div.container div.results table th, body.section_results div.container div.results table td {
   padding-right: 5px;
   padding-left: 5px;
 }
-/* line 12, ../../../app/stylesheets/results.sass */
-body.section_results div.container div.results table th.address, body.section_results div.container div.results table td.address {
-  width: 200px;
-  padding-right: 5px;
-  padding-left: 5px;
+/* line 13, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.name, body.section_results div.container div.results table td.name {
+  width: 10em;
 }
-/* line 16, ../../../app/stylesheets/results.sass */
-body.section_results div.container div.results table tr.result_type, body.section_results div.container div.results table td.result_type {
-  background-color: #cccccc;
+/* line 15, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.description, body.section_results div.container div.results table td.description {
+  width: 15em;
+}
+/* line 17, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.address, body.section_results div.container div.results table td.address {
+  width: 15em;
+}
+/* line 19, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.days_logged, body.section_results div.container div.results table td.days_logged {
+  width: 7em;
+}
+/* line 21, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.email, body.section_results div.container div.results table td.email {
+  width: 13em;
+}
+/* line 23, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.username, body.section_results div.container div.results table td.username {
+  width: 5em;
+}
+/* line 25, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table th.parent, body.section_results div.container div.results table td.parent {
+  width: 5em;
 }
