@@ -8,7 +8,7 @@
     %td= link_to user.name, user
     %td= description
     %td.address= "#{user.address}, #{user.city}"
-    %td ###
+    %td= user.days_logged
     %td= mail_to user.email
     %td= user.username
     %td= "parent" if user.is_parent?

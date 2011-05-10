@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe User do
+  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011
+
+  before do
+    @earth_day_2011 = Date.new(2011, 4, 22)
+    @work = Destination.find_by_name("Work")
+    @work.should_not be_nil
+    @school = Destination.find_by_name("School")
+    @school.should_not be_nil
+    @errands = Destination.find_by_name("Errands & Other")
+    @errands.should_not be_nil
+    @walk = Mode.find_by_name("Bus")
+    @walk.should_not be_nil
+    @walk = Mode.find_by_name("Walk")
+    @walk.should_not be_nil
+    @bike = Mode.find_by_name("Bike")
+    @bike.should_not be_nil
+    @mile = Unit.find_by_name("Mile")
+    @mile.should_not be_nil
+  end
+
   it { should be_invalid }
   it { should have_one(:baseline) }
   it { should have_many(:trips) }
@@ -12,25 +32,61 @@ describe User do
   #it { should validate_presence_of(:password) } # This is disabled by Casey so users can register by OpenId.
 
   it "should create a new instance given valid attributes" do
-    User.make
+    @user = User.make
   end
 
+  describe "#days_logged" do
+    attr_reader :user
+
+    before do
+      @user = User.make
+    end
+
+    describe "when the user has no trips" do
+      it "should return 0" do
+        user.days_logged.should == 0
+      end
+    end
+
+    describe "when the user has 1 trip logged per day" do
+      attr_reader :bike_to_school
+
+      before do
+        @bike_to_school = {
+          :destination_id => school.id,
+          :mode_id => bike.id,
+          :unit_id => mile.id,
+          :distance => 10
+        }
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 2.days))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 3.days))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 4.days))
+      end
+
+      it "should return the number of days for which there are logged trips" do
+        user.days_logged.should == 5
+      end
+
+      describe "when the user has more than 1 trip logged per day" do
+        before do
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 3.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
+        end
+
+        it "should return the number of days for which there are logged trips" do
+          user.days_logged.should == 6
+        end
+      end
+    end
+
+  end
   context "prize result" do
     before do
-      work = Destination.find_by_name("Work")
-      work.should_not be_nil
-      school = Destination.find_by_name("School")
-      school.should_not be_nil
-      errands = Destination.find_by_name("Errands & Other")
-      errands.should_not be_nil
-      walk = Mode.find_by_name("Bus")
-      walk.should_not be_nil
-      walk = Mode.find_by_name("Walk")
-      walk.should_not be_nil
-      bike = Mode.find_by_name("Bike")
-      bike.should_not be_nil
-      mile = Unit.find_by_name("Mile")
-      mile.should_not be_nil
       @user1 = User.make
       @user1.save!
       # 6 green trips, 6 days

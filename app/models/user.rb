@@ -277,6 +277,10 @@ class User < ActiveRecord::Base
     user_id, total_trips_count = trips_for_all_users_count.max { |a,b| a[1].to_f <=> b[1].to_f }
     { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_i}
   end
+
+  def days_logged
+    self.trips.map {|trip| trip.made_at}.uniq.size
+  end
   
   private
 
