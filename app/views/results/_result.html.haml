@@ -1,11 +1,14 @@
-- if user.nil?
-  %p no winner
-- else
-  %ul
-    %li= link_to user.name, user
-    %li= description
-    %li= "#{user.address}, #{user.city}"
-    %li ###
-    %li= mail_to user.email
-    %li= user.username
-    %li= "parent" if user.is_parent
+%tr
+  %td
+    = mode
+  - if user.nil?
+    %td{:colspan => 7}
+      no winner
+  - else
+    %td= link_to user.name, user
+    %td= description
+    %td.address= "#{user.address}, #{user.city}"
+    %td ###
+    %td= mail_to user.email
+    %td= user.username
+    %td= "parent" if user.is_parent?

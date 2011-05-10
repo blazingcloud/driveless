@@ -16,7 +16,7 @@
     = csrf_meta_tag
 
     = yield :head
-  %body
+  %body{:class => "section_#{controller.controller_name}"}
     .top
       .container
         .title

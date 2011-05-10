@@ -2,19 +2,27 @@
   = stylesheet_link_tag 'compiled/results.css'
 
 .results
-  %p Most Green Miles for All Users by Mode of Transportation:
-  %ul
-    - @green_mode_results.each do |result|
-      %li
-        = "#{result[:name]}:"
-        = render :partial => "result", :locals => { :user => result[:user], :description => ("#{result[:user].trips.count} trips, #{result[:total_miles]} miles" unless result[:user].nil?) }
-  %p Most Green Trips for All Users
-  %ul
-    %li 
-      Total Trips
-      = render :partial => "result", :locals => { :user => @most_green_trips_result[:user], :description => "#{@most_green_trips_result[:total_trips_count]} green trips" }
-  %p Most Green Shopping Trips for All Users
-  %ul 
-    %li
-      Total Trips
-      = render :partial => "result", :locals => { :user => @most_green_shopping_trips_result[:user], :description => "#{@most_green_shopping_trips_result[:total_trips_count]} green shopping trips"}
+  - @categories.each do |category|
+    %h1= category[:description]
+    %table
+      %thead
+        %tr
+          %th
+            Mode
+          %th
+            Name
+          %th
+            Description
+          %th.address
+            Address
+          %th
+            Days logged
+          %th
+            Email
+          %th
+            Username
+          %th
+            Parent?
+      %tbody
+        - category[:results].each do |result|
+          = render :partial => "result", :locals => { :mode => result[:name], :user => result[:user], :description => ("#{result[:user].trips.count} trips, #{result[:total_miles]} miles" unless result[:user].nil?) }
