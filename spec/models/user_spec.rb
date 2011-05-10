@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011
+  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011, :bike_to_school
 
   before do
     @earth_day_2011 = Date.new(2011, 4, 22)
@@ -19,6 +19,12 @@ describe User do
     @bike.should_not be_nil
     @mile = Unit.find_by_name("Mile")
     @mile.should_not be_nil
+    @bike_to_school = {
+      :destination_id => school.id,
+      :mode_id => bike.id,
+      :unit_id => mile.id,
+      :distance => 10
+    }
   end
 
   it { should be_invalid }
@@ -49,15 +55,8 @@ describe User do
     end
 
     describe "when the user has 1 trip logged per day" do
-      attr_reader :bike_to_school
 
       before do
-        @bike_to_school = {
-          :destination_id => school.id,
-          :mode_id => bike.id,
-          :unit_id => mile.id,
-          :distance => 10
-        }
         user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
         user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
         user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 2.days))
@@ -141,25 +140,70 @@ describe User do
                         :distance => 1.0, :unit_id => mile.id, :made_at => Date.today + 4.day)
       @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
                         :distance => 2.0, :unit_id => mile.id, :made_at => Date.today + 5.day)      
-
-
     end
+
     it "should report the User with the max miles for a mode" do
       User.max_miles('Bike').should == {:user => @user1, :total_miles => 30.0, :name => 'Bike'}
     end
+
     it "should calculate max miles for walking with several users (ignoring last year)" do
       User.max_miles('Walk').should == {:user => @user2, :total_miles => 20.0, :name => 'Walk'}
     end
+
     it "should not return nil user and 0 total_miles if there is no one with a matching trip" do
       User.max_miles('Bus').should == {:user => nil, :total_miles => 0.0, :name => 'Bus'}
     end
+
     it "should report user with most green trips" do
       User.max_green_trips.should == {:user => @user2, :total_trips_count => 7.0 }
     end
+
     it "should report user with most green shopping trips" do
       User.max_green_shopping_trips.should == {:user => @user3, :total_trips_count => 6.0 }
     end
   end
+
+  describe "top users by miles by mode" do
+
+    attr_reader :user1, :user2, :user3
+
+    before do
+      User.delete_all
+      @user1 = User.make
+      user1.new_record?.should be_false
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 2.days))
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 - 363.days)) # Last year should not count
+
+
+      @user2 = User.make
+      user2.new_record?.should be_false
+      user2.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
+      user2.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
+      user2.trips.create!(bike_to_school.merge(:distance => 25, :made_at => earth_day_2011 + 2.days))
+
+      @user3 = User.make
+      user3.new_record?.should be_false
+      user3.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
+      user3.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
+    end
+
+    describe "#miles_for_mode" do
+      it "should return green miles for mode" do
+        user1.miles_for_mode(bike).should == 30
+        user2.miles_for_mode(bike).should == 45
+        user3.miles_for_mode(bike).should == 20
+      end
+    end
+
+    describe ".by_miles_for_mode" do
+      it "should return users in descending order of miles for mode" do
+        
+      end
+    end
+  end
+
   
   describe ".to_csv" do
     attr_reader :csv_array

@@ -2,12 +2,15 @@ class ResultsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @categories = [
-      {
-        :description => "Most Green Miles for All Users by Mode of Transportation",
-        :results => Mode.green.map { |mode| result = User.max_miles(mode.name) }
-      },
+    @categories = []
+    Mode.green.map do |mode| 
+      @categories << {
+        :description => "Most Green Miles for All Users by #{mode.name}",
+        :results => User.max_miles(mode)
+      }
+    end
 
+    @categories += [
       {
         :description => "Most Green Trips for All Users",
         :results => [User.max_green_trips]
