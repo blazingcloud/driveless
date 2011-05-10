@@ -24,5 +24,15 @@
           %th
             Parent?
       %tbody
-        - category[:results].each do |result|
-          = render :partial => "result", :locals => { :mode => result[:name], :user => result[:user], :description => ("#{result[:user].trips.count} trips, #{result[:total_miles]} miles" unless result[:user].nil?) }
+        - category[:results].each do |result_set|
+          %tr.result_type
+            %td= result_set[0][:name] 
+            %td
+            %td
+            %td
+            %td
+            %td
+            %td
+            %td
+            - result_set.each do |result|
+              = render :partial => "result", :locals => { :mode => result[:name], :user => result[:user], :description => ("#{result[:user].trips.count} trips, #{result[:total_miles]} miles" unless result[:user].nil?) }

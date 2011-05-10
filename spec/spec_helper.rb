@@ -41,3 +41,19 @@ def login_as_admin
   login_as(admin, "password")
   admin
 end
+
+def user_with_trips(options)
+  user = options[:user] || User.make
+  user.save if user.new_record?
+  distances = options[:distances] || [1.0, 2.0, 3.0, 4.0, 5.0]
+  mode = options[:mode]
+  destination = options[:destination]
+  date = Date.today
+  distances.each do |distance|
+    user.trips.create!(:destination_id => destination.id, :unit_id => Unit.first.id, :mode_id => mode.id,
+                       :distance => distance, :made_at => date)
+    date += 1.day
+  end
+  user
+
+end

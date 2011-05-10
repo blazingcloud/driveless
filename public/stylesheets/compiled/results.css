@@ -21,3 +21,7 @@ body.section_results div.container div.results table th.address, body.section_re
   padding-right: 5px;
   padding-left: 5px;
 }
+/* line 16, ../../../app/stylesheets/results.sass */
+body.section_results div.container div.results table tr.result_type, body.section_results div.container div.results table td.result_type {
+  background-color: #cccccc;
+}

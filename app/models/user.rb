@@ -262,8 +262,13 @@ class User < ActiveRecord::Base
 
   def self.max_miles(mode_name)
     miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
-    user_id, total_miles = miles_for_all_users.max { |a,b| a[1].to_f <=> b[1].to_f }
-    { :user => User.where(:id => user_id).first, :total_miles => total_miles.to_f, :name => mode_name }
+    results = miles_for_all_users.sort { |a,b| a[1].to_f <=> b[1].to_f }
+    results.reverse!
+    results = results[0..4]
+    results = [[nil,0]] if results.empty?
+    results.map do |user_id, total_miles|
+      { :user => User.where(:id => user_id).first, :total_miles => total_miles.to_f, :name => mode_name }
+    end
   end
   
   def self.max_green_trips

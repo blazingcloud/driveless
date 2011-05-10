@@ -10,12 +10,12 @@ class ResultsController < ApplicationController
 
       {
         :description => "Most Green Trips for All Users",
-        :results => [User.max_green_trips]
+        :results => [[User.max_green_trips]]
       },
 
       {
         :description => "Most Green Shopping Trips for All Users",
-        :results => [User.max_green_shopping_trips]
+        :results => [[User.max_green_shopping_trips]]
       },
     ]
 

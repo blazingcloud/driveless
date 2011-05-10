@@ -90,7 +90,7 @@ describe User do
       @user1 = User.make
       @user1.save!
       # 6 green trips, 6 days
-      # 39 greem miles, 30 miles bike, 9 miles walk
+      # 40 greem miles, 30 miles bike, 10 miles walk
       @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
                         :distance => 10.0, :unit_id => mile.id, :made_at => Date.today)
       @user1.trips.create!(:destination_id => work.id, :mode_id => walk.id,
@@ -102,7 +102,7 @@ describe User do
       @user1.trips.create!(:destination_id => work.id, :mode_id => bike.id,
                         :distance => 10.0, :unit_id => mile.id, :made_at => Date.today + 4.day)
       @user1.trips.create!(:destination_id => work.id, :mode_id => walk.id,
-                        :distance => 3.0, :unit_id => mile.id, :made_at => Date.today + 5.day)
+                        :distance => 4.0, :unit_id => mile.id, :made_at => Date.today + 5.day)
 
       @user2 = User.make
       @user2.save!
@@ -129,6 +129,8 @@ describe User do
       @user3 = User.make
       @user3.save!
       # Green shopping trips winner (errands, faith, social).
+      # 6 green trips, 6 days
+      # 9 green miles, 9 miles walk
       @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
                         :distance => 1.0, :unit_id => mile.id, :made_at => Date.today)
       @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
@@ -142,16 +144,32 @@ describe User do
       @user3.trips.create!(:destination_id => errands.id, :mode_id => walk.id,
                         :distance => 2.0, :unit_id => mile.id, :made_at => Date.today + 5.day)      
 
-
+      @biker2 = user_with_trips(:mode => bike, :destination => school, :distances => [5.0]*5)
+      @biker3 = user_with_trips(:mode => bike, :destination => school, :distances => [4.0]*5)
+      @biker4 = user_with_trips(:mode => bike, :destination => school, :distances => [3.0]*5)
+      @biker5 = user_with_trips(:mode => bike, :destination => school, :distances => [2.0]*5)
+      @biker6 = user_with_trips(:mode => bike, :destination => school, :distances => [1.0]*5)
     end
     it "should report the User with the max miles for a mode" do
-      User.max_miles('Bike').should == {:user => @user1, :total_miles => 30.0, :name => 'Bike'}
+      result = User.max_miles('Bike')
+      result.length.should == 5
+      result.map {|r| r[:total_miles] }.should == [30.0, 25.0, 20.0, 15.0, 10.0]
+      result.should == [{:user => @user1, :total_miles => 30.0, :name => 'Bike'},
+                                        {:user => @biker2, :total_miles => 25.0, :name => 'Bike'},
+                                        {:user => @biker3, :total_miles => 20.0, :name => 'Bike'},
+                                        {:user => @biker4, :total_miles => 15.0, :name => 'Bike'},
+                                        {:user => @biker5, :total_miles => 10.0, :name => 'Bike'}]
     end
     it "should calculate max miles for walking with several users (ignoring last year)" do
-      User.max_miles('Walk').should == {:user => @user2, :total_miles => 20.0, :name => 'Walk'}
+      result = User.max_miles('Walk')
+      result.map {|r| r[:total_miles] }.should == [20.0, 10.0, 9.0]
+      result.should == [{:user => @user2, :total_miles => 20.0, :name => 'Walk'},
+                        {:user => @user1, :total_miles => 10.0, :name => 'Walk'},
+                        {:user => @user3, :total_miles => 9.0, :name => 'Walk'}]
+
     end
     it "should not return nil user and 0 total_miles if there is no one with a matching trip" do
-      User.max_miles('Bus').should == {:user => nil, :total_miles => 0.0, :name => 'Bus'}
+      User.max_miles('Bus').should == [{:user => nil, :total_miles => 0.0, :name => 'Bus'}]
     end
     it "should report user with most green trips" do
       User.max_green_trips.should == {:user => @user2, :total_trips_count => 7.0 }
