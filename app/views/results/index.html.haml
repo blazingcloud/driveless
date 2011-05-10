@@ -8,7 +8,7 @@
       %thead
         %tr
           %th
-            Mode
+            
           %th
             Name
           %th
@@ -35,4 +35,4 @@
             %td
             %td
             - result_set.each do |result|
-              = render :partial => "result", :locals => { :mode => result[:name], :user => result[:user], :description => ("#{result[:user].trips.count} trips, #{result[:total_miles]} miles" unless result[:user].nil?) }
+              = render :partial => "result", :locals => { :mode => result[:name], :user => result[:user], :description => result[:description] }

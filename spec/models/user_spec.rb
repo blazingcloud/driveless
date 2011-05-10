@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011
+  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011, :train
 
   before do
     @earth_day_2011 = Date.new(2011, 4, 22)
@@ -17,6 +17,8 @@ describe User do
     @walk.should_not be_nil
     @bike = Mode.find_by_name("Bike")
     @bike.should_not be_nil
+    @train = Mode.find_by_name("Train")
+    @train.should_not be_nil
     @mile = Unit.find_by_name("Mile")
     @mile.should_not be_nil
   end
@@ -149,33 +151,47 @@ describe User do
       @biker4 = user_with_trips(:mode => bike, :destination => school, :distances => [3.0]*5)
       @biker5 = user_with_trips(:mode => bike, :destination => school, :distances => [2.0]*5)
       @biker6 = user_with_trips(:mode => bike, :destination => school, :distances => [1.0]*5)
+
+      @train1 = user_with_trips(:mode => train, :destination => work, :distances => [10.0]*20)
+      @train2 = user_with_trips(:mode => train, :destination => work, :distances => [10.0]*10)
+      @train3 = user_with_trips(:mode => train, :destination => work, :distances => [10.0]*9)
+      @train4 = user_with_trips(:mode => train, :destination => work, :distances => [10.0]*8)
+      @train5 = user_with_trips(:mode => train, :destination => work, :distances => [10.0]*1)
+
     end
     it "should report the User with the max miles for a mode" do
       result = User.max_miles('Bike')
       result.length.should == 5
       result.map {|r| r[:total_miles] }.should == [30.0, 25.0, 20.0, 15.0, 10.0]
-      result.should == [{:user => @user1, :total_miles => 30.0, :name => 'Bike'},
-                                        {:user => @biker2, :total_miles => 25.0, :name => 'Bike'},
-                                        {:user => @biker3, :total_miles => 20.0, :name => 'Bike'},
-                                        {:user => @biker4, :total_miles => 15.0, :name => 'Bike'},
-                                        {:user => @biker5, :total_miles => 10.0, :name => 'Bike'}]
+      result.should == [{:user => @user1, :total_miles => 30.0, :name => 'Bike', :description => "6 trips, 30.0 miles"},
+                        {:user => @biker2, :total_miles => 25.0, :name => 'Bike', :description => "5 trips, 25.0 miles"},
+                        {:user => @biker3, :total_miles => 20.0, :name => 'Bike', :description => "5 trips, 20.0 miles"},
+                        {:user => @biker4, :total_miles => 15.0, :name => 'Bike', :description => "5 trips, 15.0 miles"},
+                        {:user => @biker5, :total_miles => 10.0, :name => 'Bike', :description => "5 trips, 10.0 miles"}]
     end
     it "should calculate max miles for walking with several users (ignoring last year)" do
       result = User.max_miles('Walk')
       result.map {|r| r[:total_miles] }.should == [20.0, 10.0, 9.0]
-      result.should == [{:user => @user2, :total_miles => 20.0, :name => 'Walk'},
-                        {:user => @user1, :total_miles => 10.0, :name => 'Walk'},
-                        {:user => @user3, :total_miles => 9.0, :name => 'Walk'}]
+      result.should == [{:user => @user2, :total_miles => 20.0, :name => 'Walk', :description => "7 trips, 20.0 miles"},
+                        {:user => @user1, :total_miles => 10.0, :name => 'Walk', :description => "6 trips, 10.0 miles"},
+                        {:user => @user3, :total_miles => 9.0, :name => 'Walk', :description => "6 trips, 9.0 miles"}]
 
     end
     it "should not return nil user and 0 total_miles if there is no one with a matching trip" do
-      User.max_miles('Bus').should == [{:user => nil, :total_miles => 0.0, :name => 'Bus'}]
+      User.max_miles('Bus').should == [{:user => nil, :total_miles => 0.0, :name => 'Bus', :description => ""}]
     end
     it "should report user with most green trips" do
-      User.max_green_trips.should == {:user => @user2, :total_trips_count => 7.0 }
+      result = User.max_green_trips
+      result.map {|r| r[:total_trips_count] }.should == [20, 10, 9, 8, 7]      
+      result.should == [{:user => @train1, :total_trips_count => 20, :description => "20 trips", :name =>"" },
+                                      {:user => @train2, :total_trips_count => 10, :description => "10 trips", :name =>"" },
+                                      {:user => @train3, :total_trips_count => 9, :description => "9 trips", :name =>"" },
+                                      {:user => @train4, :total_trips_count => 8, :description => "8 trips", :name =>"" },
+                                      {:user => @user2, :total_trips_count => 7, :description => "7 trips", :name =>"" }]
     end
     it "should report user with most green shopping trips" do
-      User.max_green_shopping_trips.should == {:user => @user3, :total_trips_count => 6.0 }
+      result = User.max_green_shopping_trips
+      result.should == [{:user => @user3, :total_trips_count => 6, :description =>"6 trips", :name =>"" }]
     end
   end
   

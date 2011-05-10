@@ -267,20 +267,40 @@ class User < ActiveRecord::Base
     results = results[0..4]
     results = [[nil,0]] if results.empty?
     results.map do |user_id, total_miles|
-      { :user => User.where(:id => user_id).first, :total_miles => total_miles.to_f, :name => mode_name }
+      user = User.where(:id => user_id).first
+      desc = user.nil? ? "" : "#{user.trips.count} trips, #{total_miles.to_f} miles"
+      { :user => user, :total_miles => total_miles.to_f,
+        :name => mode_name, :description => desc}
     end
+ 
   end
   
   def self.max_green_trips
     trips_for_all_users_count = self.joins(:trips => :mode).where(:modes => {:green => true}).count(:group => :user_id)
-    user_id, total_trips_count = trips_for_all_users_count.max { |a,b| a[1].to_f <=> b[1].to_f }
-    { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_i }
+    results = trips_for_all_users_count.sort { |a,b| a[1].to_f <=> b[1].to_f }
+    results.reverse!
+    results = results[0..4]
+    results = [[nil,0]] if results.empty?
+    results.map do |user_id, total_trips_count|
+      user = User.where(:id => user_id).first
+      desc = "#{total_trips_count.to_i} trips"
+      { :user => user, :total_trips_count => total_trips_count.to_i,
+        :name => "", :description => desc}
+    end
   end
   
   def self.max_green_shopping_trips
     trips_for_all_users_count = Trip.joins(:destination, :mode).where({:destinations => {:name => "Errands & Other"}, :modes => {:green => true}}).count(:group => :user_id)  
-    user_id, total_trips_count = trips_for_all_users_count.max { |a,b| a[1].to_f <=> b[1].to_f }
-    { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_i}
+    results = trips_for_all_users_count.sort { |a,b| a[1].to_f <=> b[1].to_f }
+    results.reverse!
+    results = results[0..4]
+    results = [[nil,0]] if results.empty?
+    results.map do |user_id, total_trips_count|
+      user = User.where(:id => user_id).first
+      desc = "#{total_trips_count.to_i} trips"
+      { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_i,
+        :name => "", :description => desc}        
+    end
   end
 
   def days_logged
