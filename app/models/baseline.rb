@@ -33,4 +33,30 @@ class Baseline < ActiveRecord::Base
   def current_challenge_end
     Time.zone.local(Date.today.year + 1, 1, 1) - 1
   end
+
+  def current_total_miles
+    [:work_green,    :work_alone,
+    :school_green,  :school_alone,
+    :kids_green,    :kids_alone,
+    :errands_green, :errands_alone,
+    :faith_green,   :faith_alone,
+    :social_green,  :social_alone,].sum {|attr| self[attr].to_f}
+  end
+
+  def current_green_miles
+    [:work_green,
+    :school_green,
+    :kids_green,
+    :errands_green,
+    :faith_green,
+    :social_green].sum {|attr| self[attr].to_f}
+  end
+
+  def percent_green
+    if current_total_miles == 0
+      0
+    else
+      current_green_miles / current_total_miles
+    end
+  end
 end
