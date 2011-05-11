@@ -63,6 +63,14 @@ class Trip < ActiveRecord::Base
     ]
   end
 
+  def lbs_co2_saved
+    distance * mode.lb_co2_per_mile.to_f
+  end
+
+  def shopping?
+    self.destination.try(:name) == "Errands & Other"
+  end
+
   private
 
   def update_green_miles

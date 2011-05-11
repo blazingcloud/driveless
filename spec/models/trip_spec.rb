@@ -1,6 +1,37 @@
 require 'spec_helper'
 
 describe Trip do
+  describe "#shopping?" do
+    attr_reader :errands, :non_shopping_destinations
+
+    before do
+      @errands = Destination.find_by_name('Errands & Other')
+      @non_shopping_destinations = Destination.all - [errands]
+    end
+
+    it "should be true if destination is 'Errands & Other'" do
+      trip = Trip.make(:destination => errands)
+      trip.should be_shopping
+    end
+
+    it "should be false if destination is not 'Errands & Other'" do
+      non_shopping_destinations.each do |destination|
+        trip = Trip.make(:destination => destination, :made_at => Date.today)
+        trip.reload.destination.should == destination
+        trip.should_not be_shopping
+      end
+    end
+  end
+
+  describe "#lbs_co2_saved" do
+    it "should return distance * mode.lb_co2_per_mile" do
+      bike = Mode.find_by_name("Bike")
+      bike.lb_co2_per_mile.should == 0.843
+      trip = Trip.make(:mode => bike, :made_at => Date.today, :distance => 100)
+      trip.lbs_co2_saved.should == 84.3
+    end
+  end
+
   describe "default scope" do
     describe "when trips exist for previous challenges" do
       attr_reader :user, :mode, :destination, :unit, :year, :previous_year

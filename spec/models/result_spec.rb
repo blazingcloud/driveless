@@ -49,10 +49,11 @@ describe Result do
         user.baseline.current_total_miles.should == 35.0
         user.baseline.current_green_miles.should == 10.0
 
-        add_trips_to_user(@user, :mode => bike, :destination => work, :distances => [2.0]*5)
-        add_trips_to_user(@user, :mode => walk, :destination => work, :distances => [0.5]*5)
-        add_trips_to_user(@user, :mode => bus,  :destination => work, :distances => [8.0]*5)
-        add_trips_to_user(@user, :mode => car,  :destination => work, :distances => [3.0, 3.0])
+        add_trips_to_user(@user, :mode => bike, :destination => work,    :distances => [2.0]*5)      # 8.43 lbs co2 saved
+        add_trips_to_user(@user, :mode => walk, :destination => work,    :distances => [0.5]*5)      # 2.1075
+        add_trips_to_user(@user, :mode => bus,  :destination => work,    :distances => [8.0]*5)      # 24.12
+        add_trips_to_user(@user, :mode => car,  :destination => work,    :distances => [3.0, 3.0])   # 0
+        add_trips_to_user(@user, :mode => bike, :destination => errands, :distances => [10.0, 12.0]) # 18.546
         @user.community = sunnyvale
         @user.save!
 
@@ -62,16 +63,21 @@ describe Result do
       it "should include stats fields for the user" do
         user_result[:walk_mileage].should == 2.5
         user_result[:bus_mileage].should == 40.0
-        user_result[:bike_mileage].should == 10.0
+        user_result[:bike_mileage].should == 32.0
         user_result[:train_mileage].should == 0.0
         user_result[:community_name].should == sunnyvale.name
         user_result[:baseline_pct_green].should == 10.0 / 35.0
-        user_result[:total_green_miles].should == 40.0 + 10.0 + 2.5
-        user_result[:total_miles].should == 40.0 + 10.0 + 2.5 + 6.0
-        user_result[:total_green_trips].should == 15
-        actual_pct = (40.0 + 10.0 + 2.5) / (40.0 + 10.0 + 2.5 + 6.0)
+        user_result[:total_green_miles].should == 10.0 + 2.5 + 40.0 + 22.0
+        total_miles = 10.0 + 2.5 + 40.0 + 22.0 + 6.0
+        user_result[:total_miles].should == total_miles
+        user_result[:total_green_trips].should == 17
+        user_result[:total_green_shopping_trips].should == 2
+        actual_pct = (22.0 + 40.0 + 10.0 + 2.5) / (22.0 + 40.0 + 10.0 + 2.5 + 6.0)
         user_result[:actual_pct_green].should == actual_pct
         user_result[:pct_improvement].should == actual_pct - (10.0 / 35.0)
+        total_lbs_co2_saved = 8.43 + 2.1075 + 24.12 + 0 + 18.546
+        user_result[:total_lbs_co2_saved].should be_within(0.01).of(total_lbs_co2_saved)
+        user_result[:lbs_co2_saved_per_mile].should be_within(0.01).of(total_lbs_co2_saved / total_miles)
       end
     end
 
@@ -123,7 +129,10 @@ describe Result do
             :user,
             :total_miles,
             :bike_mileage,
-            :total_green_trips
+            :total_green_trips,
+            :total_green_shopping_trips,
+            :lbs_co2_saved_per_mile, 
+            :total_lbs_co2_saved
           ]
         end
       end
@@ -149,28 +158,22 @@ describe Result do
       end
 
       it "should return the users in descending order of green miles traveled scoped by community" do
-        #palo_alto_ids = results.users_by_mileage.select {|u| u.trips.first.mode == bike}.map(&:id)
-        #results.user_by_mileage(:mode => bike).should == biker_ids
-        #walker_ids = results.users_by_mileage.select {|u| u.trips.first.mode == walk}.map(&:id)
-        #results.user_by_mileage(:mode => walk).should == walker_ids
+        palo_alto_biker_ids = results.users_by_mileage.map {|res| res[:user]}.
+          select {|user| user.community == palo_alto && user.trips.first.mode == bike}.
+          map(&:id)
+        results.users_by_mileage(:mode => bike, :community => palo_alto).
+          map {|res| res[:user].id}.should == palo_alto_biker_ids
+        palo_alto_walker_ids = results.users_by_mileage.map {|res| res[:user]}.
+          select {|user| user.community == palo_alto && user.trips.first.mode == walk}.
+          map(&:id)
+        results.users_by_mileage(:mode => walk, :community => palo_alto).
+          map {|res| res[:user].id}.should == palo_alto_walker_ids
       end
     end
 
     def fake_user_results(attr, *values)
       (0..(values.length - 1)).map do |index|
         {:id => index, attr => values[index]}
-      end
-    end
-
-    describe "#users_by_green_trips" do
-      before do
-        mock(@results).user_results do
-          fake_user_results(:total_green_trips, 5, 3, 1, 6, 7)
-        end
-      end
-
-      it "should return users in descending order of number of green trips taken" do
-        @results.users_by_green_trips.map {|res| res[:id]}.should == [4, 3, 0, 1, 2]
       end
     end
 
@@ -183,53 +186,142 @@ describe Result do
       end
     end
 
-    describe "#sort_by_green_trips(results)" do
-
-    end
-    describe "#green_trips_for(community)" do
-      it "should return users in descending order of number of green trips taken for specified community"
-    end
-
-    describe "#green_shopping_trips" do
-      it "should return users in descending order of number of green shopping trips taken"
-    end
-
-    describe "#green_shopping_trips_for(community)" do
-      it "should return users in descending order of number of green shopping trips taken for specified community"
-    end
-
-    describe "#greenest_travel" do
-      it "should return users by least CO2 emissions per mile"
-    end
-
-    describe "#greenest_travel_for(community)" do 
-      it "should return users by least CO2 emissions per mile for specified community"
-    end
-
-    describe "#most_improved_over_baseline" do
-      it "should return users with the greatest increase in percent of green miles over baseline"
-    end
-
-    describe "#most_improved_over_baseline_for(community)" do
-      it "should return users with the greatest increase in percent of green miles over baseline for specified community"
-    end
-
-    describe "#largest_groups" do
-      it "should return the group with the largest number of members who logged 5 or more days" do
+    describe "#sort_by(field_name, results)" do
+      it "should sort results hash by field_name" do
+        #                                                    0  1  2  3  4  5
+        fake_results = fake_user_results(:total_green_trips, 1, 3, 5, 2, 4, 6)
+        sorted = @results.sort_by(:total_green_trips, fake_results)
+        sorted.size.should == 6
+        sorted.map {|res| res[:id]}.should == [5, 2, 4, 1, 3, 0] 
       end
     end
 
-    describe "#largest_groups_for(community)" do
-      it "should return the group with the largest number of members who logged 5 or more days in community" do
+    # Yes, this is a duplicate ... keeping it around 'cause the test is slightly different
+    describe "#users_by_green_trips" do
+      it "should return users in descending order of number of green trips taken" do
+        mock(@results).user_results do
+          fake_user_results(:total_green_trips, 5, 3, 1, 6, 7)
+        end
+        @results.users_by_total_green_trips.map {|res| res[:id]}.should == [4, 3, 0, 1, 2]
       end
     end
 
-    describe "#greenest_groups_of_type(destination)" do
-      it "should return greenest groups of type destination"
+    describe "overall winners" do
+      before do
+        mock(results).user_results { :fake_results }
+      end
+
+      describe "users_by_mileage" do
+        it "should return users with most green mileage"
+      end
+
+      describe "#users_by_green_trips" do
+        it "should return users in descending order of number of green trips taken" do
+          mock(results).sort_by(:total_green_trips, :fake_results) { :sorted }
+          @results.users_by_total_green_trips.should == :sorted
+        end
+      end
+
+      describe "#total_green_shopping_trips" do
+        it "should sort_by(:total_green_shopping_trips)" do
+          mock(results).sort_by(:total_green_shopping_trips, :fake_results) { :sorted }
+          @results.users_by_total_green_shopping_trips.should == :sorted
+        end
+      end
+
+      describe "#users_by_greenest_travel" do
+        it "should return users by least CO2 emissions per mile" do
+          mock(results).sort_by(:lbs_co2_saved_per_mile, :fake_results) { :sorted }
+          @results.users_by_greenest_travel.should == :sorted
+        end
+      end
+
+      describe "#users_by_most_improved_over_baseline" do
+        it "should return users with the greatest increase in percent of green miles over baseline" do
+          mock(results).sort_by(:pct_improvement, :fake_results) { :sorted }
+          @results.users_by_most_improved_over_baseline.should == :sorted
+        end
+      end
+
     end
 
-    describe "generate_csv" do
-      it "should generate a csv containing all prizes"
+    describe "winners scoped to a community" do
+
+      before do
+        mock(results).filter_by_community(sunnyvale) { :filtered }
+      end
+
+      describe "users_by_mileage_for(community)" do
+        it "should return users with most green mileage scoped to community"
+      end
+
+      describe "#users_by_total_green_trips_for(community)" do
+        it "should filter by community and sort on :green_trips" do
+          mock(results).sort_by(:total_green_trips, :filtered) { :filtered_and_sorted }
+          results.users_by_total_green_trips_for(sunnyvale).should == :filtered_and_sorted
+        end
+      end
+
+      describe "#green_shopping_trips_for(community)" do
+        it "should return users in descending order of number of green shopping trips taken for specified community" do
+          mock(results).sort_by(:total_green_shopping_trips, :filtered) { :filtered_and_sorted }
+          @results.users_by_total_green_shopping_trips_for(sunnyvale).should == :filtered_and_sorted
+        end
+      end
+
+      describe "#users_by_greenest_travel_for(community)" do 
+        it "should return users by least CO2 emissions per mile for specified community" do
+          mock(results).sort_by(:lbs_co2_saved_per_mile, :filtered) { :filtered_and_sorted }
+          @results.users_by_greenest_travel_for(sunnyvale).should == :filtered_and_sorted
+        end
+      end
+
+      describe "#users_by_most_improved_over_baseline_for(community)" do
+        it "should return users with the greatest increase in percent of green miles over baseline for specified community" do
+          mock(results).sort_by(:pct_improvement, :filtered) { :filtered_and_sorted }
+          @results.users_by_most_improved_over_baseline_for(sunnyvale).should == :filtered_and_sorted
+        end
+      end
+
+    end
+
+    describe "#generate_csv" do
+      it "should generate a csv file with columns for users" do
+        path_to_file = File.join(Rails.root, 'tmp')
+        results.generate_csv(path_to_file)
+      end
+    end
+
+    describe "group winners" do
+
+      describe "#calculate_stats_for_group(group)" do
+        it "should return a hash with stats for the group" do
+          group = Group.make(:name => "acme")
+          mock(group).users {[1,2,3,4,5,6,7,8]}
+        end
+      end
+
+      describe ".group_stats" do
+      end
+
+      describe "#groups_by_size" do
+        it "should return the groups with the greatest number of members who logged 5 or more days" do
+        end
+      end
+
+      describe "#groups_by_size_for()" do
+        it "should return the group with the largest number of members who logged 5 or more days in community" do
+        end
+      end
+
+      describe "#greenest_groups_of_type(destination)" do
+        it "should return greenest groups of type destination"
+      end
+
+      describe "generate_csv" do
+        it "should generate a csv containing all prizes"
+      end
+
     end
   end
 end
