@@ -279,21 +279,43 @@ class User < ActiveRecord::Base
       #{ :user => user, :total_miles => user.miles_for_mode(mode), :name => mode.name }
     #end
   #end
+  #
+  #
+  #Trip.includes(:community, :user).where(["communities.id = 9 and made_at >= ?", Date.new(2011,4,22)]).group(:user_id).sum(:distance)
+
   
   def self.max_miles(mode_name)
-    miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
-    results = miles_for_all_users.sort { |a,b| a[1].to_f <=> b[1].to_f }
-    results.reverse!
-    results = results[0..4]
-    results = [[nil,0]] if results.empty?
-    results.map do |user_id, total_miles|
-      user = User.where(:id => user_id).first
-      desc = user.nil? ? "" : "#{user.trips.count} trips, #{total_miles.to_f} miles"
-      { :user => user, :total_miles => total_miles.to_f,
+    mode = Mode.find_by_name(mode_name)
+    earth_day = Date.new(Date.today.year, 4, 22)
+    user_ids_with_distance = Trip.
+      includes(:user).
+      where(["mode_id = ? and made_at >= ?", mode.id, earth_day]).
+      group(:user_id).
+      order(1).
+      sum(:distance).
+      sort {|a,b| b[1] <=> a[1]}
+    user_ids_with_distance[0..4].map do |user_id, distance| 
+      user = User.find(user_id)
+      total_miles = distance.to_f
+      desc = user.nil? ? "" : "#{user.trips.count} trips, #{total_miles} miles"
+      { :user => user, :total_miles => total_miles,
         :name => mode_name, :description => desc}
     end
- 
   end
+
+    #miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
+    #results = miles_for_all_users.sort { |a,b| a[1].to_f <=> b[1].to_f }
+    #results.reverse!
+    #results = results[0..4]
+    #results = [[nil,0]] if results.empty?
+    #results.map do |user_id, total_miles|
+      #user = User.where(:id => user_id).first
+      #desc = user.nil? ? "" : "#{user.trips.count} trips, #{total_miles.to_f} miles"
+      #{ :user => user, :total_miles => total_miles.to_f,
+        #:name => mode_name, :description => desc}
+    #end
+ 
+  #end
   
   def self.max_green_trips
     trips_for_all_users_count = self.joins(:trips => :mode).where(:modes => {:green => true}).count(:group => :user_id)
@@ -326,7 +348,7 @@ class User < ActiveRecord::Base
   def days_logged
     self.trips.map {|trip| trip.made_at}.uniq.size
   end
-  
+
   private
 
   def map_openid_registration(registration)
