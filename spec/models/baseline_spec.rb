@@ -24,7 +24,7 @@ describe Baseline do
     end
   end
 
-  describe ".percent_green" do
+  describe "#percent_green" do
     before do
       @baseline = Baseline.new(
         :work_green => 0,    :work_alone => 10,
@@ -46,7 +46,7 @@ describe Baseline do
     end
 
     it "should return the percent of current miles traveled that are green" do
-      @baseline.percent_green.should == 10.0 / 35.0
+      @baseline.percent_green.should == 10.0 / 35.0 * 100.0
     end
   end
 

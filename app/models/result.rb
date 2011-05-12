@@ -1,7 +1,7 @@
 class Result
 
   def user_results
-    @user_results ||= User.includes(:trips).all.map do |user| 
+    @user_results ||= User.includes(:trips, :community).all.map do |user| 
       calculate_stats_for_user(user)
     end.compact
   end
@@ -11,8 +11,8 @@ class Result
   end
 
   def calculate_stats_for_user(user)
-    return nil unless user.trips.size >= 5
-    result = { :user => user }
+    return nil unless user.days_logged >= 5
+    result = { :user => user, :days_logged => user.days_logged }
     modes.each do | mode |
       mode_mileage = user.trips.
         select {|trip| trip.mode_id == mode.id}.
@@ -35,7 +35,8 @@ class Result
       result[:total_miles] += trip.distance.to_f
       result[:total_lbs_co2_saved] += trip.lbs_co2_saved.to_f
     end
-    result[:actual_pct_green] = result[:total_miles] == 0 ? 0 : result[:total_green_miles] / result[:total_miles]
+    return nil if result[:total_miles] == 0
+    result[:actual_pct_green] = result[:total_green_miles] / result[:total_miles] * 100.0
     result[:pct_improvement] = result[:actual_pct_green] - result[:baseline_pct_green]
     result[:lbs_co2_saved_per_mile] = result[:total_lbs_co2_saved] / result[:total_miles]
     result
@@ -58,7 +59,6 @@ class Result
       Mode.all.each do |mode|
         next unless mode.green?
         puts users_by_mileage(:mode => mode, :community => community).map {|res| res[:user].id}.join(", ")
-        #puts users_by_mileage(:mode => mode, :community => community).map {|res| res[:user].id}[0..4].join(", ")
       end
     end
   end
@@ -121,17 +121,105 @@ class Result
 
   def generate_csv(path_to_file)
 
-  FasterCSV.open(path_to_file, "w") do |csv|
+    header = [
+      "Number of trips",
+      "Result",
+      "Days logged",
+      "username",
+      "Name",
+      "Address",
+      "City",
+      "Community",
+      "email",
+      "Parent?"
+    ]
 
-    csv << ["Users by green mileage"]
-    # need to have a version of filtered by community
-    csv << ["another", "row"]
-    # ...
-  end
-  
-    File.open(path_to_file, 'w+') do |f|
-      
+    add_to_csv = lambda do |csv, user_result, attribute|
+
+      unless user_results.nil?
+        csv << [
+          user_result[:total_green_trips],
+          user_result[attribute],
+          user_result[:days_logged],
+          user_result[:user].username,
+          user_result[:user].name,
+          user_result[:user].address,
+          user_result[:user].city,
+          user_result[:community_name],
+          user_result[:user].email,
+          user_result[:user].is_parent? ? "parent" : ""
+        ]
+      end
     end
+
+    FasterCSV.open(path_to_file, "w") do |csv|
+
+      csv << ["Most Green Miles for All Users"]
+      csv << header
+      users_by_mileage[0..4].each { |user_result| add_to_csv.call(csv, user_result, :total_green_miles) }
+      Mode.green.each do |mode|
+        csv << [""]
+        csv << ["Most Green Miles for Users: #{mode.name}"]
+        csv << header
+        users_by_mileage(:mode => mode)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :"#{mode.name.downcase}_mileage") }
+      end
+
+      csv << [""]
+      csv << [ "Most Green Trips" ]
+      csv << header
+      users_by_total_green_trips[0..4].each { |user_result| add_to_csv.call(csv, user_result, :total_green_trips) }
+
+      csv << [""]
+      csv << [ "Most Green Shopping Trips" ]
+      csv << header
+      users_by_total_green_shopping_trips[0..4].each { |user_result| add_to_csv.call(csv, user_result, :total_green_shopping_trips) }
+
+      csv << [""]
+      csv << ["Greenest Travel"]
+      csv << header
+      users_by_greenest_travel[0..4].each { |user_result| add_to_csv.call(csv, user_result, :lbs_co2_saved_per_mile) }
+
+      csv << [""]
+      csv << ["Most Improved vs. Baseline"]
+      csv << header
+      users_by_greenest_travel[0..4].each { |user_result| add_to_csv.call(csv, user_result, :pct_improvement) }
+
+      Community.all.each do |community|
+        csv << [""]
+        csv << ["Most Green Miles for Users in #{community.name}"]
+        csv << header
+        users_by_mileage(:community => community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :total_green_miles) }
+        Mode.green.each do |mode|
+          csv << [""]
+          csv << ["Most Green Miles for Users in #{community.name}: #{mode.name}"]
+          csv << header
+          users_by_mileage(:community => community, :mode => mode)[0..4].
+            each { |user_result| add_to_csv.call(csv, user_result, :"#{mode.name.downcase}_mileage") }
+        end
+
+        csv << [""]
+        csv << [ "Most Green Trips in #{community.name}" ]
+        csv << header
+        users_by_total_green_trips_for(community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :total_green_trips) }
+
+        csv << [""]
+        csv << [ "Most Green Shopping Trips in #{community.name}" ]
+        csv << header
+        users_by_total_green_shopping_trips_for(community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :total_green_shopping_trips) }
+
+        csv << [""]
+        csv << ["Greenest Travel in #{community.name}"]
+        csv << header
+        users_by_greenest_travel_for(community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :lbs_co2_saved_per_mile) }
+
+        csv << [""]
+        csv << ["Most Improved vs. Baseline in #{community.name}"]
+        csv << header
+        users_by_greenest_travel_for(community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :pct_improvement) }
+
+      end
+    end
+    path_to_file
   end
 
   def self.bench

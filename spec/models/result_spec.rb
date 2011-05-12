@@ -62,17 +62,18 @@ describe Result do
 
       it "should include stats fields for the user" do
         user_result[:walk_mileage].should == 2.5
+        user_result[:days_logged].should == 5
         user_result[:bus_mileage].should == 40.0
         user_result[:bike_mileage].should == 32.0
         user_result[:train_mileage].should == 0.0
         user_result[:community_name].should == sunnyvale.name
-        user_result[:baseline_pct_green].should == 10.0 / 35.0
+        user_result[:baseline_pct_green].should == 10.0 / 35.0 * 100.0
         user_result[:total_green_miles].should == 10.0 + 2.5 + 40.0 + 22.0
         total_miles = 10.0 + 2.5 + 40.0 + 22.0 + 6.0
         user_result[:total_miles].should == total_miles
         user_result[:total_green_trips].should == 17
         user_result[:total_green_shopping_trips].should == 2
-        actual_pct = (22.0 + 40.0 + 10.0 + 2.5) / (22.0 + 40.0 + 10.0 + 2.5 + 6.0)
+        actual_pct = (22.0 + 40.0 + 10.0 + 2.5) / (22.0 + 40.0 + 10.0 + 2.5 + 6.0) * 100.0
         user_result[:actual_pct_green].should == actual_pct
         user_result[:pct_improvement].should == actual_pct - (10.0 / 35.0)
         total_lbs_co2_saved = 8.43 + 2.1075 + 24.12 + 0 + 18.546
@@ -132,7 +133,8 @@ describe Result do
             :total_green_trips,
             :total_green_shopping_trips,
             :lbs_co2_saved_per_mile, 
-            :total_lbs_co2_saved
+            :total_lbs_co2_saved,
+            :days_logged
           ]
         end
       end
@@ -285,21 +287,21 @@ describe Result do
 
     end
 
-    describe "#generate_csv" do
-      it "should generate a csv file with columns for users" do
-        path_to_file = File.join(Rails.root, 'tmp')
-        results.generate_csv(path_to_file)
-      end
-    end
+    #describe "#generate_csv" do
+      #it "should generate a csv file with columns for users" do
+        #path_to_file = File.join(Rails.root, 'tmp')
+        #results.generate_csv(path_to_file)
+      #end
+    #end
 
     describe "group winners" do
 
-      describe "#calculate_stats_for_group(group)" do
-        it "should return a hash with stats for the group" do
-          group = Group.make(:name => "acme")
-          mock(group).users {[1,2,3,4,5,6,7,8]}
-        end
-      end
+      #describe "#calculate_stats_for_group(group)" do
+        #it "should return a hash with stats for the group" do
+          #group = Group.make(:name => "acme")
+          #mock(group).users {[1,2,3,4,5,6,7,8]}
+        #end
+      #end
 
       describe ".group_stats" do
       end

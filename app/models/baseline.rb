@@ -56,7 +56,7 @@ class Baseline < ActiveRecord::Base
     if current_total_miles == 0
       0
     else
-      current_green_miles / current_total_miles
+      current_green_miles / current_total_miles * 100.0
     end
   end
 end
