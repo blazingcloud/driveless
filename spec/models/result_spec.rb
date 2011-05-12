@@ -75,7 +75,7 @@ describe Result do
         user_result[:total_green_shopping_trips].should == 2
         actual_pct = (22.0 + 40.0 + 10.0 + 2.5) / (22.0 + 40.0 + 10.0 + 2.5 + 6.0) * 100.0
         user_result[:actual_pct_green].should == actual_pct
-        user_result[:pct_improvement].should == actual_pct - (10.0 / 35.0)
+        user_result[:pct_improvement].should == actual_pct - ((10.0 / 35.0) * 100.0)
         total_lbs_co2_saved = 8.43 + 2.1075 + 24.12 + 0 + 18.546
         user_result[:total_lbs_co2_saved].should be_within(0.01).of(total_lbs_co2_saved)
         user_result[:lbs_co2_saved_per_mile].should be_within(0.01).of(total_lbs_co2_saved / total_miles)

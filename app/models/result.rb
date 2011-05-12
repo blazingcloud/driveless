@@ -119,7 +119,11 @@ class Result
 
   # ==== CSV
 
-  def generate_csv(path_to_file)
+  def generate_groups_csv(path_to_file)
+
+  end
+
+  def generate_individuals_csv(path_to_file)
 
     header = [
       "Number of trips",
