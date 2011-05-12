@@ -49,7 +49,7 @@ def user_with_trips(options)
   distances = options[:distances] || [1.0, 2.0, 3.0, 4.0, 5.0]
   mode = options[:mode]
   destination = options[:destination]
-  date = Date.today
+  date = EARTH_DAY_2011
   distances.each do |distance|
     user.trips.create!(:destination_id => destination.id, :unit_id => Unit.first.id, :mode_id => mode.id,
                        :distance => distance, :made_at => date)

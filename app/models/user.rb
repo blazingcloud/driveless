@@ -141,7 +141,12 @@ class User < ActiveRecord::Base
   def percent_of_personal_goal_reached
     "%.2f%" % (self.green_miles.to_f / self.baseline.green_miles.to_f * 100)
   end
+
+  def lbs_co2_saved
+    trips.qualifying.inject(0) { |sum, trip| sum += trip.lbs_co2_saved }
+  end
   
+  # original method ... was formatted for display. New method producse number
   def lb_co2_saved
     "%.1f" % self.trips.only_green.map{|t| t.mode.lb_co2_per_mile * t.distance}.sum.to_f
   end
@@ -290,6 +295,10 @@ class User < ActiveRecord::Base
     end
     puts "Time: #{Time.now - start}"
   end
+
+  def earth_day
+    @earth_day ||= Date.new(Date.today.year, 4, 22)
+  end
   
   def self.max_miles(mode_name)
     mode = Mode.find_by_name(mode_name)
@@ -354,7 +363,7 @@ class User < ActiveRecord::Base
   end
 
   def days_logged
-    self.trips.map {|trip| trip.made_at}.uniq.size
+    trips.qualifying.map {|trip| trip.made_at}.uniq.size
   end
 
   private

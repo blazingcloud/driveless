@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Trip do
+  attr_reader :bike, :school, :mile
+
+  before do
+    @bike = Mode.find_by_name("Bike")
+    @school = Destination.find_by_name("School")
+    @mile = Unit.find_by_name("Mile")
+  end
+
   describe "#shopping?" do
     attr_reader :errands, :non_shopping_destinations
 
@@ -25,10 +33,27 @@ describe Trip do
 
   describe "#lbs_co2_saved" do
     it "should return distance * mode.lb_co2_per_mile" do
-      bike = Mode.find_by_name("Bike")
       bike.lb_co2_per_mile.should == 0.843
       trip = Trip.make(:mode => bike, :made_at => Date.today, :distance => 100)
       trip.lbs_co2_saved.should == 84.3
+    end
+  end
+
+  describe ".qualified_for_current_challenge" do
+    before do
+      user = User.make
+      user.save!
+      attrs = {:mode_id => bike.id, :distance => 100, :destination_id => school.id, :unit_id => mile.id}
+
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 + 5.days))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 + 14.days))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 - 1.day))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 + 5.days))
+    end
+
+    it "should be scoped to two weeks starting earth day 2011" do
+      Trip.qualifying.count.should == 3
     end
   end
 

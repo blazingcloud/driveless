@@ -10,11 +10,15 @@ class Result
     @modes ||= Mode.all
   end
 
+  def earth_day
+    @earth_day ||= Date.new(Date.today.year, 4, 22)
+  end
+
   def calculate_stats_for_user(user)
     return nil unless user.days_logged >= 5
     result = { :user => user, :days_logged => user.days_logged }
     modes.each do | mode |
-      mode_mileage = user.trips.
+      mode_mileage = user.trips.qualifying.
         select {|trip| trip.mode_id == mode.id}.
         sum {|trip| trip.distance.to_f}
       result[:"#{mode.name.downcase}_mileage"] = mode_mileage || 0.0
@@ -26,7 +30,7 @@ class Result
     result[:total_green_trips] = 0
     result[:total_green_shopping_trips] = 0
     result[:total_lbs_co2_saved] = 0
-    user.trips.each do |trip|
+    user.trips.qualifying.each do |trip|
       if trip.mode.green?
         result[:total_green_miles] += trip.distance.to_f
         result[:total_green_trips] += 1
@@ -128,6 +132,9 @@ class Result
     header = [
       "Number of trips",
       "Result",
+      "Total green miles",
+      "Total miles",
+      "Pounds of CO2 saved",
       "Days logged",
       "username",
       "Name",
@@ -144,6 +151,9 @@ class Result
         csv << [
           user_result[:total_green_trips],
           user_result[attribute],
+          user_result[:total_green_miles],
+          user_result[:total_miles],
+          user_result[:total_lbs_co2_saved],
           user_result[:days_logged],
           user_result[:user].username,
           user_result[:user].name,
@@ -186,7 +196,7 @@ class Result
       csv << [""]
       csv << ["Most Improved vs. Baseline"]
       csv << header
-      users_by_greenest_travel[0..4].each { |user_result| add_to_csv.call(csv, user_result, :pct_improvement) }
+      users_by_most_improved_over_baseline[0..4].each { |user_result| add_to_csv.call(csv, user_result, :pct_improvement) }
 
       Community.all.each do |community|
         csv << [""]
@@ -219,7 +229,7 @@ class Result
         csv << [""]
         csv << ["Most Improved vs. Baseline in #{community.name}"]
         csv << header
-        users_by_greenest_travel_for(community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :pct_improvement) }
+        users_by_most_improved_over_baseline_for(community)[0..4].each { |user_result| add_to_csv.call(csv, user_result, :pct_improvement) }
 
       end
     end

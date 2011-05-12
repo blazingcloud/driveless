@@ -19,14 +19,17 @@ describe Group do
     before do
       @bike = Mode.find_by_name("Bike")
       @school = Destination.find_by_name("School")
-      @qualified_users = [1..10].map do 
-        user_with_trips(:mode => bike, :destination => school, :distances => [5.0]*5).save!
+      @qualified_users = (1..10).map do 
+        user = user_with_trips(:mode => bike, :destination => school, :distances => [5.0]*5)
+        user.save!
+        user
       end
-      @unqualified_users = [1..3].map do
-        user_with_trips(:mode => bike, :destination => school, :distances => [5.0]*3).save!
+      @unqualified_users = (1..3).map do
+        user = user_with_trips(:mode => bike, :destination => school, :distances => [5.0]*3)
+        user.save!
+        user
       end
-      @group = Group.make(:name => "wacky cyclists")
-      debugger
+      @group = Group.make(:name => "wacky cyclists", :destination => school)
       group.users = qualified_users + unqualified_users
       group.save!
       @group = Group.find_by_id(group.id)
@@ -35,13 +38,27 @@ describe Group do
 
     describe "#qualified_users" do
       it "should return users who have logged 5 or more trips for current challenge" do
+        group.qualified_users.count.should == 10
         group.qualified_users.map(&:id).should =~ qualified_users.map(&:id)
       end
     end
 
-    describe "#lbs_co2_saved_by_qualified_users" do
+    describe "#lbs_co2_saved" do
       it "should return the amount of co2 saved by qualified users" do
+        # lbs_co2_saved_per_mile * 5 miles * 5 trips * 10 qualified users
+        group.lbs_co2_saved.should be_within(0.01).of(0.843 * 5 * 5 * 10)
+      end
+    end
 
+    describe "#total_miles" do
+      it "should return the total miles for qualified users within the qualified period" do
+        group.total_miles.should be_within(0.01).of(250.0)
+      end
+    end
+
+    describe "#category_name" do
+      it "should return the category name for the group" do
+        group.category_name.should == "School"
       end
     end
   end

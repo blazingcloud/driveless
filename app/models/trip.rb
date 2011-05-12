@@ -32,7 +32,9 @@ class Trip < ActiveRecord::Base
   after_save :update_green_miles
   after_destroy :update_green_miles
 
-  scope :current_challenge, where(['made_at >= ?', Date.new(2011, 4, 22)])
+  EARTH_DAY_2011 = Date.new(2011, 4, 22)
+
+  scope :current_challenge, where(['made_at >= ?', EARTH_DAY_2011])
 
   scope :not_green, lambda {
     current_challenge.find(:all, :joins => :mode, :conditions => {:"modes.green" => false})
@@ -52,6 +54,8 @@ class Trip < ActiveRecord::Base
       :group => 'modes.name, trips.made_at'
     )
   }
+
+  scope :qualifying, lambda { where(:made_at => EARTH_DAY_2011..(EARTH_DAY_2011 + 13.days)) }
 
   def to_tweet
     "I decided to %s for %0.2f %s on %s and saved %0.2f\lbs of co2 for the @driveless challenge! http://xrl.us/mdlc" % [
