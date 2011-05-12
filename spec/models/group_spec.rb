@@ -61,5 +61,17 @@ describe Group do
         group.category_name.should == "School"
       end
     end
+
+    describe "#qualified_for_current_challenge?" do
+      it "should return true if the number of qualified users is > 2" do
+        mock(group).qualified_users {[1,2,3,4,5]}
+        group.should be_qualified_for_current_challenge
+      end
+
+      it "should return false if the number of qualified users is < 3" do
+        mock(group).qualified_users {[1,2,]}
+        group.should_not be_qualified_for_current_challenge
+      end
+    end
   end
 end

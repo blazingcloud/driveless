@@ -124,7 +124,95 @@ class Result
   # ==== CSV
 
   def generate_groups_csv(path_to_file)
+    groups = Group.includes(:users).all.select { |group| group.qualified_for_current_challenge? }
+    groups.sort! { |a, b| b.lbs_co2_saved <=> a.lbs_co2_saved }
+    headers = [
+      "Group ID",
+      "Group Name",
+      "Members",
+      "Category",
+      "Community",
+      "Pounds CO2 saved",
+      "Total miles"
+    ]
 
+    FasterCSV.open(path_to_file, "w") do |csv|
+      csv << headers
+      groups.each do |group|
+        group.instance_eval do
+          csv << [id, name, qualified_users.count, category_name, owner.try(:community).try(:name), lbs_co2_saved, total_miles]
+        end
+      end
+    end
+    path_to_file
+  end
+
+
+  def generate_individuals_raw_data_csv(path_to_file)
+    headers = [
+      "ID",
+      "Name",
+      "Email",
+      "Address",
+      "City",
+      "Parent?",
+      "Community",
+      "Car Miles",
+      "Small EV Miles",
+      "Carpool Miles",
+      "Train Miles",
+      "Bus Miles",
+      "Walk Miles",
+      "Bike Miles",
+      "Total Miles",
+      "Total Green Miles",
+      "Total Green Trips",
+      "Total Green Shopping Trips",
+      "Baseline % Green",
+      "Actual % Green",
+      "% Improvement",
+      "Pounds CO2 Saved Per Mile",
+      "Total Pounds CO2 Saved",
+      "Days Logged"
+    ]
+
+    FasterCSV.open(path_to_file, "w") do |csv|
+      csv << headers
+      user_results.each do |res|
+
+        csv << res[:user].instance_eval do
+          [
+            id,
+            name,
+            email,
+            address,
+            city,
+            is_parent? ? "parent" : ""
+          ]
+        end +
+          [
+            :community_name,
+            :"drove car alone_mileage",
+            :"small electric vehicle_mileage",
+            :carpool_mileage,
+            :train_mileage,
+            :bus_mileage,
+            :walk_mileage,
+            :bike_mileage,
+            :total_miles,
+            :total_green_miles,
+            :total_green_trips,
+            :total_green_shopping_trips,
+            :baseline_pct_green,
+            :actual_pct_green,
+            :pct_improvement,
+            :lbs_co2_saved_per_mile, 
+            :total_lbs_co2_saved,
+            :days_logged
+        ].map {|attr| res[attr]}
+      end
+    end
+    path_to_file
   end
 
   def generate_individuals_csv(path_to_file)
