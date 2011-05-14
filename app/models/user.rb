@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
     :is_parent, :read_privacy, :zip, :password, :password_confirmation
   
   has_one :baseline
+  has_one :result
+  has_many :mode_mileages
+  has_many :modes, :through => :mode_mileages
 
   has_many :modes, :through => :trips
   has_many :trips, :conditions => ['made_at >= ?', Date.new(2011, 4, 22)]

@@ -1,4 +1,5 @@
 class Community < ActiveRecord::Base
+  has_many :results
   has_many :users
   validates_presence_of :name, :state, :country
 
