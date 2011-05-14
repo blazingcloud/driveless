@@ -1,5 +1,26 @@
 class Trip < ActiveRecord::Base
 
+  def self.earth_day
+    Date.new(2011, 4, 22)
+  end
+
+  def self.current_challenge_period
+    earth_day..(earth_day + 13.days)
+  end
+
+  # TODO: Remove hack to default scope. This was done for 2011, but it'd be better if we changed
+  # the code to use scopes by name instead of using modifying the default scope since this can
+  # be confusing.
+  # The difference between current_challenge and qualifying is that qualifying
+  # has an end date (since we're only counting data logged 4/22 through 5/5 (two
+  # weeks). It would be confusing, though if someone entered data for the day
+  # after the qualifying period and it just disappeared into the ether, which
+  # is the current user experience with entering dates before earth day.
+  # See: https://www.pivotaltracker.com/story/show/13309783
+  
+  scope :qualifying, lambda { where(:made_at => current_challenge_period) }
+  scope :current_challenge, where(['made_at >= ?', earth_day])
+
   def self.find(*args)
     current_challenge.find(*args)
   end
@@ -32,10 +53,6 @@ class Trip < ActiveRecord::Base
   after_save :update_green_miles
   after_destroy :update_green_miles
 
-  EARTH_DAY_2011 = Date.new(2011, 4, 22)
-
-  scope :current_challenge, where(['made_at >= ?', EARTH_DAY_2011])
-
   scope :not_green, lambda {
     current_challenge.find(:all, :joins => :mode, :conditions => {:"modes.green" => false})
   }
@@ -54,8 +71,6 @@ class Trip < ActiveRecord::Base
       :group => 'modes.name, trips.made_at'
     )
   }
-
-  scope :qualifying, lambda { where(:made_at => EARTH_DAY_2011..(EARTH_DAY_2011 + 13.days)) }
 
   def to_tweet
     "I decided to %s for %0.2f %s on %s and saved %0.2f\lbs of co2 for the @driveless challenge! http://xrl.us/mdlc" % [

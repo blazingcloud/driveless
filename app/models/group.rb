@@ -113,4 +113,29 @@ class Group < ActiveRecord::Base
   def owned_by?(user)
     owner_id == user.id
   end
+
+  # ==== stats
+  def qualified_users
+    users.select {|u| u.days_logged >= 5}
+  end
+
+  def lbs_co2_saved
+    qualified_users.sum { |user| user.lbs_co2_saved }
+  end
+
+  def total_miles
+    qualified_users.sum {|user| user.trips.qualifying.all.sum {|trip| trip.distance}}
+  end
+
+  def category_name
+    destination.name
+  end
+
+  def num_qualified_users
+    qualified_users.size
+  end
+
+  def qualified_for_current_challenge?
+    qualified_users.size > 2
+  end
 end

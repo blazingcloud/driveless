@@ -82,6 +82,20 @@ describe User do
         it "should return the number of days for which there are logged trips" do
           user.days_logged.should == 6
         end
+
+
+        describe "when the user has some trips that are not in the qualified range" do
+
+          before do
+            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 - 1.day))
+            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 14.days))
+            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 7.days))
+          end
+
+          it "only days in qualified range (two weeks starting with earth day) should count" do
+            user.days_logged.should == 7
+          end
+        end
       end
     end
 

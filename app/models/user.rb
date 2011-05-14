@@ -278,10 +278,6 @@ class User < ActiveRecord::Base
   def self.by_miles_for_mode(mode)
     self.all.sort {|a,b| b.miles_for_mode(mode) <=> a.miles_for_mode(mode) }
   end
-    
-  def earth_day
-    @earth_day ||= Date.new(Date.today.year, 4, 22)
-  end
   
   def self.max_miles(mode_name)
     mode = Mode.find_by_name(mode_name)

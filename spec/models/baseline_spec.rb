@@ -24,6 +24,32 @@ describe Baseline do
     end
   end
 
+  describe "#percent_green" do
+    before do
+      @baseline = Baseline.new(
+        :work_green => 0,    :work_alone => 10,
+        :school_green => 10, :school_alone => 0,
+        :errands_green => 0, :errands_alone => 15
+      )
+    end
+
+    describe ".current_total_miles" do
+      it "should return total current miles" do
+        @baseline.current_total_miles.should == 35.0
+      end
+    end
+
+    describe "#current_green_miles" do
+      it "should return the total green miles" do
+        @baseline.current_green_miles.should == 10.0
+      end
+    end
+
+    it "should return the percent of current miles traveled that are green" do
+      @baseline.percent_green.should == 10.0 / 35.0 * 100.0
+    end
+  end
+
   describe "has_non_blank_values?" do 
     it "should return true if any numeric field is non-zero" do
       baseline.kids_green = 100.0 
