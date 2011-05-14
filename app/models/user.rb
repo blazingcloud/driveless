@@ -141,7 +141,14 @@ class User < ActiveRecord::Base
   def percent_of_personal_goal_reached
     "%.2f%" % (self.green_miles.to_f / self.baseline.green_miles.to_f * 100)
   end
+
+  def lbs_co2_saved
+    trips.qualifying.inject(0) { |sum, trip| sum += trip.lbs_co2_saved }
+  end
   
+  # original method ... was formatted for display. New method produces number.
+  # TODO: Should probably rename this to indicate that it's a string and to 
+  # disambiguate it from the method above. See: https://www.pivotaltracker.com/story/show/13393527 
   def lb_co2_saved
     "%.1f" % self.trips.only_green.map{|t| t.mode.lb_co2_per_mile * t.distance}.sum.to_f
   end
@@ -272,18 +279,14 @@ class User < ActiveRecord::Base
     self.all.sort {|a,b| b.miles_for_mode(mode) <=> a.miles_for_mode(mode) }
   end
     
-  #def self.max_miles(mode)
-    ##miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
-    ##user_id, total_miles = miles_for_all_users.max { |a,b| a[1].to_f <=> b[1].to_f }
-    #self.by_miles_for_mode(mode)[0..4].map do |user|
-      #{ :user => user, :total_miles => user.miles_for_mode(mode), :name => mode.name }
-    #end
-  #end
+  def earth_day
+    @earth_day ||= Date.new(Date.today.year, 4, 22)
+  end
   
   def self.max_miles(mode_name)
-    miles_for_all_users = self.joins(:trips => :mode).where(:modes => {:name => mode_name}).sum(:distance, :group => :user_id)
-    results = miles_for_all_users.sort { |a,b| a[1].to_f <=> b[1].to_f }
-    results.reverse!
+    mode = Mode.find_by_name(mode_name)
+    miles_for_all_users = self.joins(:trips => :mode).where('modes.id = ?', mode.id).sum(:distance, :group => :user_id)
+    results = miles_for_all_users.sort { |a,b| b[1].to_f <=> a[1].to_f }
     results = results[0..4]
     results = [[nil,0]] if results.empty?
     results.map do |user_id, total_miles|
@@ -292,7 +295,6 @@ class User < ActiveRecord::Base
       { :user => user, :total_miles => total_miles.to_f,
         :name => mode_name, :description => desc}
     end
- 
   end
   
   def self.max_green_trips
@@ -324,9 +326,9 @@ class User < ActiveRecord::Base
   end
 
   def days_logged
-    self.trips.map {|trip| trip.made_at}.uniq.size
+    trips.qualifying.map {|trip| trip.made_at}.uniq.size
   end
-  
+
   private
 
   def map_openid_registration(registration)
