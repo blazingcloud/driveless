@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Result do
   attr_reader :result, :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011, 
     :train, :car, :bus, :bike_to_school,
-    :palo_alto, :sunnyvale, :users, :user1, :user2, :user3, :user4, :user5, :user6, :user7, :user8, 
+    :palo_alto, :sunnyvale, :menlo_park, :mountain_view,
+    :users, :user1, :user2, :user3, :user4, :user5, :user6, :user7, :user8, 
     :user9, :user10
 
   before do
@@ -30,6 +31,10 @@ describe Result do
     @sunnyvale.should be_present
     @palo_alto = Community.find_by_name("Palo Alto")
     @palo_alto.should be_present
+    @mountain_view = Community.find_by_name("Mountain View")
+    mountain_view.should be_present
+    @menlo_park = Community.find_by_name("Menlo Park")
+    menlo_park.should be_present
   end
 
   describe "#calculate_stats_for_user(user)" do
@@ -90,24 +95,55 @@ describe Result do
         Results.create_result_for(user).should_not be_qualified
       end
     end
+
   end
 
-  describe "when there are several users" do
-    before do
-      @users = [
-        @user0  = user_with_trips(:mode => bike, :destination => work,    :community => sunnyvale, :distances => [0.5]*5),
-        @user1  = user_with_trips(:mode => bike, :destination => work,    :community => sunnyvale, :distances => [1.0]*5),
-        @user2  = user_with_trips(:mode => walk, :destination => school,  :community => sunnyvale, :distances => [2.0]*5),
-        @user3  = user_with_trips(:mode => bike, :destination => work,    :community => sunnyvale, :distances => [3.0]*5),
-        @user4  = user_with_trips(:mode => walk, :destination => school,  :community => sunnyvale, :distances => [5.0]*5),
-        @user5  = user_with_trips(:mode => bike, :destination => errands, :community => sunnyvale, :distances => [4.0]*5),
-        @user6  = user_with_trips(:mode => bike, :destination => work,    :community => palo_alto, :distances => [1.1]*5),
-        @user7  = user_with_trips(:mode => walk, :destination => school,  :community => palo_alto, :distances => [2.1]*5),
-        @user8  = user_with_trips(:mode => bike, :destination => work,    :community => palo_alto, :distances => [3.1]*5),
-        @user9  = user_with_trips(:mode => walk, :destination => school,  :community => palo_alto, :distances => [5.1]*5),
-        @user10 = user_with_trips(:mode => bike, :destination => errands, :community => palo_alto, :distances => [4.1]*5),
-        @user11 = user_with_trips(:mode => bike, :destination => errands, :community => palo_alto, :distances => [1.0, 1.0]),
-      ]
+  describe "scopes" do
+
+    def make_fake_result(user_id, options)
+      attrs = { :user_id => user_id, :qualified => true }.merge(options)
+      Result.create!(attrs)
     end
+
+    describe ".greenest_travel" do
+
+      context "when there are fewer than five qualified users with values for lbs_co2_saved_per_mile" do
+        before do
+          make_fake_result(1, :lbs_co2_saved_per_mile => 10)
+          make_fake_result(2, :lbs_co2_saved_per_mile => 100)
+          make_fake_result(3, :lbs_co2_saved_per_mile => 30)
+          make_fake_result(4, :lbs_co2_saved_per_mile => 0)
+        end
+
+        it "should display the qualified users sorted by lbs_of_co2_saved excluding zero values" do
+          Result.greenest_travel.map(&:lbs_co2_saved_per_mile).should == [100.0, 30.0, 10.0]
+        end
+
+        context "when there are more than 5 users and there's a tie" do
+          before do
+            make_fake_result(5, :lbs_co2_saved_per_mile => 50, :days_logged => 14, :total_green_trips => 28)
+            make_fake_result(6, :lbs_co2_saved_per_mile => 50, :days_logged => 13, :total_green_trips => 56)
+            make_fake_result(7, :lbs_co2_saved_per_mile => 50, :days_logged => 13, :total_green_trips => 60)
+            make_fake_result(8, :lbs_co2_saved_per_mile => 50, :days_logged => 14, :total_green_trips => 27)
+          end
+
+          it "should return the top five using days_logged and then total_green_trips as secondary and tertiary sorts" do
+            Result.greenest_travel.map(&:user_id).should == [2, 5, 8, 7, 6]
+          end
+
+          describe ".greenest_travel_for(community)" do
+            it "should return the results scoped to a community" do
+              Result.limit(3).order(:user_id).each {|result| result.update_attribute(:community_id, menlo_park.id)}
+              Result.greenest_travel_for(menlo_park).map(&:user_id).should == [2, 3, 1]
+            end
+          end
+
+        end
+
+      end
+
+    end
+
   end
+
 end

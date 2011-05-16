@@ -12,6 +12,13 @@ class Result < ActiveRecord::Base
   scope :top_five, lambda { where(:qualified => true).limit(5) }
   scope :order_and_filter, lambda { |field| where("#{field} is not null and #{field} > 0").order("#{field} desc") }
 
+  scope :greenest_travel, lambda { 
+    top_five.
+      order("lbs_co2_saved_per_mile desc, days_logged desc, total_green_trips desc").
+      where("lbs_co2_saved_per_mile > 0") 
+  }
+  scope :greenest_travel_for, lambda { |community| greenest_travel.where(:community_id => community.id) }
+
   FIELDS = ActiveSupport::OrderedHash[[
     ["ID", :user_id],
     ["Name", :name],
@@ -156,8 +163,8 @@ class Result < ActiveRecord::Base
     FasterCSV.open(path_to_file, "w") do |csv|
 
       add_to_csv = lambda do | category, results |
-        csv << ""
-        csv << category
+        csv << [""] * HEADERS.length
+        csv << [category] + [""] * (HEADERS.length - 1)
         csv << HEADERS
         results.each {|result| csv << result.field_values}
       end
@@ -168,7 +175,7 @@ class Result < ActiveRecord::Base
       end
       add_to_csv.call("Most Green Trips", top_five.order_and_filter("total_green_trips"))
       add_to_csv.call("Most Green Shopping Trips", top_five.order_and_filter("total_green_shopping_trips"))
-      add_to_csv.call("Greenest Travel", top_five.order_and_filter("lbs_co2_saved_per_mile"))
+      add_to_csv.call("Greenest Travel", greenest_travel)
       add_to_csv.call("Most Improved vs. Baseline", top_five.order_and_filter("pct_improvement").order("days_logged desc").order("total_green_trips desc"))
 
       Community.all.each do |community|
@@ -178,7 +185,7 @@ class Result < ActiveRecord::Base
         end
         add_to_csv.call("Most Green Trips in #{community.name}", top_five.where(:community_id => community.id).order_and_filter("total_green_trips"))
         add_to_csv.call("Most Green Shopping Trips in #{community.name}", top_five.where(:community_id => community.id).order_and_filter("total_green_shopping_trips"))
-        add_to_csv.call("Greenest Travel in #{community.name}", top_five.where(:community_id => community.id).order_and_filter("lbs_co2_saved_per_mile"))
+        add_to_csv.call("Greenest Travel in #{community.name}", greenest_travel_for(community))
         add_to_csv.call("Most Improved vs. Baseline in #{community.name}", top_five.where(:community_id => community.id).order_and_filter("pct_improvement").order("days_logged desc").order("total_green_trips desc"))
       end
     end
