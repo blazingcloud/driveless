@@ -53,8 +53,8 @@ class Baseline < ActiveRecord::Base
   end
 
   def percent_green
-    if current_total_miles == 0
-      0
+    if current_total_miles == 0 || !updated_for_current_challenge?
+      nil
     else
       current_green_miles / current_total_miles * 100.0
     end

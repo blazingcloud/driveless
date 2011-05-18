@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
 
   before_create :create_baseline
 
+  def eligible_for_2nd_week_drawing?
+    trips.second_week.count >= 5
+  end
+
   def badges
     [
       (

@@ -92,8 +92,8 @@ class Result < ActiveRecord::Base
 
   # ==== CSV
 
-  def generate_groups_csv(path_to_file)
-    groups = Group.includes(:users).all.select { |group| group.qualified_for_current_challenge? }
+  def self.generate_groups_csv(path_to_file)
+    groups = Group.includes(:users).all #.select { |group| group.qualified_for_current_challenge? }
     groups.sort! { |a, b| b.lbs_co2_saved <=> a.lbs_co2_saved }
     headers = [
       "Group ID",
@@ -109,7 +109,7 @@ class Result < ActiveRecord::Base
       csv << headers
       groups.each do |group|
         group.instance_eval do
-          csv << [id, name, qualified_users.count, category_name, owner.try(:community).try(:name), lbs_co2_saved, total_miles]
+          csv << [id, name, users.count, category_name, owner.try(:community).try(:name), lbs_co2_saved, total_miles]
         end
       end
     end

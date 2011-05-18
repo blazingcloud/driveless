@@ -21,6 +21,8 @@ class Trip < ActiveRecord::Base
   scope :qualifying, lambda { where(:made_at => current_challenge_period) }
   scope :current_challenge, where(['made_at >= ?', earth_day])
 
+  scope :second_week, lambda { where(:made_at => (Date.new(2011, 4, 29)..Date.new(2011, 5, 5))) }
+
   def self.find(*args)
     current_challenge.find(*args)
   end
