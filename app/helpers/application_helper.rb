@@ -32,8 +32,14 @@ module ApplicationHelper
     end
   end
   def link_to_group_delete_action_if_group( group )
-    if group.is_a?(Group)
-      button_to 'delete group', {:controller => 'groups', :action => 'destroy', :id => group.id}, :method => :delete, :class => 'button small'
+    if group.is_a?(Group) and current_user == group.owner
+      button_to 'delete group', {:controller => 'groups', :action => 'destroy', :id => group.id}, :method => :delete, :class => 'button small delete', :confirm => 'I want to destroy this group'
+    end
+  end
+
+  def link_to_group_edit_action_if_group( group )
+    if group.is_a?(Group) and current_user == group.owner
+      button_to 'edit group', {:controller => 'groups', :action => 'edit', :id => group.id}, :method => :get, :class => 'button small'
     end
   end
 end
