@@ -31,6 +31,11 @@ module ApplicationHelper
       button_to 'add friend', {:controller => 'friendships', :action => 'create', :friend_id => user.id}, :method => :post, :class => 'button small'
     end
   end
+  def link_to_group_delete_action_if_group( group )
+    if group.is_a?(Group)
+      button_to 'delete group', {:controller => 'groups', :action => 'destroy', :id => group.id}, :method => :delete, :class => 'button small'
+    end
+  end
 end
 
 

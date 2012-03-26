@@ -4,6 +4,7 @@
   .user
     - if group
       = link_to leaderboard_item.name, leaderboard_item
+      = link_to_group_delete_action_if_group ( leaderboard_item ) 
     - else
       - name = leaderboard_item.respond_to?(:username) ? leaderboard_item.username : leaderboard_item.name
       = link_to name, leaderboard_item
