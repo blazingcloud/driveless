@@ -45,14 +45,14 @@ describe Trip do
       user.save!
       attrs = {:mode_id => bike.id, :distance => 100, :destination_id => school.id, :unit_id => mile.id}
 
-      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011))
-      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 + 5.days))
-      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 + 14.days))
-      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 - 1.day))
-      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2011 + 5.days))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2012))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2012 + 5.days))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2012 + 14.days))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2012 - 1.day))
+      user.trips.create!(attrs.merge(:made_at => EARTH_DAY_2012 + 5.days))
     end
 
-    it "should be scoped to two weeks starting earth day 2011" do
+    it "should be scoped to two weeks starting earth day 2012" do
       Trip.qualifying.count.should == 3
     end
   end

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe User do
-  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011, :train, :bike_to_school
+  attr_reader :work, :school, :errands, :walk, :bike, :mile, :earth_day_2012, :train, :bike_to_school
 
   before do
-    @earth_day_2011 = Date.new(2011, 4, 22)
+    @earth_day_2012 = Date.new(2012, 4, 22)
     @work = Destination.find_by_name("Work")
     @work.should_not be_nil
     @school = Destination.find_by_name("School")
@@ -59,11 +59,11 @@ describe User do
     describe "when the user has 1 trip logged per day" do
 
       before do
-        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
-        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
-        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 2.days))
-        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 3.days))
-        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 4.days))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 1.day))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 2.days))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 3.days))
+        user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 4.days))
       end
 
       it "should return the number of days for which there are logged trips" do
@@ -72,11 +72,11 @@ describe User do
 
       describe "when the user has more than 1 trip logged per day" do
         before do
-          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 3.days))
-          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
-          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
-          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
-          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 3.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 5.days))
+          user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 5.days))
         end
 
         it "should return the number of days for which there are logged trips" do
@@ -87,9 +87,9 @@ describe User do
         describe "when the user has some trips that are not in the qualified range" do
 
           before do
-            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 - 1.day))
-            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 14.days))
-            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 7.days))
+            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 - 1.day))
+            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 14.days))
+            user.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 7.days))
           end
 
           it "only days in qualified range (two weeks starting with earth day) should count" do
@@ -221,22 +221,22 @@ describe User do
       User.delete_all
       @user1 = User.make
       user1.new_record?.should be_false
-      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
-      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
-      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 2.days))
-      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 - 363.days)) # Last year should not count
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2012))
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 1.day))
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 2.days))
+      user1.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 - 363.days)) # Last year should not count
 
 
       @user2 = User.make
       user2.new_record?.should be_false
-      user2.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
-      user2.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
-      user2.trips.create!(bike_to_school.merge(:distance => 25, :made_at => earth_day_2011 + 2.days))
+      user2.trips.create!(bike_to_school.merge(:made_at => earth_day_2012))
+      user2.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 1.day))
+      user2.trips.create!(bike_to_school.merge(:distance => 25, :made_at => earth_day_2012 + 2.days))
 
       @user3 = User.make
       user3.new_record?.should be_false
-      user3.trips.create!(bike_to_school.merge(:made_at => earth_day_2011))
-      user3.trips.create!(bike_to_school.merge(:made_at => earth_day_2011 + 1.day))
+      user3.trips.create!(bike_to_school.merge(:made_at => earth_day_2012))
+      user3.trips.create!(bike_to_school.merge(:made_at => earth_day_2012 + 1.day))
     end
 
     describe "#miles_for_mode" do
@@ -309,7 +309,7 @@ describe User do
           "sf",
           "",
           "",
-          "April 22, 2011 09:00",
+          "April 22, 2012 09:00",
           "no",
           0,
           "",
@@ -342,11 +342,11 @@ describe User do
             "123 main", 
             "sf",
             "Palo Alto",
-            "April 22, 2011 09:00",
-            "April 22, 2011 09:00",
+            "April 22, 2012 09:00",
+            "April 22, 2012 09:00",
             "yes",
             1,
-            "2011-04-22",
+            "2012-04-22",
             "yes"
           ]
         end
@@ -365,12 +365,12 @@ describe User do
       bike_trips = []
       walk_trips = []
 
-      bike_trips << @fred.trips.make(:mode => @bike, :distance => 10, :made_at => Date.new(2011, 4, 23))
-      bike_trips << @fred.trips.make(:mode => @bike, :distance => 5, :made_at => Date.new(2011, 4, 24))
-      bike_trips << @pete.trips.make(:mode => @bike, :distance => 10, :made_at => Date.new(2011, 4, 25))
+      bike_trips << @fred.trips.make(:mode => @bike, :distance => 10, :made_at => Date.new(2012, 4, 23))
+      bike_trips << @fred.trips.make(:mode => @bike, :distance => 5, :made_at => Date.new(2012, 4, 24))
+      bike_trips << @pete.trips.make(:mode => @bike, :distance => 10, :made_at => Date.new(2012, 4, 25))
 
-      walk_trips << @fred.trips.make(:mode => @walk, :distance => 5, :made_at => Date.new(2011, 4, 26))
-      walk_trips << @pete.trips.make(:mode => @walk, :distance => 5, :made_at => Date.new(2011, 4, 27))
+      walk_trips << @fred.trips.make(:mode => @walk, :distance => 5, :made_at => Date.new(2012, 4, 26))
+      walk_trips << @pete.trips.make(:mode => @walk, :distance => 5, :made_at => Date.new(2012, 4, 27))
 
       @fred_bike_distance_sum = bike_trips.inject(0) {|sum, trip| sum += (trip.user == @fred) ? trip.distance : 0}
       @fred_bike_lb_co2_sum   = @fred_bike_distance_sum * @bike.lb_co2_per_mile

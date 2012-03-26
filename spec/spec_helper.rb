@@ -49,7 +49,7 @@ def user_with_trips(options)
   distances = options[:distances] || [1.0, 2.0, 3.0, 4.0, 5.0]
   mode = options[:mode]
   destination = options[:destination]
-  date = EARTH_DAY_2011
+  date = EARTH_DAY_2012
   distances.each do |distance|
     user.trips.create!(:destination_id => destination.id, :unit_id => Unit.first.id, :mode_id => mode.id,
                        :distance => distance, :made_at => date)
@@ -58,13 +58,13 @@ def user_with_trips(options)
   user
 end
 
-EARTH_DAY_2011 = Date.new(2011, 4, 22)
+EARTH_DAY_2012 = Date.new(2012, 4, 22)
 
 def add_trips_to_user(user, options)
   distances = options[:distances] || [1.0, 2.0, 3.0, 4.0, 5.0]
   mode = options[:mode]
   destination = options[:destination]
-  date = EARTH_DAY_2011
+  date = EARTH_DAY_2012
   distances.each do |distance|
     Trip.create!(:destination_id => destination.id, :unit_id => Unit.first.id, :mode_id => mode.id,
                  :distance => distance, :made_at => date, :user_id => user.id)

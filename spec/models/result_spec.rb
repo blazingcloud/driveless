@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Result do
-  attr_reader :result, :work, :school, :errands, :walk, :bike, :mile, :earth_day_2011, 
+  attr_reader :result, :work, :school, :errands, :walk, :bike, :mile, :earth_day_2012, 
     :train, :car, :bus, :bike_to_school,
     :palo_alto, :sunnyvale, :menlo_park, :mountain_view,
     :users, :user1, :user2, :user3, :user4, :user5, :user6, :user7, :user8, 
     :user9, :user10
 
   before do
-    @earth_day_2011 = Date.new(2011, 4, 22)
+    @earth_day_2012 = Date.new(2012, 4, 22)
     @work = Destination.find_by_name("Work")
     @work.should_not be_nil
     @school = Destination.find_by_name("School")
