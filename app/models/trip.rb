@@ -1,14 +1,14 @@
 class Trip < ActiveRecord::Base
 
   def self.earth_day
-    Date.new(2011, 4, 22)
+    Date.new(2012, 4, 22)
   end
 
   def self.current_challenge_period
     earth_day..(earth_day + 13.days)
   end
 
-  # TODO: Remove hack to default scope. This was done for 2011, but it'd be better if we changed
+  # TODO: Remove hack to default scope. This was done for 2012, but it'd be better if we changed
   # the code to use scopes by name instead of using modifying the default scope since this can
   # be confusing.
   # The difference between current_challenge and qualifying is that qualifying

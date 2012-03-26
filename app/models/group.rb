@@ -34,7 +34,7 @@ class Group < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, user_id, true, Date.new(2011, 4, 22), user_id])
+    find_by_sql([sql, user_id, true, Date.new(2012, 4, 22), user_id])
   end
 
   def stats
@@ -56,7 +56,7 @@ class Group < ActiveRecord::Base
       GROUP BY groups.id
     SQL
 
-    c = self.class.find_by_sql([sql, id, true, Date.new(2011, 4, 22)])[0]
+    c = self.class.find_by_sql([sql, id, true, Date.new(2012, 4, 22)])[0]
 
     @stats = {
       :lb_co2_sum   => c.nil? ? 0 : c.lb_co2_sum,

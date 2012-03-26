@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, filter_id, true, Date.new(2011, 4, 22)])
+    find_by_sql([sql, filter_id, true, Date.new(2012, 4, 22)])
   end
 
   def friends_leaderboard(order = :miles)

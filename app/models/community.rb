@@ -32,7 +32,7 @@ class Community < ActiveRecord::Base
       ORDER BY #{order_sql} DESC
     SQL
 
-    find_by_sql([sql, true, Date.new(2011, 4, 22)])
+    find_by_sql([sql, true, Date.new(2012, 4, 22)])
   end
 
   def stats
@@ -54,7 +54,7 @@ class Community < ActiveRecord::Base
       GROUP BY communities.id
     SQL
 
-    c = self.class.find_by_sql([sql, id, true, Date.new(2011, 4, 22)])[0]
+    c = self.class.find_by_sql([sql, id, true, Date.new(2012, 4, 22)])[0]
 
     @stats = {
       :lb_co2_sum   => c.nil? ? 0 : c.lb_co2_sum,
