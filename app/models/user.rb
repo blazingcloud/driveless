@@ -16,7 +16,10 @@ class User < ActiveRecord::Base
   has_many :modes, :through => :mode_mileages
 
   has_many :modes, :through => :trips
-  has_many :trips, :conditions => ['made_at >= ?', Date.new(2011, 4, 22)]
+  #
+  # As a user i want to see my trips for the entire year.
+  #
+  has_many :trips, :conditions => ['made_at >= ?', Date.new(Time.now.year, 1, 1)] 
   has_many :invitations
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
