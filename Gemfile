@@ -10,7 +10,7 @@ gem 'inherited_resources', '~>1.2.1'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'formtastic', '~>1.2.3' # latest as of 2011-04-13
 gem 'googlecharts', '~>1.6.1' #, :require => "gchart"
-gem 'hoptoad_notifier'
+#gem 'hoptoad_notifier'
 gem 'dynamic_form'
 gem 'devise'
 gem 'jquery-rails'
