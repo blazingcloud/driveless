@@ -15,7 +15,7 @@ describe "Group Page" do
       end
       context "when visiting a group" do
         before do
-          visit("/account/groups")
+          visit("/group/#{@group.id}")
 
         end
         it "i should not see edit " do
@@ -33,8 +33,7 @@ describe "Group Page" do
       end
       context "when visiting a group" do
         before do
-          visit("/account/groups")
-
+          visit("/group/#{@group.id}")
         end
         it "should have a link to edit" do
           click_on("edit group")

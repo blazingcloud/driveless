@@ -21,3 +21,10 @@
 
 %h3 All Members
 %p= @group.users.map{|u| link_to u.username, u}.join(", ")
+
+- if current_user == @group.owner
+  %h4 Owner Actions
+  .actions 
+    = link_to_group_edit_action_if_group ( @group ) 
+    = link_to_group_delete_action_if_group ( @group ) 
+
