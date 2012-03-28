@@ -634,12 +634,18 @@ form.baseline fieldset.baseline-travel {
   float: right;
   text-align: right;
 }
-/* line 449, ../../../app/stylesheets/application.sass */
-.leaderboard div.actions input.small {
-  font-size: 0.6em;
+
+/* line 450, ../../../app/stylesheets/application.sass */
+.section_groups .actions form {
+  height: 5em;
+  margin-left: 3em;
+}
+/* line 453, ../../../app/stylesheets/application.sass */
+.section_groups .actions form input, .section_groups .actions form select {
+  font-size: 1.5em;
 }
 
-/* line 452, ../../../app/stylesheets/application.sass */
+/* line 457, ../../../app/stylesheets/application.sass */
 input.delete {
   background: #660000;
   border: 1px solid #880000;
@@ -648,7 +654,7 @@ input.delete {
   color: white;
 }
 
-/* line 459, ../../../app/stylesheets/application.sass */
+/* line 464, ../../../app/stylesheets/application.sass */
 .button {
   display: inline-block;
   *display: inline;
@@ -677,7 +683,7 @@ input.delete {
   padding: 5px 10px;
   font-family: Arial;
 }
-/* line 475, ../../../app/stylesheets/application.sass */
+/* line 480, ../../../app/stylesheets/application.sass */
 .button.small {
   font-size: 10px;
   text-transform: uppercase;
@@ -690,45 +696,45 @@ input.delete {
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 481, ../../../app/stylesheets/application.sass */
+/* line 486, ../../../app/stylesheets/application.sass */
 .button.inactive {
   opacity: 0.6;
 }
-/* line 483, ../../../app/stylesheets/application.sass */
+/* line 488, ../../../app/stylesheets/application.sass */
 .button.inactive:hover {
   opacity: 0.9 ﻿body;
 }
 
-/* line 487, ../../../app/stylesheets/application.sass */
+/* line 492, ../../../app/stylesheets/application.sass */
 fieldset, img {
   border-style: none;
 }
 
-/* line 491, ../../../app/stylesheets/application.sass */
+/* line 496, ../../../app/stylesheets/application.sass */
 div.openid ul {
   text-align: center;
   list-style-type: none;
   display: inline;
 }
-/* line 495, ../../../app/stylesheets/application.sass */
+/* line 500, ../../../app/stylesheets/application.sass */
 div.openid ul li {
   float: left;
   padding: 4px;
 }
-/* line 498, ../../../app/stylesheets/application.sass */
+/* line 503, ../../../app/stylesheets/application.sass */
 div.openid ul li span {
   padding: 0 1em 0 3px;
 }
-/* line 500, ../../../app/stylesheets/application.sass */
+/* line 505, ../../../app/stylesheets/application.sass */
 div.openid fieldset {
   clear: both;
   padding: 1em 0;
 }
-/* line 503, ../../../app/stylesheets/application.sass */
+/* line 508, ../../../app/stylesheets/application.sass */
 div.openid div + fieldset {
   display: none;
 }
-/* line 505, ../../../app/stylesheets/application.sass */
+/* line 510, ../../../app/stylesheets/application.sass */
 div.openid label {
   display: block;
   font-weight: bold;
@@ -736,26 +742,26 @@ div.openid label {
   margin-bottom: 0.5em;
 }
 
-/* line 512, ../../../app/stylesheets/application.sass */
+/* line 517, ../../../app/stylesheets/application.sass */
 input[name=openid_username] {
   width: 8em;
 }
-/* line 514, ../../../app/stylesheets/application.sass */
+/* line 519, ../../../app/stylesheets/application.sass */
 input[name=openid_identifier] {
   width: 18em;
 }
 
-/* line 518, ../../../app/stylesheets/application.sass */
+/* line 523, ../../../app/stylesheets/application.sass */
 div.openid ul li {
   margin-left: 0;
 }
-/* line 520, ../../../app/stylesheets/application.sass */
+/* line 525, ../../../app/stylesheets/application.sass */
 div.openid ul li.highlight {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   background-color: #ffdd66;
 }
-/* line 524, ../../../app/stylesheets/application.sass */
+/* line 529, ../../../app/stylesheets/application.sass */
 div.openid fieldset div {
   font-family: arial;
   -moz-border-radius: 4px;
@@ -764,19 +770,19 @@ div.openid fieldset div {
   padding: 10px;
   display: inline-block;
 }
-/* line 531, ../../../app/stylesheets/application.sass */
+/* line 536, ../../../app/stylesheets/application.sass */
 div.openid input[type='submit'] {
   margin-left: 1em;
 }
 
-/* line 534, ../../../app/stylesheets/application.sass */
+/* line 539, ../../../app/stylesheets/application.sass */
 .openid_logo {
   color: #f7931e;
   padding: 6px 0px 8px 28px;
   background: url(../../images/openid/openidico.png) no-repeat;
 }
 
-/* line 539, ../../../app/stylesheets/application.sass */
+/* line 544, ../../../app/stylesheets/application.sass */
 #openid_login {
   float: left;
   font-size: larger;
@@ -784,16 +790,16 @@ div.openid input[type='submit'] {
   margin: 2em 1em;
   text-align: center;
 }
-/* line 545, ../../../app/stylesheets/application.sass */
+/* line 550, ../../../app/stylesheets/application.sass */
 #openid_login div {
   margin-top: 0.5em;
 }
-/* line 547, ../../../app/stylesheets/application.sass */
+/* line 552, ../../../app/stylesheets/application.sass */
 #openid_login div + span {
   font-size: smaller;
 }
 
-/* line 551, ../../../app/stylesheets/application.sass */
+/* line 556, ../../../app/stylesheets/application.sass */
 .all-groups dt {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -804,19 +810,19 @@ div.openid input[type='submit'] {
   border: #aaccaa solid 1px;
   padding: 0px 19px;
 }
-/* line 552, ../../../app/stylesheets/application.sass */
+/* line 557, ../../../app/stylesheets/application.sass */
 .all-groups dt .button {
   float: right;
   margin-top: 3px;
 }
-/* line 560, ../../../app/stylesheets/application.sass */
+/* line 565, ../../../app/stylesheets/application.sass */
 .all-groups dt a {
   color: black;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
 }
-/* line 565, ../../../app/stylesheets/application.sass */
+/* line 570, ../../../app/stylesheets/application.sass */
 .all-groups dd {
   border: #aaccaa solid 1px;
   border-top: none;
@@ -827,14 +833,14 @@ div.openid input[type='submit'] {
   padding: 19px 19px 19px 19px;
   margin-bottom: 19px;
 }
-/* line 571, ../../../app/stylesheets/application.sass */
+/* line 576, ../../../app/stylesheets/application.sass */
 .all-groups dd ol {
   display: block;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 576, ../../../app/stylesheets/application.sass */
+/* line 581, ../../../app/stylesheets/application.sass */
 .all-groups dd ol li {
   dipslay: block;
   list-style: none;
@@ -842,25 +848,25 @@ div.openid input[type='submit'] {
   padding-bottom: 9.5px;
   border-bottom: 1px solid #eeeeee;
 }
-/* line 582, ../../../app/stylesheets/application.sass */
+/* line 587, ../../../app/stylesheets/application.sass */
 .all-groups dd ol li .group-name {
   display: block;
   font-size: 18px;
 }
-/* line 585, ../../../app/stylesheets/application.sass */
+/* line 590, ../../../app/stylesheets/application.sass */
 .all-groups dd ol li .membership-action {
   float: right;
 }
 
-/* line 588, ../../../app/stylesheets/application.sass */
+/* line 593, ../../../app/stylesheets/application.sass */
 .footer {
   font-size: 14px;
 }
-/* line 590, ../../../app/stylesheets/application.sass */
+/* line 595, ../../../app/stylesheets/application.sass */
 .footer a {
   color: #ffcc00;
 }
-/* line 592, ../../../app/stylesheets/application.sass */
+/* line 597, ../../../app/stylesheets/application.sass */
 .footer .get-help {
   display: inline;
   float: left;
@@ -870,7 +876,7 @@ div.openid input[type='submit'] {
   padding-right: 80px;
   margin-left: 0;
 }
-/* line 596, ../../../app/stylesheets/application.sass */
+/* line 601, ../../../app/stylesheets/application.sass */
 .footer .facebook, .footer .twitter, .footer .email, .footer .website {
   display: inline;
   float: left;
@@ -878,7 +884,7 @@ div.openid input[type='submit'] {
   margin-right: 10px;
   width: 60px;
 }
-/* line 598, ../../../app/stylesheets/application.sass */
+/* line 603, ../../../app/stylesheets/application.sass */
 .footer .copyright {
   display: inline;
   float: left;
@@ -889,7 +895,7 @@ div.openid input[type='submit'] {
   text-align: right;
 }
 
-/* line 603, ../../../app/stylesheets/application.sass */
+/* line 608, ../../../app/stylesheets/application.sass */
 .outline {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -901,12 +907,12 @@ div.openid input[type='submit'] {
   border: 1px #ccccff solid;
   padding: 0px 19px;
 }
-/* line 607, ../../../app/stylesheets/application.sass */
+/* line 612, ../../../app/stylesheets/application.sass */
 .outline legend {
   font-weight: bold;
   font-size: 125%;
 }
-/* line 610, ../../../app/stylesheets/application.sass */
+/* line 615, ../../../app/stylesheets/application.sass */
 .outline legend .button {
   background: none;
   border: none;
@@ -921,22 +927,22 @@ div.openid input[type='submit'] {
   color: black;
   font-size: inherit;
 }
-/* line 618, ../../../app/stylesheets/application.sass */
+/* line 623, ../../../app/stylesheets/application.sass */
 .outline legend .button.inactive {
   border-bottom: 2px solid black;
 }
 
-/* line 623, ../../../app/stylesheets/application.sass */
+/* line 628, ../../../app/stylesheets/application.sass */
 .messages-menu .button {
   margin-right: 20px;
 }
 
-/* line 626, ../../../app/stylesheets/application.sass */
+/* line 631, ../../../app/stylesheets/application.sass */
 .you {
   color: #999999;
 }
 
-/* line 629, ../../../app/stylesheets/application.sass */
+/* line 634, ../../../app/stylesheets/application.sass */
 .is-parent {
   padding-left: 38px;
 }
