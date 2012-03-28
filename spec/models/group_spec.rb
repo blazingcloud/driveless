@@ -14,7 +14,6 @@ describe Group do
     Group.make
   end
   context "#merge " do
-
     context "with a group and a group to merge" do
       before do
         @owner = User.make
@@ -24,7 +23,12 @@ describe Group do
                                      :owner       => @owner,
                                      :destination => @destination)
       end
-
+      it "if you merge with yourself you are not destroyed" do
+        lambda  do
+          @group.merge(@group)
+        end.should change(Group,:count).by(0)
+      end
+      
       it "the old group is destroyed" do
         lambda  do
           @group.merge(@group_to_merge)

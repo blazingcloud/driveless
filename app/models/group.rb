@@ -115,6 +115,7 @@ class Group < ActiveRecord::Base
   end
 
   def merge(group)
+    return if group.id == self.id
     Group.transaction do
       (group.users - self.users).each do |user|
         Membership.create!(:user => user, :group => self)
