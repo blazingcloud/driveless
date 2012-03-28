@@ -14,27 +14,52 @@ describe Group do
     Group.make
   end
   context "#merge " do
-    before do
-      @owner = User.make
-      @destination = Destination.make(:name => 'Madison WI')
-      @group = Group.make(:name => 'My Group', :owner => @owner, :destination => @destination)
-      @group_to_merge = Group.make(:name        => 'This is a Group to Merge',
-                                   :owner       => @owner,
-                                   :destination => @destination)
-      @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
-      @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
-    end
 
-    it "the old group is destroyed" do
-      lambda  do
-        @group.merge(@group_to_merge)
-      end.should change(Group,:count).by(-1)
-    end
+    context "with a group and a group to merge" do
+      before do
+        @owner = User.make
+        @destination = Destination.make(:name => 'Madison WI')
+        @group = Group.make(:name => 'My Group', :owner => @owner, :destination => @destination)
+        @group_to_merge = Group.make(:name        => 'This is a Group to Merge',
+                                     :owner       => @owner,
+                                     :destination => @destination)
+      end
 
-    it "members are joined " do
-      lambda  do
-        @group.merge(@group_to_merge)
-      end.should change(@group.users,:count).by(2)
+      it "the old group is destroyed" do
+        lambda  do
+          @group.merge(@group_to_merge)
+        end.should change(Group,:count).by(-1)
+      end
+
+      context "when there are no intersecting memebers" do
+        before do
+          @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+          @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+        end
+        it "members are joined" do
+          lambda  do
+            @group.merge(@group_to_merge)
+          end.should change(@group.users,:count).by(2)
+        end
+      end
+      context "when a member belongs to both groups" do
+        before do
+          # one new member
+          @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+
+          # existing member 
+          both_group_user = User.make
+
+          # existing member in both groups
+          @group_to_merge.users << both_group_user
+          @group.users << both_group_user
+        end
+        it "the member is not added again" do
+          lambda  do
+            @group.merge(@group_to_merge)
+          end.should change(@group.users,:count).by(1)
+        end
+      end
     end
   end
   describe "statistics" do

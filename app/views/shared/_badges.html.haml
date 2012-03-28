@@ -8,5 +8,5 @@
 %ul.badge{:class => small ? 'small' : ''}
   - badges.each do |badge|
     %li{:class => badge[:html_class]}
-      .stat= badge[:stat]
+      .stat{:class =>"#{badge[:label].tr(' ','_').pluralize}"}= badge[:stat]
       .label= badge[:label]

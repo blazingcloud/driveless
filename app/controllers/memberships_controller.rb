@@ -14,7 +14,7 @@ class MembershipsController < ApplicationController
     if !membership.new_record?
       flash[:notice] = "Successfully joined #{group.name}!"
     else
-      flash[:warning] = "There were errors joining the group: #{membership.errors.full_messages.to_sentece}"
+      flash[:warning] = "There were errors joining the group: #{membership.errors.full_messages.to_sentence}"
     end
     redirect_to :back
   end

@@ -6,6 +6,7 @@ describe "Group Page" do
       @owner = User.make(:password => 'password')
       @destination = Destination.make(:name => 'Madison WI')
       @group = Group.make(:name => 'My Group', :owner => @owner, :destination => @destination)
+      #owner is not a member by default
     end
 
     describe "When logged in as a member" do
@@ -41,6 +42,7 @@ describe "Group Page" do
           @group_to_merge = Group.make(:name        => 'This is a Group to Merge',
                                        :owner       => @owner,
                                        :destination => @destination)
+          
           @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
           @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
 
@@ -56,17 +58,18 @@ describe "Group Page" do
         end
 
         it "merges selected group into displayed group" do
-          members_in_group_to_merge = @group_to_merge.users.count -1
-          members_in_group = @group.users.count
-
+           members_in_group_to_merge = @group_to_merge.users.length
+           members_in_group = @group.users.length
+           expected_members = (members_in_group +
+                                 members_in_group_to_merge )
           page.select(@group_to_merge.name, :from => "merge[group_id]")
           click_on('merge groups')
 
           # returns to same page
-          current_path.should == "/group/#{group.id}"
-          page.has_css('.badge .member', :text => (members_in_group +
-                                                   members_in_group_to_merge - 1 )) 
-                                                   # don't count owner twice
+          current_path.should == "/group/#{@group.id}"
+          save_and_open_page
+          page.should have_css('.badge .members', :text => expected_members.to_s)
+          
         end
       end
       context "when visiting a group" do

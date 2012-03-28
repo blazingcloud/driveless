@@ -116,8 +116,8 @@ class Group < ActiveRecord::Base
 
   def merge(group)
     Group.transaction do
-      group.memberships.each do |member|
-        Membership.create!(:user => member.user, :group => self)
+      (group.users - self.users).each do |user|
+        Membership.create!(:user => user, :group => self)
       end
       group.destroy
     end
