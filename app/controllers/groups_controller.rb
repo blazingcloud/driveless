@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_group, :only => [:show, :edit, :update, :destroy]
-  before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ]
+  before_filter :load_group, :only => [:show, :edit, :update, :destroy, :merge]
+  before_filter :is_the_owner?, :only => [ :destroy, :update, :edit ,:merge]
 
   def show
     mode_id = params[:mode_id].to_i
@@ -52,7 +52,11 @@ class GroupsController < ApplicationController
       render :new
     end
   end
-
+  def merge
+    @merge_group = Group.find(params[:merge][:group_id])
+    @group.merge(@merge_group)
+    redirect_to group_path(@group) 
+  end
   def destroy
     @group.destroy
     redirect_to account_groups_url

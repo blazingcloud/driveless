@@ -18,6 +18,9 @@ describe "Group Page" do
           visit("/group/#{@group.id}")
 
         end
+        it "i should not see merge " do
+          page.should_not have_button("merge group")
+        end
         it "i should not see edit " do
           page.should_not have_button("edit group")
         end
@@ -30,6 +33,41 @@ describe "Group Page" do
     describe "When logged in as owner" do
       before do
         login_as(@owner,'password')
+      end
+      context "merge group feature" do
+        before do
+          @destination = Destination.make(:name => 'Madison WI')
+
+          @group_to_merge = Group.make(:name        => 'This is a Group to Merge',
+                                       :owner       => @owner,
+                                       :destination => @destination)
+          @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+          @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+
+          visit("/group/#{@group.id}")
+        end
+
+        it "should have a button" do
+          page.should have_button("merge groups")
+        end
+
+        it "should have a select field" do
+          page.should have_select("merge[group_id]")
+        end
+
+        it "merges selected group into displayed group" do
+          members_in_group_to_merge = @group_to_merge.users.count -1
+          members_in_group = @group.users.count
+
+          page.select(@group_to_merge.name, :from => "merge[group_id]")
+          click_on('merge groups')
+
+          # returns to same page
+          current_path.should == "/group/#{group.id}"
+          page.has_css('.badge .member', :text => (members_in_group +
+                                                   members_in_group_to_merge - 1 )) 
+                                                   # don't count owner twice
+        end
       end
       context "when visiting a group" do
         before do

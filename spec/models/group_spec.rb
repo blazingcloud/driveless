@@ -13,7 +13,30 @@ describe Group do
   it "should create a new instance given valid attributes" do
     Group.make
   end
+  context "#merge " do
+    before do
+      @owner = User.make
+      @destination = Destination.make(:name => 'Madison WI')
+      @group = Group.make(:name => 'My Group', :owner => @owner, :destination => @destination)
+      @group_to_merge = Group.make(:name        => 'This is a Group to Merge',
+                                   :owner       => @owner,
+                                   :destination => @destination)
+      @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+      @group_to_merge.users.create!(User.make_unsaved.attributes.merge(:password => 'password'))
+    end
 
+    it "the old group is destroyed" do
+      lambda  do
+        @group.merge(@group_to_merge)
+      end.should change(Group,:count).by(-1)
+    end
+
+    it "members are joined " do
+      lambda  do
+        @group.merge(@group_to_merge)
+      end.should change(@group.users,:count).by(2)
+    end
+  end
   describe "statistics" do
     attr_reader :bike, :qualified_users, :unqualified_users, :group, :school
     before do

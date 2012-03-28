@@ -25,6 +25,6 @@
 - if current_user == @group.owner
   %h4 Owner Actions
   .actions 
-    = link_to_group_edit_action_if_group ( @group ) 
-    = link_to_group_delete_action_if_group ( @group ) 
-
+    = link_to_group_edit_action_if_group( @group )
+    = link_to_group_delete_action_if_group( @group )
+    = link_to_group_merge_action_if_group( @group )

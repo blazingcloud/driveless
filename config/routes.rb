@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   resources :users
   resource :account, :controller => "users" do
     resources :trips
-    resources :groups, :except => :show
+    resources :groups, :except => :show do
+      post :merge, :on => :member
+    end
   end
 
   match '/account/friends', :to => 'friendships#index'

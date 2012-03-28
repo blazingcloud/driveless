@@ -114,6 +114,14 @@ class Group < ActiveRecord::Base
     owner_id == user.id
   end
 
+  def merge(group)
+    Group.transaction do
+      group.memberships.each do |member|
+        Membership.create!(:user => member.user, :group => self)
+      end
+      group.destroy
+    end
+  end
   # ==== stats
   def qualified_users
     users.select {|u| u.days_logged >= 5}

@@ -42,6 +42,11 @@ module ApplicationHelper
       button_to 'edit group', {:controller => 'groups', :action => 'edit', :id => group.id}, :method => :get, :class => 'button small'
     end
   end
+  def link_to_group_merge_action_if_group( group )
+    if group.is_a?(Group) and current_user == group.owner
+      render :partial => 'groups/merge_action' ,:locals => {:group => group }
+    end
+  end
 end
 
 

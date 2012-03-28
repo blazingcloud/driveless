@@ -1,0 +1,5 @@
+= form_for(:merge,:url => {:controller => 'groups', :action => 'merge',:id => group.id},:method => :post) do |form|
+  = form.select('group_id',
+    options_from_collection_for_select(group.owner.owned_groups,'id','name'))
+  =   form.submit('merge groups', :class => 'button small')
+                          
