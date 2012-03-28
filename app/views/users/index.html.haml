@@ -16,8 +16,6 @@
     %tr
       %td
         = link_to user.id, :action => 'edit', :id => user
-        &nbsp;
-        &nbsp;
       %td= user.username
       %td= user.email
       %td= user.community ? user.community.name : 'None'
