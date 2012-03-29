@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   match "users_csv", :to => 'users#csv'
 
   match "results" => "results#index"
+  match "results_csv" => "results#csv"
 
   root :to => "home#index"
 end

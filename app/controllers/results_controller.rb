@@ -1,5 +1,11 @@
 class ResultsController < ApplicationController
   before_filter :require_admin
+  
+  def csv
+   filename = "./tmp/driveless-results-#{Time.now.strftime('%YY-%mm-%dd')}.csv"
+   Result.generate_individuals_csv(filename)
+   send_file filename
+  end
 
   def index
     #@categories = []
