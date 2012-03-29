@@ -40,7 +40,7 @@ Destination.create([
                    {:name => 'Social/Civic/Fun'}
 ]) if Destination.count == 0
 
-["Palo Alto", "Menlo Park", "Mountain View", "Burlingame", "Los Altos/Hills", "Redwood City", "Cupertino", "Morgan Hill", "Sunnyvale","Emeryville","Oakland","San Francisco", "South San Francisco","Other"].each do |community_name|
+["Palo Alto", "Menlo Park", "Mountain View", "Burlingame", "Los Altos/Hills", "Redwood City", "Cupertino", "Morgan Hill", "Sunnyvale","Elsewhere"].each do |community_name|
   Community.create!(:name => community_name, :state => 'California', :country => 'United States')
 end if Community.count == 0
 
