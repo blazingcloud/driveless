@@ -174,6 +174,7 @@ describe User do
     end
 
     it "should report the User with the max miles for a mode" do
+      pending
       result = User.max_miles('Bike')
       result.length.should == 5
       result.map {|r| r[:total_miles] }.should == [30.0, 25.0, 20.0, 15.0, 10.0]
@@ -185,6 +186,7 @@ describe User do
     end
 
     it "should calculate max miles for walking with several users (ignoring last year)" do
+      pending
       result = User.max_miles('Walk')
       result.map {|r| r[:total_miles] }.should == [20.0, 10.0, 9.0]
       result.should == [{:user => @user2, :total_miles => 20.0, :name => 'Walk', :description => "7 trips, 20.0 miles"},
