@@ -264,7 +264,7 @@ describe User do
       User.make
       User.make(:email => "ignore.me@my.drivelesschallenge.com")
       @csv = User.to_csv
-      @csv_array = FasterCSV.parse(@csv)
+      @csv_array = CSV.parse(@csv)
     end
 
     it "should print a header line first" do

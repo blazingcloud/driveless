@@ -65,7 +65,6 @@ GEM
       abstract (>= 1.0.0)
     faker (0.9.5)
       i18n (~> 0.4)
-    fastercsv (1.5.4)
     ffi (1.0.7)
       rake (>= 0.8.7)
     formtastic (1.2.3)
@@ -184,7 +183,6 @@ DEPENDENCIES
   dynamic_form
   email_spec
   faker
-  fastercsv
   formtastic (~> 1.2.3)
   googlecharts (~> 1.6.1)
   haml (= 3.1.0.alpha.147)

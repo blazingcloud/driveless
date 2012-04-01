@@ -5,7 +5,6 @@ gem 'rails', '~>3.0.5'
 gem 'haml', '3.1.0.alpha.147'
 gem 'compass'
 gem 'compass-960-plugin'
-gem 'fastercsv'
 gem 'inherited_resources', '~>1.2.1'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'formtastic', '~>1.2.3' # latest as of 2011-04-13
