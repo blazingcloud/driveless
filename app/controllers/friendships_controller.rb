@@ -28,7 +28,11 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    current_user.friendship_to(params[:friend_id])
+    begin
+      current_user.friendship_to(params[:friend_id])
+    rescue User::MailError
+      flash[:notice] = "Error sending friendship notification"
+    end
     redirect_to account_friends_url
   end
 

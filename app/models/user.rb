@@ -169,13 +169,12 @@ class User < ActiveRecord::Base
     group
   end
 
-  def deliver_password_reset_instructions!
-    reset_perishable_token!
-    Notifier.deliver_password_reset_instructions(self)
-  end
+  class MailError < RuntimeError; end
 
   def deliver_friendship_notification!(friend)
-    Notifier.deliver_friendship_notification(self, friend)
+    NotificationsMailer.friendships_notification(self,friend).deliver
+  rescue Exception => e
+    raise MailError, e.message, e.backtrace
   end
 
   def send_invitation!( invitation )
