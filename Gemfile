@@ -13,6 +13,7 @@ gem 'hoptoad_notifier'
 gem 'dynamic_form'
 gem 'devise'
 gem 'jquery-rails'
+gem 'escape_utils'
 #gem 'omniauth'
 
 #group :assets do

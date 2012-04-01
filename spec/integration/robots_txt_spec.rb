@@ -5,7 +5,7 @@ describe 'robots.txt' do
     before do
       mock.instance_of(RobotsController).hostname { "my.drivelesschallenge.com" }
       visit '/robots.txt'
-      @directives = page.body.split("\n").reject {|line| line.match(/^\s*#/)}
+      @directives = page.body.split("\n").reject {|line| line.match(/^\s*#/) || line.match(/<!DOCTYPE/) }
     end
 
     it "should allow search engines to search site" do
