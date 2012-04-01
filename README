@@ -7,7 +7,7 @@
 Installation
 ============
 
-git clone git@github.com:blazingcloud/driveless-repo.git
+git clone git@github.com:blazingcloud/driveless.git
 Create gemset: ree-1.8.7-2011.03@driveless
 bundle install
 copy database.sample-mac.yml to database.yml and use edit :
