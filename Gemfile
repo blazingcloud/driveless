@@ -16,7 +16,10 @@ gem 'devise'
 gem 'jquery-rails'
 #gem 'omniauth'
 
-gem 'pg', '0.11.0' # Not using ~> because when pg is installed it needs ARCHFLAGS="-arch x86_64"
+#group :assets do
+#  gem 'compass-rails'
+#end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda'
@@ -25,7 +28,6 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rr'
-  gem 'ruby-debug'
   gem 'sqlite3'
   gem 'email_spec'
 end
@@ -34,4 +36,8 @@ group :development do
   gem 'heroku'
   gem 'taps'
   gem 'pivotal_git_scripts'
+end
+
+group :production do
+  gem 'pg', '0.11.0' # Not using ~> because when pg is installed it needs ARCHFLAGS="-arch x86_64"
 end
