@@ -1,5 +1,5 @@
-- form_for [:account, @group] do |form|
-  - render :layout => 'shared/tip' do
+= form_for [:account, @group] do |form|
+  = render :layout => 'shared/tip' do
     %p It may be helpful to name your group with a geographic center, such as "1st Bank on Embarcadero" or "Fire Department of Palo Alto".
   = form.error_messages
   %p
