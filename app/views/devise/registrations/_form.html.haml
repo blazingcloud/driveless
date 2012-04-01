@@ -60,7 +60,7 @@
 %fieldset.outline
   %legend Join a Participating Community
   %p
-    Some geographic communities are officially participating in the Drive Less Challenge. If you live, work, or play in one of the communities listed below you can earn green miles for them by joining up!
+    You can participate in Drive Less Challenge wherever you are.  Some geographic communities are officially participating in the Drive Less Challenge, with prizes from local merchants. If you live, work, or play in one of the communities listed below, you are eligible for those prizes and also help that community win.  If you are in another community, choose "other".
   %p
     = f.select :community_id, options_from_collection_for_select(communities, 'id', 'name', :selected => @user.community_id), {:include_blank => true}
 

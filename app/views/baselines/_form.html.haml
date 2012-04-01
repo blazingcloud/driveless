@@ -1,12 +1,12 @@
 %h2 How green is your travel now?
 - render :layout => 'shared/tip' do
   %p
-    Fill in this form with the distances you have traveled
-    %b in miles
+    Tell us how you usually travel, so we can measure the amount of change!
+    %b Estimate the miles you travel
     for each of the categories&nbsp;
     %b> in a typical week.
   %p
-    Filling out this baseline can make you eligible for prizes in a special prize drawing!
+    Filling out this baseline can make you eligible for special prizes!
 
 - semantic_form_for @baseline do |form|
   .baseline-travel.head
