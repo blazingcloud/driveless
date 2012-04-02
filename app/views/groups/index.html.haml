@@ -1,4 +1,4 @@
-- title "My Groups"
+= title "My Groups"
 
 - if @owned_groups.length > 0
   .group-grouping
@@ -11,7 +11,7 @@
   - if current_user.community
     = render :partial => 'shared/leaderboard_item', :object => current_user.community, :locals => { :item_stats => current_user.community.stats, :group => true,  :friendship => true }
 
-- render :layout => 'shared/tip' do
+= render :layout => 'shared/tip' do
   %p The Drive Less Challenge encourages you to socialize and engage in friendly competition with your peers at work, school, hobbies, and more. Join a group today!
 
 %p= link_to 'Find, Join, Leave, and Create Groups', groups_path, :class => 'button'

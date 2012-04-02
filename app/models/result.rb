@@ -105,7 +105,7 @@ class Result < ActiveRecord::Base
       "Total miles"
     ]
 
-    FasterCSV.open(path_to_file, "w") do |csv|
+    CSV.open(path_to_file, "w") do |csv|
       csv << headers
       groups.each do |group|
         group.instance_eval do
@@ -149,7 +149,7 @@ class Result < ActiveRecord::Base
   end
 
   def self.generate_individuals_raw_data_csv(path_to_file)
-    FasterCSV.open(path_to_file, "w") do |csv|
+    CSV.open(path_to_file, "w") do |csv|
       csv << HEADERS
       all.each do |result|
         csv << result.field_values
@@ -160,7 +160,7 @@ class Result < ActiveRecord::Base
 
   def self.generate_individuals_csv(path_to_file)
 
-    FasterCSV.open(path_to_file, "w") do |csv|
+    CSV.open(path_to_file, "w") do |csv|
 
       add_to_csv = lambda do | category, results |
         csv << [""] * HEADERS.length

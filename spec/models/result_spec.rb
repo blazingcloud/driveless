@@ -86,13 +86,13 @@ describe Result do
       end
     end
 
-    description "when user has fewer than 5 trips" do
+    context "when user has fewer than 5 trips" do
       it "user should not be qualified" do
         user = User.make
         user.save!
-        add_trips_to_user(@user, :mode => bike, :destination => work, :distances => [1.0, 2.0])
+        add_trips_to_user(user, :mode => bike, :destination => work, :distances => [1.0, 2.0])
         user.trips.count.should == 2
-        Results.create_result_for(user).should_not be_qualified
+        Result.create_result_for(user).should_not be_qualified
       end
     end
 

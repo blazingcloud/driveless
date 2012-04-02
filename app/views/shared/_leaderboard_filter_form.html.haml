@@ -1,4 +1,4 @@
-- form_tag nil, :method => :get do |f|
+= form_tag nil, :method => :get do |f|
   = select_tag :mode_id, options_for_select([["Select a mode", nil]] + Mode.by_name.all.map {|d| [d.name, d.id]}, params[:mode_id].to_i)
   = submit_tag 'Filter leaderboard'
 

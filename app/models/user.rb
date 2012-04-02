@@ -231,7 +231,7 @@ class User < ActiveRecord::Base
   end
 
   def self.to_csv
-    csv_string = FasterCSV.generate do |csv|
+    csv_string = CSV.generate do |csv|
       csv << [
         "id",
         "Name",
