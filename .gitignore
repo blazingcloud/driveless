@@ -7,3 +7,4 @@ tmp/
 db/*.sqlite3
 tags
 .sass-cache/**/*
+dlc_*
