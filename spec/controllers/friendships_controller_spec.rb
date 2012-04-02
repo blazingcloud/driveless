@@ -18,10 +18,12 @@ describe FriendshipsController do
       end
 
       context "successful" do
-        post :create , :friend_id => '1'
+        it " redirects " do
+          post :create , :friend_id => '1'
 
-        response.should be_redirect
-        flash[:notice].should == nil
+          response.should be_redirect
+          flash[:notice].should == nil
+        end
       end
     end
   end
