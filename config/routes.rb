@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   match 'robots.txt', :to => 'robots#robots_txt', :as => 'robots'
 
+  # Map authentication callbacks to create the appropriate authentications
+  match 'auth/:provider/callback' => 'authentications#create'
+
   devise_for :users
 
   resources :modes
@@ -18,6 +21,8 @@ Rails.application.routes.draw do
   resources :destinations
 
   resources :user_sessions
+
+  resources :authentications, :only => [:create, :destroy]
 
   resources :users
   resource :account, :controller => "users" do
