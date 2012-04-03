@@ -14,8 +14,9 @@ gem 'dynamic_form'
 gem 'devise'
 gem 'jquery-rails'
 gem 'escape_utils'
-#gem 'omniauth'
+#gem 'omniauth' # included in devise 1.5
 
+gem 'omniauth-facebook'
 #group :assets do
 #  gem 'compass-rails'
 #end

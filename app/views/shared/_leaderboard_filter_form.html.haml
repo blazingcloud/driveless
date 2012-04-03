@@ -1,6 +1,36 @@
-= form_tag nil, :method => :get do |f|
-  = select_tag :mode_id, options_for_select([["Select a mode", nil]] + Mode.by_name.all.map {|d| [d.name, d.id]}, params[:mode_id].to_i)
-  = submit_tag 'Filter leaderboard'
+.filter
+  - if params[:n].blank?
+    .message Filter by mode of transportation :
+    .icons
+      .action.all
+        .icon= button_to '' , :mode_id =>''
+        .icon_title All
+      .action.walk
+        .icon= button_to '' , :mode_id =>1
+        .icon_title walk
+      .action.bike
+        .icon= button_to '' , :mode_id =>2
+        .icon_title bike
+      .action.electric
+        .icon= button_to '' , :mode_id =>3
+        .icon_title electric
+      .action.bus
+        .icon= button_to '' , :mode_id =>4
+        .icon_title bus
+      .action.train
+        .icon= button_to '' , :mode_id =>5
+        .icon_title train
+      .action.carpool
+        .icon= button_to '' , :mode_id =>6
+        .icon_title carpool
+      .action.solo
+        .icon= button_to '' , :mode_id =>7
+        .icon_title solo
+  - else
+    = form_tag nil, :method => :get do |f|
+      = select_tag :mode_id, options_for_select([["Select a mode", nil]] + Mode.by_name.all.map {|d| [d.name, d.id]}, params[:mode_id].to_i)
+      = submit_tag 'Filter leaderboard'
 
-= link_to "by miles", {:sort_by => 'miles'}
-= link_to "by lb co2 saved", {:sort_by => 'lb_co2'}
+  = link_to "by miles", {:sort_by => 'miles'}
+  = link_to "by lb co2 saved", {:sort_by => 'lb_co2'}
+  %div{:style => 'clear:both'}

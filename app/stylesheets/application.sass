@@ -445,22 +445,87 @@ form.baseline fieldset.baseline-travel
       .members
         float: right
         text-align: right
+.leaderboard
+  margin-top: 2em
+  div
+    display: block
+.filter
+  .icons
+    position: relative
+    .icon
+      input
+        background-size: contain
+        background-position: center center
+        background-repeat: no-repeat
+    .all
+      input
+        background-image: url('../../images/actions/all.png')
+    .walk
+      input 
+        background-image: url('../../images/actions/walk.png')
+    .bike
+      input 
+        background-image: url('../../images/actions/bike.png')
+    .electric
+      input 
+        background-image: url('../../images/actions/electric.png')
+    .bus
+      input 
+        background-image: url('../../images/actions/bus.png')
+    .train
+      input 
+        background-image: url('../../images/actions/train.png')
+    .carpool
+      input 
+        background-image: url('../../images/actions/carpool.png')
+    .solo
+      input 
+        background-image: url('../../images/actions/car.png')
+    .action
+      height: 5em
+      width: 5em
+      margin-left: 0.25em
+      float: left
+      .icon
+        margin-left: 0.5em
+      .icon_title
+        margin-left: 1em
+        position: absolute
+        top: 50px
+    form
+      margin: 0
+      input
+        width: 50px
+        height: 50px
+        
+.filter
+  width: 100%
+  form
+    height: 2em
 .section_groups
-  .leaderboard
-    margin-top: 2em
-    border: 1px solid black
   .all_members
     margin-top: 2em
-    border: 1px solid black
-  .actions
-    margin-top: 2em
-    border: 1px solid black
 
-    form
-      height: 5em
-      margin-left: 3em
-      input,select
-        font-size: 1.5em
+  .owner
+    .title
+      font-size: 1.8em
+      float: none
+    margin-top: 2em
+
+.section_groups
+  .owner
+    .action.odd
+      background: #B8B8B8
+    .action
+      background: #D9Dcd9
+      .message
+        font-size: 1.3em
+        margin-left: 2em
+      form
+        height: 5em
+        margin-left: 3em
+        input,select
+          font-size: 1.5em
 
 
 input.delete

@@ -5,8 +5,7 @@
 
 .leaderboard
   %h3 Leading Participants by Green Miles
-  .filter
-    = render :partial => 'shared/leaderboard_filter_form'
+  = render :partial => 'shared/leaderboard_filter_form'
   .participants
     - unless @members_leaderboard.empty?
       = render :partial => 'shared/leaderboard', :locals => {:items => @members_leaderboard, :group => false, :friendship => true }
@@ -29,8 +28,17 @@
   %p= @group.users.map{|u| link_to u.username, u}.join(", ")
 
 - if current_user == @group.owner
-  .actions
-    %h4 Owner Actions
-    = link_to_group_edit_action_if_group( @group )
-    = link_to_group_merge_action_if_group( @group )
-    = link_to_group_delete_action_if_group( @group )
+  .owner
+    .title Owner Actions
+    .action
+      %p.message
+        As an owner you can edit this group
+      .form= link_to_group_edit_action_if_group( @group )
+    .action.odd
+      %p.message
+        Combine another group you own into this one
+      .form= link_to_group_merge_action_if_group( @group )
+    .action
+      %p.message
+        Remove this group 
+      .form= link_to_group_delete_action_if_group( @group )
