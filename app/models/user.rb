@@ -2,14 +2,14 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :token_authenticatable, :registerable, #:confirmable,
-         :recoverable, :rememberable, :trackable, 
+         :recoverable, :rememberable, :trackable,
          :validatable, :encryptable #, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :openid_identifier, :username, :pseudonym, 
-    :community_id, :city, :green_miles, :name, :address, :is_13, 
+  attr_accessible :email, :openid_identifier, :username, :pseudonym,
+    :community_id, :city, :green_miles, :name, :address, :is_13,
     :is_parent, :read_privacy, :zip, :password, :password_confirmation
-  
+
   has_one :baseline
   has_one :result
   has_many :mode_mileages
@@ -19,16 +19,17 @@ class User < ActiveRecord::Base
   #
   # As a user i want to see my trips for the entire year.
   #
-  has_many :trips, :conditions => ['made_at >= ?', Date.new(Time.now.year, 1, 1)] 
+  has_many :trips, :conditions => ['made_at >= ?', Date.new(Time.now.year, 1, 1)]
   has_many :invitations
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   has_many :owned_groups, :class_name => "Group", :foreign_key => :owner_id
   has_many :friendships, :dependent => :destroy
   has_many :friends, :through => :friendships
-  
+  has_many :authentications
+
   belongs_to :community
-  
+
   validates_acceptance_of :is_13, :allow_nil => false, :accept => true
   validates_acceptance_of :read_privacy, :allow_nil => false, :accept => true
 
@@ -49,7 +50,7 @@ class User < ActiveRecord::Base
             :html_class => 'of-goal no-baseline',
             :stat       => '&nbsp;',
             :label      => "<a href='/baselines/#{baseline.id}/edit'>make a baseline</a>",
-          })       
+          })
       ),
       {
         :html_class => 'non-green-miles',
@@ -123,19 +124,19 @@ class User < ActiveRecord::Base
   def has_complete_profile?
     username && email && name && address && city
   end
-  
+
   def non_green_miles
     "%0.1f" % self.trips.not_green.map(&:distance).sum
   end
-  
+
   def has_joined_groups?
     groups.count > 0
   end
-  
+
   def has_complete_baseline?
     baseline.green_miles
   end
-  
+
   def has_logged_trips?
     trips.count > 0
   end
@@ -151,10 +152,10 @@ class User < ActiveRecord::Base
   def lbs_co2_saved
     trips.qualifying.inject(0) { |sum, trip| sum += trip.lbs_co2_saved }
   end
-  
+
   # original method ... was formatted for display. New method produces number.
-  # TODO: Should probably rename this to indicate that it's a string and to 
-  # disambiguate it from the method above. See: https://www.pivotaltracker.com/story/show/13393527 
+  # TODO: Should probably rename this to indicate that it's a string and to
+  # disambiguate it from the method above. See: https://www.pivotaltracker.com/story/show/13393527
   def lb_co2_saved
     "%.1f" % self.trips.only_green.map{|t| t.mode.lb_co2_per_mile * t.distance}.sum.to_f
   end
@@ -274,7 +275,7 @@ class User < ActiveRecord::Base
 
   def miles_for_mode(mode)
     @miles_for_mode ||= {}
-    unless @miles_for_mode[mode.name] 
+    unless @miles_for_mode[mode.name]
       @miles_for_mode[mode.name] = self.trips.where(:mode_id => mode.id).inject(0) {|sum, trip| sum + trip.distance}
     end
     @miles_for_mode[mode.name].to_f
@@ -283,7 +284,7 @@ class User < ActiveRecord::Base
   def self.by_miles_for_mode(mode)
     self.all.sort {|a,b| b.miles_for_mode(mode) <=> a.miles_for_mode(mode) }
   end
-  
+
   def self.max_miles(mode_name)
     mode = Mode.find_by_name(mode_name)
     miles_for_all_users = self.joins(:trips => :mode).where('modes.id = ?', mode.id).sum(:distance, :group => :user_id)
@@ -297,7 +298,7 @@ class User < ActiveRecord::Base
         :name => mode_name, :description => desc}
     end
   end
-  
+
   def self.max_green_trips
     trips_for_all_users_count = self.joins(:trips => :mode).where(:modes => {:green => true}).count(:group => :user_id)
     results = trips_for_all_users_count.sort { |a,b| a[1].to_f <=> b[1].to_f }
@@ -311,9 +312,9 @@ class User < ActiveRecord::Base
         :name => "", :description => desc}
     end
   end
-  
+
   def self.max_green_shopping_trips
-    trips_for_all_users_count = Trip.joins(:destination, :mode).where({:destinations => {:name => "Errands & Other"}, :modes => {:green => true}}).count(:group => :user_id)  
+    trips_for_all_users_count = Trip.joins(:destination, :mode).where({:destinations => {:name => "Errands & Other"}, :modes => {:green => true}}).count(:group => :user_id)
     results = trips_for_all_users_count.sort { |a,b| a[1].to_f <=> b[1].to_f }
     results.reverse!
     results = results[0..4]
@@ -322,7 +323,7 @@ class User < ActiveRecord::Base
       user = User.where(:id => user_id).first
       desc = "#{total_trips_count.to_i} trips"
       { :user => User.where(:id => user_id).first, :total_trips_count => total_trips_count.to_i,
-        :name => "", :description => desc}        
+        :name => "", :description => desc}
     end
   end
 
