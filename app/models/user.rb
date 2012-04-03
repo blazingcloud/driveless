@@ -34,6 +34,31 @@ class User < ActiveRecord::Base
   validates_acceptance_of :read_privacy, :allow_nil => false, :accept => true
 
   validates_presence_of :email, :username, :name, :address, :city, :zip
+  def self.create_via_omniauth(provider_data)
+    case provider_data[:provider]
+    when 'facebook'
+      create_user_via_facebook(provider_data)
+    end
+  end
+  def self.create_user_via_facebook(provider_data)
+    city = provider_data[:info][:location] || provider_data[:provider]
+    username = provider_data[:info][:nickname]
+    name = provider_data[:info][:name]
+    email = provider_data[:info][:email]
+    user = User.create!(:username => username, 
+                        :email    => email, 
+                        :address  => provider_data[:provider], # facebook doesn't have this
+                        :name     => name,
+                        :city     => city, 
+                        :zip      => provider_data[:provider], # facebook doesn't have this
+                        :password => rand(123) * rand(123) + Time.now.to_i,
+                        :is_13    => true, # bypass - need solution here
+                        :read_privacy => true #bypass - need solution here
+                       )
+    user.authentications.create!(:provider  => provider_data[:provider],
+                                 :uid       => provider_data[:uid])
+    user
+  end
 
   before_create :create_baseline
 
@@ -69,6 +94,7 @@ class User < ActiveRecord::Base
       },
     ]
   end
+
 
   def self.find_leaderboard(user_ids_sql, filter_id, order = :miles, mode_id = nil)
     order_sql = order == :lb_co2 ? 'lb_co2_sum' : 'distance_sum'

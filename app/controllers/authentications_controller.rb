@@ -7,9 +7,13 @@ class AuthenticationsController < ApplicationController
       sign_in_and_redirect(:user, authentication.user)
 
     # If user is logged in and authentication doesn't exist, create the authentication
-    else
+    elsif current_user
       current_user.authentications.create(:provider => omniauth['provider'], :uid => omniauth['uid'])
       redirect_to edit_user_path(current_user)
+    # if no current user - create a new user and an authentication for the user
+    else
+      user = User.create_via_omniauth(omniauth)
+      sign_in_and_redirect(:user, user)
     end
   end
 

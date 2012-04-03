@@ -42,6 +42,68 @@ describe User do
   it "should create a new instance given valid attributes" do
     @user = User.make
   end
+  context "omniauth create user" do
+    context "without zip and address" do
+      context "with location" do
+        let(:provider_data) do
+          {
+            :provider => 'facebook',
+            :uid => '234234xx111aaa',
+            :info => {
+              :email =>'c@dog.com',
+              :nickname => 'cat.dog',
+              :name => 'cat and dog',
+              :location => 'oakland, ca'
+            }
+          }
+        end
+        it "constructs via facebook" do
+          @user = User.create_via_omniauth(provider_data)
+          @user.should be_valid
+
+          @user.city.should     == provider_data[:info][:location]
+          @user.zip.should      == provider_data[:provider]
+          @user.address.should  == provider_data[:provider]
+
+
+          @user.username.should == provider_data[:info][:nickname]
+          @user.name.should     == provider_data[:info][:name]
+          @user.email.should    == provider_data[:info][:email]
+
+          @user.authentications.first.provider.should == provider_data[:provider]
+          @user.authentications.first.uid.should == provider_data[:uid]
+        end
+      end
+      context "without location" do
+        let(:provider_data) do
+          {
+            :provider => 'facebook',
+            :uid => '234234xx111aaa',
+            :info => {
+              :email =>'c@dog.com',
+              :nickname => 'cat.dog',
+              :name => 'catdog',
+            }
+          }
+        end
+        it "constructs via facebook" do
+          @user = User.create_via_omniauth(provider_data)
+          @user.should be_valid
+
+          @user.city.should     == provider_data[:provider]
+          @user.zip.should      == provider_data[:provider]
+          @user.address.should  == provider_data[:provider]
+
+          @user.username.should == provider_data[:info][:nickname]
+          @user.name.should     == provider_data[:info][:name]
+          @user.email.should    == provider_data[:info][:email]
+
+          @user.authentications.first.provider.should == provider_data[:provider]
+          @user.authentications.first.uid.should == provider_data[:uid]
+        end
+      end
+    end
+  end
 
   describe "#days_logged" do
     attr_reader :user
