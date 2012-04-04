@@ -10,6 +10,8 @@
     = stylesheet_link_tag 'formtastic',                       :media => 'screen and (min-width:975px)'
     = stylesheet_link_tag 'formtastic_changes',               :media => 'screen and (min-width:975px)'
     = stylesheet_link_tag 'compiled/application',             :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'mobile.css',             :media => 'screen and (max-width:480px)'
+    
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie7',    :media => 'screen and (min-width=1024px)'  
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'jquery.color.js', 'underscore-min.js', 'jquery.openid.js', '/jquery.jqtransform.js', :defaults
