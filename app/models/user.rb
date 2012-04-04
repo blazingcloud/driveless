@@ -34,9 +34,19 @@ class User < ActiveRecord::Base
   validates_acceptance_of :read_privacy, :allow_nil => false, :accept => true
 
   validates_presence_of :email, :username, :name, :address, :city, :zip
-  def self.create_via_omniauth(provider_data)
+  def self.connect_via_omniauth(provider_data)
     case provider_data[:provider]
     when 'facebook'
+      connect_user_via_facebook(provider_data)
+    end
+  end
+  def self.connect_user_via_facebook(provider_data)
+    email = provider_data[:info][:email]
+    if (user = User.find_by_email(email))
+      user.authentications.create!(:provider  => provider_data[:provider],
+                                   :uid       => provider_data[:uid])
+      user
+    else
       create_user_via_facebook(provider_data)
     end
   end

@@ -12,7 +12,7 @@ class AuthenticationsController < ApplicationController
       redirect_to edit_user_path(current_user)
     # if no current user - create a new user and an authentication for the user
     else
-      user = User.create_via_omniauth(omniauth)
+      user = User.connect_via_omniauth(omniauth)
       sign_in_and_redirect(:user, user)
     end
   end

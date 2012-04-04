@@ -2,3 +2,19 @@ html {
   color: #181818;
   background: #DDFFDD;
 }
+
+.auth .facebook-connect {
+  width: 14em;
+}
+.auth  .tip {
+  width: 14em;
+}
+.auth .password  a {
+
+  margin-left:2em;
+}
+.auth .outline {
+  margin-bottom:1em;
+  margin-top:1em;
+  width:18em;
+}
