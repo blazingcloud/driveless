@@ -2,15 +2,16 @@
 %html
   %head
     %title= "Drive Less Challenge | " + h(yield(:title) || "Untitled")
-    = stylesheet_link_tag 'flick/jquery-ui-1.7.2.custom.css',    :media => 'screen, projection'
-    = stylesheet_link_tag '/jqtransform.css',    :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/grid.css',    :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/text.css',    :media => 'screen, projection'
-    = stylesheet_link_tag 'formtastic'
-    = stylesheet_link_tag 'formtastic_changes'
-    = stylesheet_link_tag 'compiled/application', :media => 'screen, projection'
+    = stylesheet_link_tag 'default_mobile.css'
+    = stylesheet_link_tag 'flick/jquery-ui-1.7.2.custom.css', :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag '/jqtransform.css',                 :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'compiled/grid.css',                :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'compiled/text.css',                :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'formtastic',                       :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'formtastic_changes',               :media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'compiled/application',             :media => 'screen and (min-width:975px)'
     /[if lt IE 8]
-      = stylesheet_link_tag 'compiled/ie7', :media => 'screen, projection'
+      = stylesheet_link_tag 'compiled/ie7',    :media => 'screen and (min-width=1024px)'  
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'jquery.color.js', 'underscore-min.js', 'jquery.openid.js', '/jquery.jqtransform.js', :defaults
     = javascript_include_tag 'rails'
     = csrf_meta_tag
