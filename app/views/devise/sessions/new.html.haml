@@ -3,11 +3,13 @@
   %legend Login
   .auth
     .password
+      = link_to image_tag("facebook.png"), "/auth/facebook"
       = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'plain'}) do |f|
         %p
         = render :layout => 'shared/tip' do
           %p
-            If you don't have an account yet,
+            If you don't have an account yet :
+          %p
             = link_to 'Signup now!', register_path, :class => 'button small'
         %p
           = f.label :email
@@ -22,11 +24,9 @@
           %p
             = f.check_box :remember_me
             = f.label :remember_me
+          %p
             - if devise_mapping.recoverable? && controller_name != 'passwords'
               = link_to "Forgot your password?", new_password_path(resource_name), :class => 'button small'
         %p
           = f.submit "Login"
 
-          or,
-
-          = link_to "Login with Facebook", "/auth/facebook"
