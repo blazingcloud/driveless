@@ -42,7 +42,32 @@ describe User do
   it "should create a new instance given valid attributes" do
     @user = User.make
   end
-  context "omniauth create user" do
+  context "omniauth connect user" do
+    context "with a pre-existing user of same email" do
+      let(:my_existing_user) do
+        User.make
+      end
+      let(:provider_data) do
+        {
+          :provider => 'facebook',
+          :uid => '234234xx111aaa',
+          :info => {
+            :email => my_existing_user.email,
+            :nickname => 'cat.dog',
+            :name => 'cat and dog',
+            :location => 'oakland, ca'
+          }
+        }
+      end
+      it "should link facebook to my existing user" do
+          @user = User.connect_via_omniauth(provider_data)
+          @user.should == my_existing_user
+
+          my_existing_user.authentications.first.provider.should == provider_data[:provider]
+          my_existing_user.authentications.first.uid.should == provider_data[:uid]
+      end
+    end
+
     context "without zip and address" do
       context "with location" do
         let(:provider_data) do
@@ -58,7 +83,7 @@ describe User do
           }
         end
         it "constructs via facebook" do
-          @user = User.create_via_omniauth(provider_data)
+          @user = User.connect_via_omniauth(provider_data)
           @user.should be_valid
 
           @user.city.should     == provider_data[:info][:location]
@@ -87,7 +112,7 @@ describe User do
           }
         end
         it "constructs via facebook" do
-          @user = User.create_via_omniauth(provider_data)
+          @user = User.connect_via_omniauth(provider_data)
           @user.should be_valid
 
           @user.city.should     == provider_data[:provider]
