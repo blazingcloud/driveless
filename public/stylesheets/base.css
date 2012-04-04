@@ -6,6 +6,8 @@ html {
 .auth .facebook-connect {
   width: 14em;
 }
+.auth form input[type='email'],
+.auth form input[type='password'],
 .auth  .tip {
   width: 14em;
 }
