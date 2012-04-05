@@ -50,20 +50,26 @@ class User < ActiveRecord::Base
       create_user_via_facebook(provider_data)
     end
   end
+ 
   def self.create_user_via_facebook(provider_data)
     city = provider_data[:info][:location] || provider_data[:provider]
     username = provider_data[:info][:nickname]
+    if (User.find_by_username(username))
+      # rewrite nickname
+      username = "#{username}.#{provider_data[:uid]}"
+    end
+
     name = provider_data[:info][:name]
     email = provider_data[:info][:email]
-    user = User.create!(:username => username, 
-                        :email    => email, 
+    user = User.create!(:username => username,
+                        :email    => email,
                         :address  => provider_data[:provider], # facebook doesn't have this
                         :name     => name,
-                        :city     => city, 
+                        :city     => city,
                         :zip      => provider_data[:provider], # facebook doesn't have this
                         :password => rand(123) * rand(123) + Time.now.to_i,
-                        :is_13    => true, # bypass - need solution here
-                        :read_privacy => true #bypass - need solution here
+                        :is_13    => true,    # bypass - need solution here
+                        :read_privacy => true # bypass - need solution here
                        )
     user.authentications.create!(:provider  => provider_data[:provider],
                                  :uid       => provider_data[:uid])
