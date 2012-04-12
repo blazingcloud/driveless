@@ -2,15 +2,16 @@
 %html
   %head
     %title= "Drive Less Challenge | " + h(yield(:title) || "Untitled")
-    = stylesheet_link_tag 'base.css'
-    = stylesheet_link_tag 'flick/jquery-ui-1.7.2.custom.css', :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag '/jqtransform.css',                 :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag 'compiled/grid.css',                :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag 'compiled/text.css',                :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag 'formtastic',                       :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag 'formtastic_changes',               :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag 'compiled/application',             :media => 'screen and (min-width:975px)'
-    = stylesheet_link_tag 'mobile.css',             :media => 'screen and (max-width:480px)'
+    =# stylesheet_link_tag 'base.css'
+    = stylesheet_link_tag 'flick/jquery-ui-1.7.2.custom.css', :disabled_media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag '/jqtransform.css',                 :disabled_media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'compiled/grid.css',                :disabled_media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'compiled/text.css',                :disabled_media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'formtastic',                       :disabled_media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'formtastic_changes',               :disabled_media => 'screen and (min-width:975px)'
+    = stylesheet_link_tag 'compiled/application',             :disabled_media => 'screen and (min-width:975px)'
+    =# No ie8 support for media attr - event with the css.mediaquery stuff
+    =# stylesheet_link_tag 'mobile.css',             :media => 'screen and (max-width:480px)'
     
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie7',    :media => 'screen and (min-width=1024px)'  

@@ -43,6 +43,32 @@ describe User do
     @user = User.make
   end
   context "omniauth connect user" do
+    context "with a pre-existing user of same username" do
+      let!(:my_existing_user) do
+        User.make
+      end
+      let(:provider_data) do
+        {
+          :provider => 'facebook',
+          :uid => '234234xx111aaa',
+          :info => {
+            :nickname => my_existing_user.username,
+            :email => 'cat.dog@new.com',
+            :name => 'cat and dog',
+            :location => 'oakland, ca'
+          }
+        }
+      end
+      it "should append facebook uid to username and make a new user" do
+        lambda do
+          @user = User.connect_via_omniauth(provider_data)
+        end.should change(User,:count).by(1)
+
+        @user.username.should ==  "#{my_existing_user.username}.#{provider_data[:uid]}"
+        @user.authentications.first.provider.should == provider_data[:provider]
+        @user.authentications.first.uid.should == provider_data[:uid]
+      end
+    end
     context "with a pre-existing user of same email" do
       let(:my_existing_user) do
         User.make
