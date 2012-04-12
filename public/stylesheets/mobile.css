@@ -2,6 +2,15 @@
     display:none;
 }
 
+.mobile_tip_hide{
+    position:absolute; bottom:10px; left: 10px;
+    background:red;
+    border:none;
+}
+.mobile_signup_button{
+    
+    display:block;
+}
 
 
 /*Styles from compiled application.css - inherited here ... refactor! */

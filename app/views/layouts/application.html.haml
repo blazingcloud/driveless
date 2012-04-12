@@ -17,6 +17,8 @@
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'jquery.color.js', 'underscore-min.js', 'jquery.openid.js', '/jquery.jqtransform.js', :defaults
     = javascript_include_tag 'rails'
     = csrf_meta_tag
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}
+    
 
     = yield :head
   %body{:class => "section_#{controller.controller_name}"}
