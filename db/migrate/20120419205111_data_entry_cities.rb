@@ -1,7 +1,6 @@
 require 'pp'
 class DataEntryCities < ActiveRecord::Migration
   def self.up
-    if Object.const_defined? 'Community'  
       Community.transaction do
         current_communities = Community.all.map(&:name)
 
@@ -18,16 +17,17 @@ class DataEntryCities < ActiveRecord::Migration
         # and remove them
         (current_communities -  master_list_cali_cities).each do |name|
           c = Community.find_by_name(name)
+          puts "Removing #{c.name} as it is not on master  list"
           c.destroy
         end
         (master_list_cali_cities - current_communities).each do |name|
           Community.create!(:name    => name,
                             :state   => 'California',
                             :country => 'United States')
+          puts "Creating #{c.name}"
 
         end
         pp Community.all.map(&:name)
-      end
     end
   end
 
