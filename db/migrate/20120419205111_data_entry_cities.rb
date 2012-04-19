@@ -18,7 +18,11 @@ class DataEntryCities < ActiveRecord::Migration
         (current_communities -  master_list_cali_cities).each do |name|
           c = Community.find_by_name(name)
           puts "Removing #{c.name} as it is not on master  list"
-          c.destroy
+          begin
+            c.destroy
+          rescue
+            puts $!.message
+          end
         end
         (master_list_cali_cities - current_communities).each do |name|
           Community.create!(:name    => name,
