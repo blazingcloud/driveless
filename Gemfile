@@ -40,5 +40,6 @@ group :development do
 end
 
 group :production do
+  gem 'fastercsv'
   gem 'pg', '0.11.0' # Not using ~> because when pg is installed it needs ARCHFLAGS="-arch x86_64"
 end

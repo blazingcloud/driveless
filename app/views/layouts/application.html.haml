@@ -16,9 +16,10 @@
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie7',    :media => 'screen and (min-width=1024px)'  
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js', 'jquery-ui-1.8.custom.min.js', 'jquery.color.js', 'underscore-min.js', 'jquery.openid.js', '/jquery.jqtransform.js', :defaults
+    = javascript_include_tag 'google'
     = javascript_include_tag 'rails'
     = csrf_meta_tag
-
+    
     = yield :head
   %body{:class => "section_#{controller.controller_name}"}
     .top
