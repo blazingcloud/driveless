@@ -25,7 +25,7 @@ class DataEntryCities < ActiveRecord::Migration
           end
         end
         (master_list_cali_cities - current_communities).each do |name|
-          Community.create!(:name    => name,
+          c = Community.create!(:name    => name,
                             :state   => 'California',
                             :country => 'United States')
           puts "Creating #{c.name}"
