@@ -19,6 +19,9 @@ class DataEntryCities < ActiveRecord::Migration
           c = Community.find_by_name(name)
           puts "Removing #{c.name} as it is not on master  list"
           begin
+            c.users.each do |u|
+              u.update_attribute(:community_id,nil)
+            end
             c.destroy
           rescue
             puts $!.message
