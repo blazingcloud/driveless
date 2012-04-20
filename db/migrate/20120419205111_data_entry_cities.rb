@@ -22,7 +22,7 @@ class DataEntryCities < ActiveRecord::Migration
             c.users.each do |u|
               u.update_attribute(:community_id,nil)
             end
-            c.destroy
+            c.reload.destroy
           rescue
             puts $!.message
           end
