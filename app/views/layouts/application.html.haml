@@ -27,6 +27,8 @@
         .title
           %h1
             =link_to 'Drive Less Challenge', root_path
+          %small
+            =link_to 'Drive Less Challenge Website', 'http://drivelesschallenge.com'
         .header
           - if current_user
             = render :partial => 'shared/user_badges', :locals => {:user => current_user, :name => current_user.username}
