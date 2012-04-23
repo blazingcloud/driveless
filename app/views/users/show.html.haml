@@ -7,7 +7,22 @@
     %a{:name => 'trip-entry'} Log a new trip
   - if current_user.has_completed_workflow?
     - render :layout => 'shared/tip' do
-      %p Please log all the trips you take during the drive less challenge, including driving alone.  This will help us all understand the role of green travel compared to solo driving. If you used more than one travel mode on a trip, enter the car, bike, bus, etc parts into separate trip entries to give an accurate count for the green miles and CO2 emissions avoided.
+      %p 
+        Please log all the trips you take   
+        during the drive less challenge,       
+        including driving alone.  This will    
+        help us all understand the role of     
+        green travel compared to solo driving. 
+        If you used more than one travel mode  
+        on a trip, enter the car, bike, bus,   
+        etc parts into separate trip entries   
+        to give an accurate count for the green
+        miles and CO2 emissions avoided.
+      %p
+        More questions? 
+        =link_to "See the FAQ.",
+          "http://drivelesschallenge.com/how-does-the-drive-less-challenge-work/"
+        
 - else
   %h1 #{@user.username}'s Profile
   .in-page-badges= render :partial => 'shared/user_badges', :locals => {:user => @user, :name => nil}

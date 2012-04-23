@@ -39,6 +39,15 @@ describe User do
   it { should validate_presence_of(:username) }
   #it { should validate_presence_of(:password) } # This is disabled by Casey so users can register by OpenId.
 
+  describe "#has_completed_workflow?" do
+      let(:a_new_user) do
+        User.make
+      end
+
+      it "is false for a new user " do
+        a_new_user.should_not have_completed_workflow
+      end
+  end
   it "should create a new instance given valid attributes" do
     @user = User.make
   end
@@ -157,10 +166,8 @@ describe User do
   end
 
   describe "#days_logged" do
-    attr_reader :user
-
-    before do
-      @user = User.make
+    let!(:user) do
+      User.make
     end
 
     describe "when the user has no trips" do
