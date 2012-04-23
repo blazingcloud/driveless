@@ -1,5 +1,9 @@
 - title "My Groups"
-
+- render :layout => 'shared/tip' do
+  %p
+    The Community where you live, work, 
+    or go to school is included 
+    in the list of Groups below.
 - if @owned_groups.length > 0
   .group-grouping
     %h2 Groups I'm Administering
