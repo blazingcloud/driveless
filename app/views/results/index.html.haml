@@ -1,6 +1,9 @@
 - content_for :head do
   = stylesheet_link_tag 'compiled/results.css'
 
+.download-csv
+  = button_to "Download Report", results_csv_path
+%hr
 .results
   - @categories.each do |category|
     %h1= category[:description]
