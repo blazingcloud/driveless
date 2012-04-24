@@ -37,6 +37,8 @@ describe User do
   it { should belong_to(:community) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:username) }
+  it { should validate_uniqueness_of(:username) }
+
   #it { should validate_presence_of(:password) } # This is disabled by Casey so users can register by OpenId.
 
   describe "#has_completed_workflow?" do

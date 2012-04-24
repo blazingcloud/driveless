@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   validates_acceptance_of :read_privacy, :allow_nil => false, :accept => true
 
   validates_presence_of :email, :username, :name, :address, :city, :zip
+  validates_uniqueness_of :username
+
   def self.connect_via_omniauth(provider_data)
     case provider_data[:provider]
     when 'facebook'
