@@ -2,6 +2,19 @@
 
 %h1 All the Groups Participating in The Challenge
 
+- render :layout => 'shared/tip' do
+  %p
+    Scroll down to see all groups by category:
+    Work, School, Kids Activities, Errands &amp; Other,
+    Faith Community and Social/Civic/Fun
+  %p
+    The city where you live, work, or go to school 
+    is a Community and not included in the list of
+    Groups below. You can see results in
+    = link_to "My Groups", account_groups_path
+    and set your Community in 
+    = link_to "My Profile.", edit_account_path
+
 %dl.all-groups
   - @destinations.each do |d|
     %dt
