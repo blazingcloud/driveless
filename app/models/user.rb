@@ -56,6 +56,9 @@ class User < ActiveRecord::Base
   def self.create_user_via_facebook(provider_data)
     city = provider_data[:info][:location] || provider_data[:provider]
     username = provider_data[:info][:nickname]
+    if username.blank?
+      username = "#{provider_data[:provider]}.#{provider_data[:uid]}"
+    end
     if (User.find_by_username(username))
       # rewrite nickname
       username = "#{username}.#{provider_data[:uid]}"
