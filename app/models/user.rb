@@ -267,17 +267,6 @@ class User < ActiveRecord::Base
       return newpass
   end
 
-  def before_connect(facebook_session)
-    self.name = facebook_session.user.name
-    self.username = facebook_session.user.name
-    self.is_13 = true
-    self.read_privacy = true
-    self.email = 'facebook+temporary@my.drivelesschallenge.com'
-    self.address = 'Replace me!'
-    self.city = 'Replace me!'
-    self.zip = 'Replace me!'
-  end
-
   def self.to_csv
     csv_string = CSV.generate do |csv|
       csv << [

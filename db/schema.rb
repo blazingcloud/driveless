@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420235006) do
+ActiveRecord::Schema.define(:version => 20120426171256) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "green"
   end
 
   create_table "friendships", :force => true do |t|
@@ -69,12 +70,12 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
   add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
 
   create_table "groups", :force => true do |t|
-    t.string   "name",                           :null => false
+    t.string   "name",           :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id",       :default => -1, :null => false
-    t.integer  "destination_id", :default => -1, :null => false
+    t.integer  "destination_id", :null => false
+    t.integer  "owner_id",       :null => false
   end
 
   add_index "groups", ["destination_id"], :name => "index_groups_on_destination_id"
@@ -86,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
     t.text     "invitation", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",       :null => false
   end
 
   add_index "invitations", ["user_id"], :name => "index_invitations_on_user_id"
@@ -94,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
   create_table "lengths", :force => true do |t|
     t.integer  "trip_id"
     t.integer  "mode_id"
-    t.decimal  "distance"
+    t.integer  "distance"
     t.integer  "unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -197,7 +198,7 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
 
   create_table "units", :force => true do |t|
     t.string   "name"
-    t.decimal  "in_miles"
+    t.integer  "in_miles"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,8 +207,8 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "password_salt"
-    t.integer  "login_count",                         :default => 0,     :null => false
-    t.integer  "failed_login_count",                  :default => 0,     :null => false
+    t.integer  "login_count",            :default => 0,     :null => false
+    t.integer  "failed_login_count",     :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -219,13 +220,12 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
     t.string   "username"
     t.string   "pseudonym"
     t.integer  "community_id"
-    t.boolean  "admin",                               :default => false
+    t.boolean  "admin",                  :default => false
     t.string   "city"
-    t.integer  "green_miles",                         :default => 0
-    t.integer  "facebook_uid",           :limit => 8
+    t.integer  "green_miles",            :default => 0
     t.string   "facebook_session_key"
-    t.string   "name",                                :default => ""
-    t.string   "address",                             :default => ""
+    t.string   "name",                   :default => ""
+    t.string   "address",                :default => ""
     t.boolean  "is_13"
     t.boolean  "is_parent"
     t.boolean  "read_privacy"
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(:version => 20120420235006) do
     t.datetime "reset_password_sent_at"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"

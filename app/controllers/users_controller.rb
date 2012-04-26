@@ -81,14 +81,6 @@ class UsersController < ApplicationController
     @user.attributes = attr
     @user.admin = admin if admin_logged_in?
 
-    if @user.facebook_uid && !@user.crypted_password
-      p = @user.newpass(8)
-      @user.password= p
-      @user.password_confirmation= p
-      @user.is_13= true
-      @user.read_privacy= true
-      @user.save
-    end
     if @user.save
       flash[:notice] = "Successfully updated profile."
       redirect_to root_path
