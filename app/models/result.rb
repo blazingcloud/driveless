@@ -3,7 +3,7 @@ class Result < ActiveRecord::Base
   belongs_to :user
   belongs_to :community
 
-  delegate :name, :email, :address, :city, :is_parent?, :to => :user
+  delegate :name, :email, :username, :address, :city, :is_parent?, :to => :user
 
   def community_name
     community.try(:name)
@@ -23,6 +23,7 @@ class Result < ActiveRecord::Base
     ["ID", :user_id],
     ["Name", :name],
     ["Email", :email],
+    ["Username", :username],
     ["Address", :address],
     ["City", :city],
     ["Parent?", :is_parent?],
