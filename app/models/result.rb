@@ -29,6 +29,7 @@ class Result < ActiveRecord::Base
     ["Community", :community_name],
     ["Car Miles", :car_miles],
     ["Small EV Miles", :small_ev_miles],
+    ["Electric Car Miles", :electric_car_miles],
     ["Carpool Miles", :carpool_miles],
     ["Train Miles", :train_miles],
     ["Bus Miles", :bus_miles],
@@ -134,6 +135,10 @@ class Result < ActiveRecord::Base
 
   def small_ev_miles
     mode_mileages.where(:mode_name => "Small Electric Vehicle").first.try(:mileage)
+  end
+
+  def electric_car_miles
+    mode_mileages.where(:mode_name => "Electric Car").first.try(:mileage)
   end
 
   def bike_miles

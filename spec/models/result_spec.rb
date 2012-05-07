@@ -7,6 +7,12 @@ describe Result do
     :users, :user1, :user2, :user3, :user4, :user5, :user6, :user7, :user8, 
     :user9, :user10
 
+  let(:small_ev) do
+    Mode.find_by_name("Small Electric Vehicle")
+  end
+  let(:electric_car) do
+    Mode.find_by_name("Electric Car")
+  end
   before do
     @earth_day_2012 = Date.new(2012, 4, 22)
     @work = Destination.find_by_name("Work")
@@ -25,6 +31,10 @@ describe Result do
     @train.should_not be_nil
     @car = Mode.find_by_name("Drove Car Alone")
     @car.should be_present
+
+    small_ev.should be_present
+    electric_car.should be_present
+
     @mile = Unit.find_by_name("Mile")
     @mile.should_not be_nil
     @sunnyvale = Community.find_by_name("Sunnyvale")
@@ -37,7 +47,7 @@ describe Result do
     menlo_park.should be_present
   end
 
-  describe "#calculate_stats_for_user(user)" do
+  describe "#create_result_for(user)" do
     attr_reader :user
 
     describe "when a user has 5 or more trips" do
@@ -57,6 +67,8 @@ describe Result do
         add_trips_to_user(@user, :mode => bus,  :destination => work,    :distances => [8.0]*5)      # 24.12
         add_trips_to_user(@user, :mode => car,  :destination => work,    :distances => [3.0, 3.0])   # 0
         add_trips_to_user(@user, :mode => bike, :destination => errands, :distances => [10.0, 12.0]) # 18.546
+        add_trips_to_user(@user, :mode => small_ev, :destination => work, :distances => [1.0,2.0])   # 2.120
+        add_trips_to_user(@user, :mode => electric_car, :destination => work, :distances => [3.0,5.0])   #3.72
         @user.community = sunnyvale
         @user.save!
 
@@ -69,17 +81,19 @@ describe Result do
         result.bus_miles.should == 40.0
         result.bike_miles.should == 32.0
         result.train_miles.should == 0.0
+        result.small_ev_miles.should == 3.0
+        result.electric_car_miles.should == 8.0
         result.community_name.should == sunnyvale.name
         result.baseline_pct_green.should == 10.0 / 35.0 * 100.0
-        result.total_green_miles.should == 10.0 + 2.5 + 40.0 + 22.0
-        total_miles = 10.0 + 2.5 + 40.0 + 22.0 + 6.0
+        result.total_green_miles.should == 10.0 + 2.5 + 40.0 + 22.0 + 3.0 + 8.0
+        total_miles = 10.0 + 2.5 + 40.0 + 22.0 + 6.0 + 3.0 + 8.0
         result.total_miles.should == total_miles
-        result.total_green_trips.should == 17
+        result.total_green_trips.should == 17 + 2 + 2
         result.total_green_shopping_trips.should == 2
-        actual_pct = (22.0 + 40.0 + 10.0 + 2.5) / (22.0 + 40.0 + 10.0 + 2.5 + 6.0) * 100.0
+        actual_pct = (22.0 + 40.0 + 10.0 + 2.5 + 3.0 + 8.0) / (22.0 + 40.0 + 10.0 + 2.5 + 6.0 + 3.0 + 8.0 ) * 100.0
         result.actual_pct_green.should == actual_pct
         result.pct_improvement.should == actual_pct - ((10.0 / 35.0) * 100.0)
-        total_lbs_co2_saved = 8.43 + 2.1075 + 24.12 + 0 + 18.546
+        total_lbs_co2_saved = 8.43 + 2.1075 + 24.12 + 0 + 18.546 + 2.120 + 3.72
         result.total_lbs_co2_saved.should be_within(0.01).of(total_lbs_co2_saved)
         result.lbs_co2_saved_per_mile.should be_within(0.01).of(total_lbs_co2_saved / total_miles)
         result.should be_qualified
