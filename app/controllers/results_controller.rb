@@ -6,10 +6,11 @@ class ResultsController < ApplicationController
    Result.generate_groups_csv(filename)
    send_file filename
   end
-  RAW_RESULT_FILE= "./tmp/driveless-raw-individual-results-latest.csv" # used by tasks/scheduler.rake
-
   def raw_csv
-   filename = RAW_RESULT_FILE
+   filename = "./tmp/driveless-raw-individual-results-latest.csv" 
+   ##
+   ## too big to be generated in a request
+   ##
    send_file filename
   end
 
