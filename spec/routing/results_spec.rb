@@ -10,4 +10,7 @@ describe 'results routing' do
   it "has group csv path" do
     {:get =>"/group_results_csv"}.should route_to(:controller => 'results', :action => 'group_csv')
   end
+  it "has parent csv path" do
+    {:get =>"/parent_results_csv"}.should route_to(:controller => 'results', :action => 'parent_csv')
+  end
 end

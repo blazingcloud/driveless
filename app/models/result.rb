@@ -8,7 +8,7 @@ class Result < ActiveRecord::Base
   def community_name
     community.try(:name)
   end
-
+  scope :is_a_parent, joins(:user).where(:users => {:is_parent => true})
   scope :top_five, lambda { where(:qualified => true).limit(5) }
   scope :order_and_filter, lambda { |field| where("#{field} is not null and #{field} > 0").order("#{field} desc") }
 
@@ -164,11 +164,100 @@ class Result < ActiveRecord::Base
     path_to_file
   end
 
+ def self.generate_parent_individuals_csv(path_to_file)
+
+    CSV.open(path_to_file, "w") do |csv|
+
+      add_to_csv = lambda do | category, results  | #string, #active_record_relation
+        csv << [""] * HEADERS.length
+        csv << [category] + [""] * (HEADERS.length - 1)
+        csv << HEADERS
+        results.each {|result| csv << result.field_values}
+      end
+
+      add_to_csv.call("Most Green Miles for All Parents", 
+                      top_five.
+                      order_and_filter("total_green_miles").
+                      is_a_parent)
+
+      Mode.green.each do |mode|
+        add_to_csv.call("Most Green Miles for All Parents: #{mode.name}",
+                       ModeMileage.top_five.
+                       joins(:result => [:user]).
+                       where(:result => {:users => {:is_parent => true}}).
+                       where(:mode_id => mode.id).
+                        where("mileage > 0").map {|m| m.result})
+      end
+
+      add_to_csv.call("Most Green Trips", top_five.
+                      order_and_filter("total_green_trips").
+                      is_a_parent)
+
+      add_to_csv.call("Most Green Shopping Trips", 
+                      top_five.
+                      order_and_filter("total_green_shopping_trips").
+                      is_a_parent)
+
+      add_to_csv.call("Greenest Travel", greenest_travel.is_a_parent)
+
+      add_to_csv.call("Most Improved vs. Baseline", top_five.
+                      order_and_filter("pct_improvement").
+                      order("days_logged desc").
+                      order("total_green_trips desc").
+                      is_a_parent)
+
+      Community.all.each do |community|
+
+        add_to_csv.call("Most Green Miles for Parents in #{community.name}", 
+                        top_five.
+                        where(:community_id => community.id).
+                        order_and_filter("total_green_miles").
+                        is_a_parent)
+
+        Mode.green.each do |mode|
+
+          add_to_csv.call("Most Green Miles for Parents in #{community.name}: #{mode.name}", ModeMileage.
+                          joins(:result => [:user]).
+                          where(:result => {:users => {:is_parent => true}}).
+                          top_five.where(:mode_id => mode.id).
+                          where(["mileage > 0 and results.community_id = ?", community.id]).map {|m| m.result})
+
+        end
+        
+        add_to_csv.call("Most Green Trips in #{community.name}", 
+                        top_five.
+                        where(:community_id => community.id).
+                        order_and_filter("total_green_trips").
+                        is_a_parent)
+
+        add_to_csv.call("Most Green Shopping Trips in #{community.name}", 
+                        top_five.
+                        where(:community_id => community.id).
+                        order_and_filter("total_green_shopping_trips").
+                        is_a_parent)
+
+        add_to_csv.call("Greenest Travel in #{community.name}", 
+                        greenest_travel_for(community).is_a_parent)
+
+        add_to_csv.call("Most Improved vs. Baseline in #{community.name}", 
+                        top_five.
+                        where(:community_id => community.id).
+                        order_and_filter("pct_improvement").
+                        order("days_logged desc").
+                        order("total_green_trips desc").
+                        is_a_parent)
+      end
+    end
+
+    path_to_file
+  end
+
+
   def self.generate_individuals_csv(path_to_file)
 
     CSV.open(path_to_file, "w") do |csv|
 
-      add_to_csv = lambda do | category, results |
+      add_to_csv = lambda do | category, results  | #string, #active_record_relation
         csv << [""] * HEADERS.length
         csv << [category] + [""] * (HEADERS.length - 1)
         csv << HEADERS

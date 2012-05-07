@@ -24,6 +24,16 @@ describe ResultsController do
     end
 
 
+    describe "#parent_csv" do
+      let(:filename) do
+        "./tmp/driveless-parent-results-#{timestamp}.csv"
+      end
+      it "sends a file" do
+        mock(Result).generate_parent_individuals_csv(filename)
+        get :parent_csv
+        response.should be_ok
+      end
+    end
     describe "#group_csv" do
       let(:filename) do
         "./tmp/driveless-group-results-#{timestamp}.csv"
@@ -37,10 +47,9 @@ describe ResultsController do
 
     describe "#raw_csv" do
       let(:filename) do
-        "./tmp/driveless-raw-individual-results-#{timestamp}.csv"
+        "./tmp/driveless-raw-individual-results-latest.csv"
       end
       it "sends a file" do
-        mock(Result).generate_individuals_raw_data_csv(filename)
         get :raw_csv
         response.should be_ok
       end
