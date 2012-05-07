@@ -67,7 +67,6 @@ describe "Group Page" do
 
           # returns to same page
           current_path.should == "/group/#{@group.id}"
-          save_and_open_page
           page.should have_css('.badge .members', :text => expected_members.to_s)
           
         end

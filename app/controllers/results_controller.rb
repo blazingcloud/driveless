@@ -1,8 +1,20 @@
 class ResultsController < ApplicationController
   before_filter :require_admin
-  
+   
+  def group_csv
+   filename = "./tmp/driveless-group-results-#{Time.now.strftime('%YY-%mm-%dd-%H%M')}.csv"
+   Result.generate_groups_csv(filename)
+   send_file filename
+  end
+   
+  def raw_csv
+   filename = "./tmp/driveless-raw-individual-results-#{Time.now.strftime('%YY-%mm-%dd-%H%M')}.csv"
+   Result.generate_individuals_raw_data_csv(filename)
+   send_file filename
+  end
+
   def csv
-   filename = "./tmp/driveless-results-#{Time.now.strftime('%YY-%mm-%dd-%H%M')}.csv"
+   filename = "./tmp/driveless-individual-results-#{Time.now.strftime('%YY-%mm-%dd-%H%M')}.csv"
    Result.generate_individuals_csv(filename)
    send_file filename
   end
